@@ -6,7 +6,7 @@
 package domain;
 
 import static domain.General.manejadorBD;
-import static domain.General.rb;
+import static domain.General.propiedades_generales;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,13 +26,13 @@ public class ConexionBD {
 
            // rb = ResourceBundle.getBundle("resorces.general-conf");
             boolean mostrarSQL;
-            String server = rb.getString("server");
-            String database = rb.getString("database");
+            String server = propiedades_generales.getString("server");
+            String database = propiedades_generales.getString("database");
         //    String user = rb.getString("user");
             //   String pass = rb.getString("pass");
-            String port = rb.getString("port");
+            String port = propiedades_generales.getString("port");
 
-            if (rb.getString("mostrarSQL").equals("true") ){
+            if (propiedades_generales.getString("mostrarSQL").equals("true") ){
                 mostrarSQL = true;
             }else{
                 mostrarSQL= false;

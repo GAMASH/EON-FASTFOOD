@@ -9,6 +9,7 @@
 package domain;
 
 import abstractt.Table;
+import abstractt.TableModelAbst;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -47,7 +48,7 @@ public class ManejadorBD extends AbstractTableModel {
     private String tablaRestringida;
     private boolean muestraSQL;
     public String errorSQL;
-    public DefaultTableModel modelo;
+    public TableModelAbst modelo;
 
     /**
      * Creates a new instance of ManejadorBD
@@ -110,10 +111,9 @@ public class ManejadorBD extends AbstractTableModel {
         if (!conectado) {
 
             Class.forName(controlador_jdbc).newInstance();
-                conexion = DriverManager.getConnection(url_basededatos, usuario, palabraClave);
+            conexion = DriverManager.getConnection(url_basededatos, usuario, palabraClave);
                 //+"?allowMultiQueries=true"
-                
-                
+
             sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             conectado = true;
         }
@@ -346,9 +346,9 @@ public class ManejadorBD extends AbstractTableModel {
             SP.execute();
 
             for (Iterator<Parametro> it = parametros.iterator(); it.hasNext();) {
-                              
+
                 parametro = it.next();
-                
+
                 if (parametro.getInOut().contains("OUT")) {
                     switch (parametro.getTipo()) {
                         case "INT":
@@ -394,7 +394,7 @@ public class ManejadorBD extends AbstractTableModel {
         numeroFilas = 0;
         numeroColumnas = metaDatos.getColumnCount();
 
-        modelo = new DefaultTableModel();
+        modelo = new TableModelAbst();
 
         for (int i = 0; i < numeroColumnas; i++) {
             modelo.addColumn("Columna " + i);
@@ -455,7 +455,7 @@ public class ManejadorBD extends AbstractTableModel {
         numeroFilas = 0;
         numeroColumnas = metaDatos.getColumnCount();
 
-        modelo = new DefaultTableModel();
+        modelo = new TableModelAbst();
 
         for (int i = 0; i < numeroColumnas; i++) {
 
@@ -500,6 +500,11 @@ public class ManejadorBD extends AbstractTableModel {
         } catch (SQLException ex) {
 
             ex.printStackTrace();
+
+            this.errorSQL = ex.getMessage();
+            
+            JOptionPane.showMessageDialog(null, this.errorSQL);
+            
         }
     }
 
@@ -752,14 +757,13 @@ public class ManejadorBD extends AbstractTableModel {
 
         //System.out.println(getValueAt(fila, columna).toString());
         // return Double.parseDouble(obtenerNumero(getValueAt(fila, columna).toString()));
-        
         if (getRowCount() > 0) {
             if (getValueAt(fila, columna) != null) {
 
                 return Double.parseDouble(getValueAt(fila, columna).toString());
             }
         }
-        
+
         return 0.00;
     }
 

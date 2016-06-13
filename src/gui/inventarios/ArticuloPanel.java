@@ -72,9 +72,7 @@ public class ArticuloPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         tf_clave = new abstractt.TextField();
-        tf_descripcion = new abstractt.TextField();
         tipoArticuloSelector = new gui.controles.TipoArticuloSelector();
         jLabel3 = new javax.swing.JLabel();
         tf_codigo_barras = new abstractt.TextField();
@@ -87,6 +85,9 @@ public class ArticuloPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         tf_factor_empaque = new abstractt.TextField();
         jLabel8 = new javax.swing.JLabel();
+        label1 = new abstractt.Label();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tf_descripcion = new abstractt.TextArea();
 
         setLayout(null);
 
@@ -95,33 +96,22 @@ public class ArticuloPanel extends javax.swing.JPanel {
         add(jLabel2);
         jLabel2.setBounds(10, 150, 90, 20);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Clave");
-        add(jLabel1);
-        jLabel1.setBounds(10, 20, 90, 20);
-
+        tf_clave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tf_clave.setMargin(new java.awt.Insets(1, 1, 1, 1));
         tf_clave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_claveActionPerformed(evt);
             }
         });
         add(tf_clave);
-        tf_clave.setBounds(110, 20, 70, 21);
-
-        tf_descripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_descripcionActionPerformed(evt);
-            }
-        });
-        add(tf_descripcion);
-        tf_descripcion.setBounds(110, 50, 360, 60);
+        tf_clave.setBounds(111, 13, 70, 18);
         add(tipoArticuloSelector);
         tipoArticuloSelector.setBounds(110, 120, 130, 20);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Descripción");
         add(jLabel3);
-        jLabel3.setBounds(10, 50, 90, 20);
+        jLabel3.setBounds(18, 45, 90, 12);
 
         tf_codigo_barras.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_codigo_barras.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +120,7 @@ public class ArticuloPanel extends javax.swing.JPanel {
             }
         });
         add(tf_codigo_barras);
-        tf_codigo_barras.setBounds(340, 20, 130, 21);
+        tf_codigo_barras.setBounds(340, 12, 130, 20);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Impuesto");
@@ -161,21 +151,29 @@ public class ArticuloPanel extends javax.swing.JPanel {
         tf_factor_empaque.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tf_factor_empaque.setText("1.0");
         add(tf_factor_empaque);
-        tf_factor_empaque.setBounds(110, 180, 130, 21);
+        tf_factor_empaque.setBounds(110, 180, 130, 20);
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Codigo de Barras");
         add(jLabel8);
-        jLabel8.setBounds(240, 20, 90, 20);
+        jLabel8.setBounds(240, 12, 90, 20);
+
+        label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label1.setText("Clave:");
+        add(label1);
+        label1.setBounds(46, 14, 63, 17);
+
+        tf_descripcion.setColumns(20);
+        tf_descripcion.setRows(5);
+        jScrollPane1.setViewportView(tf_descripcion);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(110, 39, 357, 77);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_claveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_claveActionPerformed
-
-    private void tf_descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_descripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_descripcionActionPerformed
 
     private void tf_codigo_barrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_codigo_barrasActionPerformed
         // TODO add your handling code here:
@@ -184,7 +182,6 @@ public class ArticuloPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.controles.ImpuestoSelector impuestoSelector;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -192,10 +189,12 @@ public class ArticuloPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private abstractt.Label label1;
     private gui.controles.MarcaSelector marcaSelector;
     private abstractt.TextField tf_clave;
     private abstractt.TextField tf_codigo_barras;
-    private abstractt.TextField tf_descripcion;
+    private abstractt.TextArea tf_descripcion;
     private abstractt.TextField tf_factor_empaque;
     private gui.controles.TipoArticuloSelector tipoArticuloSelector;
     private gui.controles.UnidadMedidaSelector unidadMedidaSelector;

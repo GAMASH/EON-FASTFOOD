@@ -313,6 +313,10 @@ public class ComboBox extends JComboBox {
 
         return Integer.parseInt(getSelectedItem().toString());
     }
+    
+    public void cargar(){
+        System.out.println("combobox.cargar: funcion no implementada");
+    }
 
     private JTextField editor;
     private boolean transfiereFoco;

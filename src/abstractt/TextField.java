@@ -38,7 +38,7 @@ public class TextField extends javax.swing.JTextField{
          }
       });
       
-      setFont(new java.awt.Font("Tahoma", 0, 12));
+      setFont(new java.awt.Font("Arial", 0, 11));
       
    }
    

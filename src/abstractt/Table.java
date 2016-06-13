@@ -22,6 +22,8 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -45,7 +47,7 @@ public class Table extends javax.swing.JTable {
 
     TableRowSorter<TableModel> sorter;
 
-   // protected Color pautado;
+    // protected Color pautado;
     private Color pautado[];
     /**
      * Da tama�o las columnas con con un arreglo de enteros
@@ -103,11 +105,30 @@ public class Table extends javax.swing.JTable {
     public static final int NuevoModificado = 2;
     public static final int Modificado = 3;
     public static final int Eliminado = 4;
-        
+
     /**
      * variable para ver solo solo que no sean eliminados itemstatus != 4
      */
     public static final String filtro = "[^4]";
+
+    public void agregarComboBox(ComboBox combobox, int columna) {
+
+        combobox.cargar();
+        DefaultCellEditor defaultCellEditor = new DefaultCellEditor(combobox);
+        getColumnModel().getColumn(columna).setCellEditor(defaultCellEditor);
+    }
+
+    public void agregarCheckBox(int columna) {
+        /*
+         DefaultCellEditor defaultCellEditor = new DefaultCellEditor(new JCheckBox());
+         getColumnModel().getColumn(columna).setCellEditor(defaultCellEditor);
+         */
+        TableModelAbst modelo = (TableModelAbst) getModel();
+
+        modelo.agregarBoolean(columna);
+
+        setModel(modelo);
+    }
 
     /**
      * Devuelve el valor double de la consulta
@@ -116,17 +137,16 @@ public class Table extends javax.swing.JTable {
 
         //System.out.println(getValueAt(fila, columna).toString());
         // return Double.parseDouble(obtenerNumero(getValueAt(fila, columna).toString()));
-        
         if (getRowCount() > 0) {
             if (getValueAt(fila, columna) != null) {
 
                 return Double.parseDouble(getValueAt(fila, columna).toString());
             }
         }
-        
+
         return 0.00;
     }
-    
+
     /**
      * Devuelve el valor entero de la consulta
      */
@@ -137,7 +157,7 @@ public class Table extends javax.swing.JTable {
         }
         return 0;
     }
-    
+
     /**
      * Devuelve el valor en un String de la consulta
      */
@@ -151,7 +171,29 @@ public class Table extends javax.swing.JTable {
         }
         return "";
     }
-    
+
+    /**
+     * Devuelve el valor en un Boolean(String) de la consulta
+     * 
+     * true = S
+     * false = N
+     */
+    public String getValorBoolean(int fila, int columna) {
+
+        if (getRowCount() > 0) {
+            if (getValueAt(fila, columna) != null) {
+
+                if ((boolean) getValueAt(fila, columna)) {
+
+                    return "S";
+                } else {
+                    return "N";
+                }
+            }
+        }
+        return "N";
+    }
+
     public void autoResize(boolean autoresize) {
 
         if (autoresize) {
@@ -227,7 +269,7 @@ public class Table extends javax.swing.JTable {
 
     }
 
-    public void asignarModelo(DefaultTableModel modelo) {
+    public void asignarModelo(TableModelAbst modelo) {
 
         if (sorter == null) {
             sorter = new TableRowSorter<TableModel>(modelo);
@@ -1029,5 +1071,5 @@ public class Table extends javax.swing.JTable {
      */
     public Color[] getPautado() {
         return pautado;
-    }   
+    }
 }

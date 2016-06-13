@@ -14,6 +14,41 @@
                 <Property name="text" type="java.lang.String" value="Configuraciones Generales"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="m_salir">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Salir"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="m_modulos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modulos"/>
+          </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="m_inventarios">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Inventarios"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="m_articulos">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Articulos"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m_articulosActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="m_platillos">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Platillos"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m_platillosActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
             <Menu class="javax.swing.JMenu" name="m_cCatalogos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Catalogos"/>
@@ -51,31 +86,12 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m_unidadesMedidaActionPerformed"/>
                   </Events>
                 </MenuItem>
-              </SubComponents>
-            </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="m_salir">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Salir"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="m_modulos">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Modulos"/>
-          </Properties>
-          <SubComponents>
-            <Menu class="javax.swing.JMenu" name="m_inventarios">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Inventarios"/>
-              </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="m_articulos">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Articulos"/>
+                    <Property name="text" type="java.lang.String" value="Tipo de Platillos"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m_articulosActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
