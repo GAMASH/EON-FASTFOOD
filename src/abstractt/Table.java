@@ -63,6 +63,7 @@ public class Table extends javax.swing.JTable {
     public static final int moneda = 2;
     public static final int fecha = 3;
     public static final int numero_entero = 4;
+    public static final int booleano = 5;
 
     private int formato[];
     private int indices[];
@@ -125,8 +126,18 @@ public class Table extends javax.swing.JTable {
          */
         TableModelAbst modelo = (TableModelAbst) getModel();
 
-        modelo.agregarBoolean(columna);
+        for (int i = 0; i < this.getRowCount(); i++) {
 
+            if (this.getValorString(i, columna).equals("S")) {
+
+                this.setValueAt(true, i, columna);
+            } else {
+                
+                this.setValueAt(false, i, columna);
+            }
+        }
+
+        modelo.agregarBoolean(columna);
         setModel(modelo);
     }
 
@@ -174,9 +185,8 @@ public class Table extends javax.swing.JTable {
 
     /**
      * Devuelve el valor en un Boolean(String) de la consulta
-     * 
-     * true = S
-     * false = N
+     *
+     * true = S false = N
      */
     public String getValorBoolean(int fila, int columna) {
 
@@ -613,7 +623,7 @@ public class Table extends javax.swing.JTable {
             orden[columna] = true;
         }
 
-        DefaultTableModel modelo = (DefaultTableModel) getModel();
+        TableModelAbst modelo = (TableModelAbst) getModel();
         //TableModel modelo =  getModel();
         int removidas = 0;
 

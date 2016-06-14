@@ -158,8 +158,7 @@ public class Platillo extends TablaBD {
         precio = table.getValorDouble( i, 5);
                                     
         origen = origenSelector.getData(table.getValorString( i, 6));
-        
-                
+                        
         System.out.println("carta: "+carta);
     }
     
@@ -169,15 +168,15 @@ public class Platillo extends TablaBD {
         conectarBD();
                 
         manejadorBD.parametrosSP = new ParametrosSP();
-        manejadorBD.parametrosSP.agregarParametro(id_platillo, "varId_platillo", "STRING", "INOUT");
+        manejadorBD.parametrosSP.agregarParametro(id_platillo, "varId_platillo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(tipo_platillo.id_tipo_platillo, "varId_tipo_platillo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(nombre, "varNombre", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(descripcion, "varDescripcion", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(carta, "varCarta", "STRING", "IN");     
-        manejadorBD.parametrosSP.agregarParametro(precio.toString(), "varPrecio", "DOUBLR", "IN");      
+        manejadorBD.parametrosSP.agregarParametro(precio.toString(), "varPrecio", "DOUBLE", "IN");      
         manejadorBD.parametrosSP.agregarParametro(origen, "varOrigen", "STRING", "IN");
         
-        if (manejadorBD.ejecutarSP("{ call grabarPlatillo(?,?,?,?,?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("{ call grabarPlatillo(?,?,?,?,?,?,?) }") == 0) {
 
             error = true;          
         } else {
