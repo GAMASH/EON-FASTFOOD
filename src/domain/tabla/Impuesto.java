@@ -130,11 +130,11 @@ public class Impuesto extends TablaBD {
         //System.out.println(datos_fiscales.getNombre_comercial());
     }
 
-    public void setRegistro(Table table, long i) {
+    public void setRegistro(Table table, Integer i) {
 
-        id_impuesto = (String) table.getValueAt((int) i, 0);
-        descripcion = (String) table.getValueAt((int) i, 1);
-        porcentaje = Double.parseDouble(table.getValueAt((int) i, 2).toString());
+        id_impuesto = (String) table.getValueAt( i, 0);
+        descripcion = (String) table.getValueAt( i, 1);
+        porcentaje = Double.parseDouble(table.getValueAt(i, 2).toString());
 
         if (id_impuesto == null) {
 

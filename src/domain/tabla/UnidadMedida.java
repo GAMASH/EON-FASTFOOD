@@ -68,12 +68,12 @@ public class UnidadMedida extends TablaBD {
 
     private void asignarValores() {
 
-        id_unidad_medida = manejadorBD.getValorString(0, 0);
+        id_unidad_medida = manejadorBD.getValorString(0, 0 );
         descripcion = manejadorBD.getValorString(0, 1);
         nombre_corto = manejadorBD.getValorString(0, 2);
     }
 
-    public void setRegistro(Table table, long i) {
+    public void setRegistro(Table table, Integer i) {
 
         id_unidad_medida = (String) table.getValueAt((int) i, 0);
         descripcion = (String) table.getValueAt((int) i, 1);

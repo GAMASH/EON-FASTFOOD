@@ -5,6 +5,7 @@
  */
 package gui;
 
+import com.sun.glass.events.KeyEvent;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.cargarConfiguracion;
@@ -65,6 +66,11 @@ public class login extends javax.swing.JDialog {
 
         usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         usuario.setText("admin");
+        usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usuarioKeyPressed(evt);
+            }
+        });
         jPanel1.add(usuario);
         usuario.setBounds(150, 20, 170, 30);
 
@@ -76,6 +82,11 @@ public class login extends javax.swing.JDialog {
         contraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         contraseña.setText("admin");
         contraseña.setToolTipText("");
+        contraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                contraseñaKeyPressed(evt);
+            }
+        });
         jPanel1.add(contraseña);
         contraseña.setBounds(150, 60, 170, 30);
 
@@ -123,6 +134,22 @@ public class login extends javax.swing.JDialog {
         
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usuarioKeyPressed
+
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        
+            acceder();
+        }
+    }//GEN-LAST:event_usuarioKeyPressed
+
+    private void contraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraseñaKeyPressed
+        
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+
+            acceder();
+        }
+    }//GEN-LAST:event_contraseñaKeyPressed
 
     /**
      * @param args the command line arguments

@@ -72,11 +72,11 @@ public class TipoArticulo extends TablaBD {
         activo = manejadorBD.getValorString(0, 2);
     }
 
-    public void setRegistro(Table table, long i) {
+    public void setRegistro(Table table, Integer i) {
 
-        id_tipo_articulo = (String) table.getValueAt((int) i, 0);
-        descripcion = (String) table.getValueAt((int) i, 1);
-        activo = (String) table.getValueAt((int) i, 2);
+        id_tipo_articulo = (String) table.getValueAt( i, 0);
+        descripcion = (String) table.getValueAt( i, 1);
+        activo = (String) table.getValueAt( i, 2);
 
         if (id_tipo_articulo == null) {
 

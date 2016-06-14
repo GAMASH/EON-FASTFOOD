@@ -72,7 +72,7 @@ public class Marca extends TablaBD {
         activo = manejadorBD.getValorString(0, 2);
     }
 
-    public void setRegistro(Table table, long i) {
+    public void setRegistro(Table table, Integer i) {
 
         id_marca = (String) table.getValueAt((int) i, 0);
         descripcion = (String) table.getValueAt((int) i, 1);

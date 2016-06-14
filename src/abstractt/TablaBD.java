@@ -70,7 +70,7 @@ public class TablaBD {
      * @param table
      * @param i
      */
-    public void setRegistro(Table table, int i) {
+    public void setRegistro(Table table, Integer i) {
         System.out.println("setRegistro-funcion no implementada");
     }
 

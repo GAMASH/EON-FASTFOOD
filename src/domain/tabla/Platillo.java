@@ -80,7 +80,11 @@ public class Platillo extends TablaBD {
 
         manejadorBD.consulta(""
                 + "SELECT id_platillo, t.descripcion, nombre, p.descripcion, \n"
-                + "       carta, precio, origen, \n"
+                + "       carta, precio, \n"
+                + "       Case origen\n"
+                + "         WHEN 'Co' THEN 'Cocina'\n"
+                + "         WHEN 'Ba' THEN 'Barra'"
+                + "       END as  origen, \n"
                 + "       p.crea, p.modifica\n"
                 + "FROM   platillo p, tipo_platillo t\n"
                 + "WHERE p.id_tipo_platillo = t.id_tipo_platillo\n"
@@ -89,6 +93,7 @@ public class Platillo extends TablaBD {
         manejadorBD.asignarTable(tabla);
 
         tabla.agregarItemStatus();
+        tabla.alinear();
 
         TipoPlatilloSelector tipo_platillo_selector = new TipoPlatilloSelector();
         OrigenSelector origenSelector = new OrigenSelector();
@@ -124,8 +129,9 @@ public class Platillo extends TablaBD {
         tabla.cambiarTitulos();
         tabla.setFormato(new int[]{
             Table.letra, Table.letra, Table.letra, Table.letra,
-            Table.letra, Table.numero_double, Table.letra, Table.letra,
+            Table.booleano, Table.numero_double, Table.letra, Table.letra,
             Table.letra});
+
         tabla.tamañoColumna(new int[]{
             0, 100, 120, 600,
             50, 100, 100, 0,
@@ -141,7 +147,7 @@ public class Platillo extends TablaBD {
         return tabla;
     }
 
-    public void setRegistro(Table table, int i) {
+    public void setRegistro(Table table, Integer i) {
 
         String tipo_platillo_des;
         OrigenSelector origenSelector;
@@ -149,36 +155,36 @@ public class Platillo extends TablaBD {
         origenSelector.cargar();
 
         id_platillo = table.getValorString(i, 0);
-        tipo_platillo.cargarPorDescripcion(table.getValorString( i, 1));
-        nombre = table.getValorString( i, 2);
-        descripcion = table.getValorString( i, 3);
-                
-        carta = table.getValorBoolean(i,4);
-        
-        precio = table.getValorDouble( i, 5);
-                                    
-        origen = origenSelector.getData(table.getValorString( i, 6));
-                        
-        System.out.println("carta: "+carta);
+        tipo_platillo.cargarPorDescripcion(table.getValorString(i, 1));
+        nombre = table.getValorString(i, 2);
+        descripcion = table.getValorString(i, 3);
+
+        carta = table.getValorBoolean(i, 4);
+
+        precio = table.getValorDouble(i, 5);
+
+        origen = origenSelector.getData(table.getValorString(i, 6));
+
+        System.out.println("carta: " + carta);
     }
-    
+
     public boolean grabar() {
 
         boolean error;
         conectarBD();
-                
+
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_platillo, "varId_platillo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(tipo_platillo.id_tipo_platillo, "varId_tipo_platillo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(nombre, "varNombre", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(descripcion, "varDescripcion", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(carta, "varCarta", "STRING", "IN");     
-        manejadorBD.parametrosSP.agregarParametro(precio.toString(), "varPrecio", "DOUBLE", "IN");      
+        manejadorBD.parametrosSP.agregarParametro(carta, "varCarta", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(precio.toString(), "varPrecio", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(origen, "varOrigen", "STRING", "IN");
-        
+
         if (manejadorBD.ejecutarSP("{ call grabarPlatillo(?,?,?,?,?,?,?) }") == 0) {
 
-            error = true;          
+            error = true;
         } else {
 
             error = false;

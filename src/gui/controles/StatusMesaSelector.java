@@ -7,7 +7,6 @@ package gui.controles;
 
 import abstractt.ComboBox;
 import static domain.General.propiedades_datahardcored;
-import domain.tabla.Impuesto;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -15,12 +14,12 @@ import java.util.StringTokenizer;
  *
  * @author Developer GAGS
  */
-public class OrigenSelector extends ComboBox {
+public class StatusMesaSelector extends ComboBox {
 
     ArrayList<String> visible;
     ArrayList<String> data;
 
-    public OrigenSelector() {
+    public StatusMesaSelector() {
 
         visible = new ArrayList<String>();
         data = new ArrayList<String>();
@@ -32,7 +31,7 @@ public class OrigenSelector extends ComboBox {
         String sdata;
         StringTokenizer sto;
 
-        sdata = propiedades_datahardcored.getString("origen_platillo_data");
+        sdata = propiedades_datahardcored.getString("status_mesa_data");
 
         sto = new StringTokenizer(sdata, ";");
 
@@ -41,7 +40,7 @@ public class OrigenSelector extends ComboBox {
             data.add(sto.nextToken());
         }
 
-        svisible = propiedades_datahardcored.getString("origen_platillo_visible");
+        svisible = propiedades_datahardcored.getString("status_mesa_visible");
 
         sto = new StringTokenizer(svisible, ";");
 
@@ -57,13 +56,10 @@ public class OrigenSelector extends ComboBox {
 
         String sdata = "";
         int indice;
-
-        //svisible = this.getSelectedItem().toString();
+        
         indice = visible.indexOf(svisible);
         
-        System.out.println(svisible);
-        System.out.println("indice "+indice);
-        if (indice >= 0) {
+         if (indice >= 0) {
 
             sdata = data.get(indice);
         }

@@ -17,7 +17,7 @@ import static domain.General.manejadorBD;
  */
 public class Sucursal extends TablaBD{
 
-    private String id_sucursal;
+    public  String id_sucursal;
     public DatosFiscales datos_fiscales;
     
     public Sucursal(){

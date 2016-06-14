@@ -70,10 +70,10 @@ public class TipoPlatillo extends TablaBD {
         
     }
 
-    public void setRegistro(Table table, long i) {
+    public void setRegistro(Table table, Integer i) {
 
-        id_tipo_platillo = (String) table.getValueAt((int) i, 0);
-        descripcion = (String) table.getValueAt((int) i, 1);
+        id_tipo_platillo = (String) table.getValueAt( i, 0);
+        descripcion = (String) table.getValueAt( i, 1);
         
 
         if (id_tipo_platillo == null) {

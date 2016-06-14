@@ -10,6 +10,7 @@ package domain;
 
 import abstractt.Table;
 import abstractt.TableModelAbst;
+import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -47,8 +48,10 @@ public class ManejadorBD extends AbstractTableModel {
     private boolean conectado;
     private String tablaRestringida;
     private boolean muestraSQL;
-    public String errorSQL;
+    public static String errorSQL;
     public TableModelAbst modelo;
+    public ParametrosSP parametrosSP;
+    CallableStatement SP;
 
     /**
      * Creates a new instance of ManejadorBD
@@ -62,11 +65,18 @@ public class ManejadorBD extends AbstractTableModel {
         errorSQL = "";
     }
 
+    /**
+     *
+     * @return
+     */
     public Connection getConexion() {
 
         return conexion;
     }
 
+    /**
+     *
+     */
     public void commit() {
 
         try {
@@ -78,6 +88,9 @@ public class ManejadorBD extends AbstractTableModel {
         }
     }
 
+    /**
+     *
+     */
     public void rollback() {
 
         try {
@@ -89,6 +102,10 @@ public class ManejadorBD extends AbstractTableModel {
         }
     }
 
+    /**
+     *
+     * @param tabla
+     */
     public void asignarTable(Table tabla) {
 
         tabla.asignarModelo(modelo);
@@ -96,6 +113,7 @@ public class ManejadorBD extends AbstractTableModel {
         tabla.cambiarTitulos();
         tabla.centrar();
         tabla.reasignaTamaños();
+
     }
 
     /**
@@ -112,19 +130,25 @@ public class ManejadorBD extends AbstractTableModel {
 
             Class.forName(controlador_jdbc).newInstance();
             conexion = DriverManager.getConnection(url_basededatos, usuario, palabraClave);
-                //+"?allowMultiQueries=true"
+            //+"?allowMultiQueries=true"
 
             sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             conectado = true;
         }
     }
 
+    /**
+     *
+     */
     public void reconectar() {
 
         desconectar();
         conectar();
     }
 
+    /**
+     *
+     */
     public void conectar() {
 
         errorSQL = "";
@@ -164,6 +188,10 @@ public class ManejadorBD extends AbstractTableModel {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public ManejadorBD nuevaConexion() {
 
         ManejadorBD nMbd = new ManejadorBD(muestraSQL);
@@ -188,12 +216,10 @@ public class ManejadorBD extends AbstractTableModel {
         return nMbd;
     }
 
-    public ParametrosSP parametrosSP;
-    CallableStatement SP;
-
     /**
      *
-     *
+     * @param procedure
+     * @return
      */
     public int ejecutarSP(String procedure) {
 
@@ -202,8 +228,7 @@ public class ManejadorBD extends AbstractTableModel {
         String call;
         Integer tipo;
         String nombre;
-
-        // CallableStatement SP;
+        errorSQL = "";
         try {
             if (muestraSQL) {
 
@@ -217,7 +242,6 @@ public class ManejadorBD extends AbstractTableModel {
             for (Iterator<Parametro> it = parametros.iterator(); it.hasNext();) {
 
                 parametro = it.next();
-                //   parametro = new Parametro();                
 
                 nombre = parametro.getNombre();
 
@@ -251,20 +275,15 @@ public class ManejadorBD extends AbstractTableModel {
 
                             case "INT":
                                 tipo = java.sql.Types.INTEGER;
-                                //SP.setInt(nombre, Integer.parseInt(parametro.getValor()));
                                 break;
                             case "STRING":
                                 tipo = java.sql.Types.VARCHAR;
-                                //SP.registerOutParameter(parametro.nombre,);
-                                //SP.setString(parametro.nombre, parametro.valor);                            
                                 break;
                             case "DOUBLE":
                                 tipo = java.sql.Types.DOUBLE;
-                                //SP.setDouble(parametro.nombre, Double.parseDouble(parametro.valor));
                                 break;
                             case "DATETIME":
                                 tipo = java.sql.Types.TIMESTAMP;
-                                //SP.setDate(parametro.nombre, (Date) parametro.calendar.getTime(), parametro.calendar);
                                 break;
                         }
                         SP.registerOutParameter(nombre, tipo);
@@ -292,57 +311,10 @@ public class ManejadorBD extends AbstractTableModel {
                                 SP.setDate(nombre, (Date) parametro.getCalendar().getTime(), parametro.getCalendar());
                                 break;
                         }
-
                         break;
-
                 }
-                /*
-                 if (parametro.getInOut() == "IN") {
-
-                 switch (parametro.getTipo()) {
-
-                 case "INT":
-                 SP.setInt(nombre, Integer.parseInt(parametro.getValor()));
-                 break;
-                 case "STRING":
-                 SP.setString(nombre, parametro.getValor());
-                 break;
-                 case "DOUBLE":
-                 SP.setDouble(nombre, Double.parseDouble(parametro.getValor()));
-                 break;
-                 case "DATETIME":
-                 SP.setDate(nombre, (Date) parametro.getCalendar().getTime(), parametro.getCalendar());
-                 break;
-                 }
-                 } else {
-                 //OUT
-                 tipo = 0;
-                 switch (parametro.getTipo()) {
-
-                 case "INT":
-                 tipo = java.sql.Types.INTEGER;
-                 // SP.setInt(parametro.nombre, Integer.parseInt(parametro.valor));
-                 break;
-                 case "STRING":
-                 tipo = java.sql.Types.VARCHAR;
-                 //SP.registerOutParameter(parametro.nombre,);
-                 //SP.setString(parametro.nombre, parametro.valor);                            
-                 break;
-                 case "DOUBLE":
-                 tipo = java.sql.Types.DOUBLE;
-                 //SP.setDouble(parametro.nombre, Double.parseDouble(parametro.valor));
-                 break;
-                 case "DATETIME":
-                 tipo = java.sql.Types.TIMESTAMP;
-                 //SP.setDate(parametro.nombre, (Date) parametro.calendar.getTime(), parametro.calendar);
-                 break;
-                 }
-                 SP.registerOutParameter(nombre, tipo);
-                 }
-                 */
             }
             // ejecutar el SP
-
             SP.execute();
 
             for (Iterator<Parametro> it = parametros.iterator(); it.hasNext();) {
@@ -370,14 +342,17 @@ public class ManejadorBD extends AbstractTableModel {
             // confirmar si se ejecuto sin errores
         } catch (SQLException ex) {
             errorSQL = ex.getMessage();
-            Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
+
             return -1;
         }
 
-        errorSQL = "";
         return 0;
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public void setConsultaSP() throws SQLException {
 
         if (!conectado) {
@@ -491,6 +466,10 @@ public class ManejadorBD extends AbstractTableModel {
 
     }
 
+    /**
+     *
+     * @param consulta
+     */
     public void consulta(String consulta) {
 
         try {
@@ -502,12 +481,17 @@ public class ManejadorBD extends AbstractTableModel {
             ex.printStackTrace();
 
             this.errorSQL = ex.getMessage();
-            
+
             JOptionPane.showMessageDialog(null, this.errorSQL);
-            
+
         }
     }
 
+    /**
+     *
+     * @param consulta
+     * @throws SQLException
+     */
     private void setInsert(String consulta) throws SQLException {
 
         if (!conectado) {
@@ -566,6 +550,10 @@ public class ManejadorBD extends AbstractTableModel {
         //sentencia.execute(update);
     }
 
+    /**
+     *
+     * @param insercion
+     */
     public void insercion(String insercion) {
 
         try {
@@ -577,6 +565,11 @@ public class ManejadorBD extends AbstractTableModel {
         }
     }
 
+    /**
+     *
+     * @param actualizacion
+     * @return
+     */
     public int actualizacion(String actualizacion) {
 
         try {
@@ -592,6 +585,10 @@ public class ManejadorBD extends AbstractTableModel {
         return 0;
     }
 
+    /**
+     *
+     * @param eliminacion
+     */
     public void eliminacion(String eliminacion) {
 
         try {
@@ -608,8 +605,7 @@ public class ManejadorBD extends AbstractTableModel {
      */
     public void desconectar() {
 
-        errorSQL = "";
-
+        //  errorSQL = "";
         if (conectado) {
             try {
 

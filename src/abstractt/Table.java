@@ -19,6 +19,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
@@ -85,7 +86,7 @@ public class Table extends javax.swing.JTable {
     public boolean haycambios;
 
     /**
-     * Objeto de para realizar cambios en BD
+     * Objeto para realizar cambios en BD
      */
     private TablaBD tablaBD;
 
@@ -112,6 +113,10 @@ public class Table extends javax.swing.JTable {
      */
     public static final String filtro = "[^4]";
 
+    private Integer primer_campo_editable;
+    
+    private ArrayList<Integer> columnas_ocultas;
+
     public void agregarComboBox(ComboBox combobox, int columna) {
 
         combobox.cargar();
@@ -132,7 +137,7 @@ public class Table extends javax.swing.JTable {
 
                 this.setValueAt(true, i, columna);
             } else {
-                
+
                 this.setValueAt(false, i, columna);
             }
         }
@@ -307,8 +312,7 @@ public class Table extends javax.swing.JTable {
         int index = e.getColumn();
         int valueItemStatus;
 
-        filtrar(null);
-        //sorter.setRowFilter(null);
+        filtrar(null);        
 
         switch (e.getType()) {
             case TableModelEvent.INSERT:
@@ -319,7 +323,6 @@ public class Table extends javax.swing.JTable {
                         //Agregar el item status nuevo sin valor
                         this.setValueAt("1", i, colItemStatus);
                     }
-
                 }
 
                 break;
@@ -530,11 +533,81 @@ public class Table extends javax.swing.JTable {
         //setDefaultRenderer(String.class, centerRenderer);
     }
 
+    public void alinear() {
+
+        Integer columnas;
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(JLabel.LEFT);
+
+        columnas = this.getColumnCount();
+
+        if (this.itemstatus) {
+
+            columnas -= 1;
+        }
+
+        for (int i = 0; i < columnas; i++) {
+
+            if (this.formato[i] == Table.letra) {
+
+                getColumnModel().getColumn(i).setCellRenderer(leftRenderer);
+
+            } else if (this.formato[i] == Table.numero_double || this.formato[i] == Table.numero_entero) {
+                getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+
+            } else if (this.formato[i] == Table.fecha) {//|| this.formato[i] == Table.booleano
+
+                getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            }
+        }
+        //setDefaultRenderer(String.class, centerRenderer);
+    }
+
     public void ocultarcolumna(int columna) {
 
         getColumnModel().getColumn(columna).setMinWidth(0);
         getColumnModel().getColumn(columna).setMaxWidth(0);
 
+        primerColumna(columna);
+    }
+
+    private void primerColumna(int columna) {
+
+        boolean encontro = false;
+
+        if (columnas_ocultas == null) {
+
+            columnas_ocultas = new ArrayList<Integer>();
+        }
+
+        columnas_ocultas.add(columna);
+
+        Collections.sort(columnas_ocultas);
+
+        primer_campo_editable = -1;
+        for (int i = 0; i < getColumnCount(); i++) {
+            encontro = false;
+            for (int j = 0; j < columnas_ocultas.size(); j++) {
+
+                if (columnas_ocultas.get(j) == i) {
+                    encontro = true;
+                    continue;
+                }                
+            }
+
+            if (!encontro) {
+                
+                primer_campo_editable = i;
+                return;
+            }
+        }
     }
 
     public void setTitulos(String as_titulos[]) {
@@ -658,7 +731,10 @@ public class Table extends javax.swing.JTable {
      */
     public void agregarFila(JScrollPane jScrollPane1) {
 
+        this.acceptText();
+
         int columnas = getColumnCount();
+        int filas = this.getRowCount();
         Object arr[];
         arr = new Object[columnas];
         DefaultTableModel modelo = (DefaultTableModel) getModel();
@@ -667,6 +743,13 @@ public class Table extends javax.swing.JTable {
         setModel(modelo);
 
         scrollToRow(jScrollPane1);
+
+        if (!this.isFocusOwner()) {
+            this.requestFocus();
+        }
+
+        this.changeSelection(filas, primer_campo_editable, false, true);
+
         /*
          if (itemstatus) {
          //Agregar el item status nuevo sin valor
@@ -963,7 +1046,8 @@ public class Table extends javax.swing.JTable {
             tablaBD.setRegistro(this, fila);
             if (!tablaBD.grabar()) {
 
-                JOptionPane.showConfirmDialog(null, "Ocurrio un error al grabar " + manejadorBD.errorSQL, "Mensaje del sistema", JOptionPane.DEFAULT_OPTION);
+                JOptionPane.showConfirmDialog(null, "Ocurrio un error al grabar\n" + manejadorBD.errorSQL, "Mensaje del sistema", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
+
                 filtrar(null);
                 return;
 

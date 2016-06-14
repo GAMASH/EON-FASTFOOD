@@ -11,6 +11,7 @@ import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
 import gui.Catalogos.ImpuestoCatalogo;
 import domain.ManejadorBD;
+import gui.Catalogos.MesaCatalogo;
 import gui.Catalogos.TipoPlatilloCatalogo;
 import gui.Catalogos.UnidadMedidaCatalogo;
 import gui.inventarios.PlatillosFrame;
@@ -53,7 +54,9 @@ public class Principal extends javax.swing.JFrame {
         m_marcas = new javax.swing.JMenuItem();
         m_impuestos = new javax.swing.JMenuItem();
         m_unidadesMedida = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem1 = new javax.swing.JMenuItem();
+        m_mesas = new javax.swing.JMenuItem();
         m_ventana = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -137,6 +140,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         m_cCatalogos.add(m_unidadesMedida);
+        m_cCatalogos.add(jSeparator1);
 
         jMenuItem1.setText("Tipo de Platillos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +149,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         m_cCatalogos.add(jMenuItem1);
+
+        m_mesas.setText("Mesas");
+        m_mesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_mesasActionPerformed(evt);
+            }
+        });
+        m_cCatalogos.add(m_mesas);
 
         m_modulos.add(m_cCatalogos);
 
@@ -309,6 +321,28 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_m_platillosActionPerformed
 
+    private void m_mesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_mesasActionPerformed
+        
+         if (mesa == null) {
+
+            mesa = new gui.Catalogos.MesaCatalogo();
+        }
+        if (!mesa.isVisible()) {
+
+            mesa = new gui.Catalogos.MesaCatalogo();
+            // marca.setManejadorBD(getManejadorBD());
+            mesa.cargaValores();
+            mesa.centrado(escritorio.getSize());
+            escritorio.remove(mesa);
+            escritorio.add(mesa);
+            mesa.setVisible(true);
+        } else {
+
+            mesa.setVisible(false);
+            mesa.setVisible(true);
+        }
+    }//GEN-LAST:event_m_mesasActionPerformed
+
     public static void agregarInternalFrame(InternalFrameAbstracto aInteralFrame) {
 
     }
@@ -317,6 +351,7 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu m_archivo;
     private javax.swing.JMenuItem m_articulos;
     private javax.swing.JMenu m_cCatalogos;
@@ -324,6 +359,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem m_impuestos;
     private javax.swing.JMenu m_inventarios;
     private javax.swing.JMenuItem m_marcas;
+    private javax.swing.JMenuItem m_mesas;
     private javax.swing.JMenu m_modulos;
     private javax.swing.JMenuItem m_platillos;
     private javax.swing.JMenuItem m_salir;
@@ -339,4 +375,5 @@ public class Principal extends javax.swing.JFrame {
     private ArticulosFrame articulosFrame = null;
     private PlatillosFrame platillosFrame = null;        
     private TipoPlatilloCatalogo tipo_platillo = null;
+    private MesaCatalogo mesa = null;
 }
