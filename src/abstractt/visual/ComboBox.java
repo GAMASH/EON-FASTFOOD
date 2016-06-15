@@ -4,7 +4,7 @@
  * Created on 6 de mayo de 2008, 09:20 AM
  *
  */
-package abstractt;
+package abstractt.visual;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;

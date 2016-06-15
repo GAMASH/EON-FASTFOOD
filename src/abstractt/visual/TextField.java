@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package abstractt;
+package abstractt.visual;
 
 import java.awt.Color;
 import java.awt.event.KeyAdapter;

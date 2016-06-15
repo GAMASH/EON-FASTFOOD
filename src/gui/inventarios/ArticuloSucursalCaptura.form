@@ -31,7 +31,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="abstractt.Boton" name="boton1">
+    <Component class="abstractt.visual.Boton" name="boton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
@@ -41,7 +41,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="abstractt.Boton" name="boton2">
+    <Component class="abstractt.visual.Boton" name="boton2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>

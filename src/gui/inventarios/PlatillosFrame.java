@@ -5,7 +5,7 @@
  */
 package gui.inventarios;
 
-import abstractt.InternalFrameAbstracto;
+import abstractt.visual.InternalFrameAbstracto;
 import domain.tabla.Articulo;
 import domain.tabla.Platillo;
 import static gui.Principal.escritorio;
@@ -54,9 +54,9 @@ public class PlatillosFrame extends InternalFrameAbstracto {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        table1 = new abstractt.Table();
+        table1 = new abstractt.visual.Table();
         jPanel1 = new javax.swing.JPanel();
-        boton1 = new abstractt.Boton();
+        boton1 = new abstractt.visual.Boton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         m_recuperar = new javax.swing.JMenuItem();
@@ -201,7 +201,7 @@ public class PlatillosFrame extends InternalFrameAbstracto {
     }//GEN-LAST:event_m_grabarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.Boton boton1;
+    private abstractt.visual.Boton boton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -214,6 +214,6 @@ public class PlatillosFrame extends InternalFrameAbstracto {
     private javax.swing.JMenuItem m_grabar;
     private javax.swing.JMenuItem m_nuevo;
     private javax.swing.JMenuItem m_recuperar;
-    private abstractt.Table table1;
+    private abstractt.visual.Table table1;
     // End of variables declaration//GEN-END:variables
 }

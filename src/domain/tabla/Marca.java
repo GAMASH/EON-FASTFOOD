@@ -6,7 +6,7 @@
 package domain.tabla;
 
 import abstractt.TablaBD;
-import abstractt.Table;
+import abstractt.visual.Table;
 import domain.ParametrosSP;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;

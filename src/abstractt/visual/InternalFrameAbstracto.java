@@ -6,7 +6,7 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-package abstractt;
+package abstractt.visual;
 
 import domain.Fecha;
 import domain.ManejadorBD;

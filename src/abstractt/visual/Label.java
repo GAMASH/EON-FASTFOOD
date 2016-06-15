@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package abstractt;
+package abstractt.visual;
 
 import static domain.General.font_label;
 import static domain.General.propiedades_visuales;

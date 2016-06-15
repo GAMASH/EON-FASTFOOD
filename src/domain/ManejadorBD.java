@@ -8,7 +8,7 @@
  */
 package domain;
 
-import abstractt.Table;
+import abstractt.visual.Table;
 import abstractt.TableModelAbst;
 import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import java.sql.CallableStatement;

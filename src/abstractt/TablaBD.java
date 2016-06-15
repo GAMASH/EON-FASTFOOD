@@ -5,6 +5,7 @@
  */
 package abstractt;
 
+import abstractt.visual.Table;
 import static domain.General.manejadorBD;
 import domain.MovUsuario;
 

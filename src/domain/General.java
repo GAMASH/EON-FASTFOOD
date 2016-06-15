@@ -5,7 +5,7 @@
  */
 package domain;
 
-import abstractt.InternalFrameAbstracto;
+import abstractt.visual.InternalFrameAbstracto;
 import domain.tabla.Sucursal;
 import java.awt.Color;
 import java.awt.Font;

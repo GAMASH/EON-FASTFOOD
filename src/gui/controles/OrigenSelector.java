@@ -5,7 +5,7 @@
  */
 package gui.controles;
 
-import abstractt.ComboBox;
+import abstractt.visual.ComboBox;
 import static domain.General.propiedades_datahardcored;
 import domain.tabla.Impuesto;
 import java.util.ArrayList;

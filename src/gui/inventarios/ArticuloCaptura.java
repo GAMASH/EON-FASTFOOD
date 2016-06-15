@@ -5,7 +5,7 @@
  */
 package gui.inventarios;
 
-import abstractt.InternalFrameAbstracto;
+import abstractt.visual.InternalFrameAbstracto;
 import domain.tabla.Articulo;
 import domain.tabla.ArticuloProveedor;
 import domain.tabla.ArticuloSucursal;
@@ -138,11 +138,11 @@ public class ArticuloCaptura extends InternalFrameAbstracto {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        sucursalesTable = new abstractt.Table();
-        boton1 = new abstractt.Boton();
+        sucursalesTable = new abstractt.visual.Table();
+        boton1 = new abstractt.visual.Boton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        proveedoresTable = new abstractt.Table();
+        proveedoresTable = new abstractt.visual.Table();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -263,7 +263,7 @@ public class ArticuloCaptura extends InternalFrameAbstracto {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.inventarios.ArticuloPanel articuloPanel;
-    private abstractt.Boton boton1;
+    private abstractt.visual.Boton boton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -276,7 +276,7 @@ public class ArticuloCaptura extends InternalFrameAbstracto {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private abstractt.Table proveedoresTable;
-    private abstractt.Table sucursalesTable;
+    private abstractt.visual.Table proveedoresTable;
+    private abstractt.visual.Table sucursalesTable;
     // End of variables declaration//GEN-END:variables
 }

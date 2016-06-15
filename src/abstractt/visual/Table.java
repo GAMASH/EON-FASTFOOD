@@ -6,8 +6,10 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-package abstractt;
+package abstractt.visual;
 
+import abstractt.TablaBD;
+import abstractt.TableModelAbst;
 import static abstractt.ClaseAbstracta.redondear;
 import domain.Fecha;
 import static domain.General.manejadorBD;

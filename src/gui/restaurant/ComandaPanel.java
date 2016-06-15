@@ -5,7 +5,7 @@
  */
 package gui.restaurant;
 
-import abstractt.Panel;
+import abstractt.visual.Panel;
 
 /**
  *
@@ -29,33 +29,44 @@ public class ComandaPanel extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label1 = new abstractt.Label();
-        textField1 = new abstractt.TextField();
-        calendar1 = new abstractt.Calendar();
-        label2 = new abstractt.Label();
+        label1 = new abstractt.visual.Label();
+        textField1 = new abstractt.visual.TextField();
+        calendar1 = new abstractt.visual.Calendar();
+        label2 = new abstractt.visual.Label();
+        textField2 = new abstractt.visual.TextField();
+        label3 = new abstractt.visual.Label();
 
         setLayout(null);
 
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label1.setText("Fecha");
         add(label1);
-        label1.setBounds(12, 38, 38, 16);
+        label1.setBounds(154, 10, 38, 16);
         add(textField1);
         textField1.setBounds(56, 7, 92, 20);
         add(calendar1);
-        calendar1.setBounds(55, 35, 96, 20);
+        calendar1.setBounds(201, 8, 96, 20);
 
         label2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label2.setText("Folio");
         add(label2);
         label2.setBounds(11, 9, 38, 16);
+        add(textField2);
+        textField2.setBounds(56, 35, 241, 20);
+
+        label3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label3.setText("Mesero");
+        add(label3);
+        label3.setBounds(9, 37, 38, 16);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.Calendar calendar1;
-    private abstractt.Label label1;
-    private abstractt.Label label2;
-    private abstractt.TextField textField1;
+    private abstractt.visual.Calendar calendar1;
+    private abstractt.visual.Label label1;
+    private abstractt.visual.Label label2;
+    private abstractt.visual.Label label3;
+    private abstractt.visual.TextField textField1;
+    private abstractt.visual.TextField textField2;
     // End of variables declaration//GEN-END:variables
 }

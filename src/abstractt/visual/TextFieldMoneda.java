@@ -4,7 +4,7 @@
  * Created on 8 de mayo de 2008, 09:07 AM
  *
  */
-package abstractt;
+package abstractt.visual;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

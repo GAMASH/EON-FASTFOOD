@@ -5,7 +5,8 @@
  */
 package gui;
 
-import abstractt.InternalFrameAbstracto;
+import abstractt.visual.ComponenteAcordeon;
+import abstractt.visual.InternalFrameAbstracto;
 import gui.inventarios.ArticulosFrame;
 import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
@@ -29,6 +30,34 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        
+        menu_bar.setTipo("M");
+        menu_bar.setTexto("Catalogos");
+        ComponenteAcordeon c1;
+        
+        c1 = new ComponenteAcordeon();
+        c1.setTexto("Mesas");
+        c1.setTipo("M");
+        menu_bar.agregar(c1);
+        
+        ComponenteAcordeon c2;
+        
+        c2 = new ComponenteAcordeon();
+        c2.setTexto("Mesitas");
+        c2.setTipo("O");
+        c1.agregar(c2);
+        
+        ComponenteAcordeon c3;
+        
+        c3 = new ComponenteAcordeon();
+        c3.setTexto("Sillas");
+        c3.setTipo("M");
+        c2.agregar(c3);
+        
+        
+        
+        
     }
 
     /**
@@ -41,6 +70,7 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         escritorio = new javax.swing.JDesktopPane();
+        menu_bar = new abstractt.visual.ComponenteAcordeon();
         jMenuBar1 = new javax.swing.JMenuBar();
         m_archivo = new javax.swing.JMenu();
         m_configuracionesGenerales = new javax.swing.JMenuItem();
@@ -55,25 +85,36 @@ public class Principal extends javax.swing.JFrame {
         m_impuestos = new javax.swing.JMenuItem();
         m_unidadesMedida = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        m_tipo_platillo = new javax.swing.JMenuItem();
         m_mesas = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         m_ventana = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EON");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
+        getContentPane().setLayout(null);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1279, Short.MAX_VALUE)
+            .addGap(0, 395, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 704, Short.MAX_VALUE)
+            .addGap(0, 358, Short.MAX_VALUE)
         );
 
-        getContentPane().add(escritorio, java.awt.BorderLayout.CENTER);
+        getContentPane().add(escritorio);
+        escritorio.setBounds(106, 0, 395, 358);
+        getContentPane().add(menu_bar);
+        menu_bar.setBounds(-2, -2, 109, 361);
 
         m_archivo.setText("Archivo");
 
@@ -142,13 +183,13 @@ public class Principal extends javax.swing.JFrame {
         m_cCatalogos.add(m_unidadesMedida);
         m_cCatalogos.add(jSeparator1);
 
-        jMenuItem1.setText("Tipo de Platillos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        m_tipo_platillo.setText("Tipo de Platillos");
+        m_tipo_platillo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                m_tipo_platilloActionPerformed(evt);
             }
         });
-        m_cCatalogos.add(jMenuItem1);
+        m_cCatalogos.add(m_tipo_platillo);
 
         m_mesas.setText("Mesas");
         m_mesas.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +201,18 @@ public class Principal extends javax.swing.JFrame {
 
         m_modulos.add(m_cCatalogos);
 
+        jMenu1.setText("Restaurante");
+
+        jMenuItem3.setText("Comandas");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        m_modulos.add(jMenu1);
+
         jMenuBar1.add(m_modulos);
 
         m_ventana.setText("Ventana");
@@ -170,8 +223,7 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void m_tipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipoProductoActionPerformed
-
+    private void tipo_producto() {
         if (tipoProducto == null) {
 
             tipoProducto = new gui.Catalogos.TipoArticuloCatalogo();
@@ -190,9 +242,15 @@ public class Principal extends javax.swing.JFrame {
             tipoProducto.setVisible(false);
             tipoProducto.setVisible(true);
         }
+    }
+
+    private void m_tipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipoProductoActionPerformed
+
+        tipo_producto();
     }//GEN-LAST:event_m_tipoProductoActionPerformed
 
-    private void m_marcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_marcasActionPerformed
+    private void marca() {
+
         if (marca == null) {
 
             marca = new gui.Catalogos.MarcaCatalogo();
@@ -211,9 +269,14 @@ public class Principal extends javax.swing.JFrame {
             marca.setVisible(false);
             marca.setVisible(true);
         }
+    }
+
+    private void m_marcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_marcasActionPerformed
+
+        marca();
     }//GEN-LAST:event_m_marcasActionPerformed
 
-    private void m_impuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_impuestosActionPerformed
+    private void impuesto() {
 
         if (impuesto == null) {
 
@@ -233,9 +296,14 @@ public class Principal extends javax.swing.JFrame {
             impuesto.setVisible(false);
             impuesto.setVisible(true);
         }
+    }
+
+    private void m_impuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_impuestosActionPerformed
+
+        impuesto();
     }//GEN-LAST:event_m_impuestosActionPerformed
 
-    private void m_unidadesMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_unidadesMedidaActionPerformed
+    private void unidad_medida() {
 
         if (unidadMedida == null) {
 
@@ -255,9 +323,14 @@ public class Principal extends javax.swing.JFrame {
             unidadMedida.setVisible(false);
             unidadMedida.setVisible(true);
         }
+    }
+
+    private void m_unidadesMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_unidadesMedidaActionPerformed
+
+        unidad_medida();
     }//GEN-LAST:event_m_unidadesMedidaActionPerformed
 
-    private void m_articulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_articulosActionPerformed
+    private void articulos() {
         if (articulosFrame == null) {
 
             articulosFrame = new gui.inventarios.ArticulosFrame();
@@ -277,10 +350,16 @@ public class Principal extends javax.swing.JFrame {
             articulosFrame.setVisible(false);
             articulosFrame.setVisible(true);
         }
+    }
+
+    private void m_articulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_articulosActionPerformed
+
+        articulos();
     }//GEN-LAST:event_m_articulosActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-         if (tipo_platillo == null) {
+    private void tipoPlatillo() {
+
+        if (tipo_platillo == null) {
 
             tipo_platillo = new gui.Catalogos.TipoPlatilloCatalogo();
         }
@@ -298,10 +377,14 @@ public class Principal extends javax.swing.JFrame {
             tipo_platillo.setVisible(false);
             tipo_platillo.setVisible(true);
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }
 
-    private void m_platillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_platillosActionPerformed
-       
+    private void m_tipo_platilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipo_platilloActionPerformed
+
+        tipoPlatillo();
+    }//GEN-LAST:event_m_tipo_platilloActionPerformed
+
+    private void platillos() {
         if (platillosFrame == null) {
 
             platillosFrame = new gui.inventarios.PlatillosFrame();
@@ -309,7 +392,7 @@ public class Principal extends javax.swing.JFrame {
         if (!platillosFrame.isVisible()) {
 
             platillosFrame = new gui.inventarios.PlatillosFrame();
-            platillosFrame.cargaValores();            
+            platillosFrame.cargaValores();
             escritorio.remove(platillosFrame);
             escritorio.add(platillosFrame);
             platillosFrame.maximizar(escritorio.getSize());
@@ -319,11 +402,15 @@ public class Principal extends javax.swing.JFrame {
             platillosFrame.setVisible(false);
             platillosFrame.setVisible(true);
         }
+    }
+
+    private void m_platillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_platillosActionPerformed
+
+
     }//GEN-LAST:event_m_platillosActionPerformed
 
-    private void m_mesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_mesasActionPerformed
-        
-         if (mesa == null) {
+    private void mesas() {
+        if (mesa == null) {
 
             mesa = new gui.Catalogos.MesaCatalogo();
         }
@@ -334,23 +421,67 @@ public class Principal extends javax.swing.JFrame {
             mesa.cargaValores();
             mesa.centrado(escritorio.getSize());
             escritorio.remove(mesa);
-            escritorio.add(mesa);
+            escritorio.add(mesa);            
             mesa.setVisible(true);
         } else {
 
             mesa.setVisible(false);
             mesa.setVisible(true);
-        }
+        }               
+    }
+
+    private void m_mesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_mesasActionPerformed
+
+        mesas();
     }//GEN-LAST:event_m_mesasActionPerformed
 
-    public static void agregarInternalFrame(InternalFrameAbstracto aInteralFrame) {
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        reordenar();
+    }//GEN-LAST:event_formComponentResized
+
+    public void collapsed(){
+                               
+        colapsed = !colapsed;
+        
+        reordenar();
+    }
+    
+    public void reordenar(){
+        
+        if(colapsed){
+            //btn_collapsed.setText("");
+            menu_bar.setSize(10, getHeight());
+           
+            
+        }else{
+          //  btn_collapsed.setText("<");
+            menu_bar.setSize(100, getHeight());
+             //btn_collapsed.setSize(100, btn_collapsed.getHeight());
+        }
+        
+      //  btn_collapsed.setSize(menu_bar.getWidth(), btn_collapsed.getHeight());
+        
+        escritorio.setLocation(menu_bar.getWidth() , escritorio.getY());
+        escritorio.setSize( getWidth() - menu_bar.getWidth() - 10   , getHeight());
+    }
+    
+    boolean colapsed = false;
+    
+    public void agregarInternalFrame(InternalFrameAbstracto aInteralFrame) {
+
+        escritorio.add(aInteralFrame);
+        reordenar();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu m_archivo;
     private javax.swing.JMenuItem m_articulos;
@@ -364,8 +495,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem m_platillos;
     private javax.swing.JMenuItem m_salir;
     private javax.swing.JMenuItem m_tipoProducto;
+    private javax.swing.JMenuItem m_tipo_platillo;
     private javax.swing.JMenuItem m_unidadesMedida;
     private javax.swing.JMenu m_ventana;
+    private abstractt.visual.ComponenteAcordeon menu_bar;
     // End of variables declaration//GEN-END:variables
 
     private TipoArticuloCatalogo tipoProducto = null;
@@ -373,7 +506,7 @@ public class Principal extends javax.swing.JFrame {
     private ImpuestoCatalogo impuesto = null;
     private UnidadMedidaCatalogo unidadMedida = null;
     private ArticulosFrame articulosFrame = null;
-    private PlatillosFrame platillosFrame = null;        
+    private PlatillosFrame platillosFrame = null;
     private TipoPlatilloCatalogo tipo_platillo = null;
     private MesaCatalogo mesa = null;
 }

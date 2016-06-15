@@ -116,7 +116,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="abstractt.Table" name="sucursalesTable">
+                    <Component class="abstractt.visual.Table" name="sucursalesTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="4">
@@ -130,7 +130,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="abstractt.Boton" name="boton1">
+                <Component class="abstractt.visual.Boton" name="boton1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="ver detalle"/>
                   </Properties>
@@ -170,7 +170,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="abstractt.Table" name="proveedoresTable">
+                    <Component class="abstractt.visual.Table" name="proveedoresTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="4">

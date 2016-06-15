@@ -5,7 +5,7 @@
  */
 package gui.inventarios;
 
-import abstractt.InternalFrameAbstracto;
+import abstractt.visual.InternalFrameAbstracto;
 import domain.tabla.Articulo;
 import static gui.Principal.escritorio;
 import java.awt.Point;
@@ -97,9 +97,9 @@ public class ArticulosFrame extends InternalFrameAbstracto {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        table1 = new abstractt.Table();
+        table1 = new abstractt.visual.Table();
         jPanel1 = new javax.swing.JPanel();
-        boton1 = new abstractt.Boton();
+        boton1 = new abstractt.visual.Boton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -255,7 +255,7 @@ public class ArticulosFrame extends InternalFrameAbstracto {
     private ArticuloCaptura articuloCaptura = null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.Boton boton1;
+    private abstractt.visual.Boton boton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -266,6 +266,6 @@ public class ArticulosFrame extends InternalFrameAbstracto {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private abstractt.Table table1;
+    private abstractt.visual.Table table1;
     // End of variables declaration//GEN-END:variables
 }

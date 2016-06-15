@@ -6,7 +6,7 @@
 package domain.tabla;
 
 import abstractt.TablaBD;
-import abstractt.Table;
+import abstractt.visual.Table;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.manejadorBD;
@@ -109,7 +109,7 @@ public class Platillo extends TablaBD {
         desconectarBD();
     }
 
-    public static Table crearTablaFramePlatillo(Table tabla) {
+    private  static Table crearTablaFramePlatillo(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();
@@ -118,7 +118,7 @@ public class Platillo extends TablaBD {
         String titulos[] = {
             "Id Platillo", "Tipo Platillo", "Nombre", "Descripcion",
             "Carta", "Precio", "Origen", "Crea",
-            "Modifica",};
+            "Modifica"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},

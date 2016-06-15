@@ -3,19 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package abstractt;
+package abstractt.visual;
+
+import java.awt.Color;
 
 /**
  *
  * @author sperez
  */
-public class Panel extends javax.swing.JPanel {
+public class Acordeon extends javax.swing.JPanel {
 
     /**
-     * Creates new form Panel
+     * Creates new form Acordeon
      */
-    public Panel() {
+    public Acordeon() {
+        
         initComponents();
+        this.setBackground(new Color(255,220,220));
     }
 
     /**
@@ -31,11 +35,11 @@ public class Panel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 129, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 349, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

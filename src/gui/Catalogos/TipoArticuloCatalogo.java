@@ -19,7 +19,7 @@ import javax.swing.table.TableColumn;
  *
  * @author Gilberto Adan Gonz�lez Silva
  */
-public class TipoArticuloCatalogo extends abstractt.InternalFrameAbstracto {
+public class TipoArticuloCatalogo extends abstractt.visual.InternalFrameAbstracto {
 
     /**
      * Creates new form tipos
@@ -80,7 +80,7 @@ public class TipoArticuloCatalogo extends abstractt.InternalFrameAbstracto {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table1 = new abstractt.Table();
+        table1 = new abstractt.visual.Table();
 
         setClosable(false);
         setIconifiable(false);
@@ -553,7 +553,7 @@ public class TipoArticuloCatalogo extends abstractt.InternalFrameAbstracto {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private abstractt.Table table1;
+    private abstractt.visual.Table table1;
     // End of variables declaration//GEN-END:variables
 
     private int numeroFilas;

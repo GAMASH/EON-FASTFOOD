@@ -5,7 +5,7 @@
  */
 package gui.inventarios;
 
-import abstractt.InternalFrameAbstracto;
+import abstractt.visual.InternalFrameAbstracto;
 import domain.tabla.ArticuloSucursal;
 
 /**
@@ -38,8 +38,8 @@ public class ArticuloSucursalCaptura extends InternalFrameAbstracto  {
     private void initComponents() {
 
         articuloSucursalPanel1 = new gui.inventarios.ArticuloSucursalPanel();
-        boton1 = new abstractt.Boton();
-        boton2 = new abstractt.Boton();
+        boton1 = new abstractt.visual.Boton();
+        boton2 = new abstractt.visual.Boton();
 
         setTitle("Articulo Sucursal");
         getContentPane().setLayout(null);
@@ -60,8 +60,8 @@ public class ArticuloSucursalCaptura extends InternalFrameAbstracto  {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.inventarios.ArticuloSucursalPanel articuloSucursalPanel1;
-    private abstractt.Boton boton1;
-    private abstractt.Boton boton2;
+    private abstractt.visual.Boton boton1;
+    private abstractt.visual.Boton boton2;
     // End of variables declaration//GEN-END:variables
 
     /**

@@ -72,10 +72,10 @@ public class ArticuloPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        tf_clave = new abstractt.TextField();
+        tf_clave = new abstractt.visual.TextField();
         tipoArticuloSelector = new gui.controles.TipoArticuloSelector();
         jLabel3 = new javax.swing.JLabel();
-        tf_codigo_barras = new abstractt.TextField();
+        tf_codigo_barras = new abstractt.visual.TextField();
         jLabel4 = new javax.swing.JLabel();
         marcaSelector = new gui.controles.MarcaSelector();
         jLabel5 = new javax.swing.JLabel();
@@ -83,11 +83,11 @@ public class ArticuloPanel extends javax.swing.JPanel {
         impuestoSelector = new gui.controles.ImpuestoSelector();
         unidadMedidaSelector = new gui.controles.UnidadMedidaSelector();
         jLabel7 = new javax.swing.JLabel();
-        tf_factor_empaque = new abstractt.TextField();
+        tf_factor_empaque = new abstractt.visual.TextField();
         jLabel8 = new javax.swing.JLabel();
-        label1 = new abstractt.Label();
+        label1 = new abstractt.visual.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tf_descripcion = new abstractt.TextArea();
+        tf_descripcion = new abstractt.visual.TextArea();
 
         setLayout(null);
 
@@ -190,12 +190,12 @@ public class ArticuloPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private abstractt.Label label1;
+    private abstractt.visual.Label label1;
     private gui.controles.MarcaSelector marcaSelector;
-    private abstractt.TextField tf_clave;
-    private abstractt.TextField tf_codigo_barras;
-    private abstractt.TextArea tf_descripcion;
-    private abstractt.TextField tf_factor_empaque;
+    private abstractt.visual.TextField tf_clave;
+    private abstractt.visual.TextField tf_codigo_barras;
+    private abstractt.visual.TextArea tf_descripcion;
+    private abstractt.visual.TextField tf_factor_empaque;
     private gui.controles.TipoArticuloSelector tipoArticuloSelector;
     private gui.controles.UnidadMedidaSelector unidadMedidaSelector;
     // End of variables declaration//GEN-END:variables

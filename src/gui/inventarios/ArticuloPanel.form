@@ -29,7 +29,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="abstractt.TextField" name="tf_clave">
+    <Component class="abstractt.visual.TextField" name="tf_clave">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -63,7 +63,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="abstractt.TextField" name="tf_codigo_barras">
+    <Component class="abstractt.visual.TextField" name="tf_codigo_barras">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
       </Properties>
@@ -141,7 +141,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="abstractt.TextField" name="tf_factor_empaque">
+    <Component class="abstractt.visual.TextField" name="tf_factor_empaque">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="1.0"/>
@@ -163,7 +163,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="abstractt.Label" name="label1">
+    <Component class="abstractt.visual.Label" name="label1">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Clave:"/>
@@ -186,7 +186,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="abstractt.TextArea" name="tf_descripcion">
+        <Component class="abstractt.visual.TextArea" name="tf_descripcion">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>

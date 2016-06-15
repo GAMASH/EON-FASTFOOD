@@ -27,11 +27,11 @@ public class SelectorRangoFechas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        calendar_fin = new abstractt.Calendar();
+        calendar_fin = new abstractt.visual.Calendar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        calendar_ini = new abstractt.Calendar();
-        boton1 = new abstractt.Boton();
+        calendar_ini = new abstractt.visual.Calendar();
+        boton1 = new abstractt.visual.Boton();
 
         setAlignmentX(0.1F);
         setAlignmentY(0.1F);
@@ -63,9 +63,9 @@ public class SelectorRangoFechas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.Boton boton1;
-    private abstractt.Calendar calendar_fin;
-    private abstractt.Calendar calendar_ini;
+    private abstractt.visual.Boton boton1;
+    private abstractt.visual.Calendar calendar_fin;
+    private abstractt.visual.Calendar calendar_ini;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

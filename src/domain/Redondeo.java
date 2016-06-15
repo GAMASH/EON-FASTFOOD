@@ -228,7 +228,7 @@ public class Redondeo {
     *Obtiene el valor numerico de un textField con formato $ ##.##
     *retorna  ##.##
     */
-   public  double obtenerValor(abstractt.TextField campo ){
+   public  double obtenerValor(abstractt.visual.TextField campo ){
       
       return obtenerValor(campo.getText());
    }

@@ -5,7 +5,7 @@
  */
 package gui.controles;
 
-import abstractt.ComboBox;
+import abstractt.visual.ComboBox;
 import domain.tabla.TipoArticulo;
 
 /**
