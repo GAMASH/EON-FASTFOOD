@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class ComponenteAcordeon extends javax.swing.JPanel {
 
     /**
-     * M menu O opcion
+     * M menu O opcion P panel opciones
      */
-    private String tipo = "M";
+    private String tipo = "P";
 
     Color normal;
     Color mouse_entered;
@@ -50,19 +50,29 @@ public class ComponenteAcordeon extends javax.swing.JPanel {
 
         tipo = aTipo;
 
-        if (tipo.equals("M")) {
-            normal = new Color(255, 255, 100);
-            mouse_entered = new Color(255, 255, 255);
-            click = new Color(100, 100, 255);
-            seleccionado = new Color(255, 255, 255);
-
-        } else {
-            normal = new Color(100, 255, 255);
-            mouse_entered = new Color(100, 100, 100);
-            click = new Color(255, 255, 100);
-            seleccionado = new Color(100, 100, 100);
+        switch (tipo) {
+            case "P":
+                
+                normal = mouse_entered = click = seleccionado = new Color(197, 207, 223);                
+                break;
+            case "M":
+                
+                normal = new Color(255, 255, 100);
+                mouse_entered = new Color(255, 255, 255);
+                click = new Color(100, 100, 255);
+                seleccionado = new Color(255, 255, 255);
+                break;
+         
+            case "O":
+            
+                normal = new Color(100, 255, 255);
+                mouse_entered = new Color(100, 100, 100);
+                click = new Color(255, 255, 100);
+                seleccionado = new Color(100, 100, 100);
+                break;
         }
-
+        
+        this.setBackground(normal);
     }
 
     public void setTexto(String texto) {
@@ -97,35 +107,25 @@ public class ComponenteAcordeon extends javax.swing.JPanel {
 
             if (contraido) {
                 //Expander
-                System.out.println("Expandiendo");
-
+                //System.out.println("Expandiendo");
                 alto_total = alto_componentes;
 
                 for (int i = 0; i < componentes.size(); i++) {
 
                     c1 = componentes.get(i);
-
                     alto_total += c1.alto_total;
-
                 }
-
-                //alto_total = ( + 1) * alto_componentes;
             } else {
                 //Contraer
                 System.out.println("Contrayendo");
                 alto_total = alto_componentes;
             }
-
-          //  contraido = !contraido;
-
+            //  contraido = !contraido;
             this.setSize(this.getWidth(), alto_total);
-
-            System.out.println("Alto Total:" + alto_total);
-
+            //System.out.println("Alto Total:" + alto_total);
             if (parentComponenteAcordeon != null) {
                 parentComponenteAcordeon.resize();
             }
-
         }
     }
 
@@ -141,6 +141,7 @@ public class ComponenteAcordeon extends javax.swing.JPanel {
         label1 = new abstractt.visual.Label();
 
         setBackground(new java.awt.Color(0, 153, 204));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);

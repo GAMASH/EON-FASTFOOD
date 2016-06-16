@@ -28,12 +28,12 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
+        
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        
-        menu_bar.setTipo("M");
-        menu_bar.setTexto("Catalogos");
+                
+        menu_bar.setTipo("P");
+        menu_bar.setTexto("OPCIONES");
         ComponenteAcordeon c1;
         
         c1 = new ComponenteAcordeon();
@@ -53,7 +53,7 @@ public class Principal extends javax.swing.JFrame {
         c3 = new ComponenteAcordeon();
         c3.setTexto("Sillas");
         c3.setTipo("M");
-        c2.agregar(c3);
+        c1.agregar(c3);
         
         
         
