@@ -24,6 +24,16 @@ import javax.swing.JFrame;
  */
 public class Principal extends javax.swing.JFrame {
 
+    private  static final int tipo_producto_opcion = 1;
+    private  static final int marcas_opcion= 2;
+    private  static final int impuestos_opcion = 3;
+    private  static final int unidades_medida_opcion = 4;
+    private  static final int mesas_opcion = 5;
+    private  static final int tipo_platillo_opcion = 6;
+    private  static final int articulos_opcion = 7;
+    private  static final int platillos_opcion = 8;
+    private Integer ancho_opciones;
+    
     /**
      * Creates new form Principal
      */
@@ -31,33 +41,83 @@ public class Principal extends javax.swing.JFrame {
         
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-                
+        
+        ancho_opciones = 200 ; 
+        
+         menu_bar.setSize(ancho_opciones, getHeight());
         menu_bar.setTipo("P");
-        menu_bar.setTexto("OPCIONES");
-        ComponenteAcordeon c1;
+        menu_bar.setTexto("O P C I O N E S");
+        ComponenteAcordeon c1 = agregarComponente(menu_bar, "Resturante", "M", 0,"");    
+        ComponenteAcordeon c3 = agregarComponente(menu_bar, "Inventarios", "M", 0,"");    
+        ComponenteAcordeon c31 = agregarComponente(c3, "Articulos", "O", articulos_opcion,"");    
+        ComponenteAcordeon c32 = agregarComponente(c3, "Platillos", "O", platillos_opcion,"");    
+        ComponenteAcordeon c11 = agregarComponente(c1, "Comandas", "O", 0,"");        
+        ComponenteAcordeon c2 = agregarComponente(menu_bar, "Catálogo", "M", 0,"");        
+        ComponenteAcordeon c21 = agregarComponente(c2, "Inventario", "M", 0,"");        
+        ComponenteAcordeon c211 = agregarComponente(c21, "Tipo de producto", "O", tipo_producto_opcion,""); 
+        ComponenteAcordeon c212 = agregarComponente(c21, "Marcas", "O", marcas_opcion,""); 
+        ComponenteAcordeon c213 = agregarComponente(c21, "Impuestos", "O", impuestos_opcion,""); 
+        ComponenteAcordeon c214 = agregarComponente(c21, "Unidades de medida", "O", unidades_medida_opcion,""); 
+        ComponenteAcordeon c22 = agregarComponente(c2, "Restaurante", "M", 0,"");        
+        ComponenteAcordeon c221 = agregarComponente(c22, "Mesas", "O", mesas_opcion,"");        
+        ComponenteAcordeon c222 = agregarComponente(c22, "Tipos de platillos", "O", tipo_platillo_opcion, "user.png");
+    }
+    
+    private ComponenteAcordeon agregarComponente(
+            ComponenteAcordeon parentComponeneteAcordeon,
+            String texto, String tipo, Integer opcion, String icono) {
         
-        c1 = new ComponenteAcordeon();
-        c1.setTexto("Mesas");
-        c1.setTipo("M");
-        menu_bar.agregar(c1);
+        ComponenteAcordeon componeneteAcordeon;
         
-        ComponenteAcordeon c2;
+        componeneteAcordeon = new ComponenteAcordeon();
+        componeneteAcordeon.setTexto(texto);
+        componeneteAcordeon.setTipo(tipo);
         
-        c2 = new ComponenteAcordeon();
-        c2.setTexto("Mesitas");
-        c2.setTipo("O");
-        c1.agregar(c2);
+        componeneteAcordeon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                
+                opciones(opcion);
+            }
+        });
         
-        ComponenteAcordeon c3;
+        parentComponeneteAcordeon.agregar(componeneteAcordeon);
+        componeneteAcordeon.setIcono(icono);
         
-        c3 = new ComponenteAcordeon();
-        c3.setTexto("Sillas");
-        c3.setTipo("M");
-        c1.agregar(c3);
+        return componeneteAcordeon;
         
+    }
+    
+    private void opciones(Integer opcion) {
         
-        
-        
+        switch (opcion) {
+            case tipo_producto_opcion:
+                tipo_producto();
+                break;
+             case marcas_opcion:
+                 marca();
+                break;
+             case impuestos_opcion:
+                impuesto();
+                break;
+             case unidades_medida_opcion:
+                unidad_medida();
+                break;
+             case mesas_opcion:
+                mesas();
+                break;
+             case tipo_platillo_opcion:
+                tipo_platillo();
+                break;
+                 
+             case articulos_opcion:
+                 articulos();
+                 break;
+                 
+             case platillos_opcion:
+                 platillos();
+                 break;
+             
+        }        
     }
 
     /**
@@ -100,11 +160,13 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
+        escritorio.setBackground(new java.awt.Color(102, 204, 255));
+
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,9 +174,15 @@ public class Principal extends javax.swing.JFrame {
         );
 
         getContentPane().add(escritorio);
-        escritorio.setBounds(106, 0, 395, 358);
+        escritorio.setBounds(148, 0, 353, 358);
+
+        menu_bar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu_barMouseClicked(evt);
+            }
+        });
         getContentPane().add(menu_bar);
-        menu_bar.setBounds(-2, -2, 109, 361);
+        menu_bar.setBounds(-2, -2, 151, 361);
 
         m_archivo.setText("Archivo");
 
@@ -225,11 +293,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void tipo_producto() {
         if (tipoProducto == null) {
-
+            
             tipoProducto = new gui.Catalogos.TipoArticuloCatalogo();
         }
         if (!tipoProducto.isVisible()) {
-
+            
             tipoProducto = new gui.Catalogos.TipoArticuloCatalogo();
             //   tipoProducto.setManejadorBD(getManejadorBD());
             tipoProducto.cargaValores();
@@ -238,25 +306,25 @@ public class Principal extends javax.swing.JFrame {
             escritorio.add(tipoProducto);
             tipoProducto.setVisible(true);
         } else {
-
+            
             tipoProducto.setVisible(false);
             tipoProducto.setVisible(true);
         }
     }
 
     private void m_tipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipoProductoActionPerformed
-
+        
         tipo_producto();
     }//GEN-LAST:event_m_tipoProductoActionPerformed
-
+    
     private void marca() {
-
+        
         if (marca == null) {
-
+            
             marca = new gui.Catalogos.MarcaCatalogo();
         }
         if (!marca.isVisible()) {
-
+            
             marca = new gui.Catalogos.MarcaCatalogo();
             // marca.setManejadorBD(getManejadorBD());
             marca.cargaValores();
@@ -265,25 +333,25 @@ public class Principal extends javax.swing.JFrame {
             escritorio.add(marca);
             marca.setVisible(true);
         } else {
-
+            
             marca.setVisible(false);
             marca.setVisible(true);
         }
     }
 
     private void m_marcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_marcasActionPerformed
-
+        
         marca();
     }//GEN-LAST:event_m_marcasActionPerformed
-
+    
     private void impuesto() {
-
+        
         if (impuesto == null) {
-
+            
             impuesto = new gui.Catalogos.ImpuestoCatalogo();
         }
         if (!impuesto.isVisible()) {
-
+            
             impuesto = new gui.Catalogos.ImpuestoCatalogo();
             // marca.setManejadorBD(getManejadorBD());
             impuesto.cargaValores();
@@ -292,53 +360,53 @@ public class Principal extends javax.swing.JFrame {
             escritorio.add(impuesto);
             impuesto.setVisible(true);
         } else {
-
+            
             impuesto.setVisible(false);
             impuesto.setVisible(true);
         }
     }
 
     private void m_impuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_impuestosActionPerformed
-
+        
         impuesto();
     }//GEN-LAST:event_m_impuestosActionPerformed
-
+    
     private void unidad_medida() {
-
+        
         if (unidadMedida == null) {
-
+            
             unidadMedida = new gui.Catalogos.UnidadMedidaCatalogo();
         }
         if (!unidadMedida.isVisible()) {
-
+            
             unidadMedida = new gui.Catalogos.UnidadMedidaCatalogo();
-
+            
             unidadMedida.cargaValores();
             unidadMedida.centrado(escritorio.getSize());
             escritorio.remove(unidadMedida);
             escritorio.add(unidadMedida);
             unidadMedida.setVisible(true);
         } else {
-
+            
             unidadMedida.setVisible(false);
             unidadMedida.setVisible(true);
         }
     }
 
     private void m_unidadesMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_unidadesMedidaActionPerformed
-
+        
         unidad_medida();
     }//GEN-LAST:event_m_unidadesMedidaActionPerformed
-
+    
     private void articulos() {
         if (articulosFrame == null) {
-
+            
             articulosFrame = new gui.inventarios.ArticulosFrame();
         }
         if (!articulosFrame.isVisible()) {
-
+            
             articulosFrame = new gui.inventarios.ArticulosFrame();
-
+            
             articulosFrame.cargaValores();
             //articulosFrame.centrado(escritorio.getSize());            
             escritorio.remove(articulosFrame);
@@ -346,25 +414,25 @@ public class Principal extends javax.swing.JFrame {
             articulosFrame.maximizar(escritorio.getSize());
             articulosFrame.setVisible(true);
         } else {
-
+            
             articulosFrame.setVisible(false);
             articulosFrame.setVisible(true);
         }
     }
 
     private void m_articulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_articulosActionPerformed
-
+        
         articulos();
     }//GEN-LAST:event_m_articulosActionPerformed
-
-    private void tipoPlatillo() {
-
+    
+    private void tipo_platillo() {
+        
         if (tipo_platillo == null) {
-
+            
             tipo_platillo = new gui.Catalogos.TipoPlatilloCatalogo();
         }
         if (!tipo_platillo.isVisible()) {
-
+            
             tipo_platillo = new gui.Catalogos.TipoPlatilloCatalogo();
             // marca.setManejadorBD(getManejadorBD());
             tipo_platillo.cargaValores();
@@ -373,24 +441,24 @@ public class Principal extends javax.swing.JFrame {
             escritorio.add(tipo_platillo);
             tipo_platillo.setVisible(true);
         } else {
-
+            
             tipo_platillo.setVisible(false);
             tipo_platillo.setVisible(true);
         }
     }
 
     private void m_tipo_platilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipo_platilloActionPerformed
-
-        tipoPlatillo();
+        
+        tipo_platillo();
     }//GEN-LAST:event_m_tipo_platilloActionPerformed
-
+    
     private void platillos() {
         if (platillosFrame == null) {
-
+            
             platillosFrame = new gui.inventarios.PlatillosFrame();
         }
         if (!platillosFrame.isVisible()) {
-
+            
             platillosFrame = new gui.inventarios.PlatillosFrame();
             platillosFrame.cargaValores();
             escritorio.remove(platillosFrame);
@@ -398,40 +466,40 @@ public class Principal extends javax.swing.JFrame {
             platillosFrame.maximizar(escritorio.getSize());
             platillosFrame.setVisible(true);
         } else {
-
+            
             platillosFrame.setVisible(false);
             platillosFrame.setVisible(true);
         }
     }
 
     private void m_platillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_platillosActionPerformed
-
+        
 
     }//GEN-LAST:event_m_platillosActionPerformed
-
+    
     private void mesas() {
         if (mesa == null) {
-
+            
             mesa = new gui.Catalogos.MesaCatalogo();
         }
         if (!mesa.isVisible()) {
-
+            
             mesa = new gui.Catalogos.MesaCatalogo();
             // marca.setManejadorBD(getManejadorBD());
             mesa.cargaValores();
             mesa.centrado(escritorio.getSize());
             escritorio.remove(mesa);
-            escritorio.add(mesa);            
+            escritorio.add(mesa);
             mesa.setVisible(true);
         } else {
-
+            
             mesa.setVisible(false);
             mesa.setVisible(true);
-        }               
+        }
     }
 
     private void m_mesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_mesasActionPerformed
-
+        
         mesas();
     }//GEN-LAST:event_m_mesasActionPerformed
 
@@ -443,36 +511,44 @@ public class Principal extends javax.swing.JFrame {
         reordenar();
     }//GEN-LAST:event_formComponentResized
 
-    public void collapsed(){
-                               
+    private void menu_barMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_barMouseClicked
+        collapsed();
+    }//GEN-LAST:event_menu_barMouseClicked
+    
+    public void collapsed() {
+        
         colapsed = !colapsed;
         
         reordenar();
     }
     
-    public void reordenar(){
+    public void reordenar() {
         
-        if(colapsed){
-            //btn_collapsed.setText("");
-            menu_bar.setSize(10, getHeight());
-           
+        if (colapsed) {
             
-        }else{
-          //  btn_collapsed.setText("<");
-            menu_bar.setSize(100, getHeight());
-             //btn_collapsed.setSize(100, btn_collapsed.getHeight());
+            menu_bar.setSize(10, getHeight());                        
+        } else {
+            
+            menu_bar.setSize(ancho_opciones, getHeight());
         }
         
-      //  btn_collapsed.setSize(menu_bar.getWidth(), btn_collapsed.getHeight());
         
-        escritorio.setLocation(menu_bar.getWidth() , escritorio.getY());
-        escritorio.setSize( getWidth() - menu_bar.getWidth() - 10   , getHeight());
+        
+        escritorio.setLocation(menu_bar.getWidth(), escritorio.getY());
+        escritorio.setSize(getWidth() - menu_bar.getWidth() - 10, getHeight());
+
+        //Ordenar todos los internals frames                                
+        for (int i = 0; i < escritorio.getComponentCount(); i++) {
+            
+            InternalFrameAbstracto frame = (InternalFrameAbstracto) escritorio.getComponent(i);
+            frame.reacomodo(escritorio.getSize());
+        }
     }
     
     boolean colapsed = false;
     
     public void agregarInternalFrame(InternalFrameAbstracto aInteralFrame) {
-
+        
         escritorio.add(aInteralFrame);
         reordenar();
     }

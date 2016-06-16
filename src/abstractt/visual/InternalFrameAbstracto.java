@@ -59,6 +59,11 @@ public class InternalFrameAbstracto extends javax.swing.JInternalFrame {
     private boolean modal;
 
     /**
+     * 0= centrado; 1= maximizado
+     */
+    private int tipo_visualizacion;
+
+    /**
      * Creates a new instance of frameAbstracto
      */
     public InternalFrameAbstracto() {
@@ -70,6 +75,31 @@ public class InternalFrameAbstracto extends javax.swing.JInternalFrame {
         fecha = new Fecha();
         seguridad = new Seguridad();
         // redondeo = new Redondeo();
+    }
+
+    /**
+     *
+     * @param tipo
+     */
+    public void tipoCentrado(int tipo) {
+        
+        tipo_visualizacion = tipo;
+    }
+
+    /**
+     *
+     * @param d
+     */
+    public void reacomodo(Dimension d) {
+        switch (tipo_visualizacion) {
+
+            case 0:
+                this.centrado(d);
+                break;
+            case 1:
+                this.maximizar(d);
+                break;
+        }
     }
 
     /**
@@ -91,6 +121,7 @@ public class InternalFrameAbstracto extends javax.swing.JInternalFrame {
         }
 
         setLocation((d.width - frameSize.width) / 2, (d.height - frameSize.height) / 2);
+        tipo_visualizacion = 0;
     }
 
     /**
@@ -185,6 +216,7 @@ public class InternalFrameAbstracto extends javax.swing.JInternalFrame {
     public void maximizar(Dimension d) {
 
         this.setSize(d);
+        tipo_visualizacion = 1;
 
         /*
          try {
