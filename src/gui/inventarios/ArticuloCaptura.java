@@ -6,10 +6,12 @@
 package gui.inventarios;
 
 import abstractt.visual.InternalFrameAbstracto;
+import abstractt.visual.Panel;
 import domain.tabla.Articulo;
 import domain.tabla.ArticuloProveedor;
 import domain.tabla.ArticuloSucursal;
 import static gui.Principal.escritorio;
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -44,6 +46,13 @@ public class ArticuloCaptura extends InternalFrameAbstracto {
                 }
             }
         });
+        
+        jTabbedPane1.setOpaque(false);
+        
+        jScrollPane1.setOpaque(false);
+        
+        jPanel1.setOpaque(false);
+         jPanel2.setOpaque(false);
     }
 
     public void consultarArticuloSucursal(int fila) {
@@ -133,7 +142,7 @@ public class ArticuloCaptura extends InternalFrameAbstracto {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
+        jPanel3 = new Panel();
         articuloPanel = new gui.inventarios.ArticuloPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -242,7 +251,7 @@ public class ArticuloCaptura extends InternalFrameAbstracto {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
         );
 
         pack();

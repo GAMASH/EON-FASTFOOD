@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author sperez
  */
-public class ComponenteAcordeon extends javax.swing.JPanel {
+public class ComponenteMenu extends Panel {
 
     /**
      * M menu O opcion P panel opciones
@@ -31,25 +31,25 @@ public class ComponenteAcordeon extends javax.swing.JPanel {
     Color seleccionado;
     String estado;
 
-    ArrayList<ComponenteAcordeon> componentes;
+    ArrayList<ComponenteMenu> componentes;
     boolean expandido = false;
     Integer alto_componentes;
     Integer alto_total;
     Integer ancho;
-    private ComponenteAcordeon parentComponenteAcordeon;
+    private ComponenteMenu parentComponenteAcordeon;
     private String icono;
     private Integer interno;
 
     /**
      * Creates new form MenuAcordeon
      */
-    public ComponenteAcordeon() {
+    public ComponenteMenu() {
 
         initComponents();
 
         this.setBackground(normal);
 
-        componentes = new ArrayList<ComponenteAcordeon>();
+        componentes = new ArrayList<ComponenteMenu>();
         alto_componentes = 30;
         alto_total = alto_componentes;
 
@@ -88,7 +88,7 @@ public class ComponenteAcordeon extends javax.swing.JPanel {
 
         this.setBackground(normal);
     }
-
+/*
     @Override
     protected void paintComponent(Graphics g) {
 
@@ -118,13 +118,13 @@ public class ComponenteAcordeon extends javax.swing.JPanel {
                 0.0f, getHeight(), color.brighter()));
         g2.fillRect(clip.x, clip.y, clip.width, clip.height);
     }
-
+*/
     public void setTexto(String texto) {
 
         this.label1.setText(texto);
     }
 
-    public void agregar(ComponenteAcordeon opcion) {
+    public void agregar(ComponenteMenu opcion) {
 
         opcion.setParentComponenteAcordeon(this);
 
@@ -172,7 +172,7 @@ public class ComponenteAcordeon extends javax.swing.JPanel {
 
             int posicion = alto_componentes;
             //System.out.println("soy " + this.label1.getText() + " ");
-            ComponenteAcordeon c1;
+            ComponenteMenu c1;
 
             if (expandido) {
                 //Expander
@@ -279,14 +279,14 @@ public class ComponenteAcordeon extends javax.swing.JPanel {
     /**
      * @return the parentComponenteAcordeon
      */
-    public ComponenteAcordeon getParentComponenteAcordeon() {
+    public ComponenteMenu getParentComponenteAcordeon() {
         return parentComponenteAcordeon;
     }
 
     /**
      * @param parentComponenteAcordeon the parentComponenteAcordeon to set
      */
-    public void setParentComponenteAcordeon(ComponenteAcordeon parentComponenteAcordeon) {
+    public void setParentComponenteAcordeon(ComponenteMenu parentComponenteAcordeon) {
         this.parentComponenteAcordeon = parentComponenteAcordeon;
     }
 

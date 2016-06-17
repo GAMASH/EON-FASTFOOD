@@ -36,6 +36,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -256,18 +257,25 @@ public class Table extends javax.swing.JTable {
      */
     public Table() {
 
-        getTableHeader().setFont(new Font("Trebuchet", 0, 12));
+        JTableHeader tableHeader;
+        
+        tableHeader =  getTableHeader();
+        
+        tableHeader.setFont(new Font("Trebuchet", 0, 12));
         //Color de fondo del encabezado
-        getTableHeader().setBackground(new Color(0, 0, 128));
+        tableHeader.setBackground(new Color(0, 0, 128));
         //Color de fuente del encabezado
-        getTableHeader().setForeground(new Color(255, 225, 255));
-        getTableHeader().setOpaque(false);
+        tableHeader.setForeground(new Color(255, 225, 255));
+        tableHeader.setOpaque(false);
+        
+        tableHeader.setReorderingAllowed(false);
+        tableHeader.setResizingAllowed(false);
+        
         setFont(new Font("Trebuchet", 0, 12));
 //        addJTableHeaderListener();
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setSelectionBackground(new Color(51, 153, 255));
-        getTableHeader().setReorderingAllowed(false);
-        getTableHeader().setResizingAllowed(false);
+        
 
         addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseMoved(MouseEvent e) {

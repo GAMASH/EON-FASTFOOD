@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class MenuAcordeon extends javax.swing.JPanel {
 
-    ArrayList<ComponenteAcordeon> componentes;
+    ArrayList<ComponenteMenu> componentes;
     boolean contraido = true;
     Integer alto_componentes;
     Integer alto_total;
@@ -25,15 +25,15 @@ public class MenuAcordeon extends javax.swing.JPanel {
     public MenuAcordeon() {
 
         initComponents();
-        componentes = new ArrayList<ComponenteAcordeon>();
+        componentes = new ArrayList<ComponenteMenu>();
         alto_componentes = 31;
         
-        agregar(new ComponenteAcordeon());
-        agregar(new ComponenteAcordeon());
+        agregar(new ComponenteMenu());
+        agregar(new ComponenteMenu());
         
     }
 
-    public void agregar(ComponenteAcordeon opcion) {
+    public void agregar(ComponenteMenu opcion) {
 
         componentes.add(opcion);
         
@@ -76,7 +76,7 @@ public class MenuAcordeon extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        componenteAcordeon1 = new abstractt.visual.ComponenteAcordeon();
+        componenteAcordeon1 = new abstractt.visual.ComponenteMenu();
 
         setLayout(null);
 
@@ -103,6 +103,6 @@ public class MenuAcordeon extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.visual.ComponenteAcordeon componenteAcordeon1;
+    private abstractt.visual.ComponenteMenu componenteAcordeon1;
     // End of variables declaration//GEN-END:variables
 }

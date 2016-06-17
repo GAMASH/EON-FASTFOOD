@@ -119,7 +119,8 @@ public class ManejadorBD extends AbstractTableModel {
     /**
      */
     public void conectar(String controlador, String url, String nombreUsuario, String clave)
-            throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+            //throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException 
+    {
 
         controlador_jdbc = controlador;
         url_basededatos = url;
@@ -128,12 +129,26 @@ public class ManejadorBD extends AbstractTableModel {
 
         if (!conectado) {
 
-            Class.forName(controlador_jdbc).newInstance();
-            conexion = DriverManager.getConnection(url_basededatos, usuario, palabraClave);
-            //+"?allowMultiQueries=true"
-
-            sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            conectado = true;
+            try {
+                Class.forName(controlador_jdbc).newInstance();
+                conexion = DriverManager.getConnection(url_basededatos, usuario, palabraClave);
+                //+"?allowMultiQueries=true"
+                
+                sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                conectado = true;
+            } catch (InstantiationException ex) {
+                errorSQL = ex.getMessage();
+               // Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                errorSQL = ex.getMessage();
+                //Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                errorSQL = ex.getMessage();
+               // Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                errorSQL = ex.getMessage();
+               // Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -196,10 +211,10 @@ public class ManejadorBD extends AbstractTableModel {
 
         ManejadorBD nMbd = new ManejadorBD(muestraSQL);
 
-        try {
+       // try {
 
             nMbd.conectar(this.controlador_jdbc, this.url_basededatos, this.usuario, this.palabraClave);
-        } catch (InstantiationException ex) {
+        /*} catch (InstantiationException ex) {
 
             ex.printStackTrace();
         } catch (IllegalAccessException ex) {
@@ -212,7 +227,7 @@ public class ManejadorBD extends AbstractTableModel {
 
             ex.printStackTrace();
         }
-
+*/
         return nMbd;
     }
 

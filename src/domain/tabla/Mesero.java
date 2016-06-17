@@ -14,7 +14,7 @@ import abstractt.TablaBD;
  */
 public class Mesero extends TablaBD{
 
-    public String mesero;
+    public String id_mesero;
     public Empleado empleado;
     
 }

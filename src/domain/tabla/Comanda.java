@@ -39,40 +39,38 @@ public class Comanda extends TablaBD {
         conectarBD();
 
         manejadorBD.consulta(""
-                + "select m.id_sucursal, m.id_mesa, numero_mesa, \n"
+                + "select c.id_comanda, m.id_mesa, numero_mesa, \n"
                 + "       case m.status \n"
-                + "        when 'D' then 'Disponible'\n"
-                + "        when 'O' then 'Ocupada'\n"
-                + "        when 'R' then 'Reservada' end mes_status,\n"
-                + "       coalesce(c.folio,'') com_folio,\n"
-                + "       coalesce(c.fecha,'1900-01-01')com_fecha,\n"
-                + "       coalesce( case c.status \n"
-                + "                  when 'PE' then 'Pendiente'\n"
-                + "                  when 'PT' then 'Pedido Tomado'\n"
-                + "                  when 'PR' then 'Proceso'\n"
-                + "                  when 'SE' then 'Servido'\n"
-                + "                  when 'PA' then 'Pagado'\n"
-                + "                  end, 'Disponible') com_status\n"
+                + "         when 'D' then 'Disponible'\n"
+                + "         when 'O' then 'Ocupada'\n"
+                + "         when 'R' then 'Reservada' end mes_status,\n"
+                + "         coalesce(c.folio,'') com_folio, coalesce(c.fecha,'1900-01-01')com_fecha, \n"
+                + "         coalesce( case c.status \n"
+                + "                   when 'PE' then 'Pendiente'\n"
+                + "                   when 'PT' then 'Pedido Tomado'\n"
+                + "                   when 'PR' then 'Proceso'\n"
+                + "                   when 'SE' then 'Servido' \n"
+                + "                   when 'PA' then 'Pagado'                    \n"
+                + "                   end, 'Disponible') com_status\n"
                 + "from mesa m left outer join comanda c on\n"
                 + "         m.id_sucursal = c.id_sucursal\n"
-                + "     and m.id_mesa     = c.id_mesa\n"
-                + "order by numero_mesa;");
-        
-         manejadorBD.asignarTable(tabla);
+                + "	 and m.id_mesa     = c.id_mesa\n"
+                + "order by numero_mesa; ");
+
+        manejadorBD.asignarTable(tabla);
 
         tabla.agregarItemStatus();
         tabla.alinear();
-
 
         tabla.ocultarcolumna(0);
         tabla.ocultarcolumna(1);
         tabla.ocultarcolumna(8);
 
         desconectarBD();
-        
+
     }
-    
-    private  static Table crearTablaFrameMesaComanda(Table tabla) {
+
+    private static Table crearTablaFrameMesaComanda(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();

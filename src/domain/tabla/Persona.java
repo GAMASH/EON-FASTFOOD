@@ -21,5 +21,7 @@ public class Persona extends TablaBD{
     public DatosFiscales datos_fiscales;
     public EMailGrupo eMail_grupo;
     public TelefonoGrupo telefono_grupo;
-    public String nss;        
+    public String nss;           
+    //no es de bd
+    public String nombre_completo;
 }

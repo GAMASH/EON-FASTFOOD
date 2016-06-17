@@ -6,12 +6,13 @@
 package gui.inventarios;
 
 import domain.tabla.Articulo;
+import javax.swing.JPanel;
 
 /**
  *
  * @author sperez
  */
-public class ArticuloPanel extends javax.swing.JPanel {
+public class ArticuloPanel extends JPanel {
 
     public Articulo articulo;
 
@@ -22,6 +23,7 @@ public class ArticuloPanel extends javax.swing.JPanel {
 
         initComponents();
         articulo = new Articulo();
+        this.setOpaque(false);
 
     }
 

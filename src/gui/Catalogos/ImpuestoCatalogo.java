@@ -61,7 +61,7 @@ public class ImpuestoCatalogo extends abstractt.visual.InternalFrameAbstracto {
         setIconifiable(false);
         setMaximizable(false);
         setResizable(false);
-        setTitle("Marcas");
+        setTitle("Impuestos");
         setFrameIcon(null);
 
         jPanel1.setLayout(null);

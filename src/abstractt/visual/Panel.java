@@ -5,6 +5,12 @@
  */
 package abstractt.visual;
 
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
 /**
  *
  * @author sperez
@@ -17,6 +23,21 @@ public class Panel extends javax.swing.JPanel {
     public Panel() {
         initComponents();
     }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+
+        Color color = this.getBackground();
+
+        Graphics2D g2 = (Graphics2D) g.create();
+        Rectangle clip = g2.getClipBounds();
+        
+
+        g2.setPaint(new GradientPaint(0.0f, 0.0f, color.darker(),
+                0.0f, getHeight(), color.brighter()));
+        g2.fillRect(clip.x, clip.y, clip.width, clip.height);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,6 +47,8 @@ public class Panel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setBackground(new java.awt.Color(102, 204, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -18,5 +18,5 @@ public class Usuario extends TablaBD {
     public Persona persona;
     public String login;
     public String password;
-    
+        
 }

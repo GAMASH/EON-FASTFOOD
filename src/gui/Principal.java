@@ -5,8 +5,9 @@
  */
 package gui;
 
-import abstractt.visual.ComponenteAcordeon;
+import abstractt.visual.ComponenteMenu;
 import abstractt.visual.InternalFrameAbstracto;
+import static domain.General.sucursal;
 import gui.inventarios.ArticulosFrame;
 import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
@@ -16,6 +17,9 @@ import gui.Catalogos.MesaCatalogo;
 import gui.Catalogos.TipoPlatilloCatalogo;
 import gui.Catalogos.UnidadMedidaCatalogo;
 import gui.inventarios.PlatillosFrame;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -24,100 +28,164 @@ import javax.swing.JFrame;
  */
 public class Principal extends javax.swing.JFrame {
 
-    private  static final int tipo_producto_opcion = 1;
-    private  static final int marcas_opcion= 2;
-    private  static final int impuestos_opcion = 3;
-    private  static final int unidades_medida_opcion = 4;
-    private  static final int mesas_opcion = 5;
-    private  static final int tipo_platillo_opcion = 6;
-    private  static final int articulos_opcion = 7;
-    private  static final int platillos_opcion = 8;
+    private static final int tipo_producto_opcion = 1;
+    private static final int marcas_opcion = 2;
+    private static final int impuestos_opcion = 3;
+    private static final int unidades_medida_opcion = 4;
+    private static final int mesas_opcion = 5;
+    private static final int tipo_platillo_opcion = 6;
+    private static final int articulos_opcion = 7;
+    private static final int platillos_opcion = 8;
     private Integer ancho_opciones;
-    
+
     /**
      * Creates new form Principal
      */
     public Principal() {
-        
+
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        ancho_opciones = 200 ; 
-        
-         menu_bar.setSize(ancho_opciones, getHeight());
-        menu_bar.setTipo("P");
-        menu_bar.setTexto("O P C I O N E S");
-        ComponenteAcordeon c1 = agregarComponente(menu_bar, "Resturante", "M", 0,"");    
-        ComponenteAcordeon c3 = agregarComponente(menu_bar, "Inventarios", "M", 0,"");    
-        ComponenteAcordeon c31 = agregarComponente(c3, "Articulos", "O", articulos_opcion,"");    
-        ComponenteAcordeon c32 = agregarComponente(c3, "Platillos", "O", platillos_opcion,"");    
-        ComponenteAcordeon c11 = agregarComponente(c1, "Comandas", "O", 0,"");        
-        ComponenteAcordeon c2 = agregarComponente(menu_bar, "Catálogo", "M", 0,"");        
-        ComponenteAcordeon c21 = agregarComponente(c2, "Inventario", "M", 0,"");        
-        ComponenteAcordeon c211 = agregarComponente(c21, "Tipo de producto", "O", tipo_producto_opcion,""); 
-        ComponenteAcordeon c212 = agregarComponente(c21, "Marcas", "O", marcas_opcion,""); 
-        ComponenteAcordeon c213 = agregarComponente(c21, "Impuestos", "O", impuestos_opcion,""); 
-        ComponenteAcordeon c214 = agregarComponente(c21, "Unidades de medida", "O", unidades_medida_opcion,""); 
-        ComponenteAcordeon c22 = agregarComponente(c2, "Restaurante", "M", 0,"");        
-        ComponenteAcordeon c221 = agregarComponente(c22, "Mesas", "O", mesas_opcion,"");        
-        ComponenteAcordeon c222 = agregarComponente(c22, "Tipos de platillos", "O", tipo_platillo_opcion, "user.png");
+
+        ancho_opciones = 200;
+
+        menu_bar.setSize(ancho_opciones, getHeight());
+       // menu_bar.setTipo("P");
+        //menu_bar.setTexto("O P C I O N E S");
+
+        ComponenteMenu c1 = agregarComponente(menu_bar, "Resturante", "M", 0, "");
+        {
+            ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", 0, "");
+        }
+        ComponenteMenu c2 = agregarComponente(menu_bar, "Inventarios", "M", 0, "");
+        {
+            ComponenteMenu c21 = agregarComponente(c2, "Articulos", "O", articulos_opcion, "");
+            ComponenteMenu c22 = agregarComponente(c2, "Platillos", "O", platillos_opcion, "");
+        }
+        ComponenteMenu c3 = agregarComponente(menu_bar, "Catálogo", "M", 0, "");
+        {
+            ComponenteMenu c31 = agregarComponente(c3, "Inventario", "M", 0, "");
+            {
+                ComponenteMenu c311 = agregarComponente(c31, "Tipo de producto", "O", tipo_producto_opcion, "");
+                ComponenteMenu c312 = agregarComponente(c31, "Marcas", "O", marcas_opcion, "");
+                ComponenteMenu c313 = agregarComponente(c31, "Impuestos", "O", impuestos_opcion, "");
+                ComponenteMenu c314 = agregarComponente(c31, "Unidades de medida", "O", unidades_medida_opcion, "");
+            }
+            ComponenteMenu c32 = agregarComponente(c3, "Restaurante", "M", 0, "");
+            {
+                ComponenteMenu c321 = agregarComponente(c32, "Mesas", "O", mesas_opcion, "");
+                ComponenteMenu c322 = agregarComponente(c32, "Tipos de platillos", "O", tipo_platillo_opcion, "user.png");
+            }
+        }
     }
-    
-    private ComponenteAcordeon agregarComponente(
-            ComponenteAcordeon parentComponeneteAcordeon,
+
+    private ComponenteMenu agregarComponente(
+            ComponenteMenu parentComponeneteMenu,
             String texto, String tipo, Integer opcion, String icono) {
-        
-        ComponenteAcordeon componeneteAcordeon;
-        
-        componeneteAcordeon = new ComponenteAcordeon();
-        componeneteAcordeon.setTexto(texto);
-        componeneteAcordeon.setTipo(tipo);
-        
-        componeneteAcordeon.addMouseListener(new java.awt.event.MouseAdapter() {
+
+        ComponenteMenu componeneteMenu;
+        componeneteMenu = new ComponenteMenu();
+        componeneteMenu.setTexto(texto);
+        componeneteMenu.setTipo(tipo);
+
+        componeneteMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                
+
                 opciones(opcion);
             }
         });
-        
-        parentComponeneteAcordeon.agregar(componeneteAcordeon);
-        componeneteAcordeon.setIcono(icono);
-        
-        return componeneteAcordeon;
-        
+
+        parentComponeneteMenu.agregar(componeneteMenu);
+        componeneteMenu.setIcono(icono);
+        return componeneteMenu;
     }
-    
+
     private void opciones(Integer opcion) {
-        
+
         switch (opcion) {
             case tipo_producto_opcion:
                 tipo_producto();
                 break;
-             case marcas_opcion:
-                 marca();
+            case marcas_opcion:
+                marca();
                 break;
-             case impuestos_opcion:
+            case impuestos_opcion:
                 impuesto();
                 break;
-             case unidades_medida_opcion:
+            case unidades_medida_opcion:
                 unidad_medida();
                 break;
-             case mesas_opcion:
+            case mesas_opcion:
                 mesas();
                 break;
-             case tipo_platillo_opcion:
+            case tipo_platillo_opcion:
                 tipo_platillo();
                 break;
-                 
-             case articulos_opcion:
-                 articulos();
-                 break;
-                 
-             case platillos_opcion:
-                 platillos();
-                 break;
-             
-        }        
+            case articulos_opcion:
+                articulos();
+                break;
+            case platillos_opcion:
+                platillos();
+                break;
+        }
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Principal dialog = null;
+                    Login login = null;
+
+                    dialog = new Principal();
+                    login = new Login(null, true);
+
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+                    login.setVisible(true);
+                    dialog.setTitle("EON " + sucursal.datos_fiscales.getNombre_comercial());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     /**
@@ -129,8 +197,8 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorio = new javax.swing.JDesktopPane();
-        menu_bar = new abstractt.visual.ComponenteAcordeon();
+        escritorio = new abstractt.visual.Escritorio();
+        menu_bar = new abstractt.visual.ComponenteMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
         m_archivo = new javax.swing.JMenu();
         m_configuracionesGenerales = new javax.swing.JMenuItem();
@@ -176,6 +244,9 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(escritorio);
         escritorio.setBounds(148, 0, 353, 358);
 
+        menu_bar.setIcono("user.png");
+        menu_bar.setTexto("O P C I O N E S");
+        menu_bar.setTipo("P");
         menu_bar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu_barMouseClicked(evt);
@@ -293,11 +364,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void tipo_producto() {
         if (tipoProducto == null) {
-            
+
             tipoProducto = new gui.Catalogos.TipoArticuloCatalogo();
         }
         if (!tipoProducto.isVisible()) {
-            
+
             tipoProducto = new gui.Catalogos.TipoArticuloCatalogo();
             //   tipoProducto.setManejadorBD(getManejadorBD());
             tipoProducto.cargaValores();
@@ -306,25 +377,25 @@ public class Principal extends javax.swing.JFrame {
             escritorio.add(tipoProducto);
             tipoProducto.setVisible(true);
         } else {
-            
+
             tipoProducto.setVisible(false);
             tipoProducto.setVisible(true);
         }
     }
 
     private void m_tipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipoProductoActionPerformed
-        
+
         tipo_producto();
     }//GEN-LAST:event_m_tipoProductoActionPerformed
-    
+
     private void marca() {
-        
+
         if (marca == null) {
-            
+
             marca = new gui.Catalogos.MarcaCatalogo();
         }
         if (!marca.isVisible()) {
-            
+
             marca = new gui.Catalogos.MarcaCatalogo();
             // marca.setManejadorBD(getManejadorBD());
             marca.cargaValores();
@@ -333,25 +404,25 @@ public class Principal extends javax.swing.JFrame {
             escritorio.add(marca);
             marca.setVisible(true);
         } else {
-            
+
             marca.setVisible(false);
             marca.setVisible(true);
         }
     }
 
     private void m_marcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_marcasActionPerformed
-        
+
         marca();
     }//GEN-LAST:event_m_marcasActionPerformed
-    
+
     private void impuesto() {
-        
+
         if (impuesto == null) {
-            
+
             impuesto = new gui.Catalogos.ImpuestoCatalogo();
         }
         if (!impuesto.isVisible()) {
-            
+
             impuesto = new gui.Catalogos.ImpuestoCatalogo();
             // marca.setManejadorBD(getManejadorBD());
             impuesto.cargaValores();
@@ -360,53 +431,53 @@ public class Principal extends javax.swing.JFrame {
             escritorio.add(impuesto);
             impuesto.setVisible(true);
         } else {
-            
+
             impuesto.setVisible(false);
             impuesto.setVisible(true);
         }
     }
 
     private void m_impuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_impuestosActionPerformed
-        
+
         impuesto();
     }//GEN-LAST:event_m_impuestosActionPerformed
-    
+
     private void unidad_medida() {
-        
+
         if (unidadMedida == null) {
-            
+
             unidadMedida = new gui.Catalogos.UnidadMedidaCatalogo();
         }
         if (!unidadMedida.isVisible()) {
-            
+
             unidadMedida = new gui.Catalogos.UnidadMedidaCatalogo();
-            
+
             unidadMedida.cargaValores();
             unidadMedida.centrado(escritorio.getSize());
             escritorio.remove(unidadMedida);
             escritorio.add(unidadMedida);
             unidadMedida.setVisible(true);
         } else {
-            
+
             unidadMedida.setVisible(false);
             unidadMedida.setVisible(true);
         }
     }
 
     private void m_unidadesMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_unidadesMedidaActionPerformed
-        
+
         unidad_medida();
     }//GEN-LAST:event_m_unidadesMedidaActionPerformed
-    
+
     private void articulos() {
         if (articulosFrame == null) {
-            
+
             articulosFrame = new gui.inventarios.ArticulosFrame();
         }
         if (!articulosFrame.isVisible()) {
-            
+
             articulosFrame = new gui.inventarios.ArticulosFrame();
-            
+
             articulosFrame.cargaValores();
             //articulosFrame.centrado(escritorio.getSize());            
             escritorio.remove(articulosFrame);
@@ -414,25 +485,25 @@ public class Principal extends javax.swing.JFrame {
             articulosFrame.maximizar(escritorio.getSize());
             articulosFrame.setVisible(true);
         } else {
-            
+
             articulosFrame.setVisible(false);
             articulosFrame.setVisible(true);
         }
     }
 
     private void m_articulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_articulosActionPerformed
-        
+
         articulos();
     }//GEN-LAST:event_m_articulosActionPerformed
-    
+
     private void tipo_platillo() {
-        
+
         if (tipo_platillo == null) {
-            
+
             tipo_platillo = new gui.Catalogos.TipoPlatilloCatalogo();
         }
         if (!tipo_platillo.isVisible()) {
-            
+
             tipo_platillo = new gui.Catalogos.TipoPlatilloCatalogo();
             // marca.setManejadorBD(getManejadorBD());
             tipo_platillo.cargaValores();
@@ -441,24 +512,24 @@ public class Principal extends javax.swing.JFrame {
             escritorio.add(tipo_platillo);
             tipo_platillo.setVisible(true);
         } else {
-            
+
             tipo_platillo.setVisible(false);
             tipo_platillo.setVisible(true);
         }
     }
 
     private void m_tipo_platilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipo_platilloActionPerformed
-        
+
         tipo_platillo();
     }//GEN-LAST:event_m_tipo_platilloActionPerformed
-    
+
     private void platillos() {
         if (platillosFrame == null) {
-            
+
             platillosFrame = new gui.inventarios.PlatillosFrame();
         }
         if (!platillosFrame.isVisible()) {
-            
+
             platillosFrame = new gui.inventarios.PlatillosFrame();
             platillosFrame.cargaValores();
             escritorio.remove(platillosFrame);
@@ -466,24 +537,24 @@ public class Principal extends javax.swing.JFrame {
             platillosFrame.maximizar(escritorio.getSize());
             platillosFrame.setVisible(true);
         } else {
-            
+
             platillosFrame.setVisible(false);
             platillosFrame.setVisible(true);
         }
     }
 
     private void m_platillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_platillosActionPerformed
-        
+
 
     }//GEN-LAST:event_m_platillosActionPerformed
-    
+
     private void mesas() {
         if (mesa == null) {
-            
+
             mesa = new gui.Catalogos.MesaCatalogo();
         }
         if (!mesa.isVisible()) {
-            
+
             mesa = new gui.Catalogos.MesaCatalogo();
             // marca.setManejadorBD(getManejadorBD());
             mesa.cargaValores();
@@ -492,14 +563,14 @@ public class Principal extends javax.swing.JFrame {
             escritorio.add(mesa);
             mesa.setVisible(true);
         } else {
-            
+
             mesa.setVisible(false);
             mesa.setVisible(true);
         }
     }
 
     private void m_mesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_mesasActionPerformed
-        
+
         mesas();
     }//GEN-LAST:event_m_mesasActionPerformed
 
@@ -514,41 +585,39 @@ public class Principal extends javax.swing.JFrame {
     private void menu_barMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_barMouseClicked
         collapsed();
     }//GEN-LAST:event_menu_barMouseClicked
-    
+
     public void collapsed() {
-        
+
         colapsed = !colapsed;
-        
+
         reordenar();
     }
-    
+
     public void reordenar() {
-        
+
         if (colapsed) {
-            
-            menu_bar.setSize(10, getHeight());                        
+
+            menu_bar.setSize(10, getHeight());
         } else {
-            
+
             menu_bar.setSize(ancho_opciones, getHeight());
         }
-        
-        
-        
+
         escritorio.setLocation(menu_bar.getWidth(), escritorio.getY());
         escritorio.setSize(getWidth() - menu_bar.getWidth() - 10, getHeight());
 
         //Ordenar todos los internals frames                                
         for (int i = 0; i < escritorio.getComponentCount(); i++) {
-            
+
             InternalFrameAbstracto frame = (InternalFrameAbstracto) escritorio.getComponent(i);
             frame.reacomodo(escritorio.getSize());
         }
     }
-    
+
     boolean colapsed = false;
-    
+
     public void agregarInternalFrame(InternalFrameAbstracto aInteralFrame) {
-        
+
         escritorio.add(aInteralFrame);
         reordenar();
     }
@@ -574,7 +643,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem m_tipo_platillo;
     private javax.swing.JMenuItem m_unidadesMedida;
     private javax.swing.JMenu m_ventana;
-    private abstractt.visual.ComponenteAcordeon menu_bar;
+    private abstractt.visual.ComponenteMenu menu_bar;
     // End of variables declaration//GEN-END:variables
 
     private TipoArticuloCatalogo tipoProducto = null;

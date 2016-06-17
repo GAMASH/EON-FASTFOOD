@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
@@ -167,6 +167,7 @@
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new abstractt.visual.Escritorio()"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
       <Constraints>
@@ -188,7 +189,12 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="abstractt.visual.ComponenteAcordeon" name="menu_bar">
+    <Component class="abstractt.visual.ComponenteMenu" name="menu_bar">
+      <Properties>
+        <Property name="icono" type="java.lang.String" value="user.png"/>
+        <Property name="texto" type="java.lang.String" value="O P C I O N E S"/>
+        <Property name="tipo" type="java.lang.String" value="P"/>
+      </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu_barMouseClicked"/>
       </Events>
