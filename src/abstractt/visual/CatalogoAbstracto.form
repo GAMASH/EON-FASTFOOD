@@ -48,9 +48,9 @@
                           <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                   <Component id="bNuevo" min="-2" pref="40" max="-2" attributes="0"/>
                                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                   <Component id="bGuardar" min="-2" pref="40" max="-2" attributes="0"/>
@@ -58,7 +58,6 @@
                                   <Component id="bEliminar" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                   <Component id="jLabel1" min="-2" pref="40" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" pref="60" max="-2" attributes="0"/>

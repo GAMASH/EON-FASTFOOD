@@ -271,6 +271,7 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
                 "¿Desea cerrar la ventana sin guardar los cambios?",
                 "Confirmación", JOptionPane.YES_NO_OPTION);
         if (tipo == JOptionPane.OK_OPTION) {
+            
             this.dispose();
         }
             
