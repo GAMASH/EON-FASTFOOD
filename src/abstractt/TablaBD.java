@@ -19,6 +19,14 @@ public class TablaBD {
     private MovUsuario modifica;
 
     /**
+     * Funcion para crear la Tabla
+     */
+    public void cargar(Table table1) {
+        
+        System.out.println("TablaBD.cargar: Funcion no Implementada");
+    }
+
+    /**
      * Funcion pendiente
      */
     public void obtenerCreaModifica() {

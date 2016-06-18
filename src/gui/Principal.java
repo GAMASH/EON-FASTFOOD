@@ -13,6 +13,8 @@ import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
 import gui.Catalogos.ImpuestoCatalogo;
 import domain.ManejadorBD;
+import domain.tabla.Impuesto;
+import gui.Catalogos.ImpuestoCatalogo2;
 import gui.Catalogos.MesaCatalogo;
 import gui.Catalogos.TipoPlatilloCatalogo;
 import gui.Catalogos.UnidadMedidaCatalogo;
@@ -49,7 +51,7 @@ public class Principal extends javax.swing.JFrame {
         ancho_opciones = 200;
 
         menu_bar.setSize(ancho_opciones, getHeight());
-       // menu_bar.setTipo("P");
+        // menu_bar.setTipo("P");
         //menu_bar.setTexto("O P C I O N E S");
 
         ComponenteMenu c1 = agregarComponente(menu_bar, "Resturante", "M", 0, "");
@@ -419,17 +421,21 @@ public class Principal extends javax.swing.JFrame {
 
         if (impuesto == null) {
 
-            impuesto = new gui.Catalogos.ImpuestoCatalogo();
+            impuesto = new gui.Catalogos.ImpuestoCatalogo2();
         }
         if (!impuesto.isVisible()) {
 
-            impuesto = new gui.Catalogos.ImpuestoCatalogo();
+            impuesto = new gui.Catalogos.ImpuestoCatalogo2();
+            impuesto.Dimensionar();
             // marca.setManejadorBD(getManejadorBD());
+            impuesto.setTablaBd(new Impuesto());
             impuesto.cargaValores();
             impuesto.centrado(escritorio.getSize());
+
             escritorio.remove(impuesto);
             escritorio.add(impuesto);
             impuesto.setVisible(true);
+            
         } else {
 
             impuesto.setVisible(false);
@@ -648,7 +654,7 @@ public class Principal extends javax.swing.JFrame {
 
     private TipoArticuloCatalogo tipoProducto = null;
     private MarcaCatalogo marca = null;
-    private ImpuestoCatalogo impuesto = null;
+    private ImpuestoCatalogo2 impuesto = null;
     private UnidadMedidaCatalogo unidadMedida = null;
     private ArticulosFrame articulosFrame = null;
     private PlatillosFrame platillosFrame = null;

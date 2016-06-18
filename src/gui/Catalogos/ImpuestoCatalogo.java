@@ -5,23 +5,14 @@
  */
 package gui.Catalogos;
 
-import static domain.tabla.Impuesto.cargarImpuestos;
-import static domain.tabla.Marca.cargarMarcas;
-import domain.tabla.TipoArticulo;
-import java.awt.Color;
-import java.awt.Rectangle;
+import abstractt.visual.Panel;
 import java.awt.event.KeyEvent;
-import java.sql.SQLException;
-import javax.swing.CellEditor;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
  * @author Gilberto Adan Gonz�lez Silva
  */
-public class ImpuestoCatalogo extends abstractt.visual.InternalFrameAbstracto {
+public class ImpuestoCatalogo extends abstractt.visual.CatalogoAbstracto {
 
     /**
      * Creates new form tipos
@@ -31,12 +22,12 @@ public class ImpuestoCatalogo extends abstractt.visual.InternalFrameAbstracto {
 
         setLocation(30, 30);
     }
-
+/*
     public void cargaValores() {
-
+                                      
         cargarImpuestos(table1);
     }
-
+*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +36,7 @@ public class ImpuestoCatalogo extends abstractt.visual.InternalFrameAbstracto {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new Panel();
         bEliminar = new javax.swing.JButton();
         bCerrar = new javax.swing.JButton();
         bGuardar = new javax.swing.JButton();
@@ -100,11 +91,6 @@ public class ImpuestoCatalogo extends abstractt.visual.InternalFrameAbstracto {
         bNuevo.setToolTipText("Nuevo");
         bNuevo.setBorder(null);
         bNuevo.setBorderPainted(false);
-        bNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bNuevoActionPerformed(evt);
-            }
-        });
         jPanel1.add(bNuevo);
         bNuevo.setBounds(10, 10, 40, 40);
 
@@ -152,27 +138,15 @@ public class ImpuestoCatalogo extends abstractt.visual.InternalFrameAbstracto {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-  private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
-
-      bNuevo.transferFocus();
-      table1.agregarFila(jScrollPane1);
-  }//GEN-LAST:event_bNuevoActionPerformed
 
     private void grabar() {
 
@@ -229,15 +203,5 @@ public class ImpuestoCatalogo extends abstractt.visual.InternalFrameAbstracto {
     private abstractt.visual.Table table1;
     // End of variables declaration//GEN-END:variables
 
-    private int numeroFilas;
-    private int filaSeleccionada;
-    private int filaTipoAnterior = -1;
-
-    private String tipoAnterior;
-    private String nuevo = "";
-    private String agregaTipo = "";
-
-    private boolean cerrar = false;
-    private boolean actualiza = false;
-    private boolean enter = false;
+   
 }

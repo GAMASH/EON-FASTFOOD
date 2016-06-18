@@ -38,6 +38,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -45,7 +47,8 @@ import javax.swing.table.TableColumn;
  *
  * @author Gilberto Adan Gonz�lez Silva
  */
-public class InternalFrameAbstracto extends javax.swing.JInternalFrame {
+public class InternalFrameAbstracto extends javax.swing.JInternalFrame implements
+        InternalFrameListener{
 
     protected String nombreProceso = "";
 
@@ -75,6 +78,7 @@ public class InternalFrameAbstracto extends javax.swing.JInternalFrame {
         fecha = new Fecha();
         seguridad = new Seguridad();
         // redondeo = new Redondeo();
+         this.addInternalFrameListener(this);
     }
 
     /**
@@ -246,7 +250,42 @@ public class InternalFrameAbstracto extends javax.swing.JInternalFrame {
      */
     public void cargaValores() {
 
-        System.out.println("cargaValores-Funcion no implementada");
+        System.out.println("InternalFrameAbstracto.cargaValores-Funcion no implementada");
+    }
+
+    @Override
+    public void internalFrameOpened(InternalFrameEvent e) {
+     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void internalFrameClosing(InternalFrameEvent e) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void internalFrameClosed(InternalFrameEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void internalFrameIconified(InternalFrameEvent e) {
+    //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void internalFrameDeiconified(InternalFrameEvent e) {
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void internalFrameActivated(InternalFrameEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void internalFrameDeactivated(InternalFrameEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

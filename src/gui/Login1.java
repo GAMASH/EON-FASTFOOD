@@ -24,18 +24,18 @@ import javax.swing.JOptionPane;
  *
  * @author sperez
  */
-public class Login extends javax.swing.JDialog {
+public class Login1 extends javax.swing.JDialog {
 
     /**
      * Creates new form login
      */
-    public Login(java.awt.Frame parent, boolean modal) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public Login1(java.awt.Frame parent, boolean modal) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         super(parent, modal);
         //this.principal = new Principal();        
         initComponents();
         setLocationRelativeTo(null);
-        cargarConfiguracion(); 
+        cargarConfiguracion();
     }
 
     /**

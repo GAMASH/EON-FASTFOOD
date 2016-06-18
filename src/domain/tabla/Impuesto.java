@@ -30,7 +30,11 @@ public class Impuesto extends TablaBD {
         porcentaje = 0.0;
     }
 
-    public static void cargarImpuestos(Table tabla) {
+    /**
+     *
+     * @param tabla
+     */
+    public void cargar(Table tabla) {
 
         crearTablaImpuestos(tabla);
         conectarBD();
