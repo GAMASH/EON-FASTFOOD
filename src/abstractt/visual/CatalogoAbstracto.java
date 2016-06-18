@@ -57,13 +57,11 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
 
         jPanel1 = new Panel();
         bEliminar = new javax.swing.JButton();
-        bCerrar = new javax.swing.JButton();
         bGuardar = new javax.swing.JButton();
         bNuevo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new abstractt.visual.Table();
 
@@ -79,15 +77,6 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
         bEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bEliminarActionPerformed(evt);
-            }
-        });
-
-        bCerrar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        bCerrar.setMnemonic('C');
-        bCerrar.setToolTipText("Cerrar");
-        bCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCerrarActionPerformed(evt);
             }
         });
 
@@ -123,10 +112,6 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Eliminar");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Cerrar");
-
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -150,27 +135,21 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addComponent(bNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jLabel3)))
-                        .addGap(0, 131, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bCerrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 131, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -186,12 +165,8 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel1, "card2");
@@ -214,14 +189,6 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
 
       grabar();
   }//GEN-LAST:event_bGuardarActionPerformed
-
-  private void bCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCerrarActionPerformed
-
-      if (table1.validaCambios() == 0) {
-
-            setVisible(false);
-        }
-  }//GEN-LAST:event_bCerrarActionPerformed
 
     public int cerrar() {
         return table1.validaCambios();
@@ -251,14 +218,12 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
   }//GEN-LAST:event_bEliminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bCerrar;
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bNuevo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private abstractt.visual.Table table1;
@@ -266,23 +231,26 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
 
        @Override
     public void internalFrameClosing(InternalFrameEvent e) {
-        
+        /*
         int tipo = JOptionPane.showConfirmDialog(this,
                 "¿Desea cerrar la ventana sin guardar los cambios?",
                 "Confirmación", JOptionPane.YES_NO_OPTION);
         if (tipo == JOptionPane.OK_OPTION) {
             
-            this.dispose();
+            this.dispose();             
+        }else{
+            
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
             
-        
-        /*
-        if (cerrar() == 2 ){
-           // this.dispose();
-        }else{
-            return;
-        }
         */
+       
+        if (cerrar() != 1 ){
+            this.dispose();
+        }else{
+             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }
+        
     }
 
    
