@@ -7,18 +7,19 @@ package gui;
 
 import abstractt.visual.ComponenteMenu;
 import abstractt.visual.InternalFrameAbstracto;
+import static domain.General.cargarConfiguracion;
 import static domain.General.sucursal;
 import gui.inventarios.ArticulosFrame;
 import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
 import gui.Catalogos.ImpuestoCatalogo;
-import domain.ManejadorBD;
 import domain.tabla.Impuesto;
 import gui.Catalogos.ImpuestoCatalogo2;
 import gui.Catalogos.MesaCatalogo;
 import gui.Catalogos.TipoPlatilloCatalogo;
 import gui.Catalogos.UnidadMedidaCatalogo;
 import gui.inventarios.PlatillosFrame;
+import gui.restaurant.ComandasFrame;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +39,7 @@ public class Principal extends javax.swing.JFrame {
     private static final int tipo_platillo_opcion = 6;
     private static final int articulos_opcion = 7;
     private static final int platillos_opcion = 8;
+    private static final int comandas_opcion = 9;
     private Integer ancho_opciones;
 
     /**
@@ -46,6 +48,9 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
 
         initComponents();
+        
+        cargarConfiguracion();
+        
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         ancho_opciones = 200;
@@ -56,7 +61,7 @@ public class Principal extends javax.swing.JFrame {
 
         ComponenteMenu c1 = agregarComponente(menu_bar, "Resturante", "M", 0, "");
         {
-            ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", 0, "");
+            ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", comandas_opcion, "");
         }
         ComponenteMenu c2 = agregarComponente(menu_bar, "Inventarios", "M", 0, "");
         {
@@ -127,6 +132,9 @@ public class Principal extends javax.swing.JFrame {
                 break;
             case platillos_opcion:
                 platillos();
+                break;
+            case comandas_opcion:
+                comandas();
                 break;
         }
     }
@@ -574,6 +582,27 @@ public class Principal extends javax.swing.JFrame {
             mesa.setVisible(true);
         }
     }
+    
+    private void comandas() {
+        if (comanda == null) {
+
+            comanda = new gui.restaurant.ComandasFrame();
+        }
+        if (!comanda.isVisible()) {
+
+            comanda = new gui.restaurant.ComandasFrame();
+            // marca.setManejadorBD(getManejadorBD());
+            comanda.cargaValores();
+            comanda.maximizar(escritorio.getSize());
+            escritorio.remove(comanda);
+            escritorio.add(comanda);
+            comanda.setVisible(true);
+        } else {
+
+            comanda.setVisible(false);
+            comanda.setVisible(true);
+        }
+    }
 
     private void m_mesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_mesasActionPerformed
 
@@ -660,4 +689,5 @@ public class Principal extends javax.swing.JFrame {
     private PlatillosFrame platillosFrame = null;
     private TipoPlatilloCatalogo tipo_platillo = null;
     private MesaCatalogo mesa = null;
+    private ComandasFrame comanda = null;
 }

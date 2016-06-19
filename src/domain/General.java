@@ -21,6 +21,11 @@ public class General {
     public static ResourceBundle propiedades_visuales;
     public static ResourceBundle propiedades_datahardcored;
     public static Sucursal sucursal;
+
+    public static boolean gradient = false;
+    public static boolean escala_grises = false;
+    
+
     //Label
     public static Font font_label;
     public static Color color_font_label;
@@ -37,12 +42,22 @@ public class General {
         propiedades_generales = ResourceBundle.getBundle("resorces.general-conf");
         propiedades_visuales = ResourceBundle.getBundle("resorces.visual-conf");
         propiedades_datahardcored = ResourceBundle.getBundle("resorces.data-hard-cored");
+
+        cargarParametrosVisuales();
+
     }
 
-    public static void cargarParametrosIniciales() {
-
-        sucursal = new Sucursal();
-        sucursal.obenterPorId(propiedades_generales.getString("sucursal"));
+    public static void cargarParametrosVisuales() {
+        
+        if (propiedades_visuales.getString("gradient").equals("true")) {
+            
+            gradient = true;
+        }
+        
+        if (propiedades_visuales.getString("escala_grises").equals("true")) {
+            
+            escala_grises = true;
+        }
 
         font_label = new Font(
                 propiedades_visuales.getString("label_font"),
@@ -58,5 +73,12 @@ public class General {
                 propiedades_visuales.getString("textarea_font"),
                 Integer.parseInt(propiedades_visuales.getString("textarea_font_type")),
                 Integer.parseInt(propiedades_visuales.getString("textarea_font_size")));
+    }
+
+    public static void cargarParametrosIniciales() {
+
+        sucursal = new Sucursal();
+        sucursal.obenterPorId(propiedades_generales.getString("sucursal"));
+
     }
 }

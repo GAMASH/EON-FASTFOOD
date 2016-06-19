@@ -7,6 +7,7 @@ package gui;
  */
 
 
+import abstractt.visual.Panel;
 import com.sun.glass.events.KeyEvent;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
@@ -47,7 +48,7 @@ public class Login extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new Panel();
         jLabel1 = new javax.swing.JLabel();
         usuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();

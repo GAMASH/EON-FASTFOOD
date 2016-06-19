@@ -24,15 +24,10 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
      * Creates new form tipos
      */
     public CatalogoAbstracto() {
-        initComponents();
 
+        initComponents();
         setLocation(30, 30);
-        
-        
-       
     }
-    
- 
 
     public void cargaValores() {
 
@@ -229,29 +224,28 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
     private abstractt.visual.Table table1;
     // End of variables declaration//GEN-END:variables
 
-       @Override
+    @Override
     public void internalFrameClosing(InternalFrameEvent e) {
         /*
-        int tipo = JOptionPane.showConfirmDialog(this,
-                "¿Desea cerrar la ventana sin guardar los cambios?",
-                "Confirmación", JOptionPane.YES_NO_OPTION);
-        if (tipo == JOptionPane.OK_OPTION) {
+         int tipo = JOptionPane.showConfirmDialog(this,
+         "¿Desea cerrar la ventana sin guardar los cambios?",
+         "Confirmación", JOptionPane.YES_NO_OPTION);
+         if (tipo == JOptionPane.OK_OPTION) {
             
-            this.dispose();             
-        }else{
+         this.dispose();             
+         }else{
             
+         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+         }
+            
+         */
+
+        if (cerrar() != 1) {
+            this.dispose();
+        } else {
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
-            
-        */
-       
-        if (cerrar() != 1 ){
-            this.dispose();
-        }else{
-             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        }
-        
+
     }
 
-   
 }

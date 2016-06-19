@@ -66,6 +66,7 @@ public class ComandaPanel extends Panel {
         tf_estado = new abstractt.visual.TextField();
 
         setBackground(new java.awt.Color(255, 255, 200));
+        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setLayout(null);
 
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

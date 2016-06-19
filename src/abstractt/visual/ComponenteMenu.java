@@ -62,6 +62,8 @@ public class ComponenteMenu extends Panel {
     public void setTipo(String aTipo) {
 
         tipo = aTipo;
+        
+        
 
         switch (tipo) {
             case "P":
@@ -253,6 +255,7 @@ public class ComponenteMenu extends Panel {
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
 
         this.setBackground(mouse_entered);
+        this.label1.setForeground(Color.black);
         estado = "ME";
         //contraido = true;
         //resize();
@@ -261,11 +264,14 @@ public class ComponenteMenu extends Panel {
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
 
         this.setBackground(normal);
+        this.label1.setForeground(Color.WHITE);
         estado = "N";
     }//GEN-LAST:event_formMouseExited
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         this.setBackground(click);
+        
+        this.label1.setForeground(Color.BLACK);
         estado = "CL";
         this.contraerRetraer();
     }//GEN-LAST:event_formMouseClicked

@@ -5,27 +5,63 @@
  */
 package gui.restaurant;
 
+import abstractt.visual.InternalFrameAbstracto;
+import abstractt.visual.Table;
 import domain.tabla.Comanda;
+import static domain.tabla.Comanda.cargarFrameMesaComanda;
 
 /**
  *
  * @author sperez
  */
-public class ComandasFrame extends javax.swing.JInternalFrame {
+public class ComandasFrame extends InternalFrameAbstracto {
 
     /**
      * Creates new form ComandasFrame
      */
     public ComandasFrame() {
-        
+
         initComponents();
     }
-    
-    public void cargar(){
-        
-        Comanda.cargarFrameMesaComanda(table1);
+
+    public void cargar() {
+
+        Table tabla1 = null;
+
+        Comanda comanda = null;
+        ComandaPanel comandaPanel;
+
+        cargarFrameMesaComanda(tabla1);
+
+        for (int i = 0; i < tabla1.getRowCount(); i++) {
+
+            comanda = new Comanda();
+            comandaPanel = new ComandaPanel();
+           
+            //leer datos de la comanda del Table
+            
+            
+            comandaPanel.setComanda(comanda);
+            
+            //añadir su listener
+            comandaPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                    cargarComanda();
+                }
+            });
+            
+            
+            //agregar al panel del frame
+
+        }
+
     }
 
+    public void cargarComanda(){
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,41 +71,59 @@ public class ComandasFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table1 = new abstractt.visual.Table();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        panel1 = new abstractt.visual.Panel();
+        comandaPanel1 = new gui.restaurant.ComandaPanel();
+        comandaPanel2 = new gui.restaurant.ComandaPanel();
+        comandaPanel3 = new gui.restaurant.ComandaPanel();
 
         setTitle("COMANDAS ");
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        table1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(table1);
+        panel1.setBackground(new java.awt.Color(255, 204, 0));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+        comandaPanel2.setBackground(new java.awt.Color(255, 51, 51));
+
+        comandaPanel3.setBackground(new java.awt.Color(0, 204, 51));
+
+        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comandaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(comandaPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                        .addComponent(comandaPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(comandaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comandaPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comandaPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
+
+        jScrollPane2.setViewportView(panel1);
+
+        getContentPane().add(jScrollPane2);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private abstractt.visual.Table table1;
+    private gui.restaurant.ComandaPanel comandaPanel1;
+    private gui.restaurant.ComandaPanel comandaPanel2;
+    private gui.restaurant.ComandaPanel comandaPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private abstractt.visual.Panel panel1;
     // End of variables declaration//GEN-END:variables
 }

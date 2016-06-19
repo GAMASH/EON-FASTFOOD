@@ -261,7 +261,7 @@ public class Table extends javax.swing.JTable {
         
         tableHeader =  getTableHeader();
         
-        tableHeader.setFont(new Font("Trebuchet", 0, 12));
+        tableHeader.setFont(new Font("Trebuchet", Font.BOLD, 12));
         //Color de fondo del encabezado
         tableHeader.setBackground(new Color(0, 0, 128));
         //Color de fuente del encabezado
