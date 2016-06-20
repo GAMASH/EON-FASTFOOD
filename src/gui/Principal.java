@@ -592,11 +592,12 @@ public class Principal extends javax.swing.JFrame {
 
             comanda = new gui.restaurant.ComandasFrame();
             // marca.setManejadorBD(getManejadorBD());
-            comanda.cargaValores();
+           // comanda.cargaValores();
             comanda.maximizar(escritorio.getSize());
             escritorio.remove(comanda);
             escritorio.add(comanda);
             comanda.setVisible(true);
+             comanda.cargaValores();
         } else {
 
             comanda.setVisible(false);
@@ -639,7 +640,7 @@ public class Principal extends javax.swing.JFrame {
         }
 
         escritorio.setLocation(menu_bar.getWidth(), escritorio.getY());
-        escritorio.setSize(getWidth() - menu_bar.getWidth() - 10, getHeight());
+        escritorio.setSize(getWidth() - menu_bar.getWidth() - 10, getHeight() - 60);
 
         //Ordenar todos los internals frames                                
         for (int i = 0; i < escritorio.getComponentCount(); i++) {

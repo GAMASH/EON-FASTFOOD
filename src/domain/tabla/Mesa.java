@@ -40,7 +40,7 @@ public class Mesa extends TablaBD {
 
         manejadorBD.consulta(
                 "SELECT	 id_sucursal, id_mesa, numero_mesa,\n"
-                + "      numero_comensales, status, crea,\n"
+                + "      num_comensales, status, crea,\n"
                 + "      modifica\n"
                 + "FROM  mesa\n"
                 + "WHERE id_mesa = '" + id + "'\n"

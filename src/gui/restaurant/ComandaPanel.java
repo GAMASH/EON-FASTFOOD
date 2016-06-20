@@ -36,13 +36,16 @@ public class ComandaPanel extends Panel {
      * @param comanda the comanda to set
      */
     public void setComanda(Comanda Acomanda) {
-        
+
         comanda = Acomanda;
-        
+
         this.tf_estado.setText(Acomanda.status);
         this.tf_folio.setText(Acomanda.folio);
         this.tf_mesa.setText(comanda.mesa.numero_mesa);
-        this.tf_mesero.setText(comanda.mesero.empleado.usuario.persona.nombre_completo);
+        
+        if (!comanda.mesero.id_mesero.equals("")) {
+            this.tf_mesero.setText(comanda.mesero.empleado.usuario.persona.nombre_completo);
+        }
     }
 
     /**
@@ -60,12 +63,12 @@ public class ComandaPanel extends Panel {
         label2 = new abstractt.visual.Label();
         tf_mesero = new abstractt.visual.TextField();
         label3 = new abstractt.visual.Label();
+        tf_mesa = new abstractt.visual.Label();
         label4 = new abstractt.visual.Label();
-        tf_mesa = new abstractt.visual.TextField();
         label5 = new abstractt.visual.Label();
         tf_estado = new abstractt.visual.TextField();
 
-        setBackground(new java.awt.Color(255, 255, 200));
+        setBackground(new java.awt.Color(102, 255, 102));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setLayout(null);
 
@@ -75,7 +78,7 @@ public class ComandaPanel extends Panel {
         add(label1);
         label1.setBounds(176, 47, 38, 16);
         add(tf_folio);
-        tf_folio.setBounds(58, 47, 104, 20);
+        tf_folio.setBounds(58, 47, 84, 20);
         add(fecha);
         fecha.setBounds(219, 46, 96, 20);
 
@@ -93,12 +96,17 @@ public class ComandaPanel extends Panel {
         add(label3);
         label3.setBounds(2, 78, 56, 16);
 
+        tf_mesa.setBackground(new java.awt.Color(255, 255, 255));
+        tf_mesa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tf_mesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tf_mesa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        add(tf_mesa);
+        tf_mesa.setBounds(57, 10, 88, 28);
+
         label4.setText("M E S A ");
         label4.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label4);
-        label4.setBounds(11, 8, 43, 31);
-        add(tf_mesa);
-        tf_mesa.setBounds(58, 8, 81, 30);
+        label4.setBounds(14, 8, 43, 31);
 
         label5.setText("E S T A D O ");
         label5.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
@@ -118,7 +126,7 @@ public class ComandaPanel extends Panel {
     private abstractt.visual.Label label5;
     private abstractt.visual.TextField tf_estado;
     private abstractt.visual.TextField tf_folio;
-    private abstractt.visual.TextField tf_mesa;
+    private abstractt.visual.Label tf_mesa;
     private abstractt.visual.TextField tf_mesero;
     // End of variables declaration//GEN-END:variables
 

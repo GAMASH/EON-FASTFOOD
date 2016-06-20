@@ -17,4 +17,10 @@ public class Mesero extends TablaBD{
     public String id_mesero;
     public Empleado empleado;
     
+    public Mesero(){
+        id_mesero = "";
+        empleado = new Empleado();
+        
+    }
+    
 }

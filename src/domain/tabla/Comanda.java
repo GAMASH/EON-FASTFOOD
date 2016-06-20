@@ -9,8 +9,13 @@ import abstractt.TablaBD;
 import abstractt.visual.Table;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
+import static domain.General.formatoDateTime;
 import static domain.General.manejadorBD;
+import static domain.General.mensajeError;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,6 +38,40 @@ public class Comanda extends TablaBD {
     Date fecha_termino;
     Integer numero_comensales;
 
+    public Comanda(){
+        
+       id_comanda = "";
+       folio = "";
+       fecha = new Date();
+       mesa = new Mesa();
+       mesero = new Mesero();
+       
+    }
+    
+    public void setRegistro(Table table, Integer i) {
+
+        conectarBD();
+        
+        try {
+            String id_mesa;
+            
+            id_comanda = table.getValorString(i, 0);
+            id_mesa = table.getValorString(i, 1);                        
+            
+            fecha = formatoDateTime.parse(table.getValorString(i, 5)); 
+            
+            mesa.obetenerPorId(id_mesa);
+            
+            //status = statusMesaSelector.getData(table.getValorString(i, 4));
+        } catch (ParseException ex) {
+            
+            mensajeError(ex.getMessage());
+          //  Logger.getLogger(Comanda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        desconectarBD();
+    }
+
     public static void cargarFrameMesaComanda(Table tabla) {
 
         crearTablaFrameMesaComanda(tabla);
@@ -44,7 +83,7 @@ public class Comanda extends TablaBD {
                 + "         when 'D' then 'Disponible'\n"
                 + "         when 'O' then 'Ocupada'\n"
                 + "         when 'R' then 'Reservada' end mes_status,\n"
-                + "         coalesce(c.folio,'') com_folio, coalesce(c.fecha,'1900-01-01')com_fecha, \n"
+                + "         coalesce(c.folio,'') com_folio, coalesce(c.fecha,'1900-01-01 00:00') com_fecha, \n"
                 + "         coalesce( case c.status \n"
                 + "                   when 'PE' then 'Pendiente'\n"
                 + "                   when 'PT' then 'Pedido Tomado'\n"
@@ -64,7 +103,6 @@ public class Comanda extends TablaBD {
 
         tabla.ocultarcolumna(0);
         tabla.ocultarcolumna(1);
-
 
         desconectarBD();
 
@@ -97,11 +135,11 @@ public class Comanda extends TablaBD {
         });
 
         tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+/*
+        Comanda comanda = new Comanda();
 
-        Platillo platillo = new Platillo();
-
-        tabla.setTablaBD(platillo);
-
+        tabla.setTablaBD(comanda);
+*/
         return tabla;
     }
 
