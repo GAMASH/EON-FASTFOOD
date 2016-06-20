@@ -64,7 +64,7 @@ public class Comanda extends TablaBD {
 
         tabla.ocultarcolumna(0);
         tabla.ocultarcolumna(1);
-        tabla.ocultarcolumna(8);
+
 
         desconectarBD();
 
@@ -93,8 +93,7 @@ public class Comanda extends TablaBD {
 
         tabla.tamañoColumna(new int[]{
             0, 100, 120, 600,
-            50, 100, 100, 0,
-            0
+            50, 100, 100
         });
 
         tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);

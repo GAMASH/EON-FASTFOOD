@@ -16,6 +16,8 @@ import static domain.tabla.Comanda.cargarFrameMesaComanda;
  */
 public class ComandasFrame extends InternalFrameAbstracto {
 
+    private Table tabla1 = null;
+
     /**
      * Creates new form ComandasFrame
      */
@@ -24,9 +26,10 @@ public class ComandasFrame extends InternalFrameAbstracto {
         initComponents();
     }
 
-    public void cargar() {
+    @Override
+    public void cargaValores() {
 
-        Table tabla1 = null;
+        tabla1 = new Table();
 
         Comanda comanda = null;
         ComandaPanel comandaPanel;
@@ -37,31 +40,35 @@ public class ComandasFrame extends InternalFrameAbstracto {
 
             comanda = new Comanda();
             comandaPanel = new ComandaPanel();
-           
+
             //leer datos de la comanda del Table
-            
-            
-            comandaPanel.setComanda(comanda);
-            
+//            comandaPanel.setComanda(comanda);
+
             //añadir su listener
             comandaPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
 
-                    cargarComanda();
+                    cargarComanda(evt);
                 }
             });
-            
-            
-            //agregar al panel del frame
 
+            //agregar al panel del frame
+            
+            panel1.add(comandaPanel);
+            
+            comandaPanel.setBounds(100, 100, 100, 100);
+            
+            
         }
 
     }
 
-    public void cargarComanda(){
-        
+    public void cargarComanda(java.awt.event.MouseEvent evt) {
+
+        System.out.println(evt);
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,42 +80,21 @@ public class ComandasFrame extends InternalFrameAbstracto {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         panel1 = new abstractt.visual.Panel();
-        comandaPanel1 = new gui.restaurant.ComandaPanel();
-        comandaPanel2 = new gui.restaurant.ComandaPanel();
-        comandaPanel3 = new gui.restaurant.ComandaPanel();
 
         setTitle("COMANDAS ");
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         panel1.setBackground(new java.awt.Color(255, 204, 0));
 
-        comandaPanel2.setBackground(new java.awt.Color(255, 51, 51));
-
-        comandaPanel3.setBackground(new java.awt.Color(0, 204, 51));
-
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comandaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(comandaPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                        .addComponent(comandaPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(272, Short.MAX_VALUE))
+            .addGap(0, 606, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(comandaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comandaPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comandaPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+            .addGap(0, 361, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(panel1);
@@ -120,9 +106,6 @@ public class ComandasFrame extends InternalFrameAbstracto {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.restaurant.ComandaPanel comandaPanel1;
-    private gui.restaurant.ComandaPanel comandaPanel2;
-    private gui.restaurant.ComandaPanel comandaPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private abstractt.visual.Panel panel1;
     // End of variables declaration//GEN-END:variables
