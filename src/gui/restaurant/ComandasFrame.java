@@ -191,9 +191,7 @@ public class ComandasFrame extends InternalFrameAbstracto {
 
             comandaPanel = comandas.get(i);
             posX += separatorX;
-            sum_width = posX + width_panel;
-                         
-            
+            sum_width = posX + width_panel;                                     
             
             if (sum_width +  separatorX > this.jScrollPane2.getWidth()-jScrollPane2.getVerticalScrollBar().getWidth()  && i != 0) {
 
