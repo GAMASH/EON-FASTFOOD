@@ -55,7 +55,7 @@ public class Principal extends javax.swing.JFrame {
 
         ancho_opciones = 200;
 
-        menu_bar.setSize(ancho_opciones, getHeight());
+        menu_bar.setSize(ancho_opciones, getHeight() - 100);
         // menu_bar.setTipo("P");
         //menu_bar.setTexto("O P C I O N E S");
 
@@ -207,6 +207,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        statusBar1 = new abstractt.visual.StatusBar();
         escritorio = new abstractt.visual.Escritorio();
         menu_bar = new abstractt.visual.ComponenteMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -237,6 +238,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(null);
+        getContentPane().add(statusBar1);
+        statusBar1.setBounds(0, 335, 501, 23);
 
         escritorio.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -248,11 +251,11 @@ public class Principal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
 
         getContentPane().add(escritorio);
-        escritorio.setBounds(148, 0, 353, 358);
+        escritorio.setBounds(148, 0, 353, 331);
 
         menu_bar.setIcono("user.png");
         menu_bar.setTexto("O P C I O N E S");
@@ -263,7 +266,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(menu_bar);
-        menu_bar.setBounds(-2, -2, 151, 361);
+        menu_bar.setBounds(-2, -2, 151, 335);
 
         m_archivo.setText("Archivo");
 
@@ -633,21 +636,25 @@ public class Principal extends javax.swing.JFrame {
 
         if (colapsed) {
 
-            menu_bar.setSize(10, getHeight());
+            menu_bar.setSize(10, getHeight() - statusBar1.getHeight() - 58);
         } else {
 
-            menu_bar.setSize(ancho_opciones, getHeight());
+            menu_bar.setSize(ancho_opciones, getHeight() - statusBar1.getHeight() - 58);
         }
 
-        escritorio.setLocation(menu_bar.getWidth(), escritorio.getY());
-        escritorio.setSize(getWidth() - menu_bar.getWidth() - 10, getHeight() - 60);
+        escritorio.setLocation(menu_bar.getWidth(), 0);
+        escritorio.setSize(getWidth() - menu_bar.getWidth() -15, getHeight() - statusBar1.getHeight() - 60);
 
+        statusBar1.setBounds( 0, this.getHeight() - 81 , this.getWidth(), 20);
+        
         //Ordenar todos los internals frames                                
         for (int i = 0; i < escritorio.getComponentCount(); i++) {
 
             InternalFrameAbstracto frame = (InternalFrameAbstracto) escritorio.getComponent(i);
             frame.reacomodo(escritorio.getSize());
         }
+        
+        statusBar1.mostrar();
     }
 
     boolean colapsed = false;
@@ -680,6 +687,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem m_unidadesMedida;
     private javax.swing.JMenu m_ventana;
     private abstractt.visual.ComponenteMenu menu_bar;
+    private abstractt.visual.StatusBar statusBar1;
     // End of variables declaration//GEN-END:variables
 
     private TipoArticuloCatalogo tipoProducto = null;
