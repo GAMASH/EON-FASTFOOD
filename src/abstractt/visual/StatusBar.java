@@ -15,6 +15,10 @@ import javax.swing.JLabel;
 public class StatusBar extends javax.swing.JPanel {
 
     int borde = 3;
+    public boolean progressBar;
+    public static final int etiqueta_izquierda = 0;
+    public static final int etiqueta_centro = 1;
+    public static final int etiqueta_derecha = 2;
 
     /**
      * Creates new form StatusBar
@@ -22,15 +26,64 @@ public class StatusBar extends javax.swing.JPanel {
     public StatusBar() {
 
         initComponents();
+        progressBar = true;
     }
 
     public void mostrar() {
 
-        int alto=this.getHeight();
-        int ancho=this.getWidth();
+        int alto = this.getHeight();
+        int ancho = this.getWidth();
 
-        izquierda.setBounds(borde, borde, 100,alto - (borde * 2));
+        izquierda.setBounds(borde, borde, 100, alto - (borde * 2));
+        derecha.setBounds(ancho - borde - 100, borde, 100, alto - (borde * 2));
 
+        icono_progressbar.setVisible(progressBar);
+        progreesbar.setVisible(progressBar);
+
+        if (progressBar) {
+
+            icono_progressbar.setBounds(ancho - (borde * 2) - 100 - (alto - (borde * 2)), borde, alto - (borde * 2), alto - (borde * 2));
+            progreesbar.setBounds(ancho - (borde * 3) - 100 - (alto - (borde * 2)) - 250, borde, 250, alto - (borde * 2));
+            centro.setBounds(100 + (borde * 2), borde, ancho - 200 - (alto - (borde * 2)) - 250 - (borde * 6), alto - (borde * 2));
+            //progreesbar.setIndeterminate(true);
+            //progreesbar.setString("C A R G A N D O");
+            //progreesbar.setStringPainted(true);
+
+        } else {
+
+            centro.setBounds(100 + (borde * 2), borde, ancho - 200 - (borde * 4), alto - (borde * 2));
+        }
+    }
+
+    public void progresBarr(int max, boolean controlado, String mensaje) {
+
+        progressBar = true;
+        progreesbar.setMaximum(max);
+
+        progreesbar.setIndeterminate(false);
+
+        if (!controlado) {
+
+            progreesbar.setIndeterminate(true);
+        }
+
+        progreesbar.setString(mensaje);
+        progreesbar.setStringPainted(true);
+    }
+
+    public void mensaje(String mensaje, int etiqueta) {
+
+        switch (etiqueta) {
+            case etiqueta_izquierda:                
+                izquierda.setText(mensaje);
+                break;
+            case etiqueta_centro:
+                centro.setText(mensaje);
+                break;
+            case etiqueta_derecha:
+                derecha.setText(mensaje);
+                break;
+        }
     }
 
     /**
@@ -42,20 +95,20 @@ public class StatusBar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        progreesbar = new javax.swing.JProgressBar();
         centro = new javax.swing.JLabel();
+        progreesbar = new javax.swing.JProgressBar();
         derecha = new javax.swing.JLabel();
         izquierda = new javax.swing.JLabel();
         icono_progressbar = new javax.swing.JLabel();
 
         setLayout(null);
-        add(progreesbar);
-        progreesbar.setBounds(188, 4, 146, 14);
 
         centro.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         centro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         add(centro);
-        centro.setBounds(55, 2, 302, 17);
+        centro.setBounds(55, 2, 127, 17);
+        add(progreesbar);
+        progreesbar.setBounds(188, 4, 146, 14);
 
         derecha.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         add(derecha);
@@ -65,8 +118,12 @@ public class StatusBar extends javax.swing.JPanel {
         izquierda.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         add(izquierda);
         izquierda.setBounds(3, 3, 49, 17);
+
+        icono_progressbar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        icono_progressbar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resorces/images/user.png"))); // NOI18N
+        icono_progressbar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         add(icono_progressbar);
-        icono_progressbar.setBounds(339, 4, 18, 0);
+        icono_progressbar.setBounds(339, 4, 18, 15);
     }// </editor-fold>//GEN-END:initComponents
 
 

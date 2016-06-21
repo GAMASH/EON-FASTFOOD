@@ -6,9 +6,13 @@
 package gui.restaurant;
 
 import abstractt.visual.InternalFrameAbstracto;
+import static abstractt.visual.StatusBar.etiqueta_centro;
+import static abstractt.visual.StatusBar.etiqueta_derecha;
+import static abstractt.visual.StatusBar.etiqueta_izquierda;
 import abstractt.visual.Table;
 import domain.tabla.Comanda;
 import static domain.tabla.Comanda.cargarFrameMesaComanda;
+import static gui.Principal.statusBar1;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -114,10 +118,9 @@ public class ComandasFrame extends InternalFrameAbstracto {
             });
 
             //agregar al panel del frame
-          //  comandaPanel.setBackground(asignarColor());
+            //  comandaPanel.setBackground(asignarColor());
             panel1.add(comandaPanel);
             comandas.add(comandaPanel);
-
         }
 
         mostrarComandas();
@@ -133,11 +136,10 @@ public class ComandasFrame extends InternalFrameAbstracto {
         randomNum = minimum + (int) (Math.random() * maximum);
 
         randomNum *= porc_color;
-        if( randomNum < 255) {
+        if (randomNum < 255) {
             randomNum += porc_color;
         }
-        
-        
+
         return randomNum;
     }
 
@@ -167,8 +169,8 @@ public class ComandasFrame extends InternalFrameAbstracto {
             b = asignarPorcentajeColor();
         }
 
-        System.out.println(r+","+g+","+b);
-        
+        System.out.println(r + "," + g + "," + b);
+
         Color color = new Color(r, g, b);
         return color;
     }
@@ -191,9 +193,9 @@ public class ComandasFrame extends InternalFrameAbstracto {
 
             comandaPanel = comandas.get(i);
             posX += separatorX;
-            sum_width = posX + width_panel;                                     
-            
-            if (sum_width +  separatorX > this.jScrollPane2.getWidth()-jScrollPane2.getVerticalScrollBar().getWidth()  && i != 0) {
+            sum_width = posX + width_panel;
+
+            if (sum_width + separatorX > this.jScrollPane2.getWidth() - jScrollPane2.getVerticalScrollBar().getWidth() && i != 0) {
 
                 posX = separatorX;
                 posY += heigth_panel + separatorY;
@@ -219,6 +221,7 @@ public class ComandasFrame extends InternalFrameAbstracto {
         ComandaPanel comandaPanel;
         comandaPanel = (ComandaPanel) evt.getComponent();
         System.out.println(comandaPanel.getComanda().mesa.numero_mesa);
+        statusBar1.mensaje("MESA: " + comandaPanel.getComanda().mesa.numero_mesa, etiqueta_izquierda);
     }
 
     /**
@@ -254,7 +257,7 @@ public class ComandasFrame extends InternalFrameAbstracto {
             }
         });
 
-        panel1.setBackground(new java.awt.Color(255, 204, 0));
+        panel1.setBackground(new java.awt.Color(255, 255, 153));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);

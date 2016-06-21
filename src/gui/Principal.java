@@ -59,6 +59,8 @@ public class Principal extends javax.swing.JFrame {
         // menu_bar.setTipo("P");
         //menu_bar.setTexto("O P C I O N E S");
 
+         statusBar1.progresBarr(0, false,"C A R G A N D O" );
+        
         ComponenteMenu c1 = agregarComponente(menu_bar, "Resturante", "M", 0, "");
         {
             ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", comandas_opcion, "");
@@ -83,6 +85,8 @@ public class Principal extends javax.swing.JFrame {
                 ComponenteMenu c322 = agregarComponente(c32, "Tipos de platillos", "O", tipo_platillo_opcion, "user.png");
             }
         }
+        
+        statusBar1.progressBar = false;
     }
 
     private ComponenteMenu agregarComponente(
@@ -127,8 +131,8 @@ public class Principal extends javax.swing.JFrame {
             case tipo_platillo_opcion:
                 tipo_platillo();
                 break;
-            case articulos_opcion:
-                articulos();
+            case articulos_opcion:                              
+                articulos();               
                 break;
             case platillos_opcion:
                 platillos();
@@ -395,12 +399,7 @@ public class Principal extends javax.swing.JFrame {
             tipoProducto.setVisible(true);
         }
     }
-
-    private void m_tipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipoProductoActionPerformed
-
-        tipo_producto();
-    }//GEN-LAST:event_m_tipoProductoActionPerformed
-
+    
     private void marca() {
 
         if (marca == null) {
@@ -422,11 +421,6 @@ public class Principal extends javax.swing.JFrame {
             marca.setVisible(true);
         }
     }
-
-    private void m_marcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_marcasActionPerformed
-
-        marca();
-    }//GEN-LAST:event_m_marcasActionPerformed
 
     private void impuesto() {
 
@@ -453,12 +447,7 @@ public class Principal extends javax.swing.JFrame {
             impuesto.setVisible(true);
         }
     }
-
-    private void m_impuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_impuestosActionPerformed
-
-        impuesto();
-    }//GEN-LAST:event_m_impuestosActionPerformed
-
+    
     private void unidad_medida() {
 
         if (unidadMedida == null) {
@@ -480,11 +469,6 @@ public class Principal extends javax.swing.JFrame {
             unidadMedida.setVisible(true);
         }
     }
-
-    private void m_unidadesMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_unidadesMedidaActionPerformed
-
-        unidad_medida();
-    }//GEN-LAST:event_m_unidadesMedidaActionPerformed
 
     private void articulos() {
         if (articulosFrame == null) {
@@ -508,11 +492,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    private void m_articulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_articulosActionPerformed
-
-        articulos();
-    }//GEN-LAST:event_m_articulosActionPerformed
-
     private void tipo_platillo() {
 
         if (tipo_platillo == null) {
@@ -535,11 +514,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    private void m_tipo_platilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipo_platilloActionPerformed
-
-        tipo_platillo();
-    }//GEN-LAST:event_m_tipo_platilloActionPerformed
-
     private void platillos() {
         if (platillosFrame == null) {
 
@@ -559,11 +533,6 @@ public class Principal extends javax.swing.JFrame {
             platillosFrame.setVisible(true);
         }
     }
-
-    private void m_platillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_platillosActionPerformed
-
-
-    }//GEN-LAST:event_m_platillosActionPerformed
 
     private void mesas() {
         if (mesa == null) {
@@ -608,23 +577,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    private void m_mesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_mesasActionPerformed
-
-        mesas();
-    }//GEN-LAST:event_m_mesasActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        reordenar();
-    }//GEN-LAST:event_formComponentResized
-
-    private void menu_barMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_barMouseClicked
-        collapsed();
-    }//GEN-LAST:event_menu_barMouseClicked
-
     public void collapsed() {
 
         colapsed = !colapsed;
@@ -634,6 +586,8 @@ public class Principal extends javax.swing.JFrame {
 
     public void reordenar() {
 
+        statusBar1.setBounds( 0, this.getHeight() - 81 , this.getWidth() - 15, 22);
+        
         if (colapsed) {
 
             menu_bar.setSize(10, getHeight() - statusBar1.getHeight() - 58);
@@ -643,10 +597,8 @@ public class Principal extends javax.swing.JFrame {
         }
 
         escritorio.setLocation(menu_bar.getWidth(), 0);
-        escritorio.setSize(getWidth() - menu_bar.getWidth() -15, getHeight() - statusBar1.getHeight() - 60);
-
-        statusBar1.setBounds( 0, this.getHeight() - 81 , this.getWidth(), 20);
-        
+        escritorio.setSize(getWidth() - menu_bar.getWidth() - 15, getHeight() - statusBar1.getHeight() - 60);
+                
         //Ordenar todos los internals frames                                
         for (int i = 0; i < escritorio.getComponentCount(); i++) {
 
@@ -664,6 +616,58 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(aInteralFrame);
         reordenar();
     }
+
+    private void m_tipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipoProductoActionPerformed
+
+        tipo_producto();
+    }//GEN-LAST:event_m_tipoProductoActionPerformed
+    
+    private void m_marcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_marcasActionPerformed
+
+        marca();
+    }//GEN-LAST:event_m_marcasActionPerformed
+
+    private void m_impuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_impuestosActionPerformed
+
+        impuesto();
+    }//GEN-LAST:event_m_impuestosActionPerformed
+
+    private void m_unidadesMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_unidadesMedidaActionPerformed
+
+        unidad_medida();
+    }//GEN-LAST:event_m_unidadesMedidaActionPerformed
+
+    private void m_articulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_articulosActionPerformed
+
+        articulos();
+    }//GEN-LAST:event_m_articulosActionPerformed
+
+    private void m_tipo_platilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_tipo_platilloActionPerformed
+
+        tipo_platillo();
+    }//GEN-LAST:event_m_tipo_platilloActionPerformed
+
+    private void m_platillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_platillosActionPerformed
+
+
+    }//GEN-LAST:event_m_platillosActionPerformed
+
+    private void m_mesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_mesasActionPerformed
+
+        mesas();
+    }//GEN-LAST:event_m_mesasActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        reordenar();
+    }//GEN-LAST:event_formComponentResized
+
+    private void menu_barMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_barMouseClicked
+        collapsed();
+    }//GEN-LAST:event_menu_barMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane escritorio;
@@ -687,7 +691,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem m_unidadesMedida;
     private javax.swing.JMenu m_ventana;
     private abstractt.visual.ComponenteMenu menu_bar;
-    private abstractt.visual.StatusBar statusBar1;
+    public static abstractt.visual.StatusBar statusBar1;
     // End of variables declaration//GEN-END:variables
 
     private TipoArticuloCatalogo tipoProducto = null;
