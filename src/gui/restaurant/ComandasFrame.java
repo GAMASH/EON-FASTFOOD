@@ -12,6 +12,7 @@ import static abstractt.visual.StatusBar.etiqueta_izquierda;
 import abstractt.visual.Table;
 import domain.tabla.Comanda;
 import static domain.tabla.Comanda.cargarFrameMesaComanda;
+import static gui.Principal.escritorio;
 import static gui.Principal.statusBar1;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -222,7 +223,29 @@ public class ComandasFrame extends InternalFrameAbstracto {
         comandaPanel = (ComandaPanel) evt.getComponent();
         System.out.println(comandaPanel.getComanda().mesa.numero_mesa);
         statusBar1.mensaje("MESA: " + comandaPanel.getComanda().mesa.numero_mesa, etiqueta_izquierda);
+        
+        if (comandaCaptura == null) {
+
+            comandaCaptura = new ComandaCaptura();
+        }
+        if (!comandaCaptura.isVisible()) {
+
+            comandaCaptura = new ComandaCaptura();
+
+            comandaCaptura.cargaValores();
+            //articulosFrame.centrado(escritorio.getSize());            
+            escritorio.remove(comandaCaptura);
+            escritorio.add(comandaCaptura);
+            comandaCaptura.maximizar(escritorio.getSize());
+            comandaCaptura.setVisible(true);
+        } else {
+
+            comandaCaptura.setVisible(false);
+            comandaCaptura.setVisible(true);
+        }
     }
+    
+    ComandaCaptura comandaCaptura;
 
     /**
      * This method is called from within the constructor to initialize the form.
