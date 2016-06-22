@@ -23,7 +23,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
     Comanda comanda;
     ArrayList<Boton> botones;
-    ArrayList<ComandaDetallePanel> comanda_detalles;
+    ArrayList<ComandaDetallePanel> comanda_detalles_panel;
 
     /**
      * Creates new form ComandaCaptura
@@ -32,7 +32,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         initComponents();
         botones = new ArrayList<Boton>();
-        comanda_detalles = new ArrayList<ComandaDetallePanel>();
+        comanda_detalles_panel = new ArrayList<ComandaDetallePanel>();
     }
 
     public void cargaValores() {
@@ -79,9 +79,14 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     private void agregarDetalle(String nombre_tab, int comensal) {
 
       //  Table tabla_detalle;
+        ComandaDetalle comanda_detalle;
         ComandaDetallePanel panel_detalle;
-
+        
+        
+        
         panel_detalle = new ComandaDetallePanel();
+        
+        
         jTabbedPane1.add(panel_detalle, nombre_tab);
        // tabla_detalle = new Table();
       //  ComandaDetalle.cargarComandaDetalle(tabla_detalle, comanda, comensal);

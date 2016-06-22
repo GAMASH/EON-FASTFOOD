@@ -5,17 +5,25 @@
  */
 package gui.restaurant;
 
+import domain.tabla.ComandaDetalle;
+
 /**
  *
  * @author sperez
  */
 public class ComandaDetallePanel extends javax.swing.JPanel {
 
+    public ComandaDetalle comanda_detalle;
+    
     /**
      * Creates new form ComandaDetallePanel
      */
     public ComandaDetallePanel() {
         initComponents();
+    }
+    
+    public void setComandaDetalle(){
+        
     }
 
     /**
