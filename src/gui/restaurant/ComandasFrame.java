@@ -220,8 +220,13 @@ public class ComandasFrame extends InternalFrameAbstracto {
     public void cargarComanda(java.awt.event.MouseEvent evt) {
 
         ComandaPanel comandaPanel;
+        Comanda comanda;
+        
         comandaPanel = (ComandaPanel) evt.getComponent();
-        System.out.println(comandaPanel.getComanda().mesa.numero_mesa);
+        
+        comanda = comandaPanel.getComanda();
+        
+        System.out.println(comanda.mesa.numero_mesa);
         statusBar1.mensaje("MESA: " + comandaPanel.getComanda().mesa.numero_mesa, etiqueta_izquierda);
         
         if (comandaCaptura == null) {
@@ -231,7 +236,7 @@ public class ComandasFrame extends InternalFrameAbstracto {
         if (!comandaCaptura.isVisible()) {
 
             comandaCaptura = new ComandaCaptura();
-
+            comandaCaptura.setComanda(comanda);
             comandaCaptura.cargaValores();
             //articulosFrame.centrado(escritorio.getSize());            
             escritorio.remove(comandaCaptura);

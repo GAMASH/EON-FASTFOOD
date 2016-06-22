@@ -48,9 +48,9 @@ public class General {
 
     public static void cargarConfiguracion() {
 
-        propiedades_generales = ResourceBundle.getBundle("resorces.general-conf");
-        propiedades_visuales = ResourceBundle.getBundle("resorces.visual-conf");
-        propiedades_datahardcored = ResourceBundle.getBundle("resorces.data-hard-cored");
+        propiedades_generales = ResourceBundle.getBundle("resources.general-conf");
+        propiedades_visuales = ResourceBundle.getBundle("resources.visual-conf");
+        propiedades_datahardcored = ResourceBundle.getBundle("resources.data-hard-cored");
 
         cargarParametrosVisuales();
 

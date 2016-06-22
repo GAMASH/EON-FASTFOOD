@@ -247,7 +247,7 @@ public class ComponenteMenu extends Panel {
         label1.setBounds(39, 2, 160, 28);
 
         label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resorces/images/user.png"))); // NOI18N
+        label2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/user.png"))); // NOI18N
         add(label2);
         label2.setBounds(2, -1, 27, 28);
     }// </editor-fold>//GEN-END:initComponents
@@ -309,6 +309,6 @@ public class ComponenteMenu extends Panel {
     public void setIcono(String icono) {
 
         this.icono = icono;
-        label2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resorces/images/" + icono)));
+        label2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/" + icono)));
     }
 }

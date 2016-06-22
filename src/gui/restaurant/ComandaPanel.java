@@ -73,7 +73,8 @@ public class ComandaPanel extends Panel {
         setLayout(null);
 
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label1.setText("Fecha ");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("resources/language/ComandaPanel"); // NOI18N
+        label1.setText(bundle.getString("FECHA ")); // NOI18N
         label1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label1);
         label1.setBounds(176, 47, 38, 16);
@@ -83,7 +84,7 @@ public class ComandaPanel extends Panel {
         fecha.setBounds(219, 46, 96, 20);
 
         label2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label2.setText("Folio ");
+        label2.setText(bundle.getString("FOLIO ")); // NOI18N
         label2.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label2);
         label2.setBounds(13, 49, 38, 16);
@@ -91,7 +92,7 @@ public class ComandaPanel extends Panel {
         tf_mesero.setBounds(58, 75, 259, 20);
 
         label3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label3.setText("Mesero ");
+        label3.setText(bundle.getString("MESERO ")); // NOI18N
         label3.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label3);
         label3.setBounds(2, 78, 56, 16);
@@ -103,12 +104,12 @@ public class ComandaPanel extends Panel {
         add(tf_mesa);
         tf_mesa.setBounds(57, 10, 88, 28);
 
-        label4.setText("M E S A ");
+        label4.setText(bundle.getString("M E S A ")); // NOI18N
         label4.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label4);
         label4.setBounds(14, 8, 43, 31);
 
-        label5.setText("E S T A D O ");
+        label5.setText(bundle.getString("E S T A D O ")); // NOI18N
         label5.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label5);
         label5.setBounds(148, 9, 71, 31);

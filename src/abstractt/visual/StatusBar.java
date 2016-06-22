@@ -120,7 +120,7 @@ public class StatusBar extends javax.swing.JPanel {
         izquierda.setBounds(3, 3, 49, 17);
 
         icono_progressbar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        icono_progressbar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resorces/images/user.png"))); // NOI18N
+        icono_progressbar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/user.png"))); // NOI18N
         icono_progressbar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         add(icono_progressbar);
         icono_progressbar.setBounds(339, 4, 18, 15);

@@ -5,33 +5,17 @@
  */
 package gui.restaurant;
 
-import abstractt.visual.Panel;
-import domain.tabla.TipoPlatillo;
-import static domain.tabla.TipoPlatillo.cargarTipoPlatillos;
-import java.util.ArrayList;
-import javax.swing.JScrollPane;
-
 /**
  *
- * @author Prensa Tamarindo
+ * @author sperez
  */
-public class TipoPlatilloPanel extends Panel {
+public class ComandaDetallePanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form TipoProductoPanel
+     * Creates new form ComandaDetallePanel
      */
-    public TipoPlatilloPanel() {
+    public ComandaDetallePanel() {
         initComponents();
-    }
-    
-    public void cargarValores(){
-        
-        ArrayList<String> tiposPlatillo;
-        
-        tiposPlatillo = cargarTipoPlatillos();
-        
-        
-        
     }
 
     /**
@@ -43,19 +27,39 @@ public class TipoPlatilloPanel extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table1 = new abstractt.visual.Table();
+
+        table1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 453, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private abstractt.visual.Table table1;
     // End of variables declaration//GEN-END:variables
 }

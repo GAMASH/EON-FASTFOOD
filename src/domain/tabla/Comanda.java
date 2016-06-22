@@ -12,6 +12,7 @@ import static domain.ConexionBD.desconectarBD;
 import static domain.General.formatoDateTime;
 import static domain.General.manejadorBD;
 import static domain.General.mensajeError;
+import static domain.General.sucursal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.logging.Level;
@@ -94,6 +95,7 @@ public class Comanda extends TablaBD {
                 + "from mesa m left outer join comanda c on\n"
                 + "         m.id_sucursal = c.id_sucursal\n"
                 + "	 and m.id_mesa     = c.id_mesa\n"
+                + "where m.id_sucursal = '"+sucursal.id_sucursal+"'\n"                
                 + "order by numero_mesa; ");
 
         manejadorBD.asignarTable(tabla);
