@@ -11,6 +11,7 @@ import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.manejadorBD;
 import static domain.General.sucursal;
+import java.util.ArrayList;
 
 /**
  *
@@ -39,6 +40,18 @@ public class ComandaDetalle extends TablaBD {
         observaciones = "";
         precio = 0.00;
         orden = 0;
+    }
+    
+    public ArrayList<ComandaDetalle> cargarPorId(Comanda comanda){
+    
+        ArrayList<ComandaDetalle> comanda_detalle;
+        
+        comanda_detalle =  new ArrayList<ComandaDetalle>();
+        
+        
+        
+        
+        return comanda_detalle;    
     }
 
     public static void cargarComandaDetalle(Table tabla, Comanda comanda, int comensal) {
