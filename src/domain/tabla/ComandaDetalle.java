@@ -42,7 +42,7 @@ public class ComandaDetalle extends TablaBD {
         orden = 0;
     }
     
-    public ArrayList<ComandaDetalle> cargarPorId(Comanda comanda){
+    public ArrayList<ComandaDetalle> cargarPorId(Comanda comanda, int num_comensales){
     
         ArrayList<ComandaDetalle> comanda_detalle;
         

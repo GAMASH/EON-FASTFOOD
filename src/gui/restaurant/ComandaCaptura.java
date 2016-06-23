@@ -68,6 +68,10 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         tiposPaltillo.setPreferredSize(new Dimension(posX += ancho_boton + borde, (alto_boton * 2) + (borde * 2)));
 
+        ArrayList<ComandaDetalle> comandas_detalle;
+        
+       // comandas_detalle.
+        
         for (int i = 0; i < comanda.mesa.num_comensales; i++) {
 
             agregarDetalle("Comensal " + (i + 1), (i + 1));

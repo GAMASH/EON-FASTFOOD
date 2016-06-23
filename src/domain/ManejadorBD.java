@@ -109,7 +109,6 @@ public class ManejadorBD extends AbstractTableModel {
     public void asignarTable(Table tabla) {
 
         tabla.asignarModelo(modelo);
-        //tabla.setModel(modelo);
         tabla.cambiarTitulos();
         tabla.centrar();
         tabla.reasignaTamaños();
@@ -118,8 +117,7 @@ public class ManejadorBD extends AbstractTableModel {
 
     /**
      */
-    public void conectar(String controlador, String url, String nombreUsuario, String clave)
-            //throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException 
+    public void conectar(String controlador, String url, String nombreUsuario, String clave) 
     {
 
         controlador_jdbc = controlador;
@@ -131,23 +129,17 @@ public class ManejadorBD extends AbstractTableModel {
 
             try {
                 Class.forName(controlador_jdbc).newInstance();
-                conexion = DriverManager.getConnection(url_basededatos, usuario, palabraClave);
-                //+"?allowMultiQueries=true"
-                
+                conexion = DriverManager.getConnection(url_basededatos, usuario, palabraClave);                
                 sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 conectado = true;
             } catch (InstantiationException ex) {
-                errorSQL = ex.getMessage();
-               // Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
+                errorSQL = ex.getMessage();       
             } catch (IllegalAccessException ex) {
-                errorSQL = ex.getMessage();
-                //Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
+                errorSQL = ex.getMessage();                
             } catch (ClassNotFoundException ex) {
-                errorSQL = ex.getMessage();
-               // Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
+                errorSQL = ex.getMessage();                
             } catch (SQLException ex) {
-                errorSQL = ex.getMessage();
-               // Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
+                errorSQL = ex.getMessage();                
             }
         }
     }
@@ -211,23 +203,8 @@ public class ManejadorBD extends AbstractTableModel {
 
         ManejadorBD nMbd = new ManejadorBD(muestraSQL);
 
-       // try {
+        nMbd.conectar(this.controlador_jdbc, this.url_basededatos, this.usuario, this.palabraClave);
 
-            nMbd.conectar(this.controlador_jdbc, this.url_basededatos, this.usuario, this.palabraClave);
-        /*} catch (InstantiationException ex) {
-
-            ex.printStackTrace();
-        } catch (IllegalAccessException ex) {
-
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-
-            ex.printStackTrace();
-        } catch (SQLException ex) {
-
-            ex.printStackTrace();
-        }
-*/
         return nMbd;
     }
 
@@ -377,7 +354,7 @@ public class ManejadorBD extends AbstractTableModel {
 
         sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);//ResultSet.CONCUR_READ_ONLY);
 
-        conjuntoResultados = SP.getResultSet(); //sentencia.executeQuery(consulta);
+        conjuntoResultados = SP.getResultSet();
 
         metaDatos = conjuntoResultados.getMetaData();
 
