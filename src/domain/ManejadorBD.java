@@ -345,56 +345,61 @@ public class ManejadorBD extends AbstractTableModel {
      *
      * @throws SQLException
      */
-    public void setConsultaSP() throws SQLException {
+    public void setConsultaSP(){
 
-        if (!conectado) {
-
-            throw new IllegalStateException("No hay conexion a la base de datos");
-        }
-
-        sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);//ResultSet.CONCUR_READ_ONLY);
-
-        conjuntoResultados = SP.getResultSet();
-
-        metaDatos = conjuntoResultados.getMetaData();
-
-        numeroFilas = 0;
-        numeroColumnas = metaDatos.getColumnCount();
-
-        modelo = new TableModelAbst();
-
-        for (int i = 0; i < numeroColumnas; i++) {
-            modelo.addColumn("Columna " + i);
-
-        }
-
-        while (conjuntoResultados.next()) {
-
-            try {
-
-                Object[] fila = new Object[numeroColumnas];
-
-                for (int i = 0; i < numeroColumnas; i++) {
-                    fila[i] = conjuntoResultados.getObject(i + 1);
-                }
-
-                modelo.addRow(fila);
-
-                numeroFilas++;
-                errorSQL = "";
-
-            } catch (Exception excepcion) {
-                errorSQL = excepcion.getMessage();
-                break;
+        try {
+            if (!conectado) {
+                
+                throw new IllegalStateException("No hay conexion a la base de datos");
             }
+            
+            sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);//ResultSet.CONCUR_READ_ONLY);
+            
+            conjuntoResultados = SP.getResultSet();
+            
+            metaDatos = conjuntoResultados.getMetaData();
+            
+            numeroFilas = 0;
+            numeroColumnas = metaDatos.getColumnCount();
+            
+            modelo = new TableModelAbst();
+            
+            for (int i = 0; i < numeroColumnas; i++) {
+                modelo.addColumn("Columna " + i);
+                
+            }
+            
+            while (conjuntoResultados.next()) {
+                
+                try {
+                    
+                    Object[] fila = new Object[numeroColumnas];
+                    
+                    for (int i = 0; i < numeroColumnas; i++) {
+                        fila[i] = conjuntoResultados.getObject(i + 1);
+                    }
+                    
+                    modelo.addRow(fila);
+                    
+                    numeroFilas++;
+                    errorSQL = "";
+                    
+                } catch (Exception excepcion) {
+                    errorSQL = excepcion.getMessage();
+                    break;
+                }
+            }
+            
+            if (muestraSQL) {
+                
+                System.out.println("Numero de Filas " + numeroFilas);
+            }
+            
+            fireTableStructureChanged();
+        } catch (SQLException ex) {            
+            errorSQL = ex.getMessage();
+            //Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        if (muestraSQL) {
-
-            System.out.println("Numero de Filas " + numeroFilas);
-        }
-
-        fireTableStructureChanged();
 
     }
 
