@@ -73,6 +73,45 @@ public class Platillo extends TablaBD {
         tipo_platillo.obtenerPorId(id_tipo_platillo);
     }
 
+    public static void cargarPlatilloPorTipo(Table tabla, TipoPlatillo tipo_platillo) {
+
+        crearTablaFramePlatillo(tabla);
+        conectarBD();
+
+         tabla.tamañoColumna(new int[]{
+            0, 100, 120, 200,
+            50, 100, 100, 0,
+            0
+        });
+        
+        manejadorBD.consulta(""
+                + "SELECT id_platillo, t.descripcion, nombre, p.descripcion, \n"
+                + "       carta, precio, \n"
+                + "       Case origen\n"
+                + "         WHEN 'Co' THEN 'Cocina'\n"
+                + "         WHEN 'Ba' THEN 'Barra'"
+                + "       END as  origen, \n"
+                + "       p.crea, p.modifica\n"
+                + "FROM   platillo p, tipo_platillo t\n"
+                + "WHERE  p.id_tipo_platillo = t.id_tipo_platillo\n"
+                + "and    p.id_tipo_platillo = '"+tipo_platillo.id_tipo_platillo+"'\n"
+                + "ORDER  BY p.nombre");
+
+        manejadorBD.asignarTable(tabla);
+
+        tabla.agregarItemStatus();
+        tabla.alinear();
+
+        tabla.ocultarcolumna(0);
+        tabla.ocultarcolumna(1);
+        tabla.ocultarcolumna(4);
+        tabla.ocultarcolumna(6);
+        tabla.ocultarcolumna(7);
+        tabla.ocultarcolumna(8);
+
+        desconectarBD();
+    }
+
     public static void cargarFramePlatillo(Table tabla) {
 
         crearTablaFramePlatillo(tabla);
@@ -109,7 +148,7 @@ public class Platillo extends TablaBD {
         desconectarBD();
     }
 
-    private  static Table crearTablaFramePlatillo(Table tabla) {
+    private static Table crearTablaFramePlatillo(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();

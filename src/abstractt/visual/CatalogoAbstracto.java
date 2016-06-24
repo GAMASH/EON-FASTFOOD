@@ -186,6 +186,7 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
   }//GEN-LAST:event_bGuardarActionPerformed
 
     public int cerrar() {
+       
         return table1.validaCambios();
     }
 
@@ -206,6 +207,7 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
   private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
 
       int filaSeleccionada = table1.getSelectedRow();
+     
       if (filaSeleccionada != -1) {
 
           table1.eliminarFila(filaSeleccionada);
@@ -226,26 +228,13 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
 
     @Override
     public void internalFrameClosing(InternalFrameEvent e) {
-        /*
-         int tipo = JOptionPane.showConfirmDialog(this,
-         "¿Desea cerrar la ventana sin guardar los cambios?",
-         "Confirmación", JOptionPane.YES_NO_OPTION);
-         if (tipo == JOptionPane.OK_OPTION) {
-            
-         this.dispose();             
-         }else{
-            
-         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-         }
-            
-         */
-
+      
         if (cerrar() != 1) {
+            
             this.dispose();
         } else {
+            
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
-
     }
-
 }

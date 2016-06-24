@@ -54,7 +54,7 @@ public class ComandaDetalle extends TablaBD {
         return comanda_detalle;    
     }
 
-    public static void cargarComandaDetalle(Table tabla, Comanda comanda, int comensal) {
+    public static void cargarComandaDetalle(Table tabla, String id_comanda, int comensal) {
 
         crearTablaComandaDetalle(tabla);
         conectarBD();
@@ -72,7 +72,7 @@ public class ComandaDetalle extends TablaBD {
                 + "from   comanda_detalle cd, platillo p\n"
                 + "where  cd.id_platillo = p.id_platillo\n"
                 + "and    cd.id_sucursal = '" + sucursal.id_sucursal + "'\n"
-                + "and    cd.id_comanda = '" + comanda.id_comanda + "'\n"
+                + "and    cd.id_comanda = '" + id_comanda + "'\n"
                 + "and    num_comensal = case " + comensal + " when 0 then num_comensal\n"
                 + "                                        when " + comensal + " then " + comensal + " end");
 

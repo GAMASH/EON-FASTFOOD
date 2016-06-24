@@ -11,8 +11,11 @@ import abstractt.visual.Panel;
 import abstractt.visual.Table;
 import domain.tabla.Comanda;
 import domain.tabla.ComandaDetalle;
+import domain.tabla.TipoPlatillo;
 import static domain.tabla.TipoPlatillo.cargarTipoPlatillos;
+import static gui.Principal.escritorio;
 import java.awt.Dimension;
+import java.awt.dnd.DropTarget;
 import java.util.ArrayList;
 
 /**
@@ -33,6 +36,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         initComponents();
         botones = new ArrayList<Boton>();
         comanda_detalles_panel = new ArrayList<ComandaDetallePanel>();
+        
+        
     }
 
     public void cargaValores() {
@@ -51,6 +56,15 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
             boton = new Boton();
             boton.setText(tiposPlatillo.get(i));
+
+            /**/
+            boton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    boton(evt);
+                }
+            });
+            /**/
+
             botones.add(boton);
 
             tiposPaltillo.add(boton);
@@ -68,10 +82,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         tiposPaltillo.setPreferredSize(new Dimension(posX += ancho_boton + borde, (alto_boton * 2) + (borde * 2)));
 
-        ArrayList<ComandaDetalle> comandas_detalle;
-        
-       // comandas_detalle.
-        
+        //  ArrayList<ComandaDetalle> comandas_detalle;
+        // comandas_detalle.
         for (int i = 0; i < comanda.mesa.num_comensales; i++) {
 
             agregarDetalle("Comensal " + (i + 1), (i + 1));
@@ -80,22 +92,58 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         agregarDetalle("T O T A L ", 0);
     }
 
+    private void boton(java.awt.event.ActionEvent evt) {
+
+        TipoPlatillo tipo_platillo;
+        tipo_platillo = new TipoPlatillo();
+
+        tipo_platillo.cargarPorDescripcion(evt.getActionCommand());
+
+        //System.out.println(evt);
+        //System.out.println(evt.getActionCommand());
+        if (platilloPorTipo == null) {
+
+            platilloPorTipo = new PlatillosPorTipo();
+        }else{
+            platilloPorTipo.dispose();
+        }
+        if (!platilloPorTipo.isVisible()) {
+            
+            platilloPorTipo = new PlatillosPorTipo();            
+            platilloPorTipo.setTipoPlatillo(tipo_platillo);
+            platilloPorTipo.cargaValores();
+            platilloPorTipo.centrado(escritorio.getSize());
+            escritorio.remove(platilloPorTipo);
+            escritorio.add(platilloPorTipo);
+            platilloPorTipo.setVisible(true);
+        } else {
+            
+            platilloPorTipo.setTipoPlatillo(tipo_platillo);
+            platilloPorTipo.cargaValores();
+            platilloPorTipo.setVisible(false);
+            platilloPorTipo.setVisible(true);
+        }
+    }
+
     private void agregarDetalle(String nombre_tab, int comensal) {
 
-      //  Table tabla_detalle;
+        //  Table tabla_detalle;
         ComandaDetalle comanda_detalle;
         ComandaDetallePanel panel_detalle;
-        
-        
-        
+
         panel_detalle = new ComandaDetallePanel();
-        
-        
+        comanda_detalle = new ComandaDetalle();
+
+        comanda_detalle.id_comanda = comanda.id_comanda;
+        comanda_detalle.num_comensal = comensal;
+
+        panel_detalle.setComandaDetalle(comanda_detalle);
+
         jTabbedPane1.add(panel_detalle, nombre_tab);
-       // tabla_detalle = new Table();
-      //  ComandaDetalle.cargarComandaDetalle(tabla_detalle, comanda, comensal);
-      //  panel_detalle.add(tabla_detalle);
-      //  tabla_detalle.setBounds(0, 0, 200, 200);
+        //tabla_detalle = new Table();
+        //ComandaDetalle.cargarComandaDetalle(tabla_detalle, comanda, comensal);
+        //panel_detalle.add(tabla_detalle);
+        //tabla_detalle.setBounds(0, 0, 200, 200);
     }
 
     public void setComanda(Comanda comanda) {
@@ -135,6 +183,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         jScrollPane1.setViewportView(tiposPaltillo);
 
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTabbedPane1.setOpaque(true);
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -176,4 +225,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     private abstractt.visual.Panel panel1;
     private abstractt.visual.Panel tiposPaltillo;
     // End of variables declaration//GEN-END:variables
+
+    private PlatillosPorTipo platilloPorTipo = null;
+
 }

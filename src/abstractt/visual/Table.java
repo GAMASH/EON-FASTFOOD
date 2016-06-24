@@ -741,6 +741,7 @@ public class Table extends javax.swing.JTable {
      */
     public void agregarFila(JScrollPane jScrollPane1) {
 
+        System.out.println("agregando fila");
         this.acceptText();
 
         int columnas = getColumnCount();

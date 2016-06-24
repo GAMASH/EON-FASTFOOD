@@ -5,39 +5,39 @@
  */
 package gui.restaurant;
 
-import abstractt.visual.Table;
-import domain.tabla.ComandaDetalle;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import javax.swing.DropMode;
-import javax.swing.TransferHandler;
+import abstractt.visual.InternalFrameAbstracto;
+import static domain.tabla.Platillo.cargarPlatilloPorTipo;
+import domain.tabla.TipoPlatillo;
 
 /**
  *
  * @author sperez
  */
-public class ComandaDetallePanel extends javax.swing.JPanel {
+public class PlatillosPorTipo extends InternalFrameAbstracto {
 
-    public ComandaDetalle comanda_detalle;
+    public TipoPlatillo tipo_platillo;
 
     /**
-     * Creates new form ComandaDetallePanel
+     * Creates new form PlatillosPorTipo
      */
-    public ComandaDetallePanel() {
+    public PlatillosPorTipo() {
+
         initComponents();
+        this.tipo_platillo = new TipoPlatillo();
+        
+        table1.setDragEnabled(true);
 
     }
 
-    public void setComandaDetalle(ComandaDetalle comanda_detalle) {
+    public void setTipoPlatillo(TipoPlatillo tipo_platillo) {
+        
+        this.tipo_platillo = tipo_platillo;
+    }
 
-        this.comanda_detalle = comanda_detalle;
-
-        ComandaDetalle.cargarComandaDetalle(table1, comanda_detalle.id_comanda, comanda_detalle.num_comensal);
-
-        table1.setDragEnabled(true);
-        table1.setTransferHandler(new TransferHandler("text"));
-
+    public void cargaValores() {
+                
+        cargarPlatilloPorTipo(table1, tipo_platillo);        
+        setTitle(tipo_platillo.descripcion);
     }
 
     /**
@@ -52,6 +52,8 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new abstractt.visual.Table();
 
+        getContentPane().setLayout(new java.awt.GridLayout());
+
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -65,18 +67,9 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane1);
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 

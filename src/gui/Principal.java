@@ -18,7 +18,7 @@ import gui.Catalogos.ImpuestoCatalogo2;
 import gui.Catalogos.MesaCatalogo;
 import gui.Catalogos.TipoPlatilloCatalogo;
 import gui.Catalogos.UnidadMedidaCatalogo;
-import gui.inventarios.PlatillosFrame;
+import gui.restaurant.PlatillosFrame;
 import gui.restaurant.ComandasFrame;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -517,11 +517,11 @@ public class Principal extends javax.swing.JFrame {
     private void platillos() {
         if (platillosFrame == null) {
 
-            platillosFrame = new gui.inventarios.PlatillosFrame();
+            platillosFrame = new gui.restaurant.PlatillosFrame();
         }
         if (!platillosFrame.isVisible()) {
 
-            platillosFrame = new gui.inventarios.PlatillosFrame();
+            platillosFrame = new gui.restaurant.PlatillosFrame();
             platillosFrame.cargaValores();
             escritorio.remove(platillosFrame);
             escritorio.add(platillosFrame);
