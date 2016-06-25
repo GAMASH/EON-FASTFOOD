@@ -26,6 +26,7 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
      */
     public ComandaDetallePanel() {
         initComponents();
+        
 
     }
 
