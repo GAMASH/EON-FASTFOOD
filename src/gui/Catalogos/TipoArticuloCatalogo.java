@@ -168,6 +168,8 @@ public class TipoArticuloCatalogo extends abstractt.visual.InternalFrameAbstract
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table1.setDragEnabled(true);
+        table1.setDropMode(javax.swing.DropMode.INSERT_ROWS);
         jScrollPane1.setViewportView(table1);
 
         jPanel1.add(jScrollPane1);

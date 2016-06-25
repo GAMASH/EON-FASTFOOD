@@ -25,7 +25,7 @@ public class PlatillosPorTipo extends InternalFrameAbstracto {
         initComponents();
         this.tipo_platillo = new TipoPlatillo();
         
-        table1.setDragEnabled(true);
+       // table1.setDragEnabled(true);
 
     }
 

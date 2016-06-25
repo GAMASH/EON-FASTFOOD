@@ -19,6 +19,16 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
@@ -47,7 +57,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Gilberto Adan Gonz�lez Silva
  */
-public class Table extends javax.swing.JTable {
+public class Table extends javax.swing.JTable implements DragGestureListener, DragSourceListener {
 
     TableRowSorter<TableModel> sorter;
 
@@ -117,8 +127,54 @@ public class Table extends javax.swing.JTable {
     public static final String filtro = "[^4]";
 
     private Integer primer_campo_editable;
-    
+
     private ArrayList<Integer> columnas_ocultas;
+
+    DragSource dragSource;
+
+    /**
+     * Creates a new instance of Table
+     */
+    public Table() {
+
+        JTableHeader tableHeader;
+
+        tableHeader = getTableHeader();
+
+        tableHeader.setFont(new Font("Trebuchet", Font.BOLD, 12));
+        //Color de fondo del encabezado
+        tableHeader.setBackground(new Color(0, 0, 128));
+        //Color de fuente del encabezado
+        tableHeader.setForeground(new Color(255, 225, 255));
+        tableHeader.setOpaque(false);
+
+        tableHeader.setReorderingAllowed(false);
+        tableHeader.setResizingAllowed(false);
+
+        setFont(new Font("Trebuchet", 0, 12));
+//        addJTableHeaderListener();
+        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        setSelectionBackground(new Color(51, 153, 255));
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseMoved(MouseEvent e) {
+                mouseMove(e);
+            }
+        });
+
+        pautado = new Color[]{
+            new Color(220, 255, 220), // 
+            new Color(255, 255, 255), // 
+        };
+
+        //pautado = new Color(220, 255, 220);
+        haycambios = false;
+        itemstatus = false;
+
+        dragSource = new DragSource();
+        dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, this);
+
+    }
 
     public void agregarComboBox(ComboBox combobox, int columna) {
 
@@ -252,48 +308,6 @@ public class Table extends javax.swing.JTable {
         return 0;
     }
 
-    /**
-     * Creates a new instance of Table
-     */
-    public Table() {
-
-        JTableHeader tableHeader;
-        
-        tableHeader =  getTableHeader();
-        
-        tableHeader.setFont(new Font("Trebuchet", Font.BOLD, 12));
-        //Color de fondo del encabezado
-        tableHeader.setBackground(new Color(0, 0, 128));
-        //Color de fuente del encabezado
-        tableHeader.setForeground(new Color(255, 225, 255));
-        tableHeader.setOpaque(false);
-        
-        tableHeader.setReorderingAllowed(false);
-        tableHeader.setResizingAllowed(false);
-        
-        setFont(new Font("Trebuchet", 0, 12));
-//        addJTableHeaderListener();
-        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        setSelectionBackground(new Color(51, 153, 255));
-        
-
-        addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseMoved(MouseEvent e) {
-                mouseMove(e);
-            }
-        });
-
-        pautado = new Color[]{
-            new Color(220, 255, 220), // 
-            new Color(255, 255, 255), // 
-        };
-
-        //pautado = new Color(220, 255, 220);
-        haycambios = false;
-        itemstatus = false;
-
-    }
-
     public void asignarModelo(TableModelAbst modelo) {
 
         if (sorter == null) {
@@ -322,7 +336,7 @@ public class Table extends javax.swing.JTable {
         int index = e.getColumn();
         int valueItemStatus;
 
-        filtrar(null);        
+        filtrar(null);
 
         switch (e.getType()) {
             case TableModelEvent.INSERT:
@@ -609,11 +623,11 @@ public class Table extends javax.swing.JTable {
                 if (columnas_ocultas.get(j) == i) {
                     encontro = true;
                     continue;
-                }                
+                }
             }
 
             if (!encontro) {
-                
+
                 primer_campo_editable = i;
                 return;
             }
@@ -1176,5 +1190,44 @@ public class Table extends javax.swing.JTable {
      */
     public Color[] getPautado() {
         return pautado;
+    }
+
+    @Override
+    public void dragGestureRecognized(DragGestureEvent dge) {
+
+        Transferable t = new StringSelection("aString");
+        dragSource.startDrag(dge, DragSource.DefaultCopyDrop, t, this);
+        System.out.println(this.tableHeader.toString());
+    }
+
+    @Override
+    public void dragEnter(DragSourceDragEvent dsde) {
+        System.out.println("enters");
+         System.out.println(this.tableHeader.toString());
+    }
+
+    @Override
+    public void dragOver(DragSourceDragEvent dsde) {
+        System.out.println("over");
+         System.out.println(this.tableHeader.toString());
+    }
+
+    @Override
+    public void dropActionChanged(DragSourceDragEvent dsde) {
+        System.out.println("changes the drag action between copy or move");
+         System.out.println(this.tableHeader.toString());
+    }
+
+    @Override
+    public void dragExit(DragSourceEvent dse) {
+        System.out.println("leaves");
+         System.out.println(this.tableHeader.toString());
+
+    }
+
+    @Override
+    public void dragDropEnd(DragSourceDropEvent dsde) {
+        System.out.println("finishes or cancels the drag operation");
+         System.out.println(this.tableHeader.toString());       
     }
 }
