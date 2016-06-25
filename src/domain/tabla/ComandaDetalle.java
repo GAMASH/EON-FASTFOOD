@@ -11,6 +11,7 @@ import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.manejadorBD;
 import static domain.General.sucursal;
+import domain.ParametrosSP;
 import java.util.ArrayList;
 
 /**
@@ -41,17 +42,39 @@ public class ComandaDetalle extends TablaBD {
         precio = 0.00;
         orden = 0;
     }
-    
-    public ArrayList<ComandaDetalle> cargarPorId(Comanda comanda, int num_comensales){
-    
-        ArrayList<ComandaDetalle> comanda_detalle;
+
+    /**
+     * Carga comanda detalles por Comanda
+     */
+    public ArrayList<ComandaDetalle> cargarPorComanda(Comanda comanda, Integer num_comensales) {
+
+        ArrayList<ComandaDetalle> comanda_detalle_lista;
+        ComandaDetalle comanda_detalle;
+
+        comanda_detalle_lista = new ArrayList<ComandaDetalle>();
+
+        manejadorBD.parametrosSP = new ParametrosSP();
         
-        comanda_detalle =  new ArrayList<ComandaDetalle>();
+        manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "INOUT");
+        manejadorBD.parametrosSP.agregarParametro(comanda.id_comanda, "varId_comanda", "STRING", "INOUT");
+        manejadorBD.parametrosSP.agregarParametro(num_comensales+"", "varNum_comensales", "STRING", "INOUT");
+
+        if (manejadorBD.ejecutarSP("{ call ComandaDetalle(?,?,?) }") == 0) {
+            
+            manejadorBD.setConsultaSP();
+                        
+            for (int i = 0; i < manejadorBD.getRowCount(); i++) {
+                
+                comanda_detalle = new ComandaDetalle();
+                
+               // comanda_detalle.cargarPorId();
+                
+                
+                comanda_detalle_lista.add(comanda_detalle);                
+            }            
+        }
         
-        
-        
-        
-        return comanda_detalle;    
+        return comanda_detalle_lista;
     }
 
     public static void cargarComandaDetalle(Table tabla, String id_comanda, int comensal) {

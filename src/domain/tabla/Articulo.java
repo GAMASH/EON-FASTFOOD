@@ -11,7 +11,6 @@ import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.manejadorBD;
 import domain.ParametrosSP;
-import static domain.tabla.Marca.crearTablaMarcas;
 
 /**
  *
