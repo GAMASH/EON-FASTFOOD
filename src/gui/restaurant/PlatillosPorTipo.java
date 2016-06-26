@@ -6,8 +6,14 @@
 package gui.restaurant;
 
 import abstractt.visual.InternalFrameAbstracto;
+import abstractt.visual.Table;
+import domain.tabla.Platillo;
 import static domain.tabla.Platillo.cargarPlatilloPorTipo;
 import domain.tabla.TipoPlatillo;
+import static gui.Principal.escritorio;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -25,9 +31,38 @@ public class PlatillosPorTipo extends InternalFrameAbstracto {
         initComponents();
         this.tipo_platillo = new TipoPlatillo();
         
-       // table1.setDragEnabled(true);
+       table1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                Table table = (Table) me.getSource();
+                Point p = me.getPoint();
+                Integer row = table.rowAtPoint(p);
+                if (me.getClickCount() == 1) {
 
+                    seleccionar(row);
+                }
+            }
+        });
     }
+    
+    public void seleccionar(Integer fila){
+     
+        Platillo platillo;        
+        ComandaCaptura comandaCaptura;
+        
+        comandaCaptura = (ComandaCaptura)escritorio.buscarInternalFrame("ComandaCaptura");
+        
+        if(comandaCaptura == null){
+            //venatana cerrada 
+            return;
+        }
+        
+        platillo = new Platillo();
+        platillo.obtenerPorId(table1.getValorString(fila, 0));
+        
+        
+        comandaCaptura.agregarPlatillo(platillo);
+        
+    }    
 
     public void setTipoPlatillo(TipoPlatillo tipo_platillo) {
         

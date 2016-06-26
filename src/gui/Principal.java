@@ -12,7 +12,7 @@ import static domain.General.sucursal;
 import gui.inventarios.ArticulosFrame;
 import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
-import gui.Catalogos.ImpuestoCatalogo;
+//import gui.Catalogos.ImpuestoCatalogo;
 import domain.tabla.Impuesto;
 import gui.Catalogos.ImpuestoCatalogo2;
 import gui.Catalogos.MesaCatalogo;
@@ -603,6 +603,7 @@ public class Principal extends javax.swing.JFrame {
         for (int i = 0; i < escritorio.getComponentCount(); i++) {
 
             InternalFrameAbstracto frame = (InternalFrameAbstracto) escritorio.getComponent(i);
+            System.out.println("frame "+frame.getClass().getName()+" "+frame);
             frame.reacomodo(escritorio.getSize());
         }
         
@@ -670,7 +671,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_barMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JDesktopPane escritorio;
+    public static abstractt.visual.Escritorio escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;

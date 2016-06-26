@@ -11,6 +11,7 @@ import abstractt.visual.Panel;
 import abstractt.visual.Table;
 import domain.tabla.Comanda;
 import domain.tabla.ComandaDetalle;
+import domain.tabla.Platillo;
 import domain.tabla.TipoPlatillo;
 import static domain.tabla.TipoPlatillo.cargarTipoPlatillos;
 import static gui.Principal.escritorio;
@@ -35,7 +36,20 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         initComponents();
         botones = new ArrayList<Boton>();
-        comanda_detalles_panel = new ArrayList<ComandaDetallePanel>();
+        comanda_detalles_panel = new ArrayList<ComandaDetallePanel>();              
+    }
+    
+    public void agregarPlatillo(Platillo platillo){
+        
+        ComandaDetallePanel panel_detalle;
+        
+        System.out.println("Agregando Platillo "+platillo.descripcion);
+        
+        int index = this.jTabbedPane1.getSelectedIndex();
+        
+        panel_detalle = comanda_detalles_panel.get(index);
+        
+        panel_detalle.agregarPlatillo(platillo);
         
         
     }
@@ -139,7 +153,12 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         panel_detalle.setComandaDetalle(comanda_detalle);
 
+        this.comanda_detalles_panel.add(panel_detalle);
+        
         jTabbedPane1.add(panel_detalle, nombre_tab);
+        
+        
+        
         //tabla_detalle = new Table();
         //ComandaDetalle.cargarComandaDetalle(tabla_detalle, comanda, comensal);
         //panel_detalle.add(tabla_detalle);

@@ -7,6 +7,7 @@ package gui.restaurant;
 
 import abstractt.visual.Table;
 import domain.tabla.ComandaDetalle;
+import domain.tabla.Platillo;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -25,9 +26,13 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
      * Creates new form ComandaDetallePanel
      */
     public ComandaDetallePanel() {
-        initComponents();
         
-
+        initComponents();        
+    }
+    
+    public void agregarPlatillo(Platillo platillo){
+        
+        this.table1.agregarFila(jScrollPane1);
     }
 
     public void setComandaDetalle(ComandaDetalle comanda_detalle) {

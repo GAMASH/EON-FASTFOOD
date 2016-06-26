@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package abstractt.visual;
 
 import static domain.General.escala_grises;
@@ -19,10 +18,9 @@ import javax.swing.JDesktopPane;
  *
  * @author Developer GAGS
  */
-public class Escritorio extends JDesktopPane{
+public class Escritorio extends JDesktopPane {
 
-    
-     @Override
+    @Override
     protected void paintComponent(Graphics g) {
 
         Color color = this.getBackground();
@@ -47,5 +45,21 @@ public class Escritorio extends JDesktopPane{
                     0.0f, getHeight(), color));
         }
         g2.fillRect(clip.x, clip.y, clip.width, clip.height);
+    }
+
+    public InternalFrameAbstracto buscarInternalFrame(String nombreInternalFrameAbstracto) {
+
+        InternalFrameAbstracto frame = null;
+        
+        for (int i = 0; i < getComponentCount(); i++) {
+
+            frame = (InternalFrameAbstracto) getComponent(i);
+            
+            if (frame.getClass().getName().contains(nombreInternalFrameAbstracto)){
+                return frame;
+            }                                  
+        }
+        
+        return frame;
     }
 }

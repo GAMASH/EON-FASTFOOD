@@ -239,7 +239,7 @@ public class ComandasFrame extends InternalFrameAbstracto {
             comandaCaptura.setComanda(comanda);
             comandaCaptura.cargaValores();
             //articulosFrame.centrado(escritorio.getSize());            
-            escritorio.remove(comandaCaptura);
+         //   escritorio.remove(comandaCaptura);
             escritorio.add(comandaCaptura);
             comandaCaptura.maximizar(escritorio.getSize());
             comandaCaptura.setVisible(true);

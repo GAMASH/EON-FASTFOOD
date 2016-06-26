@@ -39,7 +39,8 @@ public class Platillo extends TablaBD {
         origen = "";
     }
 
-    public void obetenerPorId(String id) {
+    @Override
+    public void obtenerPorId(String id) {
 
         conectarBD();
 
