@@ -60,6 +60,21 @@ public class Escritorio extends JDesktopPane {
             }                                  
         }
         
-        return frame;
+        return null;
+    }
+    
+    public void cerrarInternalFrame(String nombreInternalFrameAbstracto){
+        
+        InternalFrameAbstracto internalFrame;
+
+        if (buscarInternalFrame(nombreInternalFrameAbstracto) != null) {
+
+            internalFrame =  buscarInternalFrame(nombreInternalFrameAbstracto);
+
+            if (internalFrame != null) {
+
+                internalFrame.dispose();
+            }
+        }
     }
 }

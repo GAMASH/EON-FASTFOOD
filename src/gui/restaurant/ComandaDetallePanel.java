@@ -31,7 +31,7 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public void agregarPlatillo(Platillo platillo) {
+    public void agregarPlatillo(Platillo platillo, Integer comensal) {
 
         Integer fila;
 
@@ -42,7 +42,7 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
         table1.setValueAt(comanda_detalle.id_comanda_detalle, fila, 2);
         table1.setValueAt(platillo.id_platillo, fila, 3);
         table1.setValueAt(platillo.descripcion, fila, 4);
-        table1.setValueAt(comanda_detalle.num_comensal, fila, 5);
+        table1.setValueAt(comensal, fila, 5);
         table1.setValueAt("Pendiente", fila, 6);
         table1.setValueAt("", fila, 7);
         table1.setValueAt(platillo.precio, fila, 8);

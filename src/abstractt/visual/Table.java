@@ -752,11 +752,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
     /**
      * 
      * @param jScrollPane1
-     * @return 
+     * @return numero de fila
      */
     public Integer agregarFila(JScrollPane jScrollPane1) {
-
-        System.out.println("agregando fila");
+       
         this.acceptText();
 
         int columnas = getColumnCount();

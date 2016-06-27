@@ -14,10 +14,12 @@ import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
 //import gui.Catalogos.ImpuestoCatalogo;
 import domain.tabla.Impuesto;
+import domain.tabla.TipoEmpleado;
 import gui.Catalogos.ImpuestoCatalogo2;
 import gui.Catalogos.MesaCatalogo;
 import gui.Catalogos.TipoPlatilloCatalogo;
 import gui.Catalogos.UnidadMedidaCatalogo;
+import gui.accesos.TipoEmpleadoCatalogo;
 import gui.restaurant.PlatillosFrame;
 import gui.restaurant.ComandasFrame;
 import java.sql.SQLException;
@@ -40,6 +42,8 @@ public class Principal extends javax.swing.JFrame {
     private static final int articulos_opcion = 7;
     private static final int platillos_opcion = 8;
     private static final int comandas_opcion = 9;
+    private static final int tipos_empleado_opcion = 10;
+    private static final int usuarios_opcion = 11;
     private Integer ancho_opciones;
 
     /**
@@ -48,9 +52,9 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
 
         initComponents();
-        
+
         cargarConfiguracion();
-        
+
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         ancho_opciones = 200;
@@ -59,8 +63,8 @@ public class Principal extends javax.swing.JFrame {
         // menu_bar.setTipo("P");
         //menu_bar.setTexto("O P C I O N E S");
 
-         statusBar1.progresBarr(0, false,"C A R G A N D O" );
-        
+        statusBar1.progresBarr(0, false, "C A R G A N D O");
+
         ComponenteMenu c1 = agregarComponente(menu_bar, "Resturante", "M", 0, "");
         {
             ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", comandas_opcion, "");
@@ -85,7 +89,17 @@ public class Principal extends javax.swing.JFrame {
                 ComponenteMenu c322 = agregarComponente(c32, "Tipos de platillos", "O", tipo_platillo_opcion, "user.png");
             }
         }
-        
+        ComponenteMenu c4 = agregarComponente(menu_bar, "Accesibilidad", "M", 0, "");
+        {
+            ComponenteMenu c41 = agregarComponente(c4, "Usuarios", "O", usuarios_opcion, "");
+
+            ComponenteMenu c42 = agregarComponente(c4, "Catalogos", "M", 0, "");
+            {
+                
+                ComponenteMenu c421 = agregarComponente(c42, "Tipos de empleado", "O", tipos_empleado_opcion, "");
+            }
+        }
+
         statusBar1.progressBar = false;
     }
 
@@ -112,6 +126,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void opciones(Integer opcion) {
 
+        statusBar1.progresBarr(0, false, "C A R G A N D O");
         switch (opcion) {
             case tipo_producto_opcion:
                 tipo_producto();
@@ -131,14 +146,19 @@ public class Principal extends javax.swing.JFrame {
             case tipo_platillo_opcion:
                 tipo_platillo();
                 break;
-            case articulos_opcion:                              
-                articulos();               
+            case articulos_opcion:
+                articulos();
                 break;
             case platillos_opcion:
                 platillos();
                 break;
-            case comandas_opcion:
+            case comandas_opcion:                
                 comandas();
+                break;
+            case usuarios_opcion:
+                break;
+            case tipos_empleado_opcion:
+                tipo_empleado();
                 break;
         }
     }
@@ -399,7 +419,7 @@ public class Principal extends javax.swing.JFrame {
             tipoProducto.setVisible(true);
         }
     }
-    
+
     private void marca() {
 
         if (marca == null) {
@@ -440,14 +460,14 @@ public class Principal extends javax.swing.JFrame {
             escritorio.remove(impuesto);
             escritorio.add(impuesto);
             impuesto.setVisible(true);
-            
+
         } else {
 
             impuesto.setVisible(false);
             impuesto.setVisible(true);
         }
     }
-    
+
     private void unidad_medida() {
 
         if (unidadMedida == null) {
@@ -555,6 +575,34 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
+     private void tipo_empleado() {
+
+         
+           
+        if (tipo_empleado == null) {
+
+            tipo_empleado = new TipoEmpleadoCatalogo();
+        }
+        if (!tipo_empleado.isVisible()) {
+
+            tipo_empleado = new TipoEmpleadoCatalogo();
+            tipo_empleado.Dimensionar();
+            // marca.setManejadorBD(getManejadorBD());
+            tipo_empleado.setTablaBd(new TipoEmpleado());
+            tipo_empleado.cargaValores();
+            tipo_empleado.centrado(escritorio.getSize());
+
+            escritorio.remove(tipo_empleado);
+            escritorio.add(tipo_empleado);
+            tipo_empleado.setVisible(true);
+
+        } else {
+
+            tipo_empleado.setVisible(false);
+            tipo_empleado.setVisible(true);
+        }
+    }
+
     private void comandas() {
         if (comanda == null) {
 
@@ -564,12 +612,12 @@ public class Principal extends javax.swing.JFrame {
 
             comanda = new gui.restaurant.ComandasFrame();
             // marca.setManejadorBD(getManejadorBD());
-           // comanda.cargaValores();
+            // comanda.cargaValores();
             comanda.maximizar(escritorio.getSize());
             escritorio.remove(comanda);
             escritorio.add(comanda);
             comanda.setVisible(true);
-             comanda.cargaValores();
+            comanda.cargaValores();
         } else {
 
             comanda.setVisible(false);
@@ -586,8 +634,8 @@ public class Principal extends javax.swing.JFrame {
 
     public void reordenar() {
 
-        statusBar1.setBounds( 0, this.getHeight() - 81 , this.getWidth() - 15, 22);
-        
+        statusBar1.setBounds(0, this.getHeight() - 81, this.getWidth() - 15, 22);
+
         if (colapsed) {
 
             menu_bar.setSize(10, getHeight() - statusBar1.getHeight() - 58);
@@ -598,15 +646,15 @@ public class Principal extends javax.swing.JFrame {
 
         escritorio.setLocation(menu_bar.getWidth(), 0);
         escritorio.setSize(getWidth() - menu_bar.getWidth() - 15, getHeight() - statusBar1.getHeight() - 60);
-                
+
         //Ordenar todos los internals frames                                
         for (int i = 0; i < escritorio.getComponentCount(); i++) {
 
             InternalFrameAbstracto frame = (InternalFrameAbstracto) escritorio.getComponent(i);
-            System.out.println("frame "+frame.getClass().getName()+" "+frame);
+            System.out.println("frame " + frame.getClass().getName() + " " + frame);
             frame.reacomodo(escritorio.getSize());
         }
-        
+
         statusBar1.mostrar();
     }
 
@@ -622,7 +670,7 @@ public class Principal extends javax.swing.JFrame {
 
         tipo_producto();
     }//GEN-LAST:event_m_tipoProductoActionPerformed
-    
+
     private void m_marcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_marcasActionPerformed
 
         marca();
@@ -704,4 +752,5 @@ public class Principal extends javax.swing.JFrame {
     private TipoPlatilloCatalogo tipo_platillo = null;
     private MesaCatalogo mesa = null;
     private ComandasFrame comanda = null;
+    private TipoEmpleadoCatalogo tipo_empleado = null;
 }

@@ -12,12 +12,9 @@ import abstractt.TablaBD;
  *
  * @author Developer GAGS
  */
-public class Direccion extends TablaBD{
+class Estado extends TablaBD{
 
-    public String id_direccion;
-    public String calle;
-    public String  num_exterior;
-    public String  num_interior;
-    public String  referencia;
-    public Asentamiento asentamiento;
+    public String id_estado;
+    public Pais pais;
+    public String descripcion_estado;
 }

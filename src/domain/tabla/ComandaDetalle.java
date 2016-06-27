@@ -138,8 +138,8 @@ public class ComandaDetalle extends TablaBD {
             Table.numero_double, Table.numero_entero});
 
         tabla.tamañoColumna(new int[]{
-            0, 0, 0, 0,
-            100, 0, 100, 100,
+            100, 100, 100, 100,
+            100, 100, 100, 100,
             100, 100
         });
 

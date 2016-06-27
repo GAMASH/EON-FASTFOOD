@@ -67,7 +67,7 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
         setFrameIcon(null);
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        bEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resorces/images/note_delete.png"))); // NOI18N
+        bEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/note_delete.png"))); // NOI18N
         bEliminar.setToolTipText("Eliminar Marca");
         bEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +75,7 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
             }
         });
 
-        bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resorces/images/database_save.png"))); // NOI18N
+        bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/database_save.png"))); // NOI18N
         bGuardar.setToolTipText("Guardar Tipo de Producto");
         bGuardar.setBorder(null);
         bGuardar.setBorderPainted(false);
@@ -85,7 +85,7 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
             }
         });
 
-        bNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resorces/images/note_add.png"))); // NOI18N
+        bNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/note_add.png"))); // NOI18N
         bNuevo.setToolTipText("Nuevo");
         bNuevo.setBorder(null);
         bNuevo.setBorderPainted(false);
