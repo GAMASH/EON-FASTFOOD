@@ -28,6 +28,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     Comanda comanda;
     ArrayList<Boton> botones;
     ArrayList<ComandaDetallePanel> comanda_detalles_panel;
+    Integer index_panel_total;
 
     /**
      * Creates new form ComandaCaptura
@@ -36,22 +37,26 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         initComponents();
         botones = new ArrayList<Boton>();
-        comanda_detalles_panel = new ArrayList<ComandaDetallePanel>();              
+        comanda_detalles_panel = new ArrayList<ComandaDetallePanel>();
+
     }
-    
-    public void agregarPlatillo(Platillo platillo){
-        
+
+    public void agregarPlatillo(Platillo platillo) {
+
         ComandaDetallePanel panel_detalle;
-        
-        System.out.println("Agregando Platillo "+platillo.descripcion);
-        
+
+        System.out.println("Agregando Platillo " + platillo.descripcion);
+
         int index = this.jTabbedPane1.getSelectedIndex();
-        
-        panel_detalle = comanda_detalles_panel.get(index);
-        
-        panel_detalle.agregarPlatillo(platillo);
-        
-        
+
+        if (index_panel_total != index) {
+
+            panel_detalle = comanda_detalles_panel.get(index);
+            panel_detalle.agregarPlatillo(platillo);
+            //al panel del total
+            panel_detalle = comanda_detalles_panel.get(index_panel_total);
+            panel_detalle.agregarPlatillo(platillo);
+        }
     }
 
     public void cargaValores() {
@@ -103,6 +108,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
             agregarDetalle("Comensal " + (i + 1), (i + 1));
         }
 
+        this.index_panel_total = comanda.mesa.num_comensales;
+
         agregarDetalle("T O T A L ", 0);
     }
 
@@ -118,12 +125,12 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         if (platilloPorTipo == null) {
 
             platilloPorTipo = new PlatillosPorTipo();
-        }else{
+        } else {
             platilloPorTipo.dispose();
         }
         if (!platilloPorTipo.isVisible()) {
-            
-            platilloPorTipo = new PlatillosPorTipo();            
+
+            platilloPorTipo = new PlatillosPorTipo();
             platilloPorTipo.setTipoPlatillo(tipo_platillo);
             platilloPorTipo.cargaValores();
             platilloPorTipo.centrado(escritorio.getSize());
@@ -131,12 +138,15 @@ public class ComandaCaptura extends InternalFrameAbstracto {
             escritorio.add(platilloPorTipo);
             platilloPorTipo.setVisible(true);
         } else {
-            
+
             platilloPorTipo.setTipoPlatillo(tipo_platillo);
             platilloPorTipo.cargaValores();
             platilloPorTipo.setVisible(false);
             platilloPorTipo.setVisible(true);
         }
+
+        platilloPorTipo.moveToFront();
+
     }
 
     private void agregarDetalle(String nombre_tab, int comensal) {
@@ -154,15 +164,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         panel_detalle.setComandaDetalle(comanda_detalle);
 
         this.comanda_detalles_panel.add(panel_detalle);
-        
+
         jTabbedPane1.add(panel_detalle, nombre_tab);
-        
-        
-        
-        //tabla_detalle = new Table();
-        //ComandaDetalle.cargarComandaDetalle(tabla_detalle, comanda, comensal);
-        //panel_detalle.add(tabla_detalle);
-        //tabla_detalle.setBounds(0, 0, 200, 200);
     }
 
     public void setComanda(Comanda comanda) {
@@ -187,6 +190,23 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
         setTitle("Comanda");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout tiposPaltilloLayout = new javax.swing.GroupLayout(tiposPaltillo);
@@ -235,6 +255,19 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+
+        PlatillosPorTipo platillos;
+
+        platillos = (PlatillosPorTipo) escritorio.buscarInternalFrame("PlatillosPorTipo");
+
+        if( platillos != null ){
+            
+            platillos.dispose();
+        }
+        
+    }//GEN-LAST:event_formInternalFrameClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,7 @@
 package gui.restaurant;
 
 import abstractt.visual.Table;
+import static domain.General.sucursal;
 import domain.tabla.ComandaDetalle;
 import domain.tabla.Platillo;
 import java.awt.datatransfer.DataFlavor;
@@ -26,13 +27,27 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
      * Creates new form ComandaDetallePanel
      */
     public ComandaDetallePanel() {
-        
-        initComponents();        
+
+        initComponents();
     }
-    
-    public void agregarPlatillo(Platillo platillo){
-        
-        this.table1.agregarFila(jScrollPane1);
+
+    public void agregarPlatillo(Platillo platillo) {
+
+        Integer fila;
+
+        fila = this.table1.agregarFila(jScrollPane1);
+
+        table1.setValueAt(sucursal.id_sucursal, fila, 0);
+        table1.setValueAt(comanda_detalle.id_comanda, fila, 1);
+        table1.setValueAt(comanda_detalle.id_comanda_detalle, fila, 2);
+        table1.setValueAt(platillo.id_platillo, fila, 3);
+        table1.setValueAt(platillo.descripcion, fila, 4);
+        table1.setValueAt(comanda_detalle.num_comensal, fila, 5);
+        table1.setValueAt("Pendiente", fila, 6);
+        table1.setValueAt("", fila, 7);
+        table1.setValueAt(platillo.precio, fila, 8);
+        table1.setValueAt(0, fila, 9);
+
     }
 
     public void setComandaDetalle(ComandaDetalle comanda_detalle) {

@@ -750,10 +750,11 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
     }
 
     /**
-     *
+     * 
      * @param jScrollPane1
+     * @return 
      */
-    public void agregarFila(JScrollPane jScrollPane1) {
+    public Integer agregarFila(JScrollPane jScrollPane1) {
 
         System.out.println("agregando fila");
         this.acceptText();
@@ -775,6 +776,8 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         this.changeSelection(filas, primer_campo_editable, false, true);
 
+        return filas;
+        
         /*
          if (itemstatus) {
          //Agregar el item status nuevo sin valor
