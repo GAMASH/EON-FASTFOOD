@@ -19,7 +19,7 @@ import javax.swing.JTable;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class ArticuloCaptura extends InternalFrameAbstracto {
 

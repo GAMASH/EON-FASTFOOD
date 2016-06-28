@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author Gilberto Adan Gonz�lez Silva
+ * @author Developer GAGS
  */
 public class ImpuestoCatalogo extends abstractt.visual.CatalogoAbstracto {
 

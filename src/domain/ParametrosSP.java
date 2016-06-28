@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Gilberto Adan González Silva
+ * @author Developer GAGS
  */
 public class ParametrosSP {
 

@@ -36,7 +36,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -55,7 +54,7 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author Gilberto Adan Gonz�lez Silva
+ * @author Developer GAGS
  */
 public class Table extends javax.swing.JTable implements DragGestureListener, DragSourceListener {
 

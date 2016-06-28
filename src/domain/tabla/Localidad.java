@@ -9,7 +9,7 @@ import abstractt.TablaBD;
 
 /**
  *
- * @author Prensa Tamarindo
+ * @author Developer GAGS
  */
 class Localidad extends TablaBD{
     

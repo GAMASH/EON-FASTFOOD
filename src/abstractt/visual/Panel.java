@@ -15,7 +15,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class Panel extends javax.swing.JPanel {
 

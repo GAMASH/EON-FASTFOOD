@@ -9,14 +9,13 @@
 
 package abstractt.visual;
 
-import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.StringTokenizer;
 
 /**
  *
- * @author Administrator
+ * @author Developer GAGS
  */
 public class TextField extends javax.swing.JTextField{
    

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class MenuAcordeon extends javax.swing.JPanel {
 

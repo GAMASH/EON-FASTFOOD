@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 /**
  *
- * @author Gilberto Adan Gonzalez Silva
+ * @author Developer GAGS
  */
 public class Parametro {
 

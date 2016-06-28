@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  *
- * @author González Silva Gilberto Adan
+ * @author Developer GAGS
  */
 public class Calendar extends JDateChooser {
     

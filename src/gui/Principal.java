@@ -12,7 +12,6 @@ import static domain.General.sucursal;
 import gui.inventarios.ArticulosFrame;
 import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
-//import gui.Catalogos.ImpuestoCatalogo;
 import domain.tabla.Impuesto;
 import domain.tabla.TipoEmpleado;
 import gui.Catalogos.ImpuestoCatalogo2;
@@ -29,7 +28,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Gilberto Adan Gonzalez Silva
+ * @author Developer GAGS
  */
 public class Principal extends javax.swing.JFrame {
 

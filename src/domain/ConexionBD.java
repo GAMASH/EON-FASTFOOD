@@ -7,11 +7,6 @@ package domain;
 
 import static domain.General.manejadorBD;
 import static domain.General.propiedades_generales;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *

@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
 
 /**
  *
- * @author INGENIERIA 2
+ * @author Developer GAGS
  */
 public class Redondeo {
     

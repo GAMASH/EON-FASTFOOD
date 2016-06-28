@@ -17,7 +17,7 @@ import javax.swing.TransferHandler;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class ComandaDetallePanel extends javax.swing.JPanel {
 

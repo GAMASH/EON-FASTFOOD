@@ -10,7 +10,6 @@ package domain;
 
 import abstractt.visual.Table;
 import abstractt.TableModelAbst;
-import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -26,12 +25,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  * Clase para controlar cualquier base de datos
  *
- * @author Gilbeto Adan González Silva
+ * @author Developer GAGS
  */
 public class ManejadorBD extends AbstractTableModel {
 

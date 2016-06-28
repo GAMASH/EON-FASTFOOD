@@ -6,14 +6,11 @@
  */
 package abstractt.visual;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.StringTokenizer;
-import javax.swing.JTextField;
 
 /**
  *
- * @author Gilberto Adan Gonz�lez Silva
+ * @author Developer GAGS
  */
 public class TextFieldMoneda extends TextField {
 

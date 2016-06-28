@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class Login extends javax.swing.JDialog {
 

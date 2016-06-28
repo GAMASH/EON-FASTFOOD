@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Gilberto Adan Gonzalez Silva
+ * @author Developer GAGS
  */
 public class ComboBox extends JComboBox {
 

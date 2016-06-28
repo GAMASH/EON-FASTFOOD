@@ -7,19 +7,16 @@
 
 package abstractt;
 
-import com.toedter.calendar.JDateChooser;
 import domain.Fecha;
 import domain.ManejadorBD;
 import domain.Seguridad;
 import java.awt.Component;
-import java.sql.SQLException;
-import java.util.Date;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Gilberto Adan Gonz�lez Silva
+ * @author Developer GAGS
  */
 public class ClaseAbstracta {
   

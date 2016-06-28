@@ -6,23 +6,19 @@
 package abstractt.visual;
 
 import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import static java.lang.Thread.sleep;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class ComponenteMenu extends Panel {
 
     /**
-     * M menu O opcion P panel opciones
+     * M menu;
+     * O opcion;
+     * P panel opciones
      */
     private String tipo = "P";
     Color normal;
@@ -90,37 +86,7 @@ public class ComponenteMenu extends Panel {
 
         this.setBackground(normal);
     }
-/*
-    @Override
-    protected void paintComponent(Graphics g) {
 
-        Color color = null;
-
-        Graphics2D g2 = (Graphics2D) g.create();
-        Rectangle clip = g2.getClipBounds();
-        float x = getWidth();
-        float y = getHeight();
-        label1.setForeground(new java.awt.Color(255, 255, 255));
-        switch (estado) {
-
-            case "N":
-                color = normal;
-
-                break;
-            case "ME":
-                color = mouse_entered;
-                label1.setForeground(new java.awt.Color(100, 100, 100));
-                break;
-            case "CL":
-                color = click;
-                break;
-        }
-
-        g2.setPaint(new GradientPaint(0.0f, 0.0f, color.darker(),
-                0.0f, getHeight(), color.brighter()));
-        g2.fillRect(clip.x, clip.y, clip.width, clip.height);
-    }
-*/
     public void setTexto(String texto) {
 
         this.label1.setText(texto);
@@ -143,8 +109,6 @@ public class ComponenteMenu extends Panel {
             opcion.click = new Color(aumNumColor(click.getRed()), aumNumColor(click.getGreen()), aumNumColor(click.getBlue()));
             opcion.seleccionado = new Color(aumNumColor(seleccionado.getRed()), aumNumColor(seleccionado.getGreen()), aumNumColor(seleccionado.getBlue()));
         }
-
-        //  System.out.println("soy " + this.label1.getText() + " ancho  " + opcion.getWidth());
     }
 
     public int aumNumColor(int numero) {
@@ -173,21 +137,16 @@ public class ComponenteMenu extends Panel {
         if (tipo.equals("M") || tipo.equals("P")) {
 
             int posicion = alto_componentes;
-            //System.out.println("soy " + this.label1.getText() + " ");
             ComponenteMenu c1;
 
             if (expandido) {
-                //Expander
-                //System.out.println("Expandiendo");
+                //Expander                
                 alto_total = alto_componentes;
 
                 for (int i = 0; i < componentes.size(); i++) {
 
-                    c1 = componentes.get(i);
-                    //        System.out.println("\t" + c1.label1.getText() + " tamaño:" + c1.alto_total + " posicion: " + posicion);
-                    
-                    c1.setBounds(interno, posicion, c1.ancho, c1.alto_total);
-                    
+                    c1 = componentes.get(i);                                        
+                    c1.setBounds(interno, posicion, c1.ancho, c1.alto_total);                    
                     posicion += c1.alto_total;
                     alto_total += c1.alto_total;
                 }
@@ -198,14 +157,13 @@ public class ComponenteMenu extends Panel {
                 }
             } else {
                 //Contraer
-                //  System.out.println("Contrayendo");
                 alto_total = alto_componentes;
             }
 
             if (tipo.equals("M")) {
+             
                 this.setSize(this.getWidth(), alto_total);
             }
-            //System.out.println("Alto Total:" + alto_total);
             if (parentComponenteAcordeon != null) {
 
                 parentComponenteAcordeon.resize();
@@ -256,9 +214,7 @@ public class ComponenteMenu extends Panel {
 
         this.setBackground(mouse_entered);
         this.label1.setForeground(Color.black);
-        estado = "ME";
-        //contraido = true;
-        //resize();
+        estado = "ME";        
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited

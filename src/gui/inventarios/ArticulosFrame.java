@@ -18,7 +18,7 @@ import javax.swing.JTable;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class ArticulosFrame extends InternalFrameAbstracto {
 

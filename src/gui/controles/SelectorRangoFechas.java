@@ -7,7 +7,7 @@ package gui.controles;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class SelectorRangoFechas extends javax.swing.JPanel {
 

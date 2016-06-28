@@ -10,7 +10,7 @@ import domain.tabla.Comanda;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class ComandaPanel extends Panel {
 

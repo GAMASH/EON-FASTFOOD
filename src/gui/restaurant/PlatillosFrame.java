@@ -6,20 +6,12 @@
 package gui.restaurant;
 
 import abstractt.visual.InternalFrameAbstracto;
-import domain.tabla.Articulo;
 import domain.tabla.Platillo;
-import static gui.Principal.escritorio;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JTable;
+
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class PlatillosFrame extends InternalFrameAbstracto {
 

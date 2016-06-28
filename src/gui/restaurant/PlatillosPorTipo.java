@@ -17,7 +17,7 @@ import java.awt.event.MouseEvent;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class PlatillosPorTipo extends InternalFrameAbstracto {
 
@@ -52,7 +52,7 @@ public class PlatillosPorTipo extends InternalFrameAbstracto {
         comandaCaptura = (ComandaCaptura)escritorio.buscarInternalFrame("ComandaCaptura");
         
         if(comandaCaptura == null){
-            //venatana cerrada 
+            //ventana cerrada 
             return;
         }
         

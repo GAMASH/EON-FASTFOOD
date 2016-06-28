@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
 
 /**
  *
- * @author Gilberto Adan Gonzalez Silva
+ * @author Developer GAGS
  */
 public class Seguridad extends abstractt.ClaseAbstracta{
   

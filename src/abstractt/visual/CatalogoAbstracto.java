@@ -6,15 +6,13 @@
 package abstractt.visual;
 
 import abstractt.TablaBD;
-import abstractt.visual.Panel;
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
+
 
 /**
  *
- * @author Gilberto Adan Gonzalez Silva
+ * @author Developer GAGS
  */
 public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
 

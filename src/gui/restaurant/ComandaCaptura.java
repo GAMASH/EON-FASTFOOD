@@ -7,8 +7,6 @@ package gui.restaurant;
 
 import abstractt.visual.Boton;
 import abstractt.visual.InternalFrameAbstracto;
-import abstractt.visual.Panel;
-import abstractt.visual.Table;
 import domain.tabla.Comanda;
 import domain.tabla.ComandaDetalle;
 import domain.tabla.Platillo;
@@ -16,12 +14,11 @@ import domain.tabla.TipoPlatillo;
 import static domain.tabla.TipoPlatillo.cargarTipoPlatillos;
 import static gui.Principal.escritorio;
 import java.awt.Dimension;
-import java.awt.dnd.DropTarget;
 import java.util.ArrayList;
 
 /**
  *
- * @author Prensa Tamarindo
+ * @author Developer GAGS
  */
 public class ComandaCaptura extends InternalFrameAbstracto {
 

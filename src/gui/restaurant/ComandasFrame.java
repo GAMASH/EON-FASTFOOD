@@ -25,7 +25,7 @@ import javax.swing.JViewport;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class ComandasFrame extends InternalFrameAbstracto {
 

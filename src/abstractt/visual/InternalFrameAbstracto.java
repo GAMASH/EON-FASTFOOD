@@ -9,9 +9,6 @@
 package abstractt.visual;
 
 import domain.Fecha;
-import domain.ManejadorBD;
-
-import domain.Redondeo;
 import domain.Seguridad;
 import java.awt.AWTEvent;
 import java.awt.ActiveEvent;
@@ -19,33 +16,18 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.MenuComponent;
-import java.awt.Rectangle;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.StringTokenizer;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+
 
 /**
  *
- * @author Gilberto Adan Gonz�lez Silva
+ * @author Developer GAGS
  */
 public class InternalFrameAbstracto extends javax.swing.JInternalFrame implements
         InternalFrameListener{
@@ -220,16 +202,7 @@ public class InternalFrameAbstracto extends javax.swing.JInternalFrame implement
     public void maximizar(Dimension d) {
 
         this.setSize(d);
-        tipo_visualizacion = 1;
-
-        /*
-         try {
-
-         setMaximum(true);
-         } catch (PropertyVetoException ex) {
-         Logger.getLogger(InternalFrameAbstracto.class.getName()).log(Level.SEVERE, null, ex);
-         }
-         */
+        tipo_visualizacion = 1;        
     }
 
     /**

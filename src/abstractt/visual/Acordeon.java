@@ -9,7 +9,7 @@ import java.awt.Color;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class Acordeon extends javax.swing.JPanel {
 

@@ -5,12 +5,9 @@
  */
 package abstractt.visual;
 
-import java.util.ArrayList;
-import javax.swing.JLabel;
-
 /**
  *
- * @author Prensa Tamarindo
+ * @author Developer GAGS
  */
 public class StatusBar extends javax.swing.JPanel {
 

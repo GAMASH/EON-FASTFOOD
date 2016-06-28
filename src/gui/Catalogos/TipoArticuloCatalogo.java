@@ -6,18 +6,11 @@
 package gui.Catalogos;
 
 import domain.tabla.TipoArticulo;
-import java.awt.Color;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import java.sql.SQLException;
-import javax.swing.CellEditor;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
- * @author Gilberto Adan Gonz�lez Silva
+ * @author Developer GAGS
  */
 public class TipoArticuloCatalogo extends abstractt.visual.InternalFrameAbstracto {
 

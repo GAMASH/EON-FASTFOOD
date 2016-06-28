@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class ArticuloPanel extends JPanel {
 

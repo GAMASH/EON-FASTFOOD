@@ -7,8 +7,6 @@
 package abstractt.visual;
 
 import static domain.General.font_label;
-import static domain.General.propiedades_visuales;
-import java.awt.Font;
 import javax.swing.JLabel;
 
 /**

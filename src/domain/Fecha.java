@@ -16,7 +16,7 @@ import javax.swing.JComboBox;
 
 /**
  *
- * @author Gilberto Adan Gonz�lez Silva
+ * @author Developer GAGS
  */
 public class Fecha {
 
