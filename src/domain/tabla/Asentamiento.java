@@ -19,4 +19,5 @@ class Asentamiento extends TablaBD{
     public String cp;
     public String descripcion_asentamiento;
     public Municipio municipio;
+    public Localidad localidad;
 }
