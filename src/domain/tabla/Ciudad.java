@@ -12,9 +12,10 @@ import abstractt.TablaBD;
  *
  * @author Developer GAGS
  */
-class AsentamientoTipo extends TablaBD{
-    
-    public String id_asentamiento_tipo;
-    public String descripcion_asentamiento_tipo;
+class Ciudad extends TablaBD{
 
+    public String id_ciudad;
+    public Estado estado;
+    public Municipio municipio;
+    public String descripcion;
 }

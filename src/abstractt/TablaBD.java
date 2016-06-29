@@ -8,6 +8,7 @@ package abstractt;
 import abstractt.visual.Table;
 import static domain.General.manejadorBD;
 import domain.MovUsuario;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,7 +23,7 @@ public class TablaBD {
      * Funcion para crear la Tabla
      */
     public void cargar(Table table1) {
-        
+
         System.out.println("TablaBD.cargar: Funcion no Implementada");
     }
 
@@ -109,5 +110,33 @@ public class TablaBD {
      */
     public void setModifica(MovUsuario modifica) {
         this.modifica = modifica;
+    }
+
+    /**
+     * funcion para generar selector
+     *
+     * @return
+     */
+    public ArrayList<String> cargar() {
+
+        System.out.println("TablaBD.cargar funcion no implementada");
+        return null;
+    }
+
+    /**
+     * funcion para buscar en la bd por descripcion 
+     * @param toString
+     */
+    public void cargarPorDescripcion(String toString) {
+        System.out.println("TablaBD.cargarPorDescripcion funcion no implementada");
+    }
+    
+    /**
+     * funcion para 
+     * @return 
+     */
+    public String getDescripcion(){
+        System.out.println("TablaBD.getDescripcion funcion no implementada");
+        return "";
     }
 }

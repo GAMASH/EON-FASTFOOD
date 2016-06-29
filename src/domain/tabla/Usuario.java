@@ -18,5 +18,12 @@ public class Usuario extends TablaBD {
     public Persona persona;
     public String login;
     public String password;
+    
+    public Usuario(){
         
+        id_usuario = "";
+        persona = new Persona();
+        login = "";
+        password = "";                
+    }                    
 }

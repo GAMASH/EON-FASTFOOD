@@ -87,13 +87,6 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="gui.controles.MarcaSelector" name="marcaSelector">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="330" y="120" width="140" height="-1"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
@@ -119,7 +112,7 @@
     <Component class="gui.controles.ImpuestoSelector" name="impuestoSelector">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="330" y="150" width="140" height="-1"/>
+          <AbsoluteConstraints x="330" y="150" width="138" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -194,5 +187,12 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="abstractt.visual.TablaBDSelector" name="marcaSelector">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="330" y="123" width="138" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
   </SubComponents>
 </Form>

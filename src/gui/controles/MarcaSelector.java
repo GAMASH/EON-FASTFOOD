@@ -24,7 +24,7 @@ public class MarcaSelector extends ComboBox{
 
     public void cargar() {
 
-        addArray(Marca.cargarMarcas());
+        addArray(marca.cargar());
     }
 
     public Marca getMarca() {

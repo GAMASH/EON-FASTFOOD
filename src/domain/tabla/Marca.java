@@ -187,7 +187,11 @@ public class Marca extends TablaBD {
         return error;
     }
 
-    public static ArrayList<String> cargarMarcas() {
+    /**
+     *
+     * @return
+     */
+    public ArrayList<String> cargar() {
 
         ArrayList<String> lista;
 

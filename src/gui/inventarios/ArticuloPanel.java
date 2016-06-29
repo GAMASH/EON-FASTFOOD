@@ -7,6 +7,7 @@ package gui.inventarios;
 
 import domain.tabla.Articulo;
 import javax.swing.JPanel;
+import domain.tabla.Marca;
 
 /**
  *
@@ -29,10 +30,10 @@ public class ArticuloPanel extends JPanel {
 
     public void cargar() {
 
-        tipoArticuloSelector.cargar();
-        marcaSelector.cargar();
+        tipoArticuloSelector.cargar();              
         unidadMedidaSelector.cargar();
         impuestoSelector.cargar();
+        marcaSelector.setTablaBD(new Marca());
     }
 
     public void setArticulo(Articulo articulo) {
@@ -40,7 +41,7 @@ public class ArticuloPanel extends JPanel {
         this.articulo = articulo;
         
         tipoArticuloSelector.setTipoArticulo(articulo.tipo_articulo);
-        marcaSelector.setMarca(articulo.marca);
+        marcaSelector.setTablaBD(articulo.marca);
         unidadMedidaSelector.setUnidadMedida(articulo.unidad_entrada);
         impuestoSelector.setImpuesto(articulo.impuesto);
         tf_clave.setText(articulo.clave);
@@ -53,7 +54,7 @@ public class ArticuloPanel extends JPanel {
     public Articulo getArticulo() {
         
         articulo.tipo_articulo = tipoArticuloSelector.getTipoArticulo();
-        articulo.marca = marcaSelector.getMarca();
+        articulo.marca = (Marca) marcaSelector.getTablaBD();
         articulo.unidad_entrada = unidadMedidaSelector.getUnidadMedida();
         articulo.impuesto = impuestoSelector.getImpuesto();
         articulo.clave = this.tf_clave.getText();
@@ -79,7 +80,6 @@ public class ArticuloPanel extends JPanel {
         jLabel3 = new javax.swing.JLabel();
         tf_codigo_barras = new abstractt.visual.TextField();
         jLabel4 = new javax.swing.JLabel();
-        marcaSelector = new gui.controles.MarcaSelector();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         impuestoSelector = new gui.controles.ImpuestoSelector();
@@ -90,6 +90,7 @@ public class ArticuloPanel extends JPanel {
         label1 = new abstractt.visual.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
         tf_descripcion = new abstractt.visual.TextArea();
+        marcaSelector = new abstractt.visual.TablaBDSelector();
 
         setLayout(null);
 
@@ -128,8 +129,6 @@ public class ArticuloPanel extends JPanel {
         jLabel4.setText("Impuesto");
         add(jLabel4);
         jLabel4.setBounds(250, 150, 70, 20);
-        add(marcaSelector);
-        marcaSelector.setBounds(330, 120, 140, 20);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Tipo de Articulo");
@@ -141,7 +140,7 @@ public class ArticuloPanel extends JPanel {
         add(jLabel6);
         jLabel6.setBounds(250, 120, 70, 20);
         add(impuestoSelector);
-        impuestoSelector.setBounds(330, 150, 140, 20);
+        impuestoSelector.setBounds(330, 150, 138, 20);
         add(unidadMedidaSelector);
         unidadMedidaSelector.setBounds(110, 150, 130, 20);
 
@@ -171,6 +170,8 @@ public class ArticuloPanel extends JPanel {
 
         add(jScrollPane1);
         jScrollPane1.setBounds(110, 39, 357, 77);
+        add(marcaSelector);
+        marcaSelector.setBounds(330, 123, 138, 20);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_claveActionPerformed
@@ -193,7 +194,7 @@ public class ArticuloPanel extends JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private abstractt.visual.Label label1;
-    private gui.controles.MarcaSelector marcaSelector;
+    private abstractt.visual.TablaBDSelector marcaSelector;
     private abstractt.visual.TextField tf_clave;
     private abstractt.visual.TextField tf_codigo_barras;
     private abstractt.visual.TextArea tf_descripcion;

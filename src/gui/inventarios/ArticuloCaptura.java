@@ -10,6 +10,7 @@ import abstractt.visual.Panel;
 import domain.tabla.Articulo;
 import domain.tabla.ArticuloProveedor;
 import domain.tabla.ArticuloSucursal;
+import domain.tabla.Marca;
 import static gui.Principal.escritorio;
 import java.awt.Component;
 import java.awt.Point;
@@ -76,13 +77,15 @@ public class ArticuloCaptura extends InternalFrameAbstracto {
         articuloPanel.setArticulo(articulo);
         ArticuloSucursal.cargarSucursalesArticulo(sucursalesTable, articulo);
         ArticuloProveedor.cargarArticuloProveedor(proveedoresTable, articulo);
+        
+        
     }
 
     public void cargar() {
 
         this.articuloPanel.cargar();
         ArticuloSucursal.cargarSucursalesArticulo(sucursalesTable, articulo);
-        ArticuloProveedor.cargarArticuloProveedor(proveedoresTable, articulo);
+        ArticuloProveedor.cargarArticuloProveedor(proveedoresTable, articulo);       
     }
 
     public void grabar() {
