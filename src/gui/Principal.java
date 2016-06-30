@@ -66,7 +66,7 @@ public class Principal extends javax.swing.JFrame {
 
         ComponenteMenu c1 = agregarComponente(menu_bar, "Resturante", "M", 0, "");
         {
-            ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", comandas_opcion, "");
+            ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", comandas_opcion, "service_bell_25px.png");
         }
         ComponenteMenu c2 = agregarComponente(menu_bar, "Inventarios", "M", 0, "");
         {
@@ -84,7 +84,7 @@ public class Principal extends javax.swing.JFrame {
             }
             ComponenteMenu c32 = agregarComponente(c3, "Restaurante", "M", 0, "");
             {
-                ComponenteMenu c321 = agregarComponente(c32, "Mesas", "O", mesas_opcion, "");
+                ComponenteMenu c321 = agregarComponente(c32, "Mesas", "O", mesas_opcion, "table_25px.png");
                 ComponenteMenu c322 = agregarComponente(c32, "Tipos de platillos", "O", tipo_platillo_opcion, "user.png");
             }
         }
