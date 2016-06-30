@@ -84,7 +84,7 @@ public class Principal extends javax.swing.JFrame {
             }
             ComponenteMenu c32 = agregarComponente(c3, "Restaurante", "M", 0, "");
             {
-                ComponenteMenu c321 = agregarComponente(c32, "Mesas", "O", mesas_opcion, "table_25px.png");
+                ComponenteMenu c321 = agregarComponente(c32, "Mesas", "O", mesas_opcion, "table.png");
                 ComponenteMenu c322 = agregarComponente(c32, "Tipos de platillos", "O", tipo_platillo_opcion, "user.png");
             }
         }
