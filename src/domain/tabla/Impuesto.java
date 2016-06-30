@@ -34,9 +34,9 @@ public class Impuesto extends TablaBD {
      *
      * @param tabla
      */
-    public void cargar(Table tabla) {
+    public void cargarTabla(Table tabla) {
 
-        crearTablaImpuestos(tabla);
+        crearTabla(tabla);
         conectarBD();
 
         manejadorBD.consulta(""
@@ -57,7 +57,12 @@ public class Impuesto extends TablaBD {
         desconectarBD();
     }
 
-    public static Table crearTablaImpuestos(Table tabla) {
+    /**
+     *
+     * @param tabla
+     * @return
+     */
+    private Table crearTabla(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();
@@ -136,8 +141,8 @@ public class Impuesto extends TablaBD {
 
     public void setRegistro(Table table, Integer i) {
 
-        id_impuesto = (String) table.getValueAt( i, 0);
-        descripcion = (String) table.getValueAt( i, 1);
+        id_impuesto = (String) table.getValueAt(i, 0);
+        descripcion = (String) table.getValueAt(i, 1);
         porcentaje = Double.parseDouble(table.getValueAt(i, 2).toString());
 
         if (id_impuesto == null) {
@@ -196,7 +201,7 @@ public class Impuesto extends TablaBD {
         return error;
     }
 
-     public static ArrayList<String> cargarImpuesto() {
+    public static ArrayList<String> cargarImpuesto() {
 
         ArrayList<String> lista;
 
@@ -220,7 +225,7 @@ public class Impuesto extends TablaBD {
 
         return lista;
     }
-    
+
     public static ArrayList<Impuesto> impuestos() {
 
         ArrayList<Impuesto> lista;

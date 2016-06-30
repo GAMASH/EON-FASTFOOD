@@ -17,12 +17,22 @@ import static domain.General.manejadorBD;
  */
 public class DatosFiscales extends TablaBD {
 
-    private String id_datos_fiscales;
-    private String razon_social;
-    private String nombre_comercial;
-    private String rfc;
-    private Direccion direccion;
+    public String id_datos_fiscales;
+    public String razon_social;
+    public String nombre_comercial;
+    public String rfc;
+    public String fisica_moral;
+    public Direccion direccion;
+    
 
+    public DatosFiscales(){
+        id_datos_fiscales = "";
+        razon_social = "";
+        nombre_comercial = "";        
+        rfc = "XAXX010101000";
+        fisica_moral = "F";
+        direccion = new Direccion();
+    }
     public void obenterPorId(String id_datos_fiscales) {
 
         conectarBD();

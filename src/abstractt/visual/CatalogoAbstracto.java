@@ -29,7 +29,7 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
 
     public void cargaValores() {
 
-        tablaBd.cargar(table1);
+        tablaBd.cargarTabla(table1);
     }
 
     /**

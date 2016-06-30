@@ -22,7 +22,7 @@ public class TablaBD {
     /**
      * Funcion para cargar la Tabla
      */
-    public void cargar(Table table1) {
+    public void cargarTabla(Table table1) {
 
         System.out.println("TablaBD.cargar: Funcion no Implementada");
     }

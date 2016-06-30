@@ -6,7 +6,10 @@
 package abstractt.visual;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -46,7 +49,7 @@ public class ComponenteMenu extends Panel {
         this.setBackground(normal);
 
         componentes = new ArrayList<ComponenteMenu>();
-        alto_componentes = 30;
+        alto_componentes = 35;
         alto_total = alto_componentes;
 
         contraerRetraer();
@@ -207,7 +210,7 @@ public class ComponenteMenu extends Panel {
         label2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/user.png"))); // NOI18N
         add(label2);
-        label2.setBounds(2, -1, 27, 28);
+        label2.setBounds(5, 5, 25, 25);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
@@ -265,6 +268,8 @@ public class ComponenteMenu extends Panel {
     public void setIcono(String icono) {
 
         this.icono = icono;
-        label2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/" + icono)));
+        ImageIcon fot = new ImageIcon(getClass().getResource("/resources/images/" + icono));
+        Icon icono_2 = new ImageIcon(fot.getImage().getScaledInstance(label2.getWidth(), label2.getHeight(), Image.SCALE_DEFAULT));
+        label2.setIcon(icono_2);
     }
 }
