@@ -20,11 +20,22 @@ public class TablaBD {
     private MovUsuario modifica;
 
     /**
-     * Funcion para crear la Tabla
+     * Funcion para cargar la Tabla
      */
     public void cargar(Table table1) {
 
         System.out.println("TablaBD.cargar: Funcion no Implementada");
+    }
+
+    /**
+     * Funcion para crear la TABla del frame 
+     * @param tabla
+     * @return 
+     */
+    private Table crearTabla(Table tabla) {
+
+        System.out.println("TablaBD.crearTabla: Funcion no Implementada");
+        return null;
     }
 
     /**
@@ -124,18 +135,20 @@ public class TablaBD {
     }
 
     /**
-     * funcion para buscar en la bd por descripcion 
+     * funcion para buscar en la bd por descripcion
+     *
      * @param toString
      */
     public void cargarPorDescripcion(String toString) {
         System.out.println("TablaBD.cargarPorDescripcion funcion no implementada");
     }
-    
+
     /**
-     * funcion para 
-     * @return 
+     * funcion para
+     *
+     * @return
      */
-    public String getDescripcion(){
+    public String getDescripcion() {
         System.out.println("TablaBD.getDescripcion funcion no implementada");
         return "";
     }

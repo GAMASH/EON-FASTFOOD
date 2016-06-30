@@ -25,5 +25,7 @@ public class Usuario extends TablaBD {
         persona = new Persona();
         login = "";
         password = "";                
-    }                    
+    }   
+    
+    
 }
