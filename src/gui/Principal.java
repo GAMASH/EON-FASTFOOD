@@ -126,6 +126,7 @@ public class Principal extends javax.swing.JFrame {
     private void opciones(Integer opcion) {
 
         statusBar1.progresBarr(0, false, "C A R G A N D O");
+        
         switch (opcion) {
             case tipo_producto_opcion:
                 tipo_producto();

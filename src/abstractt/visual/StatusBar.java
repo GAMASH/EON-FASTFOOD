@@ -5,6 +5,10 @@
  */
 package abstractt.visual;
 
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Developer GAGS
@@ -49,7 +53,11 @@ public class StatusBar extends javax.swing.JPanel {
         } else {
 
             centro.setBounds(100 + (borde * 2), borde, ancho - 200 - (borde * 4), alto - (borde * 2));
-        }
+        }                        
+        
+        ImageIcon fot = (ImageIcon) icono_progressbar.getIcon();
+        Icon icono_2 = new ImageIcon(fot.getImage().getScaledInstance(icono_progressbar.getWidth(), icono_progressbar.getHeight(), Image.SCALE_DEFAULT));
+        icono_progressbar.setIcon(icono_2);
     }
 
     public void progresBarr(int max, boolean controlado, String mensaje) {
@@ -65,7 +73,7 @@ public class StatusBar extends javax.swing.JPanel {
         }
 
         progreesbar.setString(mensaje);
-        progreesbar.setStringPainted(true);
+        progreesbar.setStringPainted(true);        
     }
 
     public void mensaje(String mensaje, int etiqueta) {

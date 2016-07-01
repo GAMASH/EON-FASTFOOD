@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package domain.tabla;
 
 import abstractt.TablaBD;
@@ -22,15 +21,15 @@ public class Usuario extends TablaBD {
     public Persona persona;
     public String login;
     public String password;
-    
-    public Usuario(){
-        
+
+    public Usuario() {
+
         id_usuario = "";
         persona = new Persona();
         login = "";
-        password = "";                
-    }   
-    
+        password = "";
+    }
+
     /**
      *
      * @param tabla
@@ -41,19 +40,17 @@ public class Usuario extends TablaBD {
         conectarBD();
 
         manejadorBD.consulta(""
-                + "SELECT   id_impuesto, descripcion, porcentaje, crea, modifica\n"
-                + "FROM     impuesto\n"
-                + "ORDER BY descripcion ");
-
-        // if (manejadorBD.getRowCount() > 0) {
+                + "Select id_usuario, u.id_persona, login, \n"
+                + "       concat(p.apellido_paterno,' ',p.apellido_materno,' ',p.nombres) usuario\n"
+                + "From	usuario u left join persona p on\n"
+                + "	u.id_persona = p.id_persona ");
+        
         manejadorBD.asignarTable(tabla);
-        // }
 
         tabla.agregarItemStatus();
 
         tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(3);
-        tabla.ocultarcolumna(4);
+        tabla.ocultarcolumna(1);
 
         desconectarBD();
     }
@@ -70,8 +67,7 @@ public class Usuario extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Impuesto", "Descripcion", "Porcentaje", "Crea",
-            "Modifica",};
+            "Id Usuario", "Id Persona", "Login", "Usuario"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -81,19 +77,11 @@ public class Usuario extends TablaBD {
         tabla.setTitulos(titulos);
         tabla.cambiarTitulos();
         tabla.setFormato(new int[]{
-            Table.letra, Table.letra, Table.numero_double, Table.letra,
-            Table.letra});
+            Table.letra, Table.letra, Table.letra, Table.letra});
         tabla.tamañoColumna(new int[]{
-            0, 100, 100, 0,
-            0
+            0, 0, 100, 100
         });
-
-        Impuesto impuesto = new Impuesto();
-
-        tabla.setTablaBD(impuesto);
-
+        
         return tabla;
     }
-    
-    
 }

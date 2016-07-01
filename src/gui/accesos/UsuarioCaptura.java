@@ -32,21 +32,39 @@ public class UsuarioCaptura extends InternalFrameAbstracto {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel2 = new abstractt.visual.Panel();
+        boton2 = new abstractt.visual.Boton();
+        boton1 = new abstractt.visual.Boton();
         panel1 = new abstractt.visual.Panel();
         label1 = new abstractt.visual.Label();
         label2 = new abstractt.visual.Label();
         textField1 = new abstractt.visual.TextField();
         textField2 = new abstractt.visual.TextField();
-        personaPanel1 = new gui.accesos.PersonaPanel();
-        boton1 = new abstractt.visual.Boton();
-        boton2 = new abstractt.visual.Boton();
+        boton3 = new abstractt.visual.Boton();
+        boton4 = new abstractt.visual.Boton();
 
         setBackground(new java.awt.Color(102, 204, 255));
         setTitle("Captura Usuario");
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+
+        panel2.setLayout(null);
+
+        boton2.setText("Cancelar");
+        boton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton2ActionPerformed(evt);
+            }
+        });
+        panel2.add(boton2);
+        boton2.setBounds(341, 120, 144, 39);
+
+        boton1.setText("Aceptar");
+        panel2.add(boton1);
+        boton1.setBounds(122, 121, 144, 39);
 
         panel1.setBackground(new java.awt.Color(204, 255, 204));
         panel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acceso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10))); // NOI18N
+        panel1.setOpaque(false);
 
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label1.setText("Login:");
@@ -82,23 +100,18 @@ public class UsuarioCaptura extends InternalFrameAbstracto {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panel1);
-        panel1.setBounds(11, 223, 308, 67);
-        getContentPane().add(personaPanel1);
-        personaPanel1.setBounds(0, 0, 831, 301);
+        panel2.add(panel1);
+        panel1.setBounds(35, 19, 308, 67);
 
-        boton1.setText("Aceptar");
-        getContentPane().add(boton1);
-        boton1.setBounds(175, 303, 144, 39);
+        boton3.setText("Agregar/Seleccionar Datos Personales");
+        panel2.add(boton3);
+        boton3.setBounds(379, 27, 215, 23);
 
-        boton2.setText("Cancelar");
-        boton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(boton2);
-        boton2.setBounds(435, 302, 144, 39);
+        boton4.setText("Agregar/Seleccionar Datos Empleado");
+        panel2.add(boton4);
+        boton4.setBounds(382, 58, 212, 23);
+
+        getContentPane().add(panel2);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -111,10 +124,12 @@ public class UsuarioCaptura extends InternalFrameAbstracto {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.visual.Boton boton1;
     private abstractt.visual.Boton boton2;
+    private abstractt.visual.Boton boton3;
+    private abstractt.visual.Boton boton4;
     private abstractt.visual.Label label1;
     private abstractt.visual.Label label2;
     private abstractt.visual.Panel panel1;
-    private gui.accesos.PersonaPanel personaPanel1;
+    private abstractt.visual.Panel panel2;
     private abstractt.visual.TextField textField1;
     private abstractt.visual.TextField textField2;
     // End of variables declaration//GEN-END:variables
