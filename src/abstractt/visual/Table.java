@@ -112,7 +112,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
      */
     public Integer colItemStatus;
 
-    public boolean editable;
+    private boolean editable = true;
 
     public static final int Recuperado = 0;
     public static final int Nuevo = 1;
@@ -172,7 +172,17 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         dragSource = new DragSource();
         dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, this);
+    }
 
+    /**
+     *
+     * @param rowIndex
+     * @param colIndex
+     * @return
+     */
+    public boolean isCellEditable(int rowIndex, int colIndex) {
+
+        return isEditable();
     }
 
     public void agregarComboBox(ComboBox combobox, int columna) {
@@ -182,11 +192,12 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         getColumnModel().getColumn(columna).setCellEditor(defaultCellEditor);
     }
 
+    /**
+     *
+     * @param columna
+     */
     public void agregarCheckBox(int columna) {
-        /*
-         DefaultCellEditor defaultCellEditor = new DefaultCellEditor(new JCheckBox());
-         getColumnModel().getColumn(columna).setCellEditor(defaultCellEditor);
-         */
+
         TableModelAbst modelo = (TableModelAbst) getModel();
 
         for (int i = 0; i < this.getRowCount(); i++) {
@@ -194,6 +205,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             if (this.getValorString(i, columna).equals("S")) {
 
                 this.setValueAt(true, i, columna);
+
             } else {
 
                 this.setValueAt(false, i, columna);
@@ -202,6 +214,8 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         modelo.agregarBoolean(columna);
         setModel(modelo);
+
+        haycambios = false;
     }
 
     /**
@@ -340,7 +354,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         switch (e.getType()) {
             case TableModelEvent.INSERT:
                 for (int i = firstRow; i <= lastRow; i++) {
-                    // System.out.println("INSERT " + i);
+                   // System.out.println("INSERT " + i);
 
                     if (itemstatus) {
                         //Agregar el item status nuevo sin valor
@@ -352,21 +366,21 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             case TableModelEvent.UPDATE:
                 if (firstRow == TableModelEvent.HEADER_ROW) {
                     if (index == TableModelEvent.ALL_COLUMNS) {
-                        //    System.out.println("A column was added");
+                       // System.out.println("A column was added");
                     } else {
-                        //  System.out.println(index + "in header changed");
+                       // System.out.println(index + "in header changed");
                     }
                 } else {
                     for (int i = firstRow; i <= lastRow; i++) {
                         if (index == TableModelEvent.ALL_COLUMNS) {
-                            // System.out.println("All columns have changed");
+                           // System.out.println("All columns have changed");
                         } else {
 
                             if (colItemStatus != index) {
 
                                 valueItemStatus = Integer.parseInt(this.getValueAt(i, colItemStatus).toString());
 
-                                //   System.out.println("UPDATE " + index);
+                               // System.out.println("UPDATE " + index + " " + valueItemStatus);
                                 switch (valueItemStatus) {
                                     case Recuperado:
 
@@ -382,6 +396,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
                                         break;
 
                                     case Modificado:
+                                        haycambios = true;
                                         break;
                                 }
 
@@ -393,18 +408,19 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             case TableModelEvent.DELETE:
 
                 for (int i = firstRow; i <= lastRow; i++) {
-                    //  System.out.println("DELETE " + i);
+                   // System.out.println("DELETE " + i);
 
                 }
                 break;
         }
 
         filtrar(filtro);
+       // System.out.println("hay cambios: "+haycambios);
         //sorter.setRowFilter(RowFilter.regexFilter(filtro, colItemStatus));
-
     }
 
     public void mouseMove(MouseEvent e) {
+        
         Point p = e.getPoint();
         int row = rowAtPoint(p);
         int column = columnAtPoint(p);
@@ -593,6 +609,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         //setDefaultRenderer(String.class, centerRenderer);
     }
 
+    /**
+     *
+     * @param columna
+     */
     public void ocultarcolumna(int columna) {
 
         getColumnModel().getColumn(columna).setMinWidth(0);
@@ -601,6 +621,11 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         primerColumna(columna);
     }
 
+    /**
+     * funcion para obtener la primer columna editable,
+     *
+     * @param columna
+     */
     private void primerColumna(int columna) {
 
         boolean encontro = false;
@@ -633,6 +658,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         }
     }
 
+    /**
+     *
+     * @param as_titulos
+     */
     public void setTitulos(String as_titulos[]) {
 
         titulos = as_titulos;
@@ -641,6 +670,9 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         colorPane();
     }
 
+    /**
+     *
+     */
     public void cambiarTitulos() {
 
         TableColumnModel tcm = this.getColumnModel();
@@ -650,6 +682,9 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
     }
 
+    /**
+     *
+     */
     public void quitarSeleccion() {
 
         int filaSeleccionada = getSelectedRow();
@@ -749,12 +784,12 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
     }
 
     /**
-     * 
+     *
      * @param jScrollPane1
      * @return numero de fila
      */
     public Integer agregarFila(JScrollPane jScrollPane1) {
-       
+
         this.acceptText();
 
         int columnas = getColumnCount();
@@ -775,7 +810,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         this.changeSelection(filas, primer_campo_editable, false, true);
 
         return filas;
-        
+
         /*
          if (itemstatus) {
          //Agregar el item status nuevo sin valor
@@ -996,6 +1031,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
     public boolean[] actualizable;
 
+    /**
+     *
+     * @param Aactualizables
+     */
     public void actualizable(boolean[] Aactualizables) {
 
         actualizable = Aactualizables;
@@ -1018,6 +1057,9 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         }
     }
 
+    /**
+     *
+     */
     public void reasignaTamaños() {
 
         TableColumn nColumn;
@@ -1047,11 +1089,18 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         orden = new boolean[formato.length];
     }
 
+    /**
+     *
+     * @param orden
+     */
     public void setOrdenar(boolean orden) {
 
         ordenar = orden;
     }
 
+    /**
+     *
+     */
     public void grabar() {
 
         int fila;
@@ -1103,6 +1152,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         haycambios = false;
     }
 
+    /**
+     *
+     * @param filtro
+     */
     public void filtrar(String filtro) {
 
         if (filtro == null) {
@@ -1164,6 +1217,9 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         ocultarcolumna(colItemStatus);
     }
 
+    /**
+     *
+     */
     public void acceptText() {
 
         if (isEditing()) {
@@ -1204,31 +1260,45 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
     @Override
     public void dragEnter(DragSourceDragEvent dsde) {
         System.out.println("enters");
-         System.out.println(this.tableHeader.toString());
+        System.out.println(this.tableHeader.toString());
     }
 
     @Override
     public void dragOver(DragSourceDragEvent dsde) {
         System.out.println("over");
-         System.out.println(this.tableHeader.toString());
+        System.out.println(this.tableHeader.toString());
     }
 
     @Override
     public void dropActionChanged(DragSourceDragEvent dsde) {
         System.out.println("changes the drag action between copy or move");
-         System.out.println(this.tableHeader.toString());
+        System.out.println(this.tableHeader.toString());
     }
 
     @Override
     public void dragExit(DragSourceEvent dse) {
         System.out.println("leaves");
-         System.out.println(this.tableHeader.toString());
+        System.out.println(this.tableHeader.toString());
 
     }
 
     @Override
     public void dragDropEnd(DragSourceDropEvent dsde) {
         System.out.println("finishes or cancels the drag operation");
-         System.out.println(this.tableHeader.toString());       
+        System.out.println(this.tableHeader.toString());
+    }
+
+    /**
+     * @return the editable
+     */
+    public boolean isEditable() {
+        return editable;
+    }
+
+    /**
+     * @param editable the editable to set
+     */
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 }

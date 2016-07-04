@@ -6,6 +6,7 @@
 package gui;
 
 import abstractt.visual.ComponenteMenu;
+import abstractt.visual.FrameAbstracto;
 import abstractt.visual.InternalFrameAbstracto;
 import static domain.General.cargarConfiguracion;
 import static domain.General.sucursal;
@@ -14,11 +15,13 @@ import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
 import domain.tabla.Impuesto;
 import domain.tabla.TipoEmpleado;
+import domain.tabla.Usuario;
 import gui.Catalogos.ImpuestoCatalogo2;
 import gui.Catalogos.MesaCatalogo;
 import gui.Catalogos.TipoPlatilloCatalogo;
 import gui.Catalogos.UnidadMedidaCatalogo;
 import gui.accesos.TipoEmpleadoCatalogo;
+import gui.accesos.UsuarioCaptura;
 import gui.restaurant.PlatillosFrame;
 import gui.restaurant.ComandasFrame;
 import java.sql.SQLException;
@@ -63,9 +66,9 @@ public class Principal extends javax.swing.JFrame {
         //menu_bar.setTexto("O P C I O N E S");
 
         statusBar1.progresBarr(0, false, "C A R G A N D O");
-        
+
         menu_bar.setIcono("");
-        
+
         ComponenteMenu c1 = agregarComponente(menu_bar, "Resturante", "M", 0, "");
         {
             ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", comandas_opcion, "Comanda.png");
@@ -96,7 +99,7 @@ public class Principal extends javax.swing.JFrame {
 
             ComponenteMenu c42 = agregarComponente(c4, "Catalogos", "M", 0, "");
             {
-                
+
                 ComponenteMenu c421 = agregarComponente(c42, "Tipos de empleado", "O", tipos_empleado_opcion, "");
             }
         }
@@ -128,7 +131,7 @@ public class Principal extends javax.swing.JFrame {
     private void opciones(Integer opcion) {
 
         statusBar1.progresBarr(0, false, "C A R G A N D O");
-        
+
         switch (opcion) {
             case tipo_producto_opcion:
                 tipo_producto();
@@ -154,16 +157,17 @@ public class Principal extends javax.swing.JFrame {
             case platillos_opcion:
                 platillos();
                 break;
-            case comandas_opcion:                
+            case comandas_opcion:
                 comandas();
                 break;
             case usuarios_opcion:
+                usuarios();
                 break;
             case tipos_empleado_opcion:
                 tipo_empleado();
                 break;
         }
-        
+
         statusBar1.progressBar = false;
     }
 
@@ -212,11 +216,11 @@ public class Principal extends javax.swing.JFrame {
                     });
                     dialog.setVisible(true);
                     login.setVisible(true);
-                    
-                    if(sucursal == null ){
+
+                    if (sucursal == null) {
                         System.exit(0);
                     }
-                    
+
                     dialog.setTitle("EON " + sucursal.datos_fiscales.getNombre_comercial());
                 } catch (SQLException ex) {
                     Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -571,11 +575,9 @@ public class Principal extends javax.swing.JFrame {
             mesa.setVisible(true);
         }
     }
-    
-     private void tipo_empleado() {
 
-         
-           
+    private void tipo_empleado() {
+
         if (tipo_empleado == null) {
 
             tipo_empleado = new TipoEmpleadoCatalogo();
@@ -619,6 +621,34 @@ public class Principal extends javax.swing.JFrame {
 
             comanda.setVisible(false);
             comanda.setVisible(true);
+        }    
+    }
+
+    private void usuarios() {
+        
+        UsuarioCaptura usuarioCaptura;
+        
+        usuarioCaptura = new UsuarioCaptura();
+        usuarioCaptura.Dimensionar();
+    
+        if (usuario == null) {
+
+            usuario = new FrameAbstracto();
+        }
+        if (!usuario.isVisible()) {
+
+            usuario = new FrameAbstracto();
+            usuario.setTablaBD(new Usuario());
+            usuario.setCaptura(usuarioCaptura);
+            usuario.cargaValores();
+            escritorio.remove(usuario);
+            escritorio.add(usuario);
+            usuario.maximizar(escritorio.getSize());
+            usuario.setVisible(true);
+        } else {
+
+            usuario.setVisible(false);
+            usuario.setVisible(true);
         }
     }
 
@@ -750,4 +780,5 @@ public class Principal extends javax.swing.JFrame {
     private MesaCatalogo mesa = null;
     private ComandasFrame comanda = null;
     private TipoEmpleadoCatalogo tipo_empleado = null;
+    private FrameAbstracto usuario = null;
 }

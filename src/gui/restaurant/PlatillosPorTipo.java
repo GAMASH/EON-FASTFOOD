@@ -14,6 +14,8 @@ import static gui.Principal.escritorio;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -30,8 +32,8 @@ public class PlatillosPorTipo extends InternalFrameAbstracto {
 
         initComponents();
         this.tipo_platillo = new TipoPlatillo();
-        
-       table1.addMouseListener(new MouseAdapter() {
+
+        table1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 Table table = (Table) me.getSource();
                 Point p = me.getPoint();
@@ -43,35 +45,32 @@ public class PlatillosPorTipo extends InternalFrameAbstracto {
             }
         });
     }
-    
-    public void seleccionar(Integer fila){
-     
-        Platillo platillo;        
+
+    public void seleccionar(Integer fila) {
+
+        Platillo platillo;
         ComandaCaptura comandaCaptura;
-        
-        comandaCaptura = (ComandaCaptura)escritorio.buscarInternalFrame("ComandaCaptura");
-        
-        if(comandaCaptura == null){
+
+        comandaCaptura = (ComandaCaptura) escritorio.buscarInternalFrame("ComandaCaptura");
+
+        if (comandaCaptura == null) {
             //ventana cerrada 
             return;
         }
-        
+
         platillo = new Platillo();
-        platillo.obtenerPorId(table1.getValorString(fila, 0));
-        
-        
+        platillo.obtenerPorId(new ArrayList(Arrays.asList(table1.getValorString(fila, 0))));
         comandaCaptura.agregarPlatillo(platillo);
-        
-    }    
+    }
 
     public void setTipoPlatillo(TipoPlatillo tipo_platillo) {
-        
+
         this.tipo_platillo = tipo_platillo;
     }
 
     public void cargaValores() {
-                
-        cargarPlatilloPorTipo(table1, tipo_platillo);        
+
+        cargarPlatilloPorTipo(table1, tipo_platillo);
         setTitle(tipo_platillo.descripcion);
     }
 

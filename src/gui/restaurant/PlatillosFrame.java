@@ -7,6 +7,8 @@ package gui.restaurant;
 
 import abstractt.visual.InternalFrameAbstracto;
 import domain.tabla.Platillo;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import javax.swing.event.InternalFrameEvent;
 
 
 /**
@@ -192,6 +194,30 @@ public class PlatillosFrame extends InternalFrameAbstracto {
         table1.grabar();
     }//GEN-LAST:event_m_grabarActionPerformed
 
+    /**
+     * 
+     * @return 
+     */
+    public int cerrar() {
+       
+        return table1.validaCambios();
+    }
+    /**
+     * 
+     * @param e 
+     */
+    @Override
+    public void internalFrameClosing(InternalFrameEvent e) {
+      
+        if (cerrar() != 1) {
+            
+            this.dispose();
+        } else {
+            
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.visual.Boton boton1;
     private javax.swing.JMenu jMenu1;

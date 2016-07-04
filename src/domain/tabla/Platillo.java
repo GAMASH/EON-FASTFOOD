@@ -13,6 +13,7 @@ import static domain.General.manejadorBD;
 import domain.ParametrosSP;
 import gui.controles.OrigenSelector;
 import gui.controles.TipoPlatilloSelector;
+import java.util.ArrayList;
 
 /**
  *
@@ -40,7 +41,9 @@ public class Platillo extends TablaBD {
     }
 
     @Override
-    public void obtenerPorId(String id) {
+    public void obtenerPorId(ArrayList pk) {
+
+        this.pk = pk;
 
         conectarBD();
 
@@ -49,7 +52,7 @@ public class Platillo extends TablaBD {
                 + "      carta,       precio,           origen, crea,\n"
                 + "      modifica\n"
                 + "FROM  platillo\n"
-                + "WHERE id_platillo = '" + id + "'");
+                + "WHERE id_platillo = '" + pk.get(0).toString() + "'");
 
         if (manejadorBD.getRowCount() > 0) {
 
@@ -58,7 +61,7 @@ public class Platillo extends TablaBD {
 
         desconectarBD();
     }
-
+    
     private void asignarValores() {
 
         String id_tipo_platillo;
@@ -79,12 +82,12 @@ public class Platillo extends TablaBD {
         crearTablaFramePlatillo(tabla);
         conectarBD();
 
-         tabla.tamañoColumna(new int[]{
+        tabla.tamañoColumna(new int[]{
             0, 100, 120, 200,
             50, 100, 100, 0,
             0
         });
-        
+
         manejadorBD.consulta(""
                 + "SELECT id_platillo, t.descripcion, nombre, p.descripcion, \n"
                 + "       carta, precio, \n"
@@ -95,7 +98,7 @@ public class Platillo extends TablaBD {
                 + "       p.crea, p.modifica\n"
                 + "FROM   platillo p, tipo_platillo t\n"
                 + "WHERE  p.id_tipo_platillo = t.id_tipo_platillo\n"
-                + "and    p.id_tipo_platillo = '"+tipo_platillo.id_tipo_platillo+"'\n"
+                + "and    p.id_tipo_platillo = '" + tipo_platillo.id_tipo_platillo + "'\n"
                 + "ORDER  BY p.nombre");
 
         manejadorBD.asignarTable(tabla);

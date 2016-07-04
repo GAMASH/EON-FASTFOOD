@@ -18,7 +18,13 @@ public class TablaBD {
 
     private MovUsuario crea;
     private MovUsuario modifica;
+    public Integer num_pk = 1;
+    public ArrayList pk;
 
+    public TablaBD(){
+        pk = new ArrayList();
+    }
+    
     /**
      * Funcion para cargar la Tabla
      */
@@ -59,10 +65,17 @@ public class TablaBD {
      *
      * @param id
      */
-    public void obtenerPorId(String id) {
+    public void obtenerPorId(ArrayList id) {
 
-        System.out.println("obtenerPorId-funcion no implementada");
+       // System.out.println("TablaBD.obtenerPorId-funcion no implementada");
     }
+    
+    /**
+     * 
+     */
+     private void asignarValores() {
+         System.out.println("TablaBD.asignarValores-funcion no implementada");
+     }
 
     /**
      * Graba el Objeto en BD si ya tiene id realiza UPDATE si no tiene id
@@ -71,7 +84,7 @@ public class TablaBD {
      * @return
      */
     public boolean grabar() {
-        System.out.println("grabar-funcion no implementada");
+        System.out.println("TablaBD.grabar-funcion no implementada");
         return true;
     }
 
@@ -81,7 +94,7 @@ public class TablaBD {
      * @return
      */
     public boolean borrar() {
-        System.out.println("borrar-funcion no implementada");
+        System.out.println("TablaBD.borrar-funcion no implementada");
         return true;
     }
 
@@ -92,7 +105,7 @@ public class TablaBD {
      * @param i
      */
     public void setRegistro(Table table, Integer i) {
-        System.out.println("setRegistro-funcion no implementada");
+        System.out.println("TablaBD.setRegistro-funcion no implementada");
     }
 
     /**
@@ -152,4 +165,11 @@ public class TablaBD {
         System.out.println("TablaBD.getDescripcion funcion no implementada");
         return "";
     }
+    
+    public String toString(){
+        
+        return this.toString();
+    }
+
+  
 }

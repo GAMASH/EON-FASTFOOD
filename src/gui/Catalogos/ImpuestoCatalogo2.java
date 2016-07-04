@@ -19,6 +19,7 @@ public class ImpuestoCatalogo2 extends CatalogoAbstracto {
         this.setTitle("Impuestos s");
         
     }
+    
     public void Dimensionar() {
 
         Dimension d = new Dimension();

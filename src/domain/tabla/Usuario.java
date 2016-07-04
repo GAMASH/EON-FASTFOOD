@@ -10,6 +10,9 @@ import abstractt.visual.Table;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.manejadorBD;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -30,6 +33,41 @@ public class Usuario extends TablaBD {
         password = "";
     }
 
+    @Override
+    public void obtenerPorId(ArrayList pk) {
+
+        this.pk = pk;
+
+        conectarBD();
+
+        manejadorBD.consulta(""
+                + "Select id_usuario, u.id_persona, login, \n"
+                + "       password \n"
+                + "From	usuario u left join persona p on\n"
+                + "	u.id_persona = p.id_persona "
+                + "where id_usuario = '"+pk.get(0)+"'");
+
+        if (manejadorBD.getRowCount() > 0) {
+
+            asignarValores();
+        }
+
+        desconectarBD();
+    }
+
+    private void asignarValores() {
+
+        String id_persona;
+
+        id_usuario = manejadorBD.getValorString(0, 0);
+        id_persona = manejadorBD.getValorString(0, 1);
+        login = manejadorBD.getValorString(0, 2);
+        password = manejadorBD.getValorString(0, 3);
+
+        persona.obtenerPorId(new ArrayList(Arrays.asList(id_persona)));
+
+    }
+
     /**
      *
      * @param tabla
@@ -44,7 +82,7 @@ public class Usuario extends TablaBD {
                 + "       concat(p.apellido_paterno,' ',p.apellido_materno,' ',p.nombres) usuario\n"
                 + "From	usuario u left join persona p on\n"
                 + "	u.id_persona = p.id_persona ");
-        
+
         manejadorBD.asignarTable(tabla);
 
         tabla.agregarItemStatus();
@@ -81,7 +119,14 @@ public class Usuario extends TablaBD {
         tabla.tamañoColumna(new int[]{
             0, 0, 100, 100
         });
-        
+
         return tabla;
+    }
+
+    public String toString() {
+
+        String Sreturn;
+        Sreturn = "Usuario: " + id_usuario + "; Login: " + login;
+        return Sreturn;
     }
 }

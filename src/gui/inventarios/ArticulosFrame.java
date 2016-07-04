@@ -48,7 +48,8 @@ public class ArticulosFrame extends InternalFrameAbstracto {
     public void cargaValores() {
 
         Articulo.cargarFrameArticulos(table1);
-        table1.setEnabled(false);
+        //table1.setEnabled(false);
+        table1.setEditable(false);
     }
 
     /**
