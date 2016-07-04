@@ -63,10 +63,12 @@ public class Principal extends javax.swing.JFrame {
         //menu_bar.setTexto("O P C I O N E S");
 
         statusBar1.progresBarr(0, false, "C A R G A N D O");
-
+        
+        menu_bar.setIcono("");
+        
         ComponenteMenu c1 = agregarComponente(menu_bar, "Resturante", "M", 0, "");
         {
-            ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", comandas_opcion, "service_bell_25px.png");
+            ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", comandas_opcion, "Comanda.png");
         }
         ComponenteMenu c2 = agregarComponente(menu_bar, "Inventarios", "M", 0, "");
         {
@@ -161,6 +163,8 @@ public class Principal extends javax.swing.JFrame {
                 tipo_empleado();
                 break;
         }
+        
+        statusBar1.progressBar = false;
     }
 
     /**
@@ -208,6 +212,11 @@ public class Principal extends javax.swing.JFrame {
                     });
                     dialog.setVisible(true);
                     login.setVisible(true);
+                    
+                    if(sucursal == null ){
+                        System.exit(0);
+                    }
+                    
                     dialog.setTitle("EON " + sucursal.datos_fiscales.getNombre_comercial());
                 } catch (SQLException ex) {
                     Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -231,8 +240,8 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        statusBar1 = new abstractt.visual.StatusBar();
         escritorio = new abstractt.visual.Escritorio();
+        statusBar1 = new abstractt.visual.StatusBar();
         menu_bar = new abstractt.visual.ComponenteMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
         m_archivo = new javax.swing.JMenu();
@@ -262,24 +271,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(null);
-        getContentPane().add(statusBar1);
-        statusBar1.setBounds(0, 335, 501, 23);
 
         escritorio.setBackground(new java.awt.Color(102, 204, 255));
-
-        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
-        escritorio.setLayout(escritorioLayout);
-        escritorioLayout.setHorizontalGroup(
-            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
-        );
-        escritorioLayout.setVerticalGroup(
-            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 331, Short.MAX_VALUE)
-        );
-
         getContentPane().add(escritorio);
-        escritorio.setBounds(148, 0, 353, 331);
+        escritorio.setBounds(151, 1, 348, 330);
+        getContentPane().add(statusBar1);
+        statusBar1.setBounds(0, 335, 501, 23);
 
         menu_bar.setIcono("user.png");
         menu_bar.setTexto("O P C I O N E S");

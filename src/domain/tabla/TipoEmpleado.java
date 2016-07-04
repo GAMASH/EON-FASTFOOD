@@ -26,9 +26,10 @@ public class TipoEmpleado extends TablaBD {
      *
      * @param tabla
      */
-    public void cargar(Table tabla) {
+    @Override
+    public void cargarTabla(Table tabla) {
 
-        crearTablaImpuestos(tabla);
+        crearTabla(tabla);
         conectarBD();
 
         manejadorBD.consulta(""
@@ -49,7 +50,7 @@ public class TipoEmpleado extends TablaBD {
         desconectarBD();
     }
 
-    public static Table crearTablaImpuestos(Table tabla) {
+    private Table crearTabla(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();

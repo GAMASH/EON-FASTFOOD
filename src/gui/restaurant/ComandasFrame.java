@@ -6,8 +6,6 @@
 package gui.restaurant;
 
 import abstractt.visual.InternalFrameAbstracto;
-import static abstractt.visual.StatusBar.etiqueta_centro;
-import static abstractt.visual.StatusBar.etiqueta_derecha;
 import static abstractt.visual.StatusBar.etiqueta_izquierda;
 import abstractt.visual.Table;
 import domain.tabla.Comanda;
