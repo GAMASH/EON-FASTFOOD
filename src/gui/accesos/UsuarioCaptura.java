@@ -9,6 +9,7 @@ import abstractt.TablaBD;
 import abstractt.visual.CapturaAbstracto;
 import abstractt.visual.InternalFrameAbstracto;
 import domain.tabla.Usuario;
+import static gui.Principal.escritorio;
 import java.awt.Dimension;
 
 /**
@@ -18,35 +19,54 @@ import java.awt.Dimension;
 public class UsuarioCaptura extends CapturaAbstracto {
 
     public Usuario usuario;
-   
-    
+    public CambioPassword cambioPassword;
+
     /**
      * Creates new form UsuarioCaptura
      */
     public UsuarioCaptura() {
-        initComponents();              
-         Dimensionar();
+        initComponents();
+        Dimensionar();
     }
-    
-    public void Dimensionar(){
+
+    public void Dimensionar() {
         Dimension d = new Dimension();
 
         d.height = 202;
         d.width = 572;
-        setSize(d);                     
+        setSize(d);
     }
-    
+
     @Override
-    public void setTablaBD(TablaBD usuario){
-        
-        this.usuario = (Usuario) usuario;        
-        
-        System.out.println("UsuarioCaptura.setTablaBD: "+usuario);
-        
+    public void setTablaBD(TablaBD usuario) {
+
+        this.usuario = (Usuario) usuario;
+
+        System.out.println("UsuarioCaptura.setTablaBD: " + usuario);
+
         this.tf_login.setText(this.usuario.login);
-        
     }
-    
+
+    public void asignarPassword() {
+
+        if( cambioPassword == null ){
+            
+            cambioPassword = new CambioPassword();
+        }
+        
+        if (!cambioPassword.isVisible()) {            
+            
+           // captura = new CapturaAbstracto();
+            //captura.cargaValores();
+
+            escritorio.remove(cambioPassword);
+            escritorio.add(cambioPassword);
+            cambioPassword.centrado(escritorio.getSize());
+            cambioPassword.setModal(true);
+            cambioPassword.setVisible(true);
+
+        } 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,7 +82,7 @@ public class UsuarioCaptura extends CapturaAbstracto {
         label1 = new abstractt.visual.Label();
         label2 = new abstractt.visual.Label();
         tf_login = new abstractt.visual.TextField();
-        tf_password = new abstractt.visual.TextField();
+        boton5 = new abstractt.visual.Boton();
         boton2 = new abstractt.visual.Boton();
         boton1 = new abstractt.visual.Boton();
         boton3 = new abstractt.visual.Boton();
@@ -84,6 +104,13 @@ public class UsuarioCaptura extends CapturaAbstracto {
         label2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label2.setText("Password:");
 
+        boton5.setText("Asignar Password");
+        boton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -95,8 +122,8 @@ public class UsuarioCaptura extends CapturaAbstracto {
                     .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_password, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                    .addComponent(tf_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tf_login, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(boton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
@@ -108,7 +135,7 @@ public class UsuarioCaptura extends CapturaAbstracto {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -145,17 +172,23 @@ public class UsuarioCaptura extends CapturaAbstracto {
         // TODO add your handling code here:
     }//GEN-LAST:event_boton2ActionPerformed
 
+    private void boton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton5ActionPerformed
+
+        asignarPassword();
+
+    }//GEN-LAST:event_boton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.visual.Boton boton1;
     private abstractt.visual.Boton boton2;
     private abstractt.visual.Boton boton3;
     private abstractt.visual.Boton boton4;
+    private abstractt.visual.Boton boton5;
     private abstractt.visual.Label label1;
     private abstractt.visual.Label label2;
     private abstractt.visual.Panel panel1;
     private abstractt.visual.Panel panel2;
     private abstractt.visual.TextField tf_login;
-    private abstractt.visual.TextField tf_password;
     // End of variables declaration//GEN-END:variables
 }
