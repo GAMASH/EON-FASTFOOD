@@ -10,6 +10,7 @@ import abstractt.visual.Table;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.manejadorBD;
+import domain.ParametrosSP;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -122,6 +123,36 @@ public class Usuario extends TablaBD {
 
         return tabla;
     }
+    
+    public boolean grabar(){
+        
+        boolean error;
+        conectarBD();
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+        manejadorBD.parametrosSP.agregarParametro(this.id_usuario, "varId_usuario", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(persona.id_persona, "varId_persona", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(this.login, "varLogin", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(this.password, "varPassword", "STRING", "IN");
+        
+        if (manejadorBD.ejecutarSP("{ call grabarUsuario(?,?,?,?) }") == 0) {
+
+            error = true;
+            //si se esta cambiando el password del usuario logeado
+            if( login.equals(manejadorBD.usuario)){
+                
+                //actualiza el password de la conexion actual
+                manejadorBD.palabraClave = this.password;
+            }
+        } else {                                    
+            
+            error = false;
+        }
+
+        desconectarBD();
+
+        return error;
+    }        
 
     public String toString() {
 

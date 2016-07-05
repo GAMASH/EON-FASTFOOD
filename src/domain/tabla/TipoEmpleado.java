@@ -22,6 +22,52 @@ public class TipoEmpleado extends TablaBD {
     public String id_tipo_empleado;
     public String descripcion;
 
+    public TipoEmpleado() {
+
+        id_tipo_empleado = "";
+        descripcion = "";
+    }
+
+    public void obtenerPorId(ArrayList pk) {
+
+        conectarBD();
+
+        manejadorBD.consulta(""
+                + "SELECT id_tipo_empleado, descripcion, crea, modifica\n"
+                + "FROM   tipo_empleado\n"
+                + "WHERE  id_tipo_empleado = '" + pk.get(0).toString() + "'");
+
+        asignarValores();
+
+        desconectarBD();
+    }
+
+    public void cargarPorDescripcion(String sDescripcion) {
+
+        conectarBD();
+
+        manejadorBD.consulta(
+                "SELECT	 id_tipo_empleado, descripcion, crea, modifica\n"
+                + "FROM  tipo_empleado\n"
+                + "WHERE descripcion = '" + sDescripcion + "'");
+
+        if (manejadorBD.getRowCount() > 0) {
+
+            asignarValores();
+        }
+
+        desconectarBD();
+    }
+
+    public void asignarValores() {
+
+        String crea;
+        String modifica;
+
+        id_tipo_empleado = manejadorBD.getValorString(0, 0);
+        descripcion = manejadorBD.getValorString(0, 1);
+    }
+
     /**
      *
      * @param tabla
@@ -80,51 +126,10 @@ public class TipoEmpleado extends TablaBD {
         return tabla;
     }
 
-    public void obtenerPorId(String id) {
-
-        conectarBD();
-
-        manejadorBD.consulta(""
-                + "SELECT id_tipo_empleado, descripcion, crea, modifica\n"
-                + "FROM   tipo_empleado\n"
-                + "WHERE  id_tipo_empleado = '" + id + "'");
-
-        asignarValores();
-
-        desconectarBD();
-    }
-
-    public void cargarPorDescripcion(String sDescripcion) {
-
-        conectarBD();
-
-        manejadorBD.consulta(
-                "SELECT	 id_tipo_empleado, descripcion, crea, modifica\n"
-                + "FROM  tipo_empleado\n"
-                + "WHERE descripcion = '" + sDescripcion + "'");
-
-        if (manejadorBD.getRowCount() > 0) {
-
-            asignarValores();
-        }
-
-        desconectarBD();
-    }
-
-    public void asignarValores() {
-
-        String crea;
-        String modifica;
-
-        id_tipo_empleado = manejadorBD.getValorString(0, 0);
-        descripcion = manejadorBD.getValorString(0, 1);       
-    }
-
     public void setRegistro(Table table, Integer i) {
 
         id_tipo_empleado = (String) table.getValueAt(i, 0);
         descripcion = (String) table.getValueAt(i, 1);
-        
 
         if (id_tipo_empleado == null) {
 
@@ -134,7 +139,7 @@ public class TipoEmpleado extends TablaBD {
 
             descripcion = "S";
         }
-      
+
     }
 
     public boolean grabar() {
@@ -178,7 +183,7 @@ public class TipoEmpleado extends TablaBD {
         return error;
     }
 
-    public static ArrayList<String> cargarTipo_empleado() {
+    public ArrayList<String> cargar() {
 
         ArrayList<String> lista;
 
@@ -202,36 +207,41 @@ public class TipoEmpleado extends TablaBD {
 
         return lista;
     }
+    /*
+     public static ArrayList<TipoEmpleado> tipos_empleado() {
 
-    public static ArrayList<TipoEmpleado> tipos_empleado() {
+     ArrayList<TipoEmpleado> lista;
 
-        ArrayList<TipoEmpleado> lista;
+     TipoEmpleado id_tipo_empleado;
 
-        TipoEmpleado id_tipo_empleado;
+     conectarBD();
 
-        conectarBD();
+     manejadorBD.consulta(""
+     + "SELECT id_tipo_empleado \n"
+     + "FROM   tipo_empleado");
 
-        manejadorBD.consulta(""
-                + "SELECT id_tipo_empleado \n"
-                + "FROM   tipo_empleado");
+     lista = new ArrayList<TipoEmpleado>();
 
-        lista = new ArrayList<TipoEmpleado>();
+     if (manejadorBD.getRowCount() > 0) {
 
-        if (manejadorBD.getRowCount() > 0) {
+     for (int i = 0; i < manejadorBD.getRowCount(); i++) {
 
-            for (int i = 0; i < manejadorBD.getRowCount(); i++) {
+     id_tipo_empleado = new TipoEmpleado();
 
-                id_tipo_empleado = new TipoEmpleado();
+     id_tipo_empleado.obtenerPorId(manejadorBD.getValorString(0, 0));
 
-                id_tipo_empleado.obtenerPorId(manejadorBD.getValorString(0, 0));
+     lista.add(id_tipo_empleado);
+     }
+     }
 
-                lista.add(id_tipo_empleado);
-            }
-        }
+     desconectarBD();
 
-        desconectarBD();
-
-        return lista;
+     return lista;
+     }
+     */
+    
+    public String getDescripcion(){
+        return descripcion;
     }
 
 }

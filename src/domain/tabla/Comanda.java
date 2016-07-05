@@ -11,7 +11,7 @@ import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.formatoDateTime;
 import static domain.General.manejadorBD;
-import static domain.General.mensajeError;
+import static domain.General.mensaje;
 import static domain.General.sucursal;
 import java.text.ParseException;
 import java.util.Date;
@@ -66,7 +66,7 @@ public class Comanda extends TablaBD {
             //status = statusMesaSelector.getData(table.getValorString(i, 4));
         } catch (ParseException ex) {
             
-            mensajeError(ex.getMessage());
+            mensaje(ex.getMessage());
           //  Logger.getLogger(Comanda.class.getName()).log(Level.SEVERE, null, ex);
         }
         

@@ -54,8 +54,8 @@ public class CapturaAbstracto extends InternalFrameAbstracto {
         */
     }
 
-    public void cargar() {
-        System.out.println("CapturaAbstracto.cargar funcion no implementada");
+    public void cargarValores() {
+        System.out.println("CapturaAbstracto.cargarValores funcion no implementada");
     }
 
     public void grabar() {

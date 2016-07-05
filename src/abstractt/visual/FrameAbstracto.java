@@ -68,11 +68,11 @@ public class FrameAbstracto extends InternalFrameAbstracto {
         
         this.tablaBD.obtenerPorId(tablaBD.pk);                
         
-        System.out.println("FrameAbstracto.consultar: "+fila);
+        //System.out.println("FrameAbstracto.consultar: "+fila);
         
         inciarCaptura();
         captura.setTablaBD(tablaBD);
-       
+        captura.cargarValores();       
         captura.setVisible(true);                        
         cargaValores();
     }

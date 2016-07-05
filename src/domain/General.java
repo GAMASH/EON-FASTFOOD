@@ -100,7 +100,7 @@ public class General {
 
     }
 
-    public static void mensajeError(String mensaje) {
+    public static void mensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
 }

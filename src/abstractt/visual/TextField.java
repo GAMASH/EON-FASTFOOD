@@ -19,6 +19,8 @@ import java.util.StringTokenizer;
  */
 public class TextField extends javax.swing.JTextField{
    
+    private boolean isDouble = false;
+    
    /** Creates a new instance of textField */
    public TextField() {
       
@@ -41,12 +43,19 @@ public class TextField extends javax.swing.JTextField{
       
    }
    
+   /**
+    * 
+    * @param evt 
+    */
    private void ActionPerformed(java.awt.event.ActionEvent evt){
-      
-      
+            
       transferFocus();
    }
    
+   /**
+    * 
+    * @param evt 
+    */
    private void FocusGained(java.awt.event.FocusEvent evt){
       
       if(isDouble){
@@ -57,6 +66,10 @@ public class TextField extends javax.swing.JTextField{
       seleccionarTexto();
    }
    
+   /**
+    * 
+    * @param evt 
+    */
    private void FocusLost(java.awt.event.FocusEvent evt){
       
       if(isDouble){
@@ -67,6 +80,11 @@ public class TextField extends javax.swing.JTextField{
       }
    }
    
+   /**
+    * 
+    * @param caracter
+    * @return 
+    */
    public boolean esNumero(char caracter){
       
       if(((caracter < '0') || (caracter > '9') )) {
@@ -126,9 +144,11 @@ public class TextField extends javax.swing.JTextField{
       
       isDouble = true;
    }
-   
-   private boolean isDouble = false;
-   
+      
+   /**
+    * 
+    * @return 
+    */
    public double getDouble(){
       
       try{
@@ -143,6 +163,10 @@ public class TextField extends javax.swing.JTextField{
       return 0.0;
    }
    
+   /**
+    * 
+    * @return 
+    */
    public double getInt(){
       
       try{
@@ -208,6 +232,7 @@ public class TextField extends javax.swing.JTextField{
          }
       });
    }
+   
    /**
     *Dado un TextFiled el texto se muestra seleccionado para su edicion rapida
     */
@@ -217,11 +242,15 @@ public class TextField extends javax.swing.JTextField{
       return getText();
    }
    
+   /**
+    * 
+    */
    public void quitarSeleccion(){
        
        select(getText().length()-3, getText().length()-1);
        //return getText();
    }
+   
    /**
     *Si el numero tiene comas se las quita
     */
@@ -236,6 +265,5 @@ public class TextField extends javax.swing.JTextField{
       }
       //numero += num.nextToken();
       return numero;
-   }
-   
+   }   
 }
