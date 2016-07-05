@@ -26,7 +26,7 @@ import javax.swing.JTable;
 public class CapturaAbstracto extends InternalFrameAbstracto {
 
     public TablaBD tablaBD;
-    public Dimension d;
+    
 
     /**
      * Creates new form Articulos
@@ -34,20 +34,24 @@ public class CapturaAbstracto extends InternalFrameAbstracto {
     public CapturaAbstracto() {
 
         initComponents();
+        
+        //System.out.println("CapturaAbstracto "+this.getSize());
     }
 
     public void setTablaBD(TablaBD tablaBD) {
 
         this.tablaBD = tablaBD;
+       // System.out.println("setTablaBD "+this.getSize());
     }  
     
     public void Dimensionar() {
 
        // this.setSize(d);
-        
+        /*
         d.height = 54;
         d.width = 109;
         setSize(d);
+        */
     }
 
     public void cargar() {

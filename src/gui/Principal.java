@@ -625,11 +625,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void usuarios() {
-        
-        UsuarioCaptura usuarioCaptura;
-        
-        usuarioCaptura = new UsuarioCaptura();
-        usuarioCaptura.Dimensionar();
     
         if (usuario == null) {
 
@@ -639,7 +634,7 @@ public class Principal extends javax.swing.JFrame {
 
             usuario = new FrameAbstracto();
             usuario.setTablaBD(new Usuario());
-            usuario.setCaptura(usuarioCaptura);
+            usuario.setCaptura(new UsuarioCaptura());
             usuario.cargaValores();
             escritorio.remove(usuario);
             escritorio.add(usuario);

@@ -10,6 +10,7 @@ import static gui.Principal.escritorio;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.event.InternalFrameEvent;
@@ -58,6 +59,7 @@ public class FrameAbstracto extends InternalFrameAbstracto {
      */
     public void consultar(int fila) {
         
+        tablaBD.pk = new ArrayList();
         //System.out.println("FrameAbstracto.consultar Funcion no Probada");
         for (int i = 0; i < tablaBD.num_pk; i++) {
             
@@ -65,7 +67,9 @@ public class FrameAbstracto extends InternalFrameAbstracto {
         }
         
         this.tablaBD.obtenerPorId(tablaBD.pk);                
-        captura.Dimensionar();
+        
+        System.out.println("FrameAbstracto.consultar: "+fila);
+        
         inciarCaptura();
         captura.setTablaBD(tablaBD);
        

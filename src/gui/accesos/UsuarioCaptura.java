@@ -5,6 +5,7 @@
  */
 package gui.accesos;
 
+import abstractt.TablaBD;
 import abstractt.visual.CapturaAbstracto;
 import abstractt.visual.InternalFrameAbstracto;
 import domain.tabla.Usuario;
@@ -24,17 +25,28 @@ public class UsuarioCaptura extends CapturaAbstracto {
      */
     public UsuarioCaptura() {
         initComponents();              
+         Dimensionar();
     }
     
     public void Dimensionar(){
         Dimension d = new Dimension();
 
-        d.height = 54;
-        d.width = 109;
-        setSize(d);
-        
-        this.d = d;
+        d.height = 202;
+        d.width = 572;
+        setSize(d);                     
     }
+    
+    @Override
+    public void setTablaBD(TablaBD usuario){
+        
+        this.usuario = (Usuario) usuario;        
+        
+        System.out.println("UsuarioCaptura.setTablaBD: "+usuario);
+        
+        this.tf_login.setText(this.usuario.login);
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,17 +61,18 @@ public class UsuarioCaptura extends CapturaAbstracto {
         panel1 = new abstractt.visual.Panel();
         label1 = new abstractt.visual.Label();
         label2 = new abstractt.visual.Label();
-        textField1 = new abstractt.visual.TextField();
-        textField2 = new abstractt.visual.TextField();
+        tf_login = new abstractt.visual.TextField();
+        tf_password = new abstractt.visual.TextField();
         boton2 = new abstractt.visual.Boton();
         boton1 = new abstractt.visual.Boton();
         boton3 = new abstractt.visual.Boton();
         boton4 = new abstractt.visual.Boton();
 
         setBackground(new java.awt.Color(102, 204, 255));
-        setResizable(false);
         setTitle("Captura Usuario");
         getContentPane().setLayout(new java.awt.BorderLayout());
+
+        panel2.setLayout(null);
 
         panel1.setBackground(new java.awt.Color(204, 255, 204));
         panel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acceso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10))); // NOI18N
@@ -82,8 +95,8 @@ public class UsuarioCaptura extends CapturaAbstracto {
                     .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                    .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tf_password, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(tf_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
@@ -91,13 +104,16 @@ public class UsuarioCaptura extends CapturaAbstracto {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        panel2.add(panel1);
+        panel1.setBounds(14, 20, 308, 67);
 
         boton2.setText("Cancelar");
         boton2.addActionListener(new java.awt.event.ActionListener() {
@@ -105,48 +121,20 @@ public class UsuarioCaptura extends CapturaAbstracto {
                 boton2ActionPerformed(evt);
             }
         });
+        panel2.add(boton2);
+        boton2.setBounds(309, 98, 144, 39);
 
         boton1.setText("Aceptar");
+        panel2.add(boton1);
+        boton1.setBounds(113, 98, 144, 39);
 
         boton3.setText("Agregar/Seleccionar Datos Personales");
+        panel2.add(boton3);
+        boton3.setBounds(331, 21, 215, 23);
 
         boton4.setText("Agregar/Seleccionar Datos Empleado");
-
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(boton4, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(boton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(13, 13, 13)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        panel2.add(boton4);
+        boton4.setBounds(333, 53, 212, 23);
 
         getContentPane().add(panel2, java.awt.BorderLayout.CENTER);
 
@@ -167,7 +155,7 @@ public class UsuarioCaptura extends CapturaAbstracto {
     private abstractt.visual.Label label2;
     private abstractt.visual.Panel panel1;
     private abstractt.visual.Panel panel2;
-    private abstractt.visual.TextField textField1;
-    private abstractt.visual.TextField textField2;
+    private abstractt.visual.TextField tf_login;
+    private abstractt.visual.TextField tf_password;
     // End of variables declaration//GEN-END:variables
 }
