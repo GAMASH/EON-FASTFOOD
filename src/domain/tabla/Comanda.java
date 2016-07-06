@@ -29,7 +29,7 @@ public class Comanda extends TablaBD {
     public String folio;
     public Date fecha;
     public Mesa mesa;
-    public Mesero mesero;
+    public Empleado mesero;
     public String status;
     public Pago pago;
     public Double Subtotal;
@@ -45,7 +45,7 @@ public class Comanda extends TablaBD {
        folio = "";
        fecha = new Date();
        mesa = new Mesa();
-       mesero = new Mesero();
+       mesero = new Empleado();
        
     }
     

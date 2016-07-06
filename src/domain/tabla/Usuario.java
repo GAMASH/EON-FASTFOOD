@@ -46,7 +46,27 @@ public class Usuario extends TablaBD {
                 + "       password \n"
                 + "From	usuario u left join persona p on\n"
                 + "	u.id_persona = p.id_persona "
-                + "where id_usuario = '"+pk.get(0)+"'");
+                + "where id_usuario = '" + pk.get(0) + "'");
+
+        if (manejadorBD.getRowCount() > 0) {
+
+            asignarValores();
+        }
+
+        desconectarBD();
+    }
+    
+    
+    public void cargarPorLogin(String login) {
+        
+        conectarBD();
+
+        manejadorBD.consulta(""
+                + "Select id_usuario, u.id_persona, login, \n"
+                + "       password \n"
+                + "From	usuario u left join persona p on\n"
+                + "	u.id_persona = p.id_persona "
+                + "where login = '" + login + "'");
 
         if (manejadorBD.getRowCount() > 0) {
 
@@ -79,13 +99,16 @@ public class Usuario extends TablaBD {
         conectarBD();
 
         manejadorBD.consulta(""
-                + "Select id_usuario, u.id_persona, login, \n"
-                + "       concat(p.apellido_paterno,' ',p.apellido_materno,' ',p.nombres) usuario\n"
+                + "Select id_usuario, u.id_persona, \n"
+                + "       concat(p.apellido_paterno,' ',p.apellido_materno,' ',p.nombres) usuario,\n"
+                + "         login\n"
                 + "From	usuario u left join persona p on\n"
                 + "	u.id_persona = p.id_persona ");
 
         manejadorBD.asignarTable(tabla);
 
+        tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        
         tabla.agregarItemStatus();
 
         tabla.ocultarcolumna(0);
@@ -106,7 +129,7 @@ public class Usuario extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Usuario", "Id Persona", "Login", "Usuario"};
+            "Id Usuario", "Id Persona", "Nombre","Login"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -118,14 +141,14 @@ public class Usuario extends TablaBD {
         tabla.setFormato(new int[]{
             Table.letra, Table.letra, Table.letra, Table.letra});
         tabla.tamañoColumna(new int[]{
-            0, 0, 100, 100
+            0, 0, 600, 100
         });
 
         return tabla;
     }
-    
-    public boolean grabar(){
-        
+
+    public boolean grabar() {
+
         boolean error;
         conectarBD();
 
@@ -134,26 +157,51 @@ public class Usuario extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(persona.id_persona, "varId_persona", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(this.login, "varLogin", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(this.password, "varPassword", "STRING", "IN");
-        
+
         if (manejadorBD.ejecutarSP("{ call grabarUsuario(?,?,?,?) }") == 0) {
 
             error = true;
             //si se esta cambiando el password del usuario logeado
-            if( login.equals(manejadorBD.usuario)){
-                
+            if (login.equals(manejadorBD.usuario)) {
+
                 //actualiza el password de la conexion actual
                 manejadorBD.palabraClave = this.password;
             }
-        } else {                                    
-            
+        } else {
+
             error = false;
         }
 
         desconectarBD();
 
         return error;
-    }        
+    }
 
+    public ArrayList<String> cargar() {
+
+        ArrayList<String> lista;
+
+        conectarBD();
+        manejadorBD.consulta(""
+                + "SELECT login \n"
+                + "FROM   usuario\n"
+                + "ORDER BY login");
+
+        lista = new ArrayList<String>();
+
+        if (manejadorBD.getRowCount() > 0) {
+
+            for (int i = 0; i < manejadorBD.getRowCount(); i++) {
+
+                lista.add(manejadorBD.getValorString(i, 0));
+            }
+        }
+
+        desconectarBD();
+
+        return lista;
+    }
+    
     public String toString() {
 
         String Sreturn;

@@ -44,11 +44,11 @@ public class UsuarioCaptura extends CapturaAbstracto {
     public void cargarValores() {
 
         tipoEmpleadoSelector.setTablaBD(new TipoEmpleado());
-         this.tipoEmpleadoSelector.setTablaBD(empleado.tipo_empleado);
+        this.tipoEmpleadoSelector.setTablaBD(empleado.tipo_empleado);
     }
 
     public void Dimensionar() {
-        
+
         Dimension d = new Dimension();
         d.height = 202;
         d.width = 572;
@@ -61,10 +61,9 @@ public class UsuarioCaptura extends CapturaAbstracto {
         this.usuario = (Usuario) usuario;
 
         //System.out.println("UsuarioCaptura.setTablaBD: " + usuario);
-
         this.tf_login.setText(this.usuario.login);
         empleado = new Empleado();
-        empleado.obtenerPorUsuario(this.usuario.id_usuario);        
+        empleado.obtenerPorUsuario(this.usuario.id_usuario);
         this.tipoEmpleadoSelector.setTablaBD(empleado.tipo_empleado);
     }
 
@@ -101,17 +100,17 @@ public class UsuarioCaptura extends CapturaAbstracto {
 
         } else {
             tipo_empleado = (TipoEmpleado) tipoEmpleadoSelector.getTablaBD();
-            
+
             if (tipo_empleado != null) {
-            
-                empleado.id_sucursal = sucursal.id_sucursal;                
+
+                empleado.id_sucursal = sucursal.id_sucursal;
                 empleado.tipo_empleado = tipo_empleado;
                 empleado.usuario.obtenerPorId(new ArrayList(Arrays.asList(usuario.id_usuario)));
-                
-                if(!empleado.grabar()){
-                    mensaje("Error al grabar el empleado "+ manejadorBD.errorSQL);
+
+                if (!empleado.grabar()) {
+                    mensaje("Error al grabar el empleado " + manejadorBD.errorSQL);
                     return;
-                }                
+                }
             }
             mensaje("Se grabó el usuario correctamente");
         }
@@ -227,7 +226,7 @@ public class UsuarioCaptura extends CapturaAbstracto {
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
     }//GEN-LAST:event_boton2ActionPerformed
 
     private void boton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton5ActionPerformed

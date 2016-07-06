@@ -10,8 +10,10 @@ import static abstractt.visual.StatusBar.etiqueta_izquierda;
 import abstractt.visual.Table;
 import domain.tabla.Comanda;
 import static domain.tabla.Comanda.cargarFrameMesaComanda;
+import domain.tabla.TipoEmpleado;
 import static gui.Principal.escritorio;
 import static gui.Principal.statusBar1;
+import gui.accesos.AccesoEmpleado;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -219,13 +221,35 @@ public class ComandasFrame extends InternalFrameAbstracto {
 
         ComandaPanel comandaPanel;
         Comanda comanda;
+        TipoEmpleado tipo_empleado;
+        
+        tipo_empleado = new TipoEmpleado();
+        
+        tipo_empleado.cargarPorDescripcion("Mesero");
         
         comandaPanel = (ComandaPanel) evt.getComponent();
         
         comanda = comandaPanel.getComanda();
         
-        System.out.println(comanda.mesa.numero_mesa);
+       // System.out.println(comanda.mesa.numero_mesa);
         statusBar1.mensaje("MESA: " + comandaPanel.getComanda().mesa.numero_mesa, etiqueta_izquierda);
+        
+        AccesoEmpleado accesoEmpleado;
+        
+        accesoEmpleado = new AccesoEmpleado();
+        accesoEmpleado.setTipoEmpleado(tipo_empleado);
+        
+        escritorio.add(accesoEmpleado);
+        accesoEmpleado.setModal(true);
+        accesoEmpleado.centrado(escritorio.getSize());
+        accesoEmpleado.setVisible(true);
+        
+        if( accesoEmpleado.empleado.usuario.id_usuario.equals("")){
+            return;
+        }
+        
+        comanda.mesero = accesoEmpleado.empleado;
+        
         
         if (comandaCaptura == null) {
 

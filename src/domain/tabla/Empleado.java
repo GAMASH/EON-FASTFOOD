@@ -86,5 +86,7 @@ public class Empleado extends TablaBD {
 
         return error;
     }
+    
+    
 
 }

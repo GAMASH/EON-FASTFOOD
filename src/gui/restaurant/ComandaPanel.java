@@ -43,8 +43,8 @@ public class ComandaPanel extends Panel {
         this.tf_folio.setText(Acomanda.folio);
         this.tf_mesa.setText(comanda.mesa.numero_mesa);
         
-        if (!comanda.mesero.id_mesero.equals("")) {
-            this.tf_mesero.setText(comanda.mesero.empleado.usuario.persona.nombre_completo);
+        if (!comanda.mesero.id_empleado.equals("")) {
+            this.tf_mesero.setText(comanda.mesero.usuario.login);
         }
     }
 

@@ -169,6 +169,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         this.comanda = comanda;
         this.comandaPanel1.setComanda(comanda);
+        
     }
 
     /**
