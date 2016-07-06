@@ -43,7 +43,8 @@ public class ComandaPanel extends Panel {
         this.tf_folio.setText(Acomanda.folio);
         this.tf_mesa.setText(comanda.mesa.numero_mesa);
         
-        if (!comanda.mesero.id_empleado.equals("")) {
+        if (!comanda.mesero.id_empleado.equals("")) {            
+            
             this.tf_mesero.setText(comanda.mesero.usuario.login);
         }
     }
@@ -58,15 +59,15 @@ public class ComandaPanel extends Panel {
     private void initComponents() {
 
         label1 = new abstractt.visual.Label();
-        tf_folio = new abstractt.visual.TextField();
         fecha = new abstractt.visual.Calendar();
         label2 = new abstractt.visual.Label();
-        tf_mesero = new abstractt.visual.TextField();
         label3 = new abstractt.visual.Label();
         tf_mesa = new abstractt.visual.Label();
         label4 = new abstractt.visual.Label();
         label5 = new abstractt.visual.Label();
         tf_estado = new abstractt.visual.TextField();
+        tf_folio = new abstractt.visual.Label();
+        tf_mesero = new abstractt.visual.Label();
 
         setBackground(new java.awt.Color(102, 255, 102));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -78,8 +79,6 @@ public class ComandaPanel extends Panel {
         label1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label1);
         label1.setBounds(176, 47, 38, 16);
-        add(tf_folio);
-        tf_folio.setBounds(58, 47, 84, 20);
         add(fecha);
         fecha.setBounds(219, 46, 96, 20);
 
@@ -88,8 +87,6 @@ public class ComandaPanel extends Panel {
         label2.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label2);
         label2.setBounds(13, 49, 38, 16);
-        add(tf_mesero);
-        tf_mesero.setBounds(58, 75, 259, 20);
 
         label3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label3.setText(bundle.getString("MESERO ")); // NOI18N
@@ -98,9 +95,10 @@ public class ComandaPanel extends Panel {
         label3.setBounds(2, 78, 56, 16);
 
         tf_mesa.setBackground(new java.awt.Color(255, 255, 255));
-        tf_mesa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tf_mesa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tf_mesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tf_mesa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_mesa.setOpaque(true);
         add(tf_mesa);
         tf_mesa.setBounds(57, 10, 88, 28);
 
@@ -115,6 +113,22 @@ public class ComandaPanel extends Panel {
         label5.setBounds(148, 9, 71, 31);
         add(tf_estado);
         tf_estado.setBounds(215, 8, 104, 30);
+
+        tf_folio.setBackground(new java.awt.Color(255, 255, 255));
+        tf_folio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tf_folio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tf_folio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_folio.setOpaque(true);
+        add(tf_folio);
+        tf_folio.setBounds(58, 44, 88, 25);
+
+        tf_mesero.setBackground(new java.awt.Color(255, 255, 255));
+        tf_mesero.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tf_mesero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tf_mesero.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_mesero.setOpaque(true);
+        add(tf_mesero);
+        tf_mesero.setBounds(59, 76, 256, 24);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -126,9 +140,9 @@ public class ComandaPanel extends Panel {
     private abstractt.visual.Label label4;
     private abstractt.visual.Label label5;
     private abstractt.visual.TextField tf_estado;
-    private abstractt.visual.TextField tf_folio;
+    private abstractt.visual.Label tf_folio;
     private abstractt.visual.Label tf_mesa;
-    private abstractt.visual.TextField tf_mesero;
+    private abstractt.visual.Label tf_mesero;
     // End of variables declaration//GEN-END:variables
 
 }

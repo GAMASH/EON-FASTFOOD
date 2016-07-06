@@ -189,6 +189,8 @@ public class Usuario extends TablaBD {
 
         lista = new ArrayList<String>();
 
+        lista.add("");
+        
         if (manejadorBD.getRowCount() > 0) {
 
             for (int i = 0; i < manejadorBD.getRowCount(); i++) {

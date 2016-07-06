@@ -25,7 +25,7 @@
     <Container class="abstractt.visual.Panel" name="panel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="cc" red="ff" type="rgb"/>
+          <Color blue="66" green="f1" red="ff" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
@@ -98,6 +98,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boton2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="abstractt.visual.Label" name="label1">
           <Properties>

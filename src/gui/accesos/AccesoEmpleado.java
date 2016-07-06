@@ -40,12 +40,14 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
         if (!empleado.usuario.password.equals(password)) {
 
             mensaje("Contraseña incorrecta");
+            empleado = new Empleado();
             return;
         }
 
         if (!empleado.tipo_empleado.id_tipo_empleado.equals(tipoEmpleado.id_tipo_empleado)) {
 
-            mensaje("El usuario no es " + tipoEmpleado.descripcion);
+            mensaje("El usuario no es " + tipoEmpleado.descripcion);            
+            empleado = new Empleado();
             return;
         }
 
@@ -57,7 +59,6 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
 
         this.tipoEmpleado = tipoEmpleado;
         this.tablaBDSelector1.setTablaBD(new Usuario());
-
     }
 
     /**
@@ -79,7 +80,7 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
 
         setTitle("Selecciona Usuario");
 
-        panel1.setBackground(new java.awt.Color(255, 204, 0));
+        panel1.setBackground(new java.awt.Color(255, 241, 102));
 
         boton1.setText("Aceptar");
         boton1.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +90,11 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
         });
 
         boton2.setText("Cancelar");
+        boton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton2ActionPerformed(evt);
+            }
+        });
 
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label1.setText("Usuario:");
@@ -146,6 +152,10 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
 
         acceder();
     }//GEN-LAST:event_boton1ActionPerformed
+
+    private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
+       setVisible(false);
+    }//GEN-LAST:event_boton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
