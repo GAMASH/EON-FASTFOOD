@@ -9,14 +9,14 @@ import abstractt.TablaBD;
 import abstractt.visual.Table;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
-import static domain.General.formatoDateTime;
+import static domain.General.formatoDateTime_11;
+import static domain.General.formatoDate_2;
 import static domain.General.manejadorBD;
 import static domain.General.mensaje;
 import static domain.General.sucursal;
+import domain.ParametrosSP;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -57,9 +57,10 @@ public class Comanda extends TablaBD {
             String id_mesa;
             
             id_comanda = table.getValorString(i, 0);
-            id_mesa = table.getValorString(i, 1);                        
+            id_mesa = table.getValorString(i, 1);                         
+            fecha = formatoDateTime_11.parse(table.getValorString(i, 5)); 
+            status = table.getValorString(i, 6); 
             
-            fecha = formatoDateTime.parse(table.getValorString(i, 5)); 
             
             mesa.obetenerPorId(id_mesa);
             
@@ -84,7 +85,8 @@ public class Comanda extends TablaBD {
                 + "         when 'D' then 'Disponible'\n"
                 + "         when 'O' then 'Ocupada'\n"
                 + "         when 'R' then 'Reservada' end mes_status,\n"
-                + "         coalesce(c.folio,'') com_folio, coalesce(c.fecha,'1900-01-01 00:00') com_fecha, \n"
+                + "         coalesce(c.folio,'') com_folio, \n"
+                + "         coalesce(c.fecha,NOW()) com_fecha, \n"
                 + "         coalesce( case c.status \n"
                 + "                   when 'PE' then 'Pendiente'\n"
                 + "                   when 'PT' then 'Pedido Tomado'\n"
@@ -144,5 +146,31 @@ public class Comanda extends TablaBD {
 */
         return tabla;
     }
+    
+    public boolean grabar() {
+
+        boolean error = true;
+        /*
+        conectarBD();
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+        manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_mesa, "varId_mesa", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(numero_mesa, "varNumero_mesa", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(num_comensales.toString(), "varNum_comensales", "INT", "IN");
+        manejadorBD.parametrosSP.agregarParametro(status, "varStatus", "STRING", "IN");
+
+        if (manejadorBD.ejecutarSP("{ call grabarMesa(?,?,?,?,?) }") == 0) {
+
+            error = true;
+        } else {
+            error = false;
+        }
+
+        desconectarBD();
+*/
+        return error;
+    }
+    
 
 }

@@ -6,6 +6,9 @@
 package gui.restaurant;
 
 import abstractt.visual.Panel;
+import static domain.General.formatoDate_2;
+import static domain.General.manejadorBD;
+import static domain.General.mensaje;
 import domain.tabla.Comanda;
 
 /**
@@ -42,12 +45,24 @@ public class ComandaPanel extends Panel {
         this.tf_estado.setText(Acomanda.status);
         this.tf_folio.setText(Acomanda.folio);
         this.tf_mesa.setText(comanda.mesa.numero_mesa);
+        this.tf_estado.setText(comanda.status);        
+        this.tf_fecha.setText(formatoDate_2.format(comanda.fecha));                
         
         if (!comanda.mesero.id_empleado.equals("")) {            
             
             this.tf_mesero.setText(comanda.mesero.usuario.login);
         }
     }
+    
+    public void grabar(){
+        
+        if (!comanda.grabar()){
+            
+            mensaje("Error al grabar la comanda "+manejadorBD.errorSQL);
+        }
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,15 +74,15 @@ public class ComandaPanel extends Panel {
     private void initComponents() {
 
         label1 = new abstractt.visual.Label();
-        fecha = new abstractt.visual.Calendar();
+        tf_fecha = new abstractt.visual.Label();
         label2 = new abstractt.visual.Label();
         label3 = new abstractt.visual.Label();
         tf_mesa = new abstractt.visual.Label();
         label4 = new abstractt.visual.Label();
         label5 = new abstractt.visual.Label();
-        tf_estado = new abstractt.visual.TextField();
         tf_folio = new abstractt.visual.Label();
         tf_mesero = new abstractt.visual.Label();
+        tf_estado = new abstractt.visual.Label();
 
         setBackground(new java.awt.Color(102, 255, 102));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -79,67 +94,84 @@ public class ComandaPanel extends Panel {
         label1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label1);
         label1.setBounds(176, 47, 38, 16);
-        add(fecha);
-        fecha.setBounds(219, 46, 96, 20);
+
+        tf_fecha.setBackground(new java.awt.Color(255, 255, 255));
+        tf_fecha.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tf_fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tf_fecha.setAlignmentY(0.0F);
+        tf_fecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_fecha.setOpaque(true);
+        tf_fecha.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        add(tf_fecha);
+        tf_fecha.setBounds(218, 45, 97, 24);
 
         label2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label2.setText(bundle.getString("FOLIO ")); // NOI18N
+        java.util.ResourceBundle bundle1 = java.util.ResourceBundle.getBundle("gui/restaurant/ComandaPanel"); // NOI18N
+        label2.setText(bundle1.getString("FOLIO ")); // NOI18N
         label2.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label2);
         label2.setBounds(13, 49, 38, 16);
 
         label3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label3.setText(bundle.getString("MESERO ")); // NOI18N
+        label3.setText(bundle1.getString("MESERO ")); // NOI18N
         label3.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label3);
         label3.setBounds(2, 78, 56, 16);
 
         tf_mesa.setBackground(new java.awt.Color(255, 255, 255));
-        tf_mesa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tf_mesa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tf_mesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tf_mesa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_mesa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_mesa.setOpaque(true);
         add(tf_mesa);
         tf_mesa.setBounds(57, 10, 88, 28);
 
-        label4.setText(bundle.getString("M E S A ")); // NOI18N
+        label4.setText(bundle1.getString("M E S A ")); // NOI18N
         label4.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label4);
         label4.setBounds(14, 8, 43, 31);
 
-        label5.setText(bundle.getString("E S T A D O ")); // NOI18N
+        label5.setText(bundle1.getString("E S T A D O ")); // NOI18N
         label5.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         add(label5);
         label5.setBounds(148, 9, 71, 31);
-        add(tf_estado);
-        tf_estado.setBounds(215, 8, 104, 30);
 
         tf_folio.setBackground(new java.awt.Color(255, 255, 255));
-        tf_folio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tf_folio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tf_folio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tf_folio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_folio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_folio.setOpaque(true);
         add(tf_folio);
         tf_folio.setBounds(58, 44, 88, 25);
 
         tf_mesero.setBackground(new java.awt.Color(255, 255, 255));
-        tf_mesero.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tf_mesero.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tf_mesero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tf_mesero.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_mesero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_mesero.setOpaque(true);
         add(tf_mesero);
         tf_mesero.setBounds(59, 76, 256, 24);
+
+        tf_estado.setBackground(new java.awt.Color(255, 255, 255));
+        tf_estado.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tf_estado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tf_estado.setAlignmentY(0.0F);
+        tf_estado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tf_estado.setOpaque(true);
+        tf_estado.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        add(tf_estado);
+        tf_estado.setBounds(220, 10, 95, 30);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private abstractt.visual.Calendar fecha;
     private abstractt.visual.Label label1;
     private abstractt.visual.Label label2;
     private abstractt.visual.Label label3;
     private abstractt.visual.Label label4;
     private abstractt.visual.Label label5;
-    private abstractt.visual.TextField tf_estado;
+    private abstractt.visual.Label tf_estado;
+    private abstractt.visual.Label tf_fecha;
     private abstractt.visual.Label tf_folio;
     private abstractt.visual.Label tf_mesa;
     private abstractt.visual.Label tf_mesero;

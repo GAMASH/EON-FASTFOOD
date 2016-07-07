@@ -78,6 +78,10 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
         label2 = new abstractt.visual.Label();
         tablaBDSelector1 = new abstractt.visual.TablaBDSelector();
 
+        setClosable(false);
+        setIconifiable(false);
+        setMaximizable(false);
+        setResizable(false);
         setTitle("Selecciona Usuario");
 
         panel1.setBackground(new java.awt.Color(255, 241, 102));
@@ -98,6 +102,12 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
 
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label1.setText("Usuario:");
+
+        textFieldPassword1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldPassword1ActionPerformed(evt);
+            }
+        });
 
         label2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label2.setText("Password:");
@@ -156,6 +166,10 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
     private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
        setVisible(false);
     }//GEN-LAST:event_boton2ActionPerformed
+
+    private void textFieldPassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPassword1ActionPerformed
+         acceder();
+    }//GEN-LAST:event_textFieldPassword1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

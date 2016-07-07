@@ -157,8 +157,8 @@ public class TablaBD {
     }
 
     /**
-     * funcion para
-     *
+     * - funcion para recuperara la descripcion
+     * - si es desde selector recupera el texto 
      * @return
      */
     public String getDescripcion() {

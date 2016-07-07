@@ -49,10 +49,10 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         if (index_panel_total != index) {
 
             panel_detalle = comanda_detalles_panel.get(index);
-            panel_detalle.agregarPlatillo(platillo, index+1);
+            panel_detalle.agregarPlatillo(platillo, index + 1);
             //al panel del total
             panel_detalle = comanda_detalles_panel.get(index_panel_total);
-            panel_detalle.agregarPlatillo(platillo, index+1);
+            panel_detalle.agregarPlatillo(platillo, index + 1);
         }
     }
 
@@ -169,7 +169,14 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         this.comanda = comanda;
         this.comandaPanel1.setComanda(comanda);
-        
+
+        if (comanda.status.equals("Disponible")) {
+            
+            comanda.status= "Proceso";
+                        
+            this.comanda.grabar();
+        }
+
     }
 
     /**
@@ -256,8 +263,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
 
-        
-        escritorio.cerrarInternalFrame("PlatillosPorTipo");    
+        escritorio.cerrarInternalFrame("PlatillosPorTipo");
     }//GEN-LAST:event_formInternalFrameClosed
 
 

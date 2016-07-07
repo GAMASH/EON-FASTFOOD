@@ -32,13 +32,17 @@ public class General {
     //TextArea
     public static Font font_textarea;
 
-    public static SimpleDateFormat formatoDateTime;
     public static SimpleDateFormat formatoDateTime_1;
     public static SimpleDateFormat formatoDateTime_11;
+    public static SimpleDateFormat formatoDateTime_12;
+
     public static SimpleDateFormat formatoDateTime_2;
     public static SimpleDateFormat formatoDateTime_21;
-    public static SimpleDateFormat formatoDateTime3;
-    public static SimpleDateFormat formatoDate;
+    public static SimpleDateFormat formatoDateTime_22;
+
+    public static SimpleDateFormat formatoDate_1;
+    
+    public static SimpleDateFormat formatoDate_2;
 
     /**
      *
@@ -53,16 +57,16 @@ public class General {
 
         cargarParametrosVisuales();
 
-        formatoDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        formatoDateTime_1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        formatoDateTime_11 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
+        formatoDateTime_1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        formatoDateTime_11 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        formatoDateTime_12 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
 
         formatoDateTime_2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         formatoDateTime_21 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        formatoDateTime3 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
+        formatoDateTime_22 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
 
-        formatoDate = new SimpleDateFormat("yyyy-MM-dd");
-
+        formatoDate_1 = new SimpleDateFormat("yyyy-MM-dd");
+        formatoDate_2 = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     public static void cargarParametrosVisuales() {

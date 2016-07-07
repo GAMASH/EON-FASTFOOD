@@ -103,7 +103,7 @@ public class Mesa extends TablaBD {
 
         String titulos[] = {
             "Id sucursal", "Id Mesa", "Numero Mesa", "Numero Comensales",
-            "Status", "Crea", "Modifica",};
+            "Estado", "Crea", "Modifica",};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
