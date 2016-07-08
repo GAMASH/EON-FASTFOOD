@@ -7,6 +7,7 @@
 package domain.tabla;
 
 import abstractt.TablaBD;
+import static domain.General.sucursal;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Date;
  */
 public class Pago extends TablaBD{
     
-    public String id_usucursal;
+    public String id_sucursal;
     public String id_pago;
     public CajaTurno caja_turno;
     public Integer folio_pago;
@@ -25,5 +26,14 @@ public class Pago extends TablaBD{
     Double total;
     Double efectivo;
     Double cambio;
+    
+    public Pago(){
+        
+        id_sucursal = sucursal.id_sucursal;
+        id_pago     =   "";
+        caja_turno  =   new CajaTurno();
+        
+    }
+    
 
 }

@@ -37,40 +37,46 @@ public class Comanda extends TablaBD {
     Double total;
     Double propina;
     Date fecha_termino;
-    Integer numero_comensales;
+    Integer num_comensales;
 
-    public Comanda(){
-        
-       id_comanda = "";
-       folio = "";
-       fecha = new Date();
-       mesa = new Mesa();
-       mesero = new Empleado();
-       
+    public Comanda() {
+
+        id_comanda = "";
+        folio = "";
+        fecha = new Date();
+        mesa = new Mesa();
+        mesero = new Empleado();
+        pago = new Pago();
+        Subtotal = 0.00;
+        impuesto = 0.00;
+        total = 0.00;
+        propina = 0.00;
+        fecha_termino = new Date();
+        num_comensales = 0;
+
     }
-    
+
     public void setRegistro(Table table, Integer i) {
 
         conectarBD();
-        
+
         try {
             String id_mesa;
-            
+
             id_comanda = table.getValorString(i, 0);
-            id_mesa = table.getValorString(i, 1);                         
-            fecha = formatoDateTime_11.parse(table.getValorString(i, 5)); 
-            status = table.getValorString(i, 6); 
-            
-            
+            id_mesa = table.getValorString(i, 1);
+            fecha = formatoDateTime_11.parse(table.getValorString(i, 5));
+            status = table.getValorString(i, 6);
+
             mesa.obetenerPorId(id_mesa);
-            
+
             //status = statusMesaSelector.getData(table.getValorString(i, 4));
         } catch (ParseException ex) {
-            
+
             mensaje(ex.getMessage());
-          //  Logger.getLogger(Comanda.class.getName()).log(Level.SEVERE, null, ex);
+            //  Logger.getLogger(Comanda.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         desconectarBD();
     }
 
@@ -97,7 +103,7 @@ public class Comanda extends TablaBD {
                 + "from mesa m left outer join comanda c on\n"
                 + "         m.id_sucursal = c.id_sucursal\n"
                 + "	 and m.id_mesa     = c.id_mesa\n"
-                + "where m.id_sucursal = '"+sucursal.id_sucursal+"'\n"                
+                + "where m.id_sucursal = '" + sucursal.id_sucursal + "'\n"
                 + "order by numero_mesa; ");
 
         manejadorBD.asignarTable(tabla);
@@ -139,38 +145,47 @@ public class Comanda extends TablaBD {
         });
 
         tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-/*
-        Comanda comanda = new Comanda();
+        /*
+         Comanda comanda = new Comanda();
 
-        tabla.setTablaBD(comanda);
-*/
+         tabla.setTablaBD(comanda);
+         */
         return tabla;
     }
-    
+
     public boolean grabar() {
 
         boolean error = true;
-        /*
+
         conectarBD();
 
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(id_mesa, "varId_mesa", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(numero_mesa, "varNumero_mesa", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(num_comensales.toString(), "varNum_comensales", "INT", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_comanda, "varId_comanda", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(folio, "varFolio", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(formatoDateTime_11.format(fecha), "varFecha", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(mesa.id_mesa, "varId_mesa", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(mesero.id_empleado, "varId_mesero", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(status, "varStatus", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(pago.id_pago, "varId_pago", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(Subtotal.toString(), "varSubtotal", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(impuesto.toString(), "varImpuesto", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(total.toString(), "varTotal", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(propina.toString(), "varPropina", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(formatoDateTime_11.format(fecha_termino), "varFecha_Termino", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(num_comensales.toString(), "varNum_comensales", "INT", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarMesa(?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("{ call grabarComanda(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
 
             error = true;
         } else {
+
             error = false;
         }
 
         desconectarBD();
-*/
+
         return error;
     }
-    
 
 }
