@@ -107,4 +107,55 @@ public class General {
     public static void mensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
+    
+    
+    public int asignarPorcentajeColor() {
+
+        int randomNum;
+        int minimum = 0;
+        int maximum = 4;
+        int porc_color = 51;
+
+        randomNum = minimum + (int) (Math.random() * maximum);
+
+        randomNum *= porc_color;
+        if (randomNum < 255) {
+            randomNum += porc_color;
+        }
+
+        return randomNum;
+    }
+
+    public Color asignarColor() {
+        int r;
+        int g;
+        int b;
+
+        r = asignarPorcentajeColor();
+
+        if (r == 51) {
+            do {
+                g = asignarPorcentajeColor();
+
+            } while (g == 51);
+        } else {
+            g = asignarPorcentajeColor();
+        }
+
+        if (r == 51 || g == 51) {
+
+            do {
+                b = asignarPorcentajeColor();
+
+            } while (b == 51);
+        } else {
+            b = asignarPorcentajeColor();
+        }
+
+        System.out.println(r + "," + g + "," + b);
+
+        Color color = new Color(r, g, b);
+        return color;
+    }
+
 }

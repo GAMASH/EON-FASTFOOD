@@ -16,6 +16,8 @@ import static domain.General.mensaje;
 import static domain.General.sucursal;
 import domain.ParametrosSP;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -62,13 +64,17 @@ public class Comanda extends TablaBD {
 
         try {
             String id_mesa;
+            String id_mesero;
 
             id_comanda = table.getValorString(i, 0);
             id_mesa = table.getValorString(i, 1);
             fecha = formatoDateTime_11.parse(table.getValorString(i, 5));
             status = table.getValorString(i, 6);
-
+            id_mesero  = table.getValorString(i, 7);
+            folio = table.getValorString(i, 8);
+                        
             mesa.obetenerPorId(id_mesa);
+            mesero.obtenerPorId(new ArrayList(Arrays.asList(id_mesero)));
 
             //status = statusMesaSelector.getData(table.getValorString(i, 4));
         } catch (ParseException ex) {
@@ -99,7 +105,8 @@ public class Comanda extends TablaBD {
                 + "                   when 'PR' then 'Proceso'\n"
                 + "                   when 'SE' then 'Servido' \n"
                 + "                   when 'PA' then 'Pagado'                    \n"
-                + "                   end, 'Disponible') com_status\n"
+                + "                   end, 'Disponible') com_status,\n"
+                + "         c.id_mesero, c.folio\n"
                 + "from mesa m left outer join comanda c on\n"
                 + "         m.id_sucursal = c.id_sucursal\n"
                 + "	 and m.id_mesa     = c.id_mesa\n"
@@ -143,8 +150,8 @@ public class Comanda extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Sucursl", "Id Mesa", "Numero Mesa", "Estatus Mesa",
-            "Folio", "Fecha", "Estatus Comanda"};
+            "Id Sucursal", "Id Mesa", "Numero Mesa", "Estatus Mesa",
+            "Folio", "Fecha", "Estatus Comanda", "id Mesero", "folio"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -155,11 +162,11 @@ public class Comanda extends TablaBD {
         tabla.cambiarTitulos();
         tabla.setFormato(new int[]{
             Table.letra, Table.letra, Table.letra, Table.letra,
-            Table.letra, Table.fecha, Table.letra});
+            Table.letra, Table.fecha, Table.letra,  Table.letra, Table.letra});
 
         tabla.tamañoColumna(new int[]{
             0, 100, 120, 600,
-            50, 100, 100
+            50, 100, 100, 100, 100
         });
 
         tabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -203,8 +210,8 @@ public class Comanda extends TablaBD {
 
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(id_comanda, "varId_comanda", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(folio, "varFolio", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_comanda, "varId_comanda", "STRING", "INOUT");
+        manejadorBD.parametrosSP.agregarParametro(folio, "varFolio", "STRING", "INOUT");
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime_11.format(fecha), "varFecha", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(mesa.id_mesa, "varId_mesa", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(mesero.id_empleado, "varId_mesero", "STRING", "IN");
@@ -220,6 +227,8 @@ public class Comanda extends TablaBD {
         if (manejadorBD.ejecutarSP("{ call grabarComanda(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
 
             error = true;
+            id_comanda  =   manejadorBD.parametrosSP.get(1).getValor();
+            folio       =   manejadorBD.parametrosSP.get(2).getValor();
         } else {
 
             error = false;

@@ -31,7 +31,7 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
 
         String password;
 
-        this.empleado.usuario.cargarPorLogin(tablaBDSelector1.getSelectedItem().toString());
+        this.empleado.usuario.cargarPorLogin(UsuarioSelector.getSelectedItem().toString());
 
         this.empleado.obtenerPorUsuario(empleado.usuario.id_usuario);
 
@@ -58,7 +58,7 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
     public void setTipoEmpleado(TipoEmpleado tipoEmpleado) {
 
         this.tipoEmpleado = tipoEmpleado;
-        this.tablaBDSelector1.setTablaBD(new Usuario());
+        this.UsuarioSelector.setTablaBD(new Usuario());
     }
 
     /**
@@ -76,13 +76,13 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
         label1 = new abstractt.visual.Label();
         textFieldPassword1 = new abstractt.visual.TextFieldPassword();
         label2 = new abstractt.visual.Label();
-        tablaBDSelector1 = new abstractt.visual.TablaBDSelector();
+        UsuarioSelector = new abstractt.visual.TablaBDSelector();
 
         setClosable(false);
         setIconifiable(false);
         setMaximizable(false);
         setResizable(false);
-        setTitle("Selecciona Usuario");
+        setTitle("Acceso Usuario");
 
         panel1.setBackground(new java.awt.Color(255, 241, 102));
 
@@ -103,6 +103,7 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label1.setText("Usuario:");
 
+        textFieldPassword1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         textFieldPassword1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldPassword1ActionPerformed(evt);
@@ -111,6 +112,12 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
 
         label2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label2.setText("Password:");
+
+        UsuarioSelector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsuarioSelectorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -128,7 +135,7 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(tablaBDSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(UsuarioSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -141,7 +148,7 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tablaBDSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UsuarioSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,15 +178,31 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
          acceder();
     }//GEN-LAST:event_textFieldPassword1ActionPerformed
 
+    private void UsuarioSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioSelectorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsuarioSelectorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private abstractt.visual.TablaBDSelector UsuarioSelector;
     private abstractt.visual.Boton boton1;
     private abstractt.visual.Boton boton2;
     private abstractt.visual.Label label1;
     private abstractt.visual.Label label2;
     private abstractt.visual.Panel panel1;
-    private abstractt.visual.TablaBDSelector tablaBDSelector1;
     private abstractt.visual.TextFieldPassword textFieldPassword1;
     // End of variables declaration//GEN-END:variables
+
+    public void setEmpleado(Empleado mesero) {
+    
+        if( mesero.id_empleado.equals("")){
+            return;
+        }
+        
+        UsuarioSelector.setTablaBD(mesero.usuario);
+        UsuarioSelector.setEnabled(false);
+        
+        
+    }
 
 }

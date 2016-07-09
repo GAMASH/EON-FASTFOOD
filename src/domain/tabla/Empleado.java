@@ -32,13 +32,31 @@ public class Empleado extends TablaBD {
         usuario = new Usuario();
     }
 
+    public void obtenerPorId(ArrayList pk) {
+
+        conectarBD();
+
+        manejadorBD.consulta(""
+                + "SELECT   id_sucursal, id_empleado, id_tipo_empleado,\n"
+                + "         id_usuario,  crea,        modifica\n"
+                + "FROM     empleado\n"
+                + "WHERE    id_empleado = '" + pk.get(0).toString() + "'");
+
+        if (manejadorBD.getRowCount() > 0) {
+
+            asignarValores();
+        }
+
+        desconectarBD();
+    }
+
     public void obtenerPorUsuario(String id_usuario) {
 
         conectarBD();
 
         manejadorBD.consulta(
                 "SELECT	 id_sucursal, id_empleado, id_tipo_empleado,\n"
-                + "id_usuario, crea, modifica\n"
+                + "      id_usuario,  crea, modifica\n"
                 + "FROM  empleado\n"
                 + "WHERE id_usuario = '" + id_usuario + "'\n"
                 + "and id_sucursal = '" + sucursal.id_sucursal + "';");
@@ -61,6 +79,7 @@ public class Empleado extends TablaBD {
         id_usuario = manejadorBD.getValorString(0, 3);
 
         tipo_empleado.obtenerPorId(new ArrayList(Arrays.asList(id_tipo_empleado)));
+        usuario.obtenerPorId(new ArrayList(Arrays.asList(id_usuario)));
     }
 
     public boolean grabar() {
@@ -86,7 +105,5 @@ public class Empleado extends TablaBD {
 
         return error;
     }
-    
-    
 
 }

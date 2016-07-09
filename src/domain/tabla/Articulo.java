@@ -11,6 +11,8 @@ import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.manejadorBD;
 import domain.ParametrosSP;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -75,7 +77,7 @@ public class Articulo extends TablaBD {
         id_unidad_entrada = manejadorBD.getValorString(0, 7);
         factor_empaque = manejadorBD.getValorDouble(0, 8);
 
-        tipo_articulo.obtenerPorId(id_tipo_articulo);
+        tipo_articulo.obtenerPorId(new ArrayList(Arrays.asList(id_tipo_articulo)));
         impuesto.obtenerPorId(id_impuesto);
         marca.obtenerPorId(id_marca);
         unidad_entrada.obtenerPorId(id_unidad_entrada);

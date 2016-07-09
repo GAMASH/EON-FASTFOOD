@@ -171,7 +171,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         this.comanda = comanda;
         this.comandaPanel1.setComanda(comanda);
-
+/*
         if (comanda.status.equals("Disponible")) {
             
             comanda.status= "Proceso";
@@ -180,7 +180,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
              mensaje("Error al grabar la comanda "+manejadorBD.errorSQL)   ;
             }
         }
-
+*/
     }
 
     /**

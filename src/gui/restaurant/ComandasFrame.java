@@ -8,6 +8,8 @@ package gui.restaurant;
 import abstractt.visual.InternalFrameAbstracto;
 import static abstractt.visual.StatusBar.etiqueta_izquierda;
 import abstractt.visual.Table;
+import static domain.General.manejadorBD;
+import static domain.General.mensaje;
 import domain.tabla.Comanda;
 import static domain.tabla.Comanda.cargarFrameMesaComanda;
 import domain.tabla.TipoEmpleado;
@@ -127,55 +129,6 @@ public class ComandasFrame extends InternalFrameAbstracto {
         mostrarComandas();
     }
 
-    public int asignarPorcentajeColor() {
-
-        int randomNum;
-        int minimum = 0;
-        int maximum = 4;
-        int porc_color = 51;
-
-        randomNum = minimum + (int) (Math.random() * maximum);
-
-        randomNum *= porc_color;
-        if (randomNum < 255) {
-            randomNum += porc_color;
-        }
-
-        return randomNum;
-    }
-
-    public Color asignarColor() {
-        int r;
-        int g;
-        int b;
-
-        r = asignarPorcentajeColor();
-
-        if (r == 51) {
-            do {
-                g = asignarPorcentajeColor();
-
-            } while (g == 51);
-        } else {
-            g = asignarPorcentajeColor();
-        }
-
-        if (r == 51 || g == 51) {
-
-            do {
-                b = asignarPorcentajeColor();
-
-            } while (b == 51);
-        } else {
-            b = asignarPorcentajeColor();
-        }
-
-        System.out.println(r + "," + g + "," + b);
-
-        Color color = new Color(r, g, b);
-        return color;
-    }
-
     public void mostrarComandas() {
 
         int posX = 0, posY = 0;
@@ -222,35 +175,46 @@ public class ComandasFrame extends InternalFrameAbstracto {
         ComandaPanel comandaPanel;
         Comanda comanda;
         TipoEmpleado tipo_empleado;
-        
+
         tipo_empleado = new TipoEmpleado();
-        
+
         tipo_empleado.cargarPorDescripcion("Mesero");
-        
+
         comandaPanel = (ComandaPanel) evt.getComponent();
-        
+
         comanda = comandaPanel.getComanda();
-        
-       // System.out.println(comanda.mesa.numero_mesa);
+
+        // System.out.println(comanda.mesa.numero_mesa);
         statusBar1.mensaje("MESA: " + comandaPanel.getComanda().mesa.numero_mesa, etiqueta_izquierda);
-        
+
         AccesoEmpleado accesoEmpleado;
-        
+
         accesoEmpleado = new AccesoEmpleado();
         accesoEmpleado.setTipoEmpleado(tipo_empleado);
-        
+        accesoEmpleado.setEmpleado(comanda.mesero);
+
         escritorio.add(accesoEmpleado);
         accesoEmpleado.setModal(true);
         accesoEmpleado.centrado(escritorio.getSize());
         accesoEmpleado.setVisible(true);
-        
-        if( accesoEmpleado.empleado.usuario.id_usuario.equals("")){
+
+        if (accesoEmpleado.empleado.usuario.id_usuario.equals("")) {
+
             return;
         }
-        
+
         comanda.mesero = accesoEmpleado.empleado;
-        
-        
+
+        if (comanda.status.equals("Disponible")) {
+
+            comanda.status = "Proceso";
+
+            if (!comanda.grabar()) {
+                
+                mensaje("Error al grabar la comanda " + manejadorBD.errorSQL);
+            }
+        }
+
         if (comandaCaptura == null) {
 
             comandaCaptura = new ComandaCaptura();
@@ -261,7 +225,7 @@ public class ComandasFrame extends InternalFrameAbstracto {
             comandaCaptura.setComanda(comanda);
             comandaCaptura.cargaValores();
             //articulosFrame.centrado(escritorio.getSize());            
-         //   escritorio.remove(comandaCaptura);
+            //   escritorio.remove(comandaCaptura);
             escritorio.add(comandaCaptura);
             comandaCaptura.maximizar(escritorio.getSize());
             comandaCaptura.setVisible(true);
@@ -271,7 +235,7 @@ public class ComandasFrame extends InternalFrameAbstracto {
             comandaCaptura.setVisible(true);
         }
     }
-    
+
     ComandaCaptura comandaCaptura;
 
     /**

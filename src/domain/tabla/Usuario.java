@@ -34,6 +34,10 @@ public class Usuario extends TablaBD {
         password = "";
     }
 
+    public String getDescripcion(){
+        return login;
+    }
+    
     @Override
     public void obtenerPorId(ArrayList pk) {
 
@@ -44,7 +48,7 @@ public class Usuario extends TablaBD {
         manejadorBD.consulta(""
                 + "Select id_usuario, u.id_persona, login, \n"
                 + "       password \n"
-                + "From	usuario u left join persona p on\n"
+                + "From	  usuario u left join persona p on\n"
                 + "	u.id_persona = p.id_persona "
                 + "where id_usuario = '" + pk.get(0) + "'");
 

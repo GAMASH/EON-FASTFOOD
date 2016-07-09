@@ -84,7 +84,7 @@ public class ComandaPanel extends Panel {
         tf_mesero = new abstractt.visual.Label();
         tf_estado = new abstractt.visual.Label();
 
-        setBackground(new java.awt.Color(102, 255, 102));
+        setBackground(new java.awt.Color(51, 204, 0));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setLayout(null);
 

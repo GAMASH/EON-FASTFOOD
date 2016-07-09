@@ -48,14 +48,14 @@ public class TipoArticulo extends TablaBD {
         desconectarBD();
     }
 
-    public void obtenerPorId(String id) {
+    public void obtenerPorId(ArrayList pk) {
 
         conectarBD();
 
        manejadorBD.consulta(
                 "SELECT	 id_tipo_articulo, descripcion, activo\n"
                 + "FROM  tipo_articulo\n"
-                + "WHERE id_tipo_articulo = '" + id + "'");
+                + "WHERE id_tipo_articulo = '" + pk.get(0).toString() + "'");
 
         if (manejadorBD.getRowCount() > 0) {
 
