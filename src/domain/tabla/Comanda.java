@@ -118,6 +118,24 @@ public class Comanda extends TablaBD {
 
     }
 
+    private String convierteStatus() {
+
+        switch (status) {
+            case "Pendiente":
+                return "PE";
+            case "Pedido Tomado":
+                return "PT";
+            case "Proceso":
+                return "PR";
+            case "Servido":
+                return "SE";
+            case "Pagado":
+                return "PA";
+        }
+
+        return "";
+    }
+
     private static Table crearTablaFrameMesaComanda(Table tabla) {
 
         if (tabla == null) {
@@ -153,11 +171,35 @@ public class Comanda extends TablaBD {
         return tabla;
     }
 
+    public String toString() {
+
+        String comandaString;
+
+        comandaString = ""
+                + "sucursal = " + sucursal.id_sucursal + ", "
+                + "comanda = " + this.id_comanda + ", "
+                + "folio = " + folio + ", "
+                + "fecha = {" + fecha + "}, "
+                + "mesa = " + mesa.id_mesa + ", "
+                + "mesero = " + mesero.id_empleado + ", "
+                + "status = " + status + "{"+convierteStatus()+"}, "
+                + "pago = " + pago.id_pago + ", "
+                + "subtotal = " + Subtotal + ", "
+                + "impuesto = " + impuesto + ", "
+                + "total = " + total + ", "
+                + "propina = " + propina + ", "
+                + "fecha_termino = {" + fecha_termino + "}, "
+                + "num_comensales = " + num_comensales.toString();
+        return comandaString;
+    }
+
     public boolean grabar() {
 
         boolean error = true;
 
         conectarBD();
+
+        System.out.println(this);
 
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");
@@ -166,13 +208,13 @@ public class Comanda extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime_11.format(fecha), "varFecha", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(mesa.id_mesa, "varId_mesa", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(mesero.id_empleado, "varId_mesero", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(status, "varStatus", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(convierteStatus(), "varStatus", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(pago.id_pago, "varId_pago", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(Subtotal.toString(), "varSubtotal", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(impuesto.toString(), "varImpuesto", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(total.toString(), "varTotal", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(propina.toString(), "varPropina", "DOUBLE", "IN");
-        manejadorBD.parametrosSP.agregarParametro(formatoDateTime_11.format(fecha_termino), "varFecha_Termino", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(formatoDateTime_11.format(fecha_termino), "varFecha_termino", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(num_comensales.toString(), "varNum_comensales", "INT", "IN");
 
         if (manejadorBD.ejecutarSP("{ call grabarComanda(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {

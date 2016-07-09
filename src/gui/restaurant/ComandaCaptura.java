@@ -7,6 +7,8 @@ package gui.restaurant;
 
 import abstractt.visual.Boton;
 import abstractt.visual.InternalFrameAbstracto;
+import static domain.General.manejadorBD;
+import static domain.General.mensaje;
 import domain.tabla.Comanda;
 import domain.tabla.ComandaDetalle;
 import domain.tabla.Platillo;
@@ -174,7 +176,9 @@ public class ComandaCaptura extends InternalFrameAbstracto {
             
             comanda.status= "Proceso";
                         
-            this.comanda.grabar();
+            if (!this.comanda.grabar()){
+             mensaje("Error al grabar la comanda "+manejadorBD.errorSQL)   ;
+            }
         }
 
     }
