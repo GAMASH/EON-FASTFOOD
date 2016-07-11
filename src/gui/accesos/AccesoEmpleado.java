@@ -27,6 +27,9 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
 
     }
 
+    /**
+     * 
+     */
     public void acceder() {
 
         String password;
@@ -46,15 +49,19 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
 
         if (!empleado.tipo_empleado.id_tipo_empleado.equals(tipoEmpleado.id_tipo_empleado)) {
 
-            mensaje("El usuario no es " + tipoEmpleado.descripcion);            
+            mensaje("El usuario no es " + tipoEmpleado.descripcion);
             empleado = new Empleado();
             return;
         }
 
         setVisible(false);
-        
+
     }
 
+    /**
+     * 
+     * @param tipoEmpleado 
+     */
     public void setTipoEmpleado(TipoEmpleado tipoEmpleado) {
 
         this.tipoEmpleado = tipoEmpleado;
@@ -171,11 +178,11 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
     }//GEN-LAST:event_boton1ActionPerformed
 
     private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
-       setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_boton2ActionPerformed
 
     private void textFieldPassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPassword1ActionPerformed
-         acceder();
+        acceder();
     }//GEN-LAST:event_textFieldPassword1ActionPerformed
 
     private void UsuarioSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioSelectorActionPerformed
@@ -193,16 +200,19 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
     private abstractt.visual.TextFieldPassword textFieldPassword1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *
+     * @param mesero
+     */
     public void setEmpleado(Empleado mesero) {
-    
-        if( mesero.id_empleado.equals("")){
+
+        if (mesero.id_empleado.equals("")) {
             return;
         }
-        
+
         UsuarioSelector.setTablaBD(mesero.usuario);
         UsuarioSelector.setEnabled(false);
-        
-        
+
     }
 
 }

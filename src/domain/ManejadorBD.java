@@ -10,6 +10,7 @@ package domain;
 
 import abstractt.visual.Table;
 import abstractt.TableModelAbst;
+import static domain.General.mensaje;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -206,9 +207,9 @@ public class ManejadorBD extends AbstractTableModel {
     }
 
     /**
-     * 
+     *
      * @param procedure
-     * @return 
+     * @return
      */
     public String completa_procedure(String procedure) {
 
@@ -223,15 +224,15 @@ public class ManejadorBD extends AbstractTableModel {
             parametros = parametrosSP.getParametros();
 
             for (int i = 0; i < parametros.size(); i++) {
-                
-                if( i > 0 ){
+
+                if (i > 0) {
                     procedure += ",";
                 }
-                
+
                 procedure += "?";
-                
+
             }
-                      
+
             procedure += ") }";
 
         }
@@ -444,7 +445,12 @@ public class ManejadorBD extends AbstractTableModel {
 
         if (!conectado) {
 
-            throw new IllegalStateException("No hay conexion a la base de datos");
+            errorSQL = "No hay conexion a la base de datos";
+            mensaje("No hay conexion a la base de datos");
+            
+            return;
+            //throw new IllegalStateException("No hay conexion a la base de datos");
+
         }
 
         if (muestraSQL) {

@@ -47,6 +47,20 @@ public class Principal extends javax.swing.JFrame {
     private static final int tipos_empleado_opcion = 10;
     private static final int usuarios_opcion = 11;
     private Integer ancho_opciones;
+    boolean colapsed = false;
+
+    /**/
+    private TipoArticuloCatalogo tipoProducto = null;
+    private MarcaCatalogo marca = null;
+    private ImpuestoCatalogo2 impuesto = null;
+    private UnidadMedidaCatalogo unidadMedida = null;
+    private ArticulosFrame articulosFrame = null;
+    private PlatillosFrame platillosFrame = null;
+    private TipoPlatilloCatalogo tipo_platillo = null;
+    private MesaCatalogo mesa = null;
+    private ComandasFrame comanda = null;
+    private TipoEmpleadoCatalogo tipo_empleado = null;
+    private FrameAbstracto usuario = null;
 
     /**
      * Creates new form Principal
@@ -107,6 +121,15 @@ public class Principal extends javax.swing.JFrame {
         statusBar1.progressBar = false;
     }
 
+    /**
+     *
+     * @param parentComponeneteMenu
+     * @param texto
+     * @param tipo
+     * @param opcion
+     * @param icono
+     * @return
+     */
     private ComponenteMenu agregarComponente(
             ComponenteMenu parentComponeneteMenu,
             String texto, String tipo, Integer opcion, String icono) {
@@ -128,6 +151,10 @@ public class Principal extends javax.swing.JFrame {
         return componeneteMenu;
     }
 
+    /**
+     *
+     * @param opcion
+     */
     private void opciones(Integer opcion) {
 
         statusBar1.progresBarr(0, false, "C A R G A N D O");
@@ -400,6 +427,9 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *
+     */
     private void tipo_producto() {
         if (tipoProducto == null) {
 
@@ -421,6 +451,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void marca() {
 
         if (marca == null) {
@@ -443,6 +476,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void impuesto() {
 
         if (impuesto == null) {
@@ -469,6 +505,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void unidad_medida() {
 
         if (unidadMedida == null) {
@@ -491,6 +530,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void articulos() {
         if (articulosFrame == null) {
 
@@ -513,6 +555,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void tipo_platillo() {
 
         if (tipo_platillo == null) {
@@ -535,6 +580,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void platillos() {
         if (platillosFrame == null) {
 
@@ -555,6 +603,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void mesas() {
         if (mesa == null) {
 
@@ -576,6 +627,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void tipo_empleado() {
 
         if (tipo_empleado == null) {
@@ -602,6 +656,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void comandas() {
         if (comanda == null) {
 
@@ -621,11 +678,14 @@ public class Principal extends javax.swing.JFrame {
 
             comanda.setVisible(false);
             comanda.setVisible(true);
-        }    
+        }
     }
 
+    /**
+     *
+     */
     private void usuarios() {
-    
+
         if (usuario == null) {
 
             usuario = new FrameAbstracto();
@@ -647,6 +707,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     public void collapsed() {
 
         colapsed = !colapsed;
@@ -654,6 +717,9 @@ public class Principal extends javax.swing.JFrame {
         reordenar();
     }
 
+    /**
+     *
+     */
     public void reordenar() {
 
         statusBar1.setBounds(0, this.getHeight() - 81, this.getWidth() - 15, 22);
@@ -673,15 +739,17 @@ public class Principal extends javax.swing.JFrame {
         for (int i = 0; i < escritorio.getComponentCount(); i++) {
 
             InternalFrameAbstracto frame = (InternalFrameAbstracto) escritorio.getComponent(i);
-            System.out.println("frame " + frame.getClass().getName() + " " + frame);
+            //  System.out.println("frame " + frame.getClass().getName() + " " + frame);
             frame.reacomodo(escritorio.getSize());
         }
 
         statusBar1.mostrar();
     }
 
-    boolean colapsed = false;
-
+    /**
+     *
+     * @param aInteralFrame
+     */
     public void agregarInternalFrame(InternalFrameAbstracto aInteralFrame) {
 
         escritorio.add(aInteralFrame);
@@ -719,7 +787,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_m_tipo_platilloActionPerformed
 
     private void m_platillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_platillosActionPerformed
-
 
     }//GEN-LAST:event_m_platillosActionPerformed
 
@@ -765,15 +832,4 @@ public class Principal extends javax.swing.JFrame {
     public static abstractt.visual.StatusBar statusBar1;
     // End of variables declaration//GEN-END:variables
 
-    private TipoArticuloCatalogo tipoProducto = null;
-    private MarcaCatalogo marca = null;
-    private ImpuestoCatalogo2 impuesto = null;
-    private UnidadMedidaCatalogo unidadMedida = null;
-    private ArticulosFrame articulosFrame = null;
-    private PlatillosFrame platillosFrame = null;
-    private TipoPlatilloCatalogo tipo_platillo = null;
-    private MesaCatalogo mesa = null;
-    private ComandasFrame comanda = null;
-    private TipoEmpleadoCatalogo tipo_empleado = null;
-    private FrameAbstracto usuario = null;
 }
