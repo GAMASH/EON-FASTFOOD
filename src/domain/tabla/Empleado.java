@@ -93,7 +93,7 @@ public class Empleado extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(tipo_empleado.id_tipo_empleado, "varId_tipo_empleado", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(usuario.id_usuario, "varId_usuario", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarEmpleado(?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarEmpleado") == 0) {
 
             error = true;
         } else {

@@ -168,8 +168,8 @@ public class Impuesto extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(id_impuesto, "varId_impuesto", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(descripcion, "varDescripcion", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(porcentaje.toString(), "varPorcentaje", "DOUBLE", "IN");
-
-        if (manejadorBD.ejecutarSP("{ call grabarImpuesto(?,?,?) }") == 0) {
+        
+        if (manejadorBD.ejecutarSP("grabarImpuesto") == 0) {
 
             error = true;
         } else {
@@ -189,7 +189,7 @@ public class Impuesto extends TablaBD {
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_impuesto, "varId_impuesto", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call eliminarImpuesto(?) }") == 0) {
+        if (manejadorBD.ejecutarSP("eliminarImpuesto") == 0) {
 
             error = true;
         } else {

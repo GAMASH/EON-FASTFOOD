@@ -5,21 +5,17 @@
  */
 package gui.restaurant;
 
-import abstractt.visual.Table;
+import abstractt.visual.Panel;
 import static domain.General.sucursal;
 import domain.tabla.ComandaDetalle;
 import domain.tabla.Platillo;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import javax.swing.DropMode;
 import javax.swing.TransferHandler;
 
 /**
  *
  * @author Developer GAGS
  */
-public class ComandaDetallePanel extends javax.swing.JPanel {
+public class ComandaDetallePanel extends Panel {
 
     public ComandaDetalle comanda_detalle;
     public Double total;
@@ -110,6 +106,8 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table1);
 
+        jPanel1.setOpaque(false);
+
         label3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label3.setText("Subtotal:");
 
@@ -120,6 +118,7 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
         label1.setText("Total:");
 
         tf_subtotal.setEditable(false);
+        tf_subtotal.setBackground(new java.awt.Color(255, 255, 255));
         tf_subtotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tf_subtotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,9 +127,11 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
         });
 
         tf_impuesto.setEditable(false);
+        tf_impuesto.setBackground(new java.awt.Color(255, 255, 255));
         tf_impuesto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         tf_total.setEditable(false);
+        tf_total.setBackground(new java.awt.Color(255, 255, 255));
         tf_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -181,7 +182,7 @@ public class ComandaDetallePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(

@@ -153,7 +153,7 @@ public class Mesa extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(num_comensales.toString(), "varNum_comensales", "INT", "IN");
         manejadorBD.parametrosSP.agregarParametro(status, "varStatus", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarMesa(?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarMesa") == 0) {
 
             error = true;
         } else {
@@ -174,7 +174,7 @@ public class Mesa extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(id_mesa, "varId_mesa", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call eliminarMesa(?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("eliminarMesa") == 0) {
 
             error = true;
         } else {

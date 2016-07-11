@@ -7,7 +7,6 @@ package gui.accesos;
 
 import abstractt.TablaBD;
 import abstractt.visual.CapturaAbstracto;
-import abstractt.visual.InternalFrameAbstracto;
 import static domain.General.manejadorBD;
 import static domain.General.mensaje;
 import static domain.General.sucursal;
@@ -21,7 +20,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author sperez
+ * @author Developer GAGS
  */
 public class UsuarioCaptura extends CapturaAbstracto {
 
@@ -47,6 +46,9 @@ public class UsuarioCaptura extends CapturaAbstracto {
         this.tipoEmpleadoSelector.setTablaBD(empleado.tipo_empleado);
     }
 
+    /**
+     *
+     */
     public void Dimensionar() {
 
         Dimension d = new Dimension();
@@ -55,6 +57,10 @@ public class UsuarioCaptura extends CapturaAbstracto {
         setSize(d);
     }
 
+    /**
+     *
+     * @param usuario
+     */
     @Override
     public void setTablaBD(TablaBD usuario) {
 
@@ -67,6 +73,9 @@ public class UsuarioCaptura extends CapturaAbstracto {
         this.tipoEmpleadoSelector.setTablaBD(empleado.tipo_empleado);
     }
 
+    /**
+     *
+     */
     public void asignarPassword() {
 
         if (cambioPassword == null) {
@@ -95,7 +104,7 @@ public class UsuarioCaptura extends CapturaAbstracto {
         TipoEmpleado tipo_empleado;
 
         usuario.login = this.tf_login.getText();
-        
+
         if (!usuario.grabar()) {
 
             mensaje("Error al grabar el usuario " + manejadorBD.errorSQL);
@@ -114,9 +123,9 @@ public class UsuarioCaptura extends CapturaAbstracto {
                     return;
                 }
             }
+
             mensaje("Se grabó el usuario correctamente");
         }
-
     }
 
     /**
@@ -228,16 +237,17 @@ public class UsuarioCaptura extends CapturaAbstracto {
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
+
         setVisible(false);
     }//GEN-LAST:event_boton2ActionPerformed
 
     private void boton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton5ActionPerformed
 
         asignarPassword();
-
     }//GEN-LAST:event_boton5ActionPerformed
 
     private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
+
         grabar();
     }//GEN-LAST:event_boton1ActionPerformed
 

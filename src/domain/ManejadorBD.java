@@ -115,8 +115,7 @@ public class ManejadorBD extends AbstractTableModel {
 
     /**
      */
-    public void conectar(String controlador, String url, String nombreUsuario, String clave) 
-    {
+    public void conectar(String controlador, String url, String nombreUsuario, String clave) {
 
         controlador_jdbc = controlador;
         url_basededatos = url;
@@ -127,17 +126,17 @@ public class ManejadorBD extends AbstractTableModel {
 
             try {
                 Class.forName(controlador_jdbc).newInstance();
-                conexion = DriverManager.getConnection(url_basededatos, usuario, palabraClave);                
+                conexion = DriverManager.getConnection(url_basededatos, usuario, palabraClave);
                 sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 conectado = true;
             } catch (InstantiationException ex) {
-                errorSQL = ex.getMessage();       
+                errorSQL = ex.getMessage();
             } catch (IllegalAccessException ex) {
-                errorSQL = ex.getMessage();                
+                errorSQL = ex.getMessage();
             } catch (ClassNotFoundException ex) {
-                errorSQL = ex.getMessage();                
+                errorSQL = ex.getMessage();
             } catch (SQLException ex) {
-                errorSQL = ex.getMessage();                
+                errorSQL = ex.getMessage();
             }
         }
     }
@@ -207,6 +206,40 @@ public class ManejadorBD extends AbstractTableModel {
     }
 
     /**
+     * 
+     * @param procedure
+     * @return 
+     */
+    public String completa_procedure(String procedure) {
+
+        List<Parametro> parametros;
+        int resultado = procedure.indexOf("call");
+
+        if (resultado == -1) {
+
+            procedure = "{ call " + procedure + "(";
+
+            //agregar ? por cada parametro
+            parametros = parametrosSP.getParametros();
+
+            for (int i = 0; i < parametros.size(); i++) {
+                
+                if( i > 0 ){
+                    procedure += ",";
+                }
+                
+                procedure += "?";
+                
+            }
+                      
+            procedure += ") }";
+
+        }
+
+        return procedure;
+    }
+
+    /**
      *
      * @param procedure
      * @return
@@ -219,6 +252,9 @@ public class ManejadorBD extends AbstractTableModel {
         Integer tipo;
         String nombre;
         errorSQL = "";
+
+        procedure = completa_procedure(procedure);
+
         try {
             if (muestraSQL) {
 
@@ -343,58 +379,58 @@ public class ManejadorBD extends AbstractTableModel {
      *
      * @throws SQLException
      */
-    public void setConsultaSP(){
+    public void setConsultaSP() {
 
         try {
             if (!conectado) {
-                
+
                 throw new IllegalStateException("No hay conexion a la base de datos");
             }
-            
+
             sentencia = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);//ResultSet.CONCUR_READ_ONLY);
-            
+
             conjuntoResultados = SP.getResultSet();
-            
+
             metaDatos = conjuntoResultados.getMetaData();
-            
+
             numeroFilas = 0;
             numeroColumnas = metaDatos.getColumnCount();
-            
+
             modelo = new TableModelAbst();
-            
+
             for (int i = 0; i < numeroColumnas; i++) {
                 modelo.addColumn("Columna " + i);
-                
+
             }
-            
+
             while (conjuntoResultados.next()) {
-                
+
                 try {
-                    
+
                     Object[] fila = new Object[numeroColumnas];
-                    
+
                     for (int i = 0; i < numeroColumnas; i++) {
                         fila[i] = conjuntoResultados.getObject(i + 1);
                     }
-                    
+
                     modelo.addRow(fila);
-                    
+
                     numeroFilas++;
                     errorSQL = "";
-                    
+
                 } catch (Exception excepcion) {
                     errorSQL = excepcion.getMessage();
                     break;
                 }
             }
-            
+
             if (muestraSQL) {
-                
+
                 System.out.println("Numero de Filas " + numeroFilas);
             }
-            
+
             fireTableStructureChanged();
-        } catch (SQLException ex) {            
+        } catch (SQLException ex) {
             errorSQL = ex.getMessage();
             //Logger.getLogger(ManejadorBD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -841,7 +877,8 @@ public class ManejadorBD extends AbstractTableModel {
         String comillas = "";
 
 //	para hacer una consulta con campos string son necesarias las comillas para enteros y dobles no los son
-        if (this.getColumnClass(0).equals(String.class)) {
+        if (this.getColumnClass(0).equals(String.class
+        )) {
             comillas = "'";
         }
 //	se hace en orden inverso para no tener problemas con los indices de las filas cuando son borradas ya que estos van cambiando
@@ -908,7 +945,8 @@ public class ManejadorBD extends AbstractTableModel {
                 conjuntoColumnas += columnas[j];
 
 //              si el campo es de tipo string se inicializara con comillas
-                if (this.getColumnClass(j).equals(String.class)) {
+                if (this.getColumnClass(j).equals(String.class
+                )) {
                     values += "''";
                 } //		si no se iniciara con un cero
                 else {

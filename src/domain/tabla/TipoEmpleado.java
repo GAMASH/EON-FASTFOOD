@@ -151,7 +151,7 @@ public class TipoEmpleado extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(id_tipo_empleado, "varId_tipo_empleado", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(descripcion, "varDescripcion", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarTipoEmpleado(?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarTipoEmpleado") == 0) {
 
             error = true;
         } else {
@@ -171,7 +171,7 @@ public class TipoEmpleado extends TablaBD {
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_tipo_empleado, "varId_tipo_empleado", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call eliminarTipoEmpleado(?) }") == 0) {
+        if (manejadorBD.ejecutarSP("eliminarTipoEmpleado") == 0) {
 
             error = true;
         } else {

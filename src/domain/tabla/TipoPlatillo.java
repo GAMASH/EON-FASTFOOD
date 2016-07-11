@@ -148,7 +148,7 @@ public class TipoPlatillo extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(id_tipo_platillo, "varId_tipo_platillo", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(descripcion, "varDescripcion", "STRING", "IN");
         
-        if (manejadorBD.ejecutarSP("{ call grabarTipoPlatillo(?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarTipoPlatillo") == 0) {
 
             error = true;
         } else {
@@ -168,7 +168,7 @@ public class TipoPlatillo extends TablaBD {
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_tipo_platillo, "varId_tipo_platillo", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call eliminarTipoPlatillo(?) }") == 0) {
+        if (manejadorBD.ejecutarSP("eliminarTipoPlatillo") == 0) {
 
             error = true;
         } else {

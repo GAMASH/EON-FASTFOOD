@@ -225,7 +225,7 @@ public class Platillo extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(precio.toString(), "varPrecio", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(origen, "varOrigen", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarPlatillo(?,?,?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarPlatillo") == 0) {
 
             error = true;
         } else {

@@ -167,7 +167,7 @@ public class Articulo extends TablaBD {
 //        manejadorBD.parametrosSP.agregarParametro(unidad_salida.getId_unidad_medida(), "varId_unidad_salida", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(factor_empaque.toString(), "varFactor_empaque", "DOUBLE", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarArticulo(?,?,?,?,?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarArticulo") == 0) {
 
             error = true;
             id_articulo = manejadorBD.parametrosSP.get(0).getValor();

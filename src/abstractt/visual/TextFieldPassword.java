@@ -18,10 +18,15 @@ public class TextFieldPassword extends javax.swing.JPasswordField {
             }
         });
 
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                FocusGained(evt);
+            }
+
+        });
+
         setFont(new java.awt.Font("Arial", 0, 11));
-        
-        
-        
+
     }
 
     /**
@@ -31,6 +36,25 @@ public class TextFieldPassword extends javax.swing.JPasswordField {
     private void ActionPerformed(java.awt.event.ActionEvent evt) {
 
         transferFocus();
+    }
+
+    /**
+     *
+     * @param evt
+     */
+    private void FocusGained(java.awt.event.FocusEvent evt) {
+
+        seleccionarTexto();
+    }
+
+    /**
+     * Dado un TextFiledPassword el texto se muestra seleccionado para su
+     * edicion rapida
+     */
+    public String seleccionarTexto() {
+
+        select(0, getText().length());
+        return getText();
     }
 
 }

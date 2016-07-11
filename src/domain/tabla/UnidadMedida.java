@@ -155,7 +155,7 @@ public class UnidadMedida extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(descripcion, "varDescripcion", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(nombre_corto, "varNombre_corto", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarUnidadMedida(?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarUnidadMedida") == 0) {
 
             error = true;
         } else {
@@ -175,7 +175,7 @@ public class UnidadMedida extends TablaBD {
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_unidad_medida, "varId_unidad_medida", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call eliminarUnidadMedida(?) }") == 0) {
+        if (manejadorBD.ejecutarSP("eliminarUnidadMedida") == 0) {
 
             error = true;
         } else {

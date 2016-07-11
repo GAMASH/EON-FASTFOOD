@@ -155,7 +155,7 @@ public class Marca extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(descripcion, "varDescripcion", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(activo, "varActivo", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarMarca(?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarMarca") == 0) {
 
             error = true;
         } else {
@@ -175,7 +175,7 @@ public class Marca extends TablaBD {
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_marca, "varId_marca", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call eliminarMarca(?) }") == 0) {
+        if (manejadorBD.ejecutarSP("eliminarMarca") == 0) {
 
             error = true;
         } else {

@@ -9,10 +9,12 @@ import abstractt.TablaBD;
 import abstractt.visual.Table;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
+
 import static domain.General.manejadorBD;
 import static domain.General.sucursal;
 import domain.ParametrosSP;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -24,11 +26,11 @@ public class ComandaDetalle extends TablaBD {
     public String id_comanda;
     public String id_comanda_detalle;
     public Platillo platillo;
-    public int num_comensal;
+    public Integer num_comensal;
     public String status;
     public String observaciones;
     public Double precio;
-    public int orden;
+    public Integer orden;
 
     public ComandaDetalle() {
 
@@ -59,7 +61,7 @@ public class ComandaDetalle extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(comanda.id_comanda, "varId_comanda", "STRING", "INOUT");
         manejadorBD.parametrosSP.agregarParametro(num_comensales+"", "varNum_comensales", "STRING", "INOUT");
 
-        if (manejadorBD.ejecutarSP("{ call ComandaDetalle(?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("ComandaDetalle") == 0) {
             
             manejadorBD.setConsultaSP();
                         
@@ -77,6 +79,40 @@ public class ComandaDetalle extends TablaBD {
         return comanda_detalle_lista;
     }
 
+    public void setRegistro(Table table, Integer i) {
+
+        id_comanda = table.getValorString(i, 1);
+        id_comanda_detalle = table.getValorString(i, 2);
+        platillo.obtenerPorId(new ArrayList(Arrays.asList(table.getValorString(i, 3))));
+        this.num_comensal = table.getValorInt(i, 5);
+        this.status =   table.getValorString(i, 6);
+        this.observaciones =   table.getValorString(i, 7);
+        this.precio =   table.getValorDouble(i, 8);
+        this.orden =   table.getValorInt(i, 9);
+
+    }
+    
+    
+    private String convierteStatus(){    
+
+        switch (status) {
+            case "Pendiente":
+                return "PE";            
+            case "Proceso":
+                return "PR";
+            case "Servido":
+                return "SE";           
+        }
+
+        return "";
+    }
+    
+    /**
+     * 
+     * @param tabla
+     * @param id_comanda
+     * @param comensal 
+     */
     public static void cargarComandaDetalle(Table tabla, String id_comanda, int comensal) {
 
         crearTablaComandaDetalle(tabla);
@@ -152,4 +188,42 @@ public class ComandaDetalle extends TablaBD {
         return tabla;
     }
 
+    /**
+     *
+     * @return
+     */
+    public boolean grabar() {
+
+        boolean error = true;
+
+        conectarBD();
+
+        System.out.println(this);
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+        manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_comanda, "varId_comanda", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_comanda_detalle, "varId_comanda_detalle", "STRING", "INOUT");
+        manejadorBD.parametrosSP.agregarParametro(platillo.id_platillo, "varId_platillo", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(this.num_comensal.toString(), "varNum_comensal", "STRING", "IN");        
+        manejadorBD.parametrosSP.agregarParametro(convierteStatus(), "varStatus", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(observaciones, "varObservaciones", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(precio.toString(), "varPrecio", "DOUBLE", "IN");
+        manejadorBD.parametrosSP.agregarParametro(orden.toString(), "varOrden", "INT", "IN");
+        
+
+        if (manejadorBD.ejecutarSP("grabarComandaDetalle") == 0) {
+
+            error = true;
+            id_comanda_detalle = manejadorBD.parametrosSP.get(2).getValor();            
+        } else {
+
+            error = false;
+        }
+
+        desconectarBD();
+
+        return error;
+    }
+    
 }

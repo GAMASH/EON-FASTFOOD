@@ -7,8 +7,6 @@ package gui.restaurant;
 
 import abstractt.visual.Boton;
 import abstractt.visual.InternalFrameAbstracto;
-import static domain.General.manejadorBD;
-import static domain.General.mensaje;
 import domain.tabla.Comanda;
 import domain.tabla.ComandaDetalle;
 import domain.tabla.Platillo;
@@ -37,9 +35,12 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         initComponents();
         botones = new ArrayList<Boton>();
         comanda_detalles_panel = new ArrayList<ComandaDetallePanel>();
-
     }
 
+    /**
+     *
+     * @param platillo
+     */
     public void agregarPlatillo(Platillo platillo) {
 
         ComandaDetallePanel panel_detalle;
@@ -58,6 +59,9 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         }
     }
 
+    /**
+     *
+     */
     public void cargaValores() {
 
         ArrayList<String> tiposPlatillo;
@@ -112,6 +116,10 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         agregarDetalle("T O T A L ", 0);
     }
 
+    /**
+     *
+     * @param evt
+     */
     private void boton(java.awt.event.ActionEvent evt) {
 
         TipoPlatillo tipo_platillo;
@@ -148,6 +156,11 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
     }
 
+    /**
+     * 
+     * @param nombre_tab
+     * @param comensal 
+     */
     private void agregarDetalle(String nombre_tab, int comensal) {
 
         //  Table tabla_detalle;
@@ -167,6 +180,10 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         jTabbedPane1.add(panel_detalle, nombre_tab);
     }
 
+    /**
+     * 
+     * @param comanda 
+     */
     public void setComanda(Comanda comanda) {
 
         this.comanda = comanda;
@@ -197,6 +214,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         jScrollPane1 = new javax.swing.JScrollPane();
         tiposPaltillo = new abstractt.visual.Panel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        boton1 = new abstractt.visual.Boton();
 
         setTitle("Comanda");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -234,6 +252,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTabbedPane1.setOpaque(true);
 
+        boton1.setText("Quitar Platillo");
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -245,7 +265,10 @@ public class ComandaCaptura extends InternalFrameAbstracto {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(comandaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jScrollPane1))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
@@ -256,8 +279,9 @@ public class ComandaCaptura extends InternalFrameAbstracto {
                     .addComponent(comandaPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(panel1);
@@ -272,6 +296,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private abstractt.visual.Boton boton1;
     private gui.restaurant.ComandaPanel comandaPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;

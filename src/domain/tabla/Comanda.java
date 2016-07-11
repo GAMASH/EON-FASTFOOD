@@ -253,7 +253,7 @@ public class Comanda extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(formatoDateTime_11.format(fecha_termino), "varFecha_termino", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(num_comensales.toString(), "varNum_comensales", "INT", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarComanda(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarComanda") == 0) {
 
             error = true;
             id_comanda = manejadorBD.parametrosSP.get(1).getValor();

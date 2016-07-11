@@ -158,7 +158,7 @@ public class TipoArticulo extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(descripcion, "varDescripcion", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(activo, "varActivo", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarTipoArticulo(?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarTipoArticulo") == 0) {
 
             error = true;
         } else {
@@ -179,7 +179,7 @@ public class TipoArticulo extends TablaBD {
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_tipo_articulo, "varId_tipo_articulo", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call eliminarTipoArticulo(?) }") == 0) {
+        if (manejadorBD.ejecutarSP("eliminarTipoArticulo") == 0) {
 
             error = true;
         } else {

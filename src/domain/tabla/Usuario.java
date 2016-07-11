@@ -162,7 +162,7 @@ public class Usuario extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(this.login, "varLogin", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(this.password, "varPassword", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("{ call grabarUsuario(?,?,?,?) }") == 0) {
+        if (manejadorBD.ejecutarSP("grabarUsuario") == 0) {
 
             error = true;
             //si se esta cambiando el password del usuario logeado
