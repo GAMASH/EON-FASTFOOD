@@ -171,16 +171,16 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         this.comanda = comanda;
         this.comandaPanel1.setComanda(comanda);
-/*
-        if (comanda.status.equals("Disponible")) {
+        /*
+         if (comanda.status.equals("Disponible")) {
             
-            comanda.status= "Proceso";
+         comanda.status= "Proceso";
                         
-            if (!this.comanda.grabar()){
-             mensaje("Error al grabar la comanda "+manejadorBD.errorSQL)   ;
-            }
-        }
-*/
+         if (!this.comanda.grabar()){
+         mensaje("Error al grabar la comanda "+manejadorBD.errorSQL)   ;
+         }
+         }
+         */
     }
 
     /**

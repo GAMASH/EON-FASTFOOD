@@ -41,6 +41,9 @@ public class Comanda extends TablaBD {
     Date fecha_termino;
     Integer num_comensales;
 
+    /**
+     *
+     */
     public Comanda() {
 
         id_comanda = "";
@@ -58,6 +61,11 @@ public class Comanda extends TablaBD {
 
     }
 
+    /**
+     *
+     * @param table
+     * @param i
+     */
     public void setRegistro(Table table, Integer i) {
 
         conectarBD();
@@ -70,9 +78,9 @@ public class Comanda extends TablaBD {
             id_mesa = table.getValorString(i, 1);
             fecha = formatoDateTime_11.parse(table.getValorString(i, 5));
             status = table.getValorString(i, 6);
-            id_mesero  = table.getValorString(i, 7);
+            id_mesero = table.getValorString(i, 7);
             folio = table.getValorString(i, 8);
-                        
+
             mesa.obetenerPorId(id_mesa);
             mesero.obtenerPorId(new ArrayList(Arrays.asList(id_mesero)));
 
@@ -86,6 +94,10 @@ public class Comanda extends TablaBD {
         desconectarBD();
     }
 
+    /**
+     *
+     * @param tabla
+     */
     public static void cargarFrameMesaComanda(Table tabla) {
 
         crearTablaFrameMesaComanda(tabla);
@@ -125,6 +137,10 @@ public class Comanda extends TablaBD {
 
     }
 
+    /**
+     *
+     * @return
+     */
     private String convierteStatus() {
 
         switch (status) {
@@ -143,6 +159,11 @@ public class Comanda extends TablaBD {
         return "";
     }
 
+    /**
+     *
+     * @param tabla
+     * @return
+     */
     private static Table crearTablaFrameMesaComanda(Table tabla) {
 
         if (tabla == null) {
@@ -162,7 +183,7 @@ public class Comanda extends TablaBD {
         tabla.cambiarTitulos();
         tabla.setFormato(new int[]{
             Table.letra, Table.letra, Table.letra, Table.letra,
-            Table.letra, Table.fecha, Table.letra,  Table.letra, Table.letra});
+            Table.letra, Table.fecha, Table.letra, Table.letra, Table.letra});
 
         tabla.tamañoColumna(new int[]{
             0, 100, 120, 600,
@@ -178,6 +199,10 @@ public class Comanda extends TablaBD {
         return tabla;
     }
 
+    /**
+     *
+     * @return
+     */
     public String toString() {
 
         String comandaString;
@@ -189,7 +214,7 @@ public class Comanda extends TablaBD {
                 + "fecha = {" + fecha + "}, "
                 + "mesa = " + mesa.id_mesa + ", "
                 + "mesero = " + mesero.id_empleado + ", "
-                + "status = " + status + "{"+convierteStatus()+"}, "
+                + "status = " + status + "{" + convierteStatus() + "}, "
                 + "pago = " + pago.id_pago + ", "
                 + "subtotal = " + Subtotal + ", "
                 + "impuesto = " + impuesto + ", "
@@ -200,6 +225,10 @@ public class Comanda extends TablaBD {
         return comandaString;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean grabar() {
 
         boolean error = true;
@@ -227,8 +256,8 @@ public class Comanda extends TablaBD {
         if (manejadorBD.ejecutarSP("{ call grabarComanda(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }") == 0) {
 
             error = true;
-            id_comanda  =   manejadorBD.parametrosSP.get(1).getValor();
-            folio       =   manejadorBD.parametrosSP.get(2).getValor();
+            id_comanda = manejadorBD.parametrosSP.get(1).getValor();
+            folio = manejadorBD.parametrosSP.get(2).getValor();
         } else {
 
             error = false;

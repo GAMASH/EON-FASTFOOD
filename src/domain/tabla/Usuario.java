@@ -157,7 +157,7 @@ public class Usuario extends TablaBD {
         conectarBD();
 
         manejadorBD.parametrosSP = new ParametrosSP();
-        manejadorBD.parametrosSP.agregarParametro(this.id_usuario, "varId_usuario", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(this.id_usuario, "varId_usuario", "STRING", "INOUT");
         manejadorBD.parametrosSP.agregarParametro(persona.id_persona, "varId_persona", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(this.login, "varLogin", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(this.password, "varPassword", "STRING", "IN");
@@ -171,6 +171,8 @@ public class Usuario extends TablaBD {
                 //actualiza el password de la conexion actual
                 manejadorBD.palabraClave = this.password;
             }
+             id_usuario = manejadorBD.parametrosSP.get(0).getValor();
+            
         } else {
 
             error = false;

@@ -29,7 +29,7 @@ public class Pago extends TablaBD{
     
     public Pago(){
         
-        id_sucursal = sucursal.id_sucursal;
+       // id_sucursal = sucursal.id_sucursal;
         id_pago     =   "";
         caja_turno  =   new CajaTurno();
         

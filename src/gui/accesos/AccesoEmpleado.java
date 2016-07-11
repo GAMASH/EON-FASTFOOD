@@ -84,7 +84,7 @@ public class AccesoEmpleado extends InternalFrameAbstracto {
         setResizable(false);
         setTitle("Acceso Usuario");
 
-        panel1.setBackground(new java.awt.Color(255, 241, 102));
+        panel1.setBackground(new java.awt.Color(240, 240, 240));
 
         boton1.setText("Aceptar");
         boton1.addActionListener(new java.awt.event.ActionListener() {

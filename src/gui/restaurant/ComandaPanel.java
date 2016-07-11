@@ -25,7 +25,7 @@ public class ComandaPanel extends Panel {
     public ComandaPanel() {
 
         initComponents();
-        comanda = new Comanda();
+        // comanda = new Comanda();
     }
 
     /**
@@ -45,24 +45,26 @@ public class ComandaPanel extends Panel {
         this.tf_estado.setText(Acomanda.status);
         this.tf_folio.setText(Acomanda.folio);
         this.tf_mesa.setText(comanda.mesa.numero_mesa);
-        this.tf_estado.setText(comanda.status);        
-        this.tf_fecha.setText(formatoDate_2.format(comanda.fecha));                
-        
-        if (!comanda.mesero.id_empleado.equals("")) {            
-            
+        this.tf_estado.setText(comanda.status);
+        this.tf_fecha.setText(formatoDate_2.format(comanda.fecha));
+
+        if (!comanda.mesero.id_empleado.equals("")) {
+
             this.tf_mesero.setText(comanda.mesero.usuario.login);
         }
     }
-    
-    public void grabar(){
-        
-        if (!comanda.grabar()){
-            
-            mensaje("Error al grabar la comanda "+manejadorBD.errorSQL);
+
+    /**
+     *
+     */
+    public void grabar() {
+
+        if (!comanda.grabar()) {
+
+            mensaje("Error al grabar la comanda " + manejadorBD.errorSQL);
         }
-        
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +86,7 @@ public class ComandaPanel extends Panel {
         tf_mesero = new abstractt.visual.Label();
         tf_estado = new abstractt.visual.Label();
 
-        setBackground(new java.awt.Color(51, 204, 0));
+        setBackground(new java.awt.Color(110, 230, 118));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setLayout(null);
 

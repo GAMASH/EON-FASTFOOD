@@ -35,6 +35,7 @@ public class ComandasFrame extends InternalFrameAbstracto {
     ArrayList<ComandaPanel> comandas;
     int mouseStartX;
     int mouseStartY;
+    ComandaCaptura comandaCaptura;
 
     /**
      * Creates new form ComandasFrame
@@ -62,6 +63,10 @@ public class ComandasFrame extends InternalFrameAbstracto {
 
     }
 
+    /**
+     *
+     * @param e
+     */
     private void arrastreMouse(MouseEvent e) {
 
         // System.out.println("arrastre");
@@ -71,6 +76,10 @@ public class ComandasFrame extends InternalFrameAbstracto {
         panel1.scrollRectToVisible(new Rectangle(vpp, viewPort.getSize()));
     }
 
+    /**
+     *
+     * @param e
+     */
     private void clickMouse(MouseEvent e) {
 
         // System.out.println("CLick");
@@ -78,6 +87,9 @@ public class ComandasFrame extends InternalFrameAbstracto {
         mouseStartY = e.getY();
     }
 
+    /**
+     * 
+     */
     @Override
     public void cargaValores() {
 
@@ -129,6 +141,9 @@ public class ComandasFrame extends InternalFrameAbstracto {
         mostrarComandas();
     }
 
+    /**
+     * 
+     */
     public void mostrarComandas() {
 
         int posX = 0, posY = 0;
@@ -170,6 +185,10 @@ public class ComandasFrame extends InternalFrameAbstracto {
         }
     }
 
+    /**
+     * 
+     * @param evt 
+     */
     public void cargarComanda(java.awt.event.MouseEvent evt) {
 
         ComandaPanel comandaPanel;
@@ -210,10 +229,13 @@ public class ComandasFrame extends InternalFrameAbstracto {
             comanda.status = "Proceso";
 
             if (!comanda.grabar()) {
-                
+
                 mensaje("Error al grabar la comanda " + manejadorBD.errorSQL);
+                return;
             }
         }
+
+        comandaPanel.setComanda(comanda);
 
         if (comandaCaptura == null) {
 
@@ -235,8 +257,6 @@ public class ComandasFrame extends InternalFrameAbstracto {
             comandaCaptura.setVisible(true);
         }
     }
-
-    ComandaCaptura comandaCaptura;
 
     /**
      * This method is called from within the constructor to initialize the form.

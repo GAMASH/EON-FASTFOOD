@@ -94,6 +94,8 @@ public class UsuarioCaptura extends CapturaAbstracto {
 
         TipoEmpleado tipo_empleado;
 
+        usuario.login = this.tf_login.getText();
+        
         if (!usuario.grabar()) {
 
             mensaje("Error al grabar el usuario " + manejadorBD.errorSQL);

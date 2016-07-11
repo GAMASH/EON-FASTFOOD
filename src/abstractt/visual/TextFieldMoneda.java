@@ -36,6 +36,19 @@ public class TextFieldMoneda extends TextField {
         setFont(new java.awt.Font("Calibri", 0, 12));
     }
 
+    /**
+     *
+     * @param valor
+     */
+    public void setDouble(Double valor) {
+
+        setText("$ " + valor);
+    }
+
+    /**
+     *
+     * @param evt
+     */
     private void FocusLost(java.awt.event.FocusEvent evt) {
 
         if (!getText().startsWith("$")) {
@@ -46,6 +59,10 @@ public class TextFieldMoneda extends TextField {
         }
     }
 
+    /**
+     *
+     * @param evt
+     */
     private void FocusGained(java.awt.event.FocusEvent evt) {
 
         this.setText(this.obtenerValor() + "");

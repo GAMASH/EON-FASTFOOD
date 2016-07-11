@@ -104,30 +104,15 @@ public class CambioPassword extends InternalFrameAbstracto {
         
         this.setVisible(false);
     }
-    
-    /*
-     public int cerrar(){
-        
-        
-        
-     return 1;
-     }
-     */
 
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void internalFrameClosing(InternalFrameEvent e) {
         
-        cancelar();
-        
-        /*    
-         if (cerrar() != 1) {
-        
-        password_nueva = "";
-        this.setVisible(false);
-          } else {
-            
-         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-         }*/
+        cancelar();              
     }
 
     /**
@@ -144,13 +129,17 @@ public class CambioPassword extends InternalFrameAbstracto {
         
         this.password_actual = password_actual;
 
-        if (!password_actual.equals("")) {
+        if (!password_actual.equals("") ) {
 
             this.tf_pass_ant.setEnabled(true);
             this.tf_pass_ant.requestFocus();
 
             this.tf_pass_nva.setEnabled(false);
             this.tf_pass_nva_2.setEnabled(false);
+        }else{
+            
+            this.tf_pass_ant.setEnabled(false);
+            this.tf_pass_nva.requestFocus();
         }
         
         tf_pass_ant.setText("");
