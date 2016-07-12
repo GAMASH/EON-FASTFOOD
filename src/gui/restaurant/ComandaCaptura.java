@@ -150,6 +150,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         agregarDetalle("T O T A L ", 0);
 
         quitar_platillo.redimensionarIcono();
+        this.grabar.redimensionarIcono();
     }
 
     /**
@@ -223,17 +224,17 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     public void setComanda(Comanda comanda) {
 
         this.comanda = comanda;
-        this.comandaPanel1.setComanda(comanda);
-        /*
-         if (comanda.status.equals("Disponible")) {
-            
-         comanda.status= "Proceso";
-                        
-         if (!this.comanda.grabar()){
-         mensaje("Error al grabar la comanda "+manejadorBD.errorSQL)   ;
-         }
-         }
-         */
+        this.comandaPanel1.setComanda(comanda); 
+    }
+    
+    public void grabar(){
+        
+        ComandaDetallePanel panel_detalle;
+        
+         panel_detalle = comanda_detalles_panel.get(index_panel_total);
+         panel_detalle.grabar();
+                
+        
     }
 
     /**
@@ -251,7 +252,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         tiposPaltillo = new abstractt.visual.Panel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         quitar_platillo = new abstractt.visual.Boton();
-        quitar_platillo1 = new abstractt.visual.Boton();
+        grabar = new abstractt.visual.Boton();
 
         setTitle("Comanda");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -301,15 +302,15 @@ public class ComandaCaptura extends InternalFrameAbstracto {
             }
         });
 
-        quitar_platillo1.setBorder(null);
-        quitar_platillo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/trash_100px.png"))); // NOI18N
-        quitar_platillo1.setBorderPainted(false);
-        quitar_platillo1.setContentAreaFilled(false);
-        quitar_platillo1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        quitar_platillo1.setPreferredSize(new java.awt.Dimension(50, 50));
-        quitar_platillo1.addActionListener(new java.awt.event.ActionListener() {
+        grabar.setBorder(null);
+        grabar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/save_filled_100px.png"))); // NOI18N
+        grabar.setBorderPainted(false);
+        grabar.setContentAreaFilled(false);
+        grabar.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        grabar.setPreferredSize(new java.awt.Dimension(50, 50));
+        grabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitar_platillo1ActionPerformed(evt);
+                grabarActionPerformed(evt);
             }
         });
 
@@ -328,7 +329,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(quitar_platillo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(quitar_platillo1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(grabar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -344,7 +345,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(quitar_platillo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(quitar_platillo1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(grabar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         getContentPane().add(panel1);
@@ -355,6 +356,9 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
 
         escritorio.cerrarInternalFrame("PlatillosPorTipo");
+        
+        
+        
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void quitar_platilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitar_platilloActionPerformed
@@ -362,18 +366,18 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         quitarPlatillo();
     }//GEN-LAST:event_quitar_platilloActionPerformed
 
-    private void quitar_platillo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitar_platillo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_quitar_platillo1ActionPerformed
+    private void grabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grabarActionPerformed
+        grabar();
+    }//GEN-LAST:event_grabarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.restaurant.ComandaPanel comandaPanel1;
+    private abstractt.visual.Boton grabar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private abstractt.visual.Panel panel1;
     private abstractt.visual.Boton quitar_platillo;
-    private abstractt.visual.Boton quitar_platillo1;
     private abstractt.visual.Panel tiposPaltillo;
     // End of variables declaration//GEN-END:variables
 

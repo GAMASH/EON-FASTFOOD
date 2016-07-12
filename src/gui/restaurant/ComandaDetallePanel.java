@@ -30,6 +30,12 @@ public class ComandaDetallePanel extends Panel {
         total = 0.0;
     }
 
+    public void grabar() {
+
+        table1.grabar();
+
+    }
+
     /**
      *
      * @param platillo
@@ -45,18 +51,24 @@ public class ComandaDetallePanel extends Panel {
         table1.setValueAt(comanda_detalle.id_comanda, fila, 1);
         table1.setValueAt(comanda_detalle.id_comanda_detalle, fila, 2);
         table1.setValueAt(platillo.id_platillo, fila, 3);
-        table1.setValueAt(platillo.descripcion, fila, 4);
+        table1.setValueAt(platillo.nombre, fila, 4);
         table1.setValueAt(comensal, fila, 5);
         table1.setValueAt("Pendiente", fila, 6);
         table1.setValueAt("", fila, 7);
         table1.setValueAt(platillo.precio, fila, 8);
         table1.setValueAt(0, fila, 9);
 
-        total += platillo.precio;
-        setTotal(total);
+        calcular_totales();
     }
 
-    public void setTotal(Double total) {
+    private void calcular_totales() {
+
+        total = 0.0;
+
+        for (int i = 0; i < table1.getRowCount(); i++) {
+
+            total += table1.getValorDouble(i, 8);
+        }
 
         this.tf_subtotal.setDouble(total);
         this.tf_total.setDouble(total);
@@ -78,10 +90,8 @@ public class ComandaDetallePanel extends Panel {
 
         comanda_detalle.setRegistro(table1, fila);
 
-        total -= comanda_detalle.precio;
-        setTotal(total);
-
         table1.eliminarFila(fila);
+        calcular_totales();
 
         return comanda_detalle;
     }
@@ -96,11 +106,12 @@ public class ComandaDetallePanel extends Panel {
             comanda_detalle_2.setRegistro(table1, i);
 
             if (comanda_detalle_2.equals(comanda_detalle)) {
-                total -= comanda_detalle_2.precio;
-                setTotal(total);
+
                 table1.eliminarFila(i);
             }
         }
+
+        calcular_totales();
     }
 
     /**
@@ -116,6 +127,7 @@ public class ComandaDetallePanel extends Panel {
         table1.setDragEnabled(true);
         table1.setTransferHandler(new TransferHandler("text"));
 
+        calcular_totales();
     }
 
     /**
@@ -242,6 +254,9 @@ public class ComandaDetallePanel extends Panel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_subtotalActionPerformed
 
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

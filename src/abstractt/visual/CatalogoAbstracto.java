@@ -30,6 +30,7 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
     public void cargaValores() {
 
         tablaBd.cargarTabla(table1);
+        bGuardar.redimensionarIcono();
     }
 
     /**
@@ -50,13 +51,10 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
 
         jPanel1 = new Panel();
         bEliminar = new javax.swing.JButton();
-        bGuardar = new javax.swing.JButton();
         bNuevo = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new abstractt.visual.Table();
+        bGuardar = new abstractt.visual.Boton();
 
         setIconifiable(false);
         setMaximizable(false);
@@ -73,16 +71,6 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
             }
         });
 
-        bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/database_save.png"))); // NOI18N
-        bGuardar.setToolTipText("Guardar Tipo de Producto");
-        bGuardar.setBorder(null);
-        bGuardar.setBorderPainted(false);
-        bGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bGuardarActionPerformed(evt);
-            }
-        });
-
         bNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/note_add.png"))); // NOI18N
         bNuevo.setToolTipText("Nuevo");
         bNuevo.setBorder(null);
@@ -92,18 +80,6 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
                 bNuevoActionPerformed(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Nuevo");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Guardar");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Eliminar");
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,6 +94,18 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
         ));
         jScrollPane1.setViewportView(table1);
 
+        bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/save_filled_100px_2.png"))); // NOI18N
+        bGuardar.setToolTipText("Guardar");
+        bGuardar.setBorderPainted(false);
+        bGuardar.setContentAreaFilled(false);
+        bGuardar.setFocusPainted(false);
+        bGuardar.setPreferredSize(new java.awt.Dimension(41, 41));
+        bGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGuardarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -129,19 +117,11 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(bNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jLabel3)))
+                        .addComponent(bNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 131, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -150,15 +130,12 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(bEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                        .addComponent(bNuevo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -177,11 +154,6 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
 
         table1.grabar();
     }
-
-  private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-
-      grabar();
-  }//GEN-LAST:event_bGuardarActionPerformed
 
     public int cerrar() {
        
@@ -212,13 +184,14 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
       }
   }//GEN-LAST:event_bEliminarActionPerformed
 
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+        grabar();
+    }//GEN-LAST:event_bGuardarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bEliminar;
-    private javax.swing.JButton bGuardar;
+    private abstractt.visual.Boton bGuardar;
     private javax.swing.JButton bNuevo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private abstractt.visual.Table table1;

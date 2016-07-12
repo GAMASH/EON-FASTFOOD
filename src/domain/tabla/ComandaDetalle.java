@@ -118,7 +118,7 @@ public class ComandaDetalle extends TablaBD {
         manejadorBD.consulta(""
                 + "select cd.id_sucursal, cd.id_comanda, \n"
                 + "       cd.id_comanda_detalle,\n "
-                + "       cd.id_platillo, p.descripcion, cd.num_comensal, \n"
+                + "       cd.id_platillo, p.nombre, cd.num_comensal, \n"
                 + "       case cd.status \n"
                 + "        when 'PE' then 'Pendiente'\n"
                 + "        when 'PR' then 'Proceso'\n"
@@ -136,13 +136,13 @@ public class ComandaDetalle extends TablaBD {
 
         tabla.agregarItemStatus();
         tabla.alinear();
-        /*
+        
          tabla.ocultarcolumna(0);
          tabla.ocultarcolumna(1);
          tabla.ocultarcolumna(2);
          tabla.ocultarcolumna(3);
          tabla.ocultarcolumna(5);
-         */
+         
         desconectarBD();
 
     }
@@ -195,7 +195,7 @@ public class ComandaDetalle extends TablaBD {
 
         conectarBD();
 
-        System.out.println(this);
+       // System.out.println(this);
 
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");

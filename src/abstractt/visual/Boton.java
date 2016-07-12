@@ -25,6 +25,7 @@ public class Boton extends JButton {
         //  setContentAreaFilled(false);
         // this.setOpaque(true);
         // this.icono = icono;
+        setFocusPainted(false);
     }
 
     public void redimensionarIcono() {
