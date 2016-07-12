@@ -6,6 +6,7 @@
 package gui.restaurant;
 
 import abstractt.visual.Panel;
+import static domain.General.mensaje;
 import static domain.General.sucursal;
 import domain.tabla.ComandaDetalle;
 import domain.tabla.Platillo;
@@ -30,9 +31,9 @@ public class ComandaDetallePanel extends Panel {
     }
 
     /**
-     * 
+     *
      * @param platillo
-     * @param comensal 
+     * @param comensal
      */
     public void agregarPlatillo(Platillo platillo, Integer comensal) {
 
@@ -50,18 +51,61 @@ public class ComandaDetallePanel extends Panel {
         table1.setValueAt("", fila, 7);
         table1.setValueAt(platillo.precio, fila, 8);
         table1.setValueAt(0, fila, 9);
-        
-        total +=platillo.precio;
-        
+
+        total += platillo.precio;
+        setTotal(total);
+    }
+
+    public void setTotal(Double total) {
+
         this.tf_subtotal.setDouble(total);
         this.tf_total.setDouble(total);
-        
+    }
 
+    public ComandaDetalle quitarPlatillo() {
+
+        Integer fila;
+
+        fila = table1.getSelectedRow();
+
+        if (fila < 0) {
+            mensaje("Seleccione un registo");
+            return null;
+        }
+
+        ComandaDetalle comanda_detalle;
+        comanda_detalle = new ComandaDetalle();
+
+        comanda_detalle.setRegistro(table1, fila);
+
+        total -= comanda_detalle.precio;
+        setTotal(total);
+
+        table1.eliminarFila(fila);
+
+        return comanda_detalle;
+    }
+
+    public void quitarPlatillo(ComandaDetalle comanda_detalle) {
+
+        Integer fila;
+        ComandaDetalle comanda_detalle_2 = new ComandaDetalle();
+
+        for (int i = 0; i < table1.getRowCount(); i++) {
+
+            comanda_detalle_2.setRegistro(table1, i);
+
+            if (comanda_detalle_2.equals(comanda_detalle)) {
+                total -= comanda_detalle_2.precio;
+                setTotal(total);
+                table1.eliminarFila(i);
+            }
+        }
     }
 
     /**
-     * 
-     * @param comanda_detalle 
+     *
+     * @param comanda_detalle
      */
     public void setComandaDetalle(ComandaDetalle comanda_detalle) {
 

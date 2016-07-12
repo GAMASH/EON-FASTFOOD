@@ -56,26 +56,24 @@ public class ComandaDetalle extends TablaBD {
         comanda_detalle_lista = new ArrayList<ComandaDetalle>();
 
         manejadorBD.parametrosSP = new ParametrosSP();
-        
+
         manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "INOUT");
         manejadorBD.parametrosSP.agregarParametro(comanda.id_comanda, "varId_comanda", "STRING", "INOUT");
-        manejadorBD.parametrosSP.agregarParametro(num_comensales+"", "varNum_comensales", "STRING", "INOUT");
+        manejadorBD.parametrosSP.agregarParametro(num_comensales + "", "varNum_comensales", "STRING", "INOUT");
 
         if (manejadorBD.ejecutarSP("ComandaDetalle") == 0) {
-            
+
             manejadorBD.setConsultaSP();
-                        
+
             for (int i = 0; i < manejadorBD.getRowCount(); i++) {
-                
+
                 comanda_detalle = new ComandaDetalle();
-                
-               // comanda_detalle.cargarPorId();
-                
-                
-                comanda_detalle_lista.add(comanda_detalle);                
-            }            
+
+                // comanda_detalle.cargarPorId();
+                comanda_detalle_lista.add(comanda_detalle);
+            }
         }
-        
+
         return comanda_detalle_lista;
     }
 
@@ -85,33 +83,32 @@ public class ComandaDetalle extends TablaBD {
         id_comanda_detalle = table.getValorString(i, 2);
         platillo.obtenerPorId(new ArrayList(Arrays.asList(table.getValorString(i, 3))));
         this.num_comensal = table.getValorInt(i, 5);
-        this.status =   table.getValorString(i, 6);
-        this.observaciones =   table.getValorString(i, 7);
-        this.precio =   table.getValorDouble(i, 8);
-        this.orden =   table.getValorInt(i, 9);
+        this.status = table.getValorString(i, 6);
+        this.observaciones = table.getValorString(i, 7);
+        this.precio = table.getValorDouble(i, 8);
+        this.orden = table.getValorInt(i, 9);
 
     }
-    
-    
-    private String convierteStatus(){    
+
+    private String convierteStatus() {
 
         switch (status) {
             case "Pendiente":
-                return "PE";            
+                return "PE";
             case "Proceso":
                 return "PR";
             case "Servido":
-                return "SE";           
+                return "SE";
         }
 
         return "";
     }
-    
+
     /**
-     * 
+     *
      * @param tabla
      * @param id_comanda
-     * @param comensal 
+     * @param comensal
      */
     public static void cargarComandaDetalle(Table tabla, String id_comanda, int comensal) {
 
@@ -139,13 +136,13 @@ public class ComandaDetalle extends TablaBD {
 
         tabla.agregarItemStatus();
         tabla.alinear();
-
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(1);
-        tabla.ocultarcolumna(2);
-        tabla.ocultarcolumna(3);
-        tabla.ocultarcolumna(5);
-
+        /*
+         tabla.ocultarcolumna(0);
+         tabla.ocultarcolumna(1);
+         tabla.ocultarcolumna(2);
+         tabla.ocultarcolumna(3);
+         tabla.ocultarcolumna(5);
+         */
         desconectarBD();
 
     }
@@ -157,7 +154,7 @@ public class ComandaDetalle extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Sucursl", "Id Comanda", "Id Comanda Detalle", "Id Platillo",
+            "Id Sucural", "Id Comanda", "Id Comanda Detalle", "Id Platillo",
             "Platillo", "Comensal", "Estatus", "Observaciones",
             "Precio", "Orden"};
 
@@ -205,17 +202,16 @@ public class ComandaDetalle extends TablaBD {
         manejadorBD.parametrosSP.agregarParametro(id_comanda, "varId_comanda", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(id_comanda_detalle, "varId_comanda_detalle", "STRING", "INOUT");
         manejadorBD.parametrosSP.agregarParametro(platillo.id_platillo, "varId_platillo", "STRING", "IN");
-        manejadorBD.parametrosSP.agregarParametro(this.num_comensal.toString(), "varNum_comensal", "STRING", "IN");        
+        manejadorBD.parametrosSP.agregarParametro(this.num_comensal.toString(), "varNum_comensal", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(convierteStatus(), "varStatus", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(observaciones, "varObservaciones", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(precio.toString(), "varPrecio", "DOUBLE", "IN");
         manejadorBD.parametrosSP.agregarParametro(orden.toString(), "varOrden", "INT", "IN");
-        
 
         if (manejadorBD.ejecutarSP("grabarComandaDetalle") == 0) {
 
             error = true;
-            id_comanda_detalle = manejadorBD.parametrosSP.get(2).getValor();            
+            id_comanda_detalle = manejadorBD.parametrosSP.get(2).getValor();
         } else {
 
             error = false;
@@ -225,5 +221,28 @@ public class ComandaDetalle extends TablaBD {
 
         return error;
     }
-    
+
+    public boolean equals(Object obj) {
+
+        if (obj instanceof ComandaDetalle) {
+
+            ComandaDetalle tmpComandaDetalle = (ComandaDetalle) obj;
+
+            if (tmpComandaDetalle.id_comanda.equals(id_comanda)
+                    && tmpComandaDetalle.id_comanda_detalle.equals(id_comanda_detalle)
+                    && tmpComandaDetalle.platillo.id_platillo.equals(platillo.id_platillo)
+                    && tmpComandaDetalle.num_comensal.equals(num_comensal)
+                    && tmpComandaDetalle.convierteStatus().equals(convierteStatus())
+                    && tmpComandaDetalle.observaciones.equals(observaciones)
+                    && tmpComandaDetalle.precio.equals(precio)
+                    && tmpComandaDetalle.orden.equals(orden)
+                    ) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
