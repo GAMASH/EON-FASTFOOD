@@ -15,10 +15,13 @@ import gui.Catalogos.TipoArticuloCatalogo;
 import gui.Catalogos.MarcaCatalogo;
 import domain.tabla.Impuesto;
 import domain.tabla.TipoEmpleado;
+import domain.tabla.TipoPago;
 import domain.tabla.Usuario;
+
 import gui.Catalogos.ImpuestoCatalogo2;
 import gui.Catalogos.MesaCatalogo;
 import gui.Catalogos.TipoPlatilloCatalogo;
+import gui.Catalogos.TiposPagoCatalogo;
 import gui.Catalogos.UnidadMedidaCatalogo;
 import gui.accesos.TipoEmpleadoCatalogo;
 import gui.accesos.UsuarioCaptura;
@@ -46,6 +49,8 @@ public class Principal extends javax.swing.JFrame {
     private static final int comandas_opcion = 9;
     private static final int tipos_empleado_opcion = 10;
     private static final int usuarios_opcion = 11;
+    private static final int tipos_pago_opcion = 12;
+    
     private Integer ancho_opciones;
     boolean colapsed = false;
 
@@ -61,6 +66,7 @@ public class Principal extends javax.swing.JFrame {
     private ComandasFrame comanda = null;
     private TipoEmpleadoCatalogo tipo_empleado = null;
     private FrameAbstracto usuario = null;
+    private TiposPagoCatalogo tipos_pago = null;
 
     /**
      * Creates new form Principal
@@ -100,6 +106,7 @@ public class Principal extends javax.swing.JFrame {
                 ComponenteMenu c312 = agregarComponente(c31, "Marcas", "O", marcas_opcion, "");
                 ComponenteMenu c313 = agregarComponente(c31, "Impuestos", "O", impuestos_opcion, "");
                 ComponenteMenu c314 = agregarComponente(c31, "Unidades de medida", "O", unidades_medida_opcion, "");
+                ComponenteMenu c315 = agregarComponente(c31, "Tipos de pago", "O", tipos_pago_opcion, "");
             }
             ComponenteMenu c32 = agregarComponente(c3, "Restaurante", "M", 0, "");
             {
@@ -192,6 +199,9 @@ public class Principal extends javax.swing.JFrame {
                 break;
             case tipos_empleado_opcion:
                 tipo_empleado();
+                break;
+            case tipos_pago_opcion:
+                tipos_pago();
                 break;
         }
 
@@ -476,6 +486,35 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
+    private void tipos_pago() {
+
+        if (tipos_pago == null) {
+
+            tipos_pago = new gui.Catalogos.TiposPagoCatalogo();
+        }
+        if (!tipos_pago.isVisible()) {
+
+            tipos_pago = new gui.Catalogos.TiposPagoCatalogo();
+            tipos_pago.Dimensionar();
+            // marca.setManejadorBD(getManejadorBD());
+            tipos_pago.setTablaBd(new TipoPago());
+            tipos_pago.cargaValores();
+            tipos_pago.centrado(escritorio.getSize());
+
+            escritorio.remove(tipos_pago);
+            escritorio.add(tipos_pago);
+            tipos_pago.setVisible(true);
+
+        } else {
+
+            tipos_pago.setVisible(false);
+            tipos_pago.setVisible(true);
+        }
+    }
+    
     /**
      *
      */

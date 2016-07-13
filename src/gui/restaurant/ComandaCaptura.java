@@ -151,6 +151,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         quitar_platillo.redimensionarIcono();
         this.grabar.redimensionarIcono();
+        this.boton_pagar.redimensionarIcono();
     }
 
     /**
@@ -253,6 +254,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         quitar_platillo = new abstractt.visual.Boton();
         grabar = new abstractt.visual.Boton();
+        boton_pagar = new abstractt.visual.Boton();
 
         setTitle("Comanda");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -314,6 +316,18 @@ public class ComandaCaptura extends InternalFrameAbstracto {
             }
         });
 
+        boton_pagar.setBorder(null);
+        boton_pagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/cash_register_50px.png"))); // NOI18N
+        boton_pagar.setBorderPainted(false);
+        boton_pagar.setContentAreaFilled(false);
+        boton_pagar.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        boton_pagar.setPreferredSize(new java.awt.Dimension(50, 50));
+        boton_pagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_pagarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -330,6 +344,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
                         .addComponent(quitar_platillo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(grabar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(boton_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -341,11 +357,12 @@ public class ComandaCaptura extends InternalFrameAbstracto {
                     .addComponent(comandaPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(quitar_platillo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(grabar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(grabar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_pagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         getContentPane().add(panel1);
@@ -370,8 +387,13 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         grabar();
     }//GEN-LAST:event_grabarActionPerformed
 
+    private void boton_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_pagarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_pagarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private abstractt.visual.Boton boton_pagar;
     private gui.restaurant.ComandaPanel comandaPanel1;
     private abstractt.visual.Boton grabar;
     private javax.swing.JScrollPane jScrollPane1;

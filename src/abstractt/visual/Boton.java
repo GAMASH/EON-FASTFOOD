@@ -5,9 +5,8 @@
  */
 package abstractt.visual;
 
+import java.awt.Color;
 import java.awt.Image;
-import java.awt.Toolkit;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -16,6 +15,8 @@ import javax.swing.JButton;
  * @author Developer GAGS
  */
 public class Boton extends JButton {
+
+    private boolean tiene_icono = false;
 
     public Boton() {
       //  this.setBackground(FormatoControles.color1);
@@ -26,25 +27,34 @@ public class Boton extends JButton {
         // this.setOpaque(true);
         // this.icono = icono;
         setFocusPainted(false);
-        
+
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 MouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 MouseExited(evt);
             }
         });
-        
     }
-    
-    private void MouseEntered(java.awt.event.MouseEvent evt) {                                    
-        setContentAreaFilled(true);
-    }                                   
 
-    private void MouseExited(java.awt.event.MouseEvent evt) {                                   
-        setContentAreaFilled(false);
-    }   
+    private void MouseEntered(java.awt.event.MouseEvent evt) {
+
+        if (tiene_icono) {
+            
+            setContentAreaFilled(true);
+            this.setBackground(Color.RED);
+        }
+    }
+
+    private void MouseExited(java.awt.event.MouseEvent evt) {
+
+        if (tiene_icono) {
+            
+            setContentAreaFilled(false);
+        }
+    }
 
     public void redimensionarIcono() {
 
@@ -56,14 +66,14 @@ public class Boton extends JButton {
              ImageIcon fot = new ImageIcon(((ImageIcon) getIcon()).getImage());
              Icon icono_2 = new ImageIcon(fot.getImage().getScaledInstance(this.getPreferredSize().width, this.getPreferredSize().height, Image.SCALE_DEFAULT));
              setIcon(icono_2);
-             */           
+             */
 
             ImageIcon icon = new ImageIcon(((ImageIcon) getIcon()).getImage());
             Image img = icon.getImage(); //convertimos icon en una imagen
-            Image otraimg = img.getScaledInstance(this.getPreferredSize().width, this.getPreferredSize().height, java.awt.Image.SCALE_REPLICATE); //creamos una imagen nueva dándole las dimensiones que queramos a la antigua
+            Image otraimg = img.getScaledInstance(this.getPreferredSize().width -10 , this.getPreferredSize().height - 10, java.awt.Image.SCALE_REPLICATE); //creamos una imagen nueva dándole las dimensiones que queramos a la antigua
             ImageIcon otroicon = new ImageIcon(otraimg);
             setIcon(otroicon);
-
+            tiene_icono = true;
         }
     }
 
