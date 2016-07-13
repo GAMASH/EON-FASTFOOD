@@ -26,7 +26,25 @@ public class Boton extends JButton {
         // this.setOpaque(true);
         // this.icono = icono;
         setFocusPainted(false);
+        
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MouseExited(evt);
+            }
+        });
+        
     }
+    
+    private void MouseEntered(java.awt.event.MouseEvent evt) {                                    
+        setContentAreaFilled(true);
+    }                                   
+
+    private void MouseExited(java.awt.event.MouseEvent evt) {                                   
+        setContentAreaFilled(false);
+    }   
 
     public void redimensionarIcono() {
 

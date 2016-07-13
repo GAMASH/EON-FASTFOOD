@@ -9,7 +9,6 @@ import abstractt.TablaBD;
 import java.awt.event.KeyEvent;
 import javax.swing.event.InternalFrameEvent;
 
-
 /**
  *
  * @author Developer GAGS
@@ -31,6 +30,8 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
 
         tablaBd.cargarTabla(table1);
         bGuardar.redimensionarIcono();
+        boton1.redimensionarIcono();
+        bNuevo.redimensionarIcono();
     }
 
     /**
@@ -50,11 +51,12 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
     private void initComponents() {
 
         jPanel1 = new Panel();
-        bEliminar = new javax.swing.JButton();
-        bNuevo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new abstractt.visual.Table();
+        jPanel2 = new javax.swing.JPanel();
+        bNuevo = new abstractt.visual.Boton();
         bGuardar = new abstractt.visual.Boton();
+        boton1 = new abstractt.visual.Boton();
 
         setIconifiable(false);
         setMaximizable(false);
@@ -62,24 +64,6 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
         setTitle("Sin titulo");
         setFrameIcon(null);
         getContentPane().setLayout(new java.awt.CardLayout());
-
-        bEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/note_delete.png"))); // NOI18N
-        bEliminar.setToolTipText("Eliminar Marca");
-        bEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bEliminarActionPerformed(evt);
-            }
-        });
-
-        bNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/note_add.png"))); // NOI18N
-        bNuevo.setToolTipText("Nuevo");
-        bNuevo.setBorder(null);
-        bNuevo.setBorderPainted(false);
-        bNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bNuevoActionPerformed(evt);
-            }
-        });
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,49 +78,75 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
         ));
         jScrollPane1.setViewportView(table1);
 
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(null);
+
+        bNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/add_row_100px_1.png"))); // NOI18N
+        bNuevo.setToolTipText("Agregar Registro");
+        bNuevo.setBorderPainted(false);
+        bNuevo.setContentAreaFilled(false);
+        bNuevo.setPreferredSize(new java.awt.Dimension(40, 40));
+        bNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bNuevoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bNuevoMouseExited(evt);
+            }
+        });
+        bNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNuevoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(bNuevo);
+        bNuevo.setBounds(0, 0, 40, 40);
+
         bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/save_filled_100px_2.png"))); // NOI18N
         bGuardar.setToolTipText("Guardar");
         bGuardar.setBorderPainted(false);
         bGuardar.setContentAreaFilled(false);
-        bGuardar.setFocusPainted(false);
-        bGuardar.setPreferredSize(new java.awt.Dimension(41, 41));
+        bGuardar.setPreferredSize(new java.awt.Dimension(40, 40));
         bGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bGuardarActionPerformed(evt);
             }
         });
+        jPanel2.add(bGuardar);
+        bGuardar.setBounds(51, 0, 40, 40);
+
+        boton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/delete_row_100px_1.png"))); // NOI18N
+        boton1.setToolTipText("Eliminar Registro");
+        boton1.setBorderPainted(false);
+        boton1.setContentAreaFilled(false);
+        boton1.setPreferredSize(new java.awt.Dimension(40, 40));
+        boton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(boton1);
+        boton1.setBounds(101, 0, 40, 40);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(bNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 131, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(bEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                        .addComponent(bNuevo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
 
         getContentPane().add(jPanel1, "card2");
@@ -144,11 +154,11 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
+    private void agregarFila() {
 
-      bNuevo.transferFocus();
-      table1.agregarFila(jScrollPane1);
-  }//GEN-LAST:event_bNuevoActionPerformed
+        bNuevo.transferFocus();
+        table1.agregarFila(jScrollPane1);
+    }
 
     private void grabar() {
 
@@ -156,7 +166,7 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
     }
 
     public int cerrar() {
-       
+
         return table1.validaCambios();
     }
 
@@ -174,37 +184,56 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
         return "";
     }
 
-  private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
+    private void eliminarFila() {
 
-      int filaSeleccionada = table1.getSelectedRow();
-     
-      if (filaSeleccionada != -1) {
+        int filaSeleccionada = table1.getSelectedRow();
 
-          table1.eliminarFila(filaSeleccionada);
-      }
-  }//GEN-LAST:event_bEliminarActionPerformed
+        if (filaSeleccionada != -1) {
+
+            table1.eliminarFila(filaSeleccionada);
+        }
+    }
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+
         grabar();
     }//GEN-LAST:event_bGuardarActionPerformed
 
+    private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
+
+        eliminarFila();
+    }//GEN-LAST:event_boton1ActionPerformed
+
+    private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
+        agregarFila();
+    }//GEN-LAST:event_bNuevoActionPerformed
+
+    private void bNuevoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bNuevoMouseEntered
+        bNuevo.setContentAreaFilled(true);
+    }//GEN-LAST:event_bNuevoMouseEntered
+
+    private void bNuevoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bNuevoMouseExited
+        bNuevo.setContentAreaFilled(false);
+    }//GEN-LAST:event_bNuevoMouseExited
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bEliminar;
     private abstractt.visual.Boton bGuardar;
-    private javax.swing.JButton bNuevo;
+    private abstractt.visual.Boton bNuevo;
+    private abstractt.visual.Boton boton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private abstractt.visual.Table table1;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void internalFrameClosing(InternalFrameEvent e) {
-      
+
         if (cerrar() != 1) {
-            
+
             this.dispose();
         } else {
-            
+
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
     }
