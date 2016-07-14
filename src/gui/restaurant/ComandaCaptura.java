@@ -10,9 +10,11 @@ import abstractt.visual.InternalFrameAbstracto;
 import static domain.General.mensaje;
 import domain.tabla.Comanda;
 import domain.tabla.ComandaDetalle;
+import domain.tabla.Pago;
 import domain.tabla.Platillo;
 import domain.tabla.TipoPlatillo;
 import static domain.tabla.TipoPlatillo.cargarTipoPlatillos;
+import gui.Pagos.PagosComanda;
 import static gui.Principal.escritorio;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     public void agregarPlatillo(Platillo platillo) {
 
         ComandaDetallePanel panel_detalle;
-        
+
         int index = this.jTabbedPane1.getSelectedIndex();
 
         if (index_panel_total != index) {
@@ -225,18 +227,40 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     public void setComanda(Comanda comanda) {
 
         this.comanda = comanda;
-        this.comandaPanel1.setComanda(comanda); 
+        this.comandaPanel1.setComanda(comanda);
+    }
+
+    public void grabar() {
+
+        ComandaDetallePanel panel_detalle;
+
+        panel_detalle = comanda_detalles_panel.get(index_panel_total);
+        panel_detalle.grabar();
+
     }
     
-    public void grabar(){
-        
-        ComandaDetallePanel panel_detalle;
-        
-         panel_detalle = comanda_detalles_panel.get(index_panel_total);
-         panel_detalle.grabar();
-                
-        
+    public void pagar(){
+        if (pagos_comanda == null) {
+
+            pagos_comanda = new PagosComanda();
+        }
+
+        if (!pagos_comanda.isVisible()) {
+
+            pagos_comanda.setPago(new Pago());
+            
+            
+            escritorio.remove(pagos_comanda);
+            escritorio.add(pagos_comanda);
+            pagos_comanda.centrado(escritorio.getSize());
+            pagos_comanda.setModal(true);
+            pagos_comanda.setVisible(true);
+
+           
+        }
     }
+    
+    public PagosComanda pagos_comanda;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -373,9 +397,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
 
         escritorio.cerrarInternalFrame("PlatillosPorTipo");
-        
-        
-        
+
+
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void quitar_platilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitar_platilloActionPerformed
@@ -388,7 +411,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     }//GEN-LAST:event_grabarActionPerformed
 
     private void boton_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_pagarActionPerformed
-        // TODO add your handling code here:
+        pagar();
     }//GEN-LAST:event_boton_pagarActionPerformed
 
 

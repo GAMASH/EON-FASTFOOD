@@ -11,7 +11,6 @@ import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.manejadorBD;
 import domain.ParametrosSP;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -94,6 +93,10 @@ public class Impuesto extends TablaBD {
         return tabla;
     }
 
+    /**
+     * 
+     * @param id 
+     */
     public void obtenerPorId(String id) {
 
         conectarBD();
@@ -109,6 +112,10 @@ public class Impuesto extends TablaBD {
         desconectarBD();
     }
 
+    /**
+     * 
+     * @param sDescripcion 
+     */
     public void cargarPorDescripcion(String sDescripcion) {
 
         conectarBD();
@@ -127,6 +134,9 @@ public class Impuesto extends TablaBD {
         desconectarBD();
     }
 
+    /**
+     * 
+     */
     public void asignarValores() {
 
         String crea;
@@ -139,6 +149,11 @@ public class Impuesto extends TablaBD {
         //System.out.println(datos_fiscales.getNombre_comercial());
     }
 
+    /**
+     * 
+     * @param table
+     * @param i 
+     */
     public void setRegistro(Table table, Integer i) {
 
         id_impuesto = (String) table.getValueAt(i, 0);
@@ -158,7 +173,10 @@ public class Impuesto extends TablaBD {
             porcentaje = 0.0;
         }
     }
-
+/**
+ * 
+ * @return 
+ */
     public boolean grabar() {
 
         boolean error;
@@ -181,6 +199,10 @@ public class Impuesto extends TablaBD {
         return error;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public boolean borrar() {
 
         boolean error;
@@ -201,6 +223,10 @@ public class Impuesto extends TablaBD {
         return error;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public static ArrayList<String> cargarImpuesto() {
 
         ArrayList<String> lista;
@@ -226,6 +252,10 @@ public class Impuesto extends TablaBD {
         return lista;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public static ArrayList<Impuesto> impuestos() {
 
         ArrayList<Impuesto> lista;

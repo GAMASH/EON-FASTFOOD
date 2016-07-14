@@ -7,6 +7,8 @@
 package gui.Pagos;
 
 import abstractt.visual.Panel;
+import domain.tabla.Pago;
+import domain.tabla.PagoDetalle;
 
 /**
  *
@@ -14,10 +16,25 @@ import abstractt.visual.Panel;
  */
 public class PagosPanel extends Panel {
 
+    private Pago pago;
+    private PagoDetalle pago_detalle;
+    
     /** Creates new form PagosPanel */
     public PagosPanel() {
+        
         initComponents();
+        pago_detalle = new PagoDetalle();
     }
+    
+    
+    public void setPago( Pago aPago){
+        
+        pago = aPago;
+        
+        pago_detalle.cargarTabla(table1, pago);
+        
+    }
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -47,6 +64,8 @@ public class PagosPanel extends Panel {
         textFieldMoneda5 = new abstractt.visual.TextFieldMoneda();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new abstractt.visual.Table();
+
+        jPanel1.setOpaque(false);
 
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label1.setText("Folio:");
@@ -96,15 +115,15 @@ public class PagosPanel extends Panel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textFieldMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label5, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textFieldMoneda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(textFieldMoneda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(textFieldMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textFieldMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -138,6 +157,8 @@ public class PagosPanel extends Panel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel3.setOpaque(false);
 
         label7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label7.setText("Efectivo:");

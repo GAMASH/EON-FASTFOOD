@@ -51,6 +51,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -142,16 +145,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="textFieldMoneda1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="label4" alignment="3" max="32767" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                              <Component id="textFieldMoneda2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="label5" alignment="1" pref="22" max="32767" attributes="0"/>
-                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                                  <Component id="textFieldMoneda3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label6" alignment="3" max="32767" attributes="0"/>
-                              </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="label5" alignment="1" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="textFieldMoneda3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="label6" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="textFieldMoneda2" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="textFieldMoneda1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="label4" alignment="3" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -198,6 +201,9 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel3">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
