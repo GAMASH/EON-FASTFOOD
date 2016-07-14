@@ -87,10 +87,10 @@ public class Mesa extends TablaBD {
         
         tabla.agregarComboBox(statusMesaSelector, 4);
         
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(1);
-        tabla.ocultarcolumna(5);
-        tabla.ocultarcolumna(6);
+        tabla.ocultarColumna(0);
+        tabla.ocultarColumna(1);
+        tabla.ocultarColumna(5);
+        tabla.ocultarColumna(6);
 
         desconectarBD();
     }

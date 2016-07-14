@@ -13,12 +13,12 @@ import domain.tabla.Pago;
  *
  * @author Developer GAGS
  */
-public class PagosComanda extends InternalFrameAbstracto {
+public class Pagos extends InternalFrameAbstracto {
 
     private Pago pago;
     
     /** Creates new form PagosComanda */
-    public PagosComanda() {
+    public Pagos() {
         initComponents();
     }
 
@@ -41,6 +41,7 @@ public class PagosComanda extends InternalFrameAbstracto {
         panel1 = new abstractt.visual.Panel();
         pagosPanel1 = new gui.Pagos.PagosPanel();
 
+        setTitle("Realizar Pago");
         getContentPane().setLayout(new java.awt.CardLayout());
 
         pagosPanel1.setOpaque(false);
@@ -49,9 +50,7 @@ public class PagosComanda extends InternalFrameAbstracto {
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addComponent(pagosPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 148, Short.MAX_VALUE))
+            .addComponent(pagosPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

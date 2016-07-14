@@ -104,9 +104,9 @@ public class Articulo extends TablaBD {
 
         tabla.agregarItemStatus();
 
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(7);
-        tabla.ocultarcolumna(8);
+        tabla.ocultarColumna(0);
+        tabla.ocultarColumna(7);
+        tabla.ocultarColumna(8);
 
         desconectarBD();
     }

@@ -115,8 +115,8 @@ public class Usuario extends TablaBD {
         
         tabla.agregarItemStatus();
 
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(1);
+        tabla.ocultarColumna(0);
+        tabla.ocultarColumna(1);
 
         desconectarBD();
     }

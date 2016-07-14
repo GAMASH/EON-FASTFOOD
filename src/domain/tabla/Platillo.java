@@ -61,7 +61,7 @@ public class Platillo extends TablaBD {
 
         desconectarBD();
     }
-    
+
     private void asignarValores() {
 
         String id_tipo_platillo;
@@ -94,8 +94,7 @@ public class Platillo extends TablaBD {
                 + "       Case origen\n"
                 + "         WHEN 'Co' THEN 'Cocina'\n"
                 + "         WHEN 'Ba' THEN 'Barra'"
-                + "       END as  origen, \n"
-                + "       p.crea, p.modifica\n"
+                + "       END as  origen, p.crea, p.modifica\n"
                 + "FROM   platillo p, tipo_platillo t\n"
                 + "WHERE  p.id_tipo_platillo = t.id_tipo_platillo\n"
                 + "and    p.id_tipo_platillo = '" + tipo_platillo.id_tipo_platillo + "'\n"
@@ -106,12 +105,12 @@ public class Platillo extends TablaBD {
         tabla.agregarItemStatus();
         tabla.alinear();
 
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(1);
-        tabla.ocultarcolumna(4);
-        tabla.ocultarcolumna(6);
-        tabla.ocultarcolumna(7);
-        tabla.ocultarcolumna(8);
+        tabla.ocultarColumnas(new int[]{
+            0, 1, 4, 6, 7 ,8});
+
+        tabla.setEditables(new boolean[]{
+            false, false, false, false,
+            false, false, false, false});
 
         desconectarBD();
     }
@@ -145,9 +144,13 @@ public class Platillo extends TablaBD {
         tabla.agregarCheckBox(4);
         tabla.agregarComboBox(origenSelector, 6);
 
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(7);
-        tabla.ocultarcolumna(8);
+        tabla.ocultarColumnas(new int[]{0, 7, 8});
+
+        tabla.setEditables(new boolean[]{
+            false, true, true, true,
+            true, true, true, false,
+            false
+        });
 
         desconectarBD();
     }
@@ -160,8 +163,7 @@ public class Platillo extends TablaBD {
 
         String titulos[] = {
             "Id Platillo", "Tipo Platillo", "Nombre", "Descripcion",
-            "Carta", "Precio", "Origen", "Crea",
-            "Modifica"};
+            "Carta", "Precio", "Origen", "crea", "modifica"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -172,8 +174,8 @@ public class Platillo extends TablaBD {
         tabla.cambiarTitulos();
         tabla.setFormato(new int[]{
             Table.letra, Table.letra, Table.letra, Table.letra,
-            Table.booleano, Table.numero_double, Table.letra, Table.letra,
-            Table.letra});
+            Table.booleano, Table.numero_double, Table.letra,
+            Table.letra, Table.letra});
 
         tabla.tamañoColumna(new int[]{
             0, 100, 120, 600,

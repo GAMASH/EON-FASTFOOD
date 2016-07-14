@@ -14,7 +14,7 @@ import domain.tabla.Pago;
 import domain.tabla.Platillo;
 import domain.tabla.TipoPlatillo;
 import static domain.tabla.TipoPlatillo.cargarTipoPlatillos;
-import gui.Pagos.PagosComanda;
+import gui.Pagos.Pagos;
 import static gui.Principal.escritorio;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -242,7 +242,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     public void pagar(){
         if (pagos_comanda == null) {
 
-            pagos_comanda = new PagosComanda();
+            pagos_comanda = new Pagos();
         }
 
         if (!pagos_comanda.isVisible()) {
@@ -260,7 +260,7 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         }
     }
     
-    public PagosComanda pagos_comanda;
+    public Pagos pagos_comanda;
 
     /**
      * This method is called from within the constructor to initialize the form.

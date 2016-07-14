@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 
 /**
@@ -156,6 +157,25 @@ public class General {
 
         Color color = new Color(r, g, b);
         return color;
+    }
+    
+    /**
+     * Si el numero tiene comas se las quita
+     *
+     *
+     * @param numero
+     * @return
+     */
+    public static String obtenerNumero(String numero) {
+
+        StringTokenizer num = new StringTokenizer(numero, ",");
+
+        numero = "";
+
+        while (num.hasMoreTokens()) {
+            numero += num.nextToken();
+        }
+        return numero;
     }
 
 }

@@ -15,21 +15,39 @@ import javax.swing.table.DefaultTableModel;
 public class TableModelAbst extends DefaultTableModel {
 
     public ArrayList<Integer> booleans;
- 
+
     public void TableModelAbst() {
 
-        booleans = new ArrayList<Integer>();       
-        
+        booleans = new ArrayList<Integer>();
     }
-    public void agregarBoolean(Integer columna){
-        
-        if( booleans == null ){ 
-            
-            booleans = new ArrayList<Integer>();        
+
+    public boolean isBoolean(Integer columna) {
+
+        if( booleans == null ){
+            return false;
         }
         
+        for (int i = 0; i < booleans.size(); i++) {
+
+            if (booleans.get(i) == columna) {
+                return true;
+
+            }
+        }
+
+        return false;
+
+    }
+
+    public void agregarBoolean(Integer columna) {
+
+        if (booleans == null) {
+
+            booleans = new ArrayList<Integer>();
+        }
+
         booleans.add(columna);
-        
+
     }
 
     public Class getColumnClass(int columnIndex) {

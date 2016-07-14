@@ -73,6 +73,7 @@ public class PlatillosFrame extends InternalFrameAbstracto {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table1.setRowHeight(20);
         table1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 table1FocusGained(evt);
@@ -89,7 +90,7 @@ public class PlatillosFrame extends InternalFrameAbstracto {
             }
         });
         jPanel1.add(boton1);
-        boton1.setBounds(0, 0, 90, 23);
+        boton1.setBounds(0, 0, 90, 22);
 
         jMenu1.setText("Archivo");
 

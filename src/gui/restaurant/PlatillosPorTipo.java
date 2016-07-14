@@ -44,6 +44,8 @@ public class PlatillosPorTipo extends InternalFrameAbstracto {
                 }
             }
         });
+        
+        table1.setEditable(false);
     }
 
     public void seleccionar(Integer fila) {

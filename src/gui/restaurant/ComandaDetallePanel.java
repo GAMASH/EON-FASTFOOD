@@ -28,6 +28,8 @@ public class ComandaDetallePanel extends Panel {
 
         initComponents();
         total = 0.0;
+        
+        table1.setEditable(false);
     }
 
     public void grabar() {

@@ -136,13 +136,15 @@ public class ComandaDetalle extends TablaBD {
 
         tabla.agregarItemStatus();
         tabla.alinear();
-        
-         tabla.ocultarcolumna(0);
-         tabla.ocultarcolumna(1);
-         tabla.ocultarcolumna(2);
-         tabla.ocultarcolumna(3);
-         tabla.ocultarcolumna(5);
-         
+
+        tabla.ocultarColumnas(new int[]{0, 1, 2, 3, 5});
+
+        tabla.setEditables(new boolean[]{
+            
+            false, false, false, false,
+            false, false, false, false,
+            false, true});
+
         desconectarBD();
 
     }
@@ -195,8 +197,7 @@ public class ComandaDetalle extends TablaBD {
 
         conectarBD();
 
-       // System.out.println(this);
-
+        // System.out.println(this);
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");
         manejadorBD.parametrosSP.agregarParametro(id_comanda, "varId_comanda", "STRING", "IN");
@@ -235,8 +236,7 @@ public class ComandaDetalle extends TablaBD {
                     && tmpComandaDetalle.convierteStatus().equals(convierteStatus())
                     && tmpComandaDetalle.observaciones.equals(observaciones)
                     && tmpComandaDetalle.precio.equals(precio)
-                    && tmpComandaDetalle.orden.equals(orden)
-                    ) {
+                    && tmpComandaDetalle.orden.equals(orden)) {
 
                 return true;
             }

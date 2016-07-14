@@ -13,6 +13,7 @@ import abstractt.TableModelAbst;
 import static abstractt.ClaseAbstracta.redondear;
 import domain.Fecha;
 import static domain.General.manejadorBD;
+import static domain.General.obtenerNumero;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -29,16 +30,22 @@ import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
+import javax.swing.CellEditor;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.event.TableModelEvent;
@@ -46,6 +53,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -68,6 +76,8 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
      */
     private int[] tamaños;
 
+    private boolean[] editables;
+
     /**
      * 2015-01-02 Formatos
      */
@@ -89,6 +99,8 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
     private LinkedList columnaTabla;
     private LinkedList columnaTablaOrdenada;
+
+    public boolean[] actualizable;
 
     JScrollPane scrollpane;
 
@@ -160,7 +172,27 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
                 mouseMove(e);
             }
         });
+        /*
+         addKeyListener(new java.awt.event.KeyAdapter() {
+            
+            
+         public void keyReleased(java.awt.event.KeyEvent e) {
+         if (!isEditing() && editCellAt(getSelectedRow(), getSelectedColumn())) {
 
+         getEditorComponent().requestFocusInWindow();
+                    
+         }
+         }
+            
+         public void keyPressed(java.awt.event.KeyEvent e){
+         if (!isEditing() && editCellAt(getSelectedRow(), getSelectedColumn())) {
+                    
+         System.out.println("Escribiendo en tabla");
+                    
+         }
+         }
+         });
+         */
         pautado = new Color[]{
             new Color(220, 255, 220), // 
             new Color(255, 255, 255), // 
@@ -171,7 +203,116 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         itemstatus = false;
 
         dragSource = new DragSource();
-        dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, this);
+
+        dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE,
+                this);
+
+        setRowHeight(20);
+    }
+
+    public boolean getRender = false;
+
+    /**
+     *
+     * @param row
+     * @param col
+     * @return
+     */
+    public TableCellEditor getCellEditor(int row, int col) {
+
+        if (!editables[col]) {
+
+            return this.getCellEditor();
+        }
+
+        getRender = true;
+
+        TableModelAbst modelo = (TableModelAbst) getModel();
+
+        boolean valor_check;
+        String valor;
+
+        DefaultCellEditor edit;
+
+        if (modelo.isBoolean(col)) {
+
+            if (getValueAt(row, col) == null) {
+
+                valor_check = false;
+            } else {
+
+                valor_check = (boolean) getValueAt(row, col);
+            }
+
+            final JCheckBox check = new JCheckBox();
+
+            check.setSelected(valor_check);
+
+            edit = new DefaultCellEditor(check);
+        } else {
+
+            if (getValueAt(row, col) == null) {
+
+                valor = "";
+            } else {
+
+                valor = getValueAt(row, col).toString();
+            }
+
+            if (isComboBox(col)) {
+
+                ComboBox combobox;
+
+                combobox = getComboBox(col);
+                //final DefaultCellEditor                                                
+                edit = new DefaultCellEditor(combobox);
+
+            } else {
+
+                final JTextField field = new JTextField(valor);
+
+                switch (formato[col]) {
+                    case Table.letra:
+
+                        field.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+                        break;
+                    case Table.numero_double:
+
+                        field.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+                        break;
+                    case Table.numero_entero:
+
+                        field.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+                        break;
+                    case Table.fecha:
+
+                        field.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+                        break;
+                    default:
+
+                        field.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+                        break;
+                }
+
+                edit = new DefaultCellEditor(field);
+                edit.setClickCountToStart(1);
+
+                field.addFocusListener(new FocusAdapter() {
+                    public void focusGained(FocusEvent e) {
+
+                        field.selectAll();//Con esto al solicitar el editor, el texto queda seleccionado
+                    }
+
+                    public void focusLost(FocusEvent e) {
+                        field.select(0, 0);//De-selecciono el texto al perder el foco.
+                    }
+                });
+            }
+        }
+
+        getRender = false;
+
+        return edit;
     }
 
     /**
@@ -182,15 +323,100 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
      */
     public boolean isCellEditable(int rowIndex, int colIndex) {
 
-        return isEditable();
+        if (editables == null) {
+            return false;
+        }
+
+        return editables[colIndex];
+
+        //return isEditable();
     }
 
+    /**
+     *
+     * @param combobox
+     * @param columna
+     */
     public void agregarComboBox(ComboBox combobox, int columna) {
 
         combobox.cargar();
         DefaultCellEditor defaultCellEditor = new DefaultCellEditor(combobox);
         getColumnModel().getColumn(columna).setCellEditor(defaultCellEditor);
+
+        if (columnasComboBox == null) {
+
+            columnasComboBox = new ArrayList<ColumnaComboBox>();
+        }
+
+        ColumnaComboBox columnaComboBox = new ColumnaComboBox(combobox, columna);
+
+        columnasComboBox.add(columnaComboBox);
     }
+
+    /**
+     *
+     */
+    public class ColumnaComboBox {
+
+        public ComboBox combobox;
+        public Integer columna;
+
+        public ColumnaComboBox(ComboBox aComboBox, int aColumna) {
+
+            combobox = aComboBox;
+            columna = aColumna;
+        }
+    }
+
+    /**
+     *
+     * @param columna
+     * @return
+     */
+    public boolean isComboBox(Integer columna) {
+
+        ColumnaComboBox columnaComboBox;
+
+        if (columnasComboBox == null) {
+
+            return false;
+        }
+
+        for (int i = 0; i < columnasComboBox.size(); i++) {
+
+            columnaComboBox = columnasComboBox.get(i);
+
+            if (columnaComboBox.columna == columna) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     *
+     * @param columna
+     * @return
+     */
+    public ComboBox getComboBox(Integer columna) {
+
+        ColumnaComboBox columnaComboBox;
+
+        for (int i = 0; i < columnasComboBox.size(); i++) {
+
+            columnaComboBox = columnasComboBox.get(i);
+
+            if (columnaComboBox.columna == columna) {
+                return columnaComboBox.combobox;
+            }
+        }
+
+        return new ComboBox();
+    }
+
+    public ArrayList<ColumnaComboBox> columnasComboBox;
 
     /**
      *
@@ -281,6 +507,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         return "N";
     }
 
+    /**
+     *
+     * @param autoresize
+     */
     public void autoResize(boolean autoresize) {
 
         if (autoresize) {
@@ -292,6 +522,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int validaCambios() {
 
         acceptText();
@@ -321,6 +555,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         return 0;
     }
 
+    /**
+     *
+     * @param modelo
+     */
     public void asignarModelo(TableModelAbst modelo) {
 
         if (sorter == null) {
@@ -330,6 +568,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         modelo.addTableModelListener(new TableModelListener() {
             public void tableChanged(TableModelEvent e) {
+
                 cambioTabla(e);
             }
         });
@@ -337,9 +576,13 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         setModel(modelo);
     }
 
+    /**
+     *
+     * @param e
+     */
     public void cambioTabla(TableModelEvent e) {
 
-        if (!itemstatus) {
+        if ((!itemstatus || getRender)) {
 
             return;
         }
@@ -354,7 +597,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         switch (e.getType()) {
             case TableModelEvent.INSERT:
                 for (int i = firstRow; i <= lastRow; i++) {
-                   // System.out.println("INSERT " + i);
+                    // System.out.println("INSERT " + i);
 
                     if (itemstatus) {
                         //Agregar el item status nuevo sin valor
@@ -366,21 +609,21 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             case TableModelEvent.UPDATE:
                 if (firstRow == TableModelEvent.HEADER_ROW) {
                     if (index == TableModelEvent.ALL_COLUMNS) {
-                       // System.out.println("A column was added");
+                        // System.out.println("A column was added");
                     } else {
-                       // System.out.println(index + "in header changed");
+                        // System.out.println(index + "in header changed");
                     }
                 } else {
                     for (int i = firstRow; i <= lastRow; i++) {
                         if (index == TableModelEvent.ALL_COLUMNS) {
-                           // System.out.println("All columns have changed");
+                            // System.out.println("All columns have changed");
                         } else {
 
                             if (colItemStatus != index) {
 
                                 valueItemStatus = Integer.parseInt(this.getValueAt(i, colItemStatus).toString());
 
-                               // System.out.println("UPDATE " + index + " " + valueItemStatus);
+                                // System.out.println("UPDATE " + index + " " + valueItemStatus);
                                 switch (valueItemStatus) {
                                     case Recuperado:
 
@@ -408,19 +651,23 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             case TableModelEvent.DELETE:
 
                 for (int i = firstRow; i <= lastRow; i++) {
-                   // System.out.println("DELETE " + i);
+                    // System.out.println("DELETE " + i);
 
                 }
                 break;
         }
 
         filtrar(filtro);
-       // System.out.println("hay cambios: "+haycambios);
+        // System.out.println("hay cambios: "+haycambios);
         //sorter.setRowFilter(RowFilter.regexFilter(filtro, colItemStatus));
     }
 
+    /**
+     *
+     * @param e
+     */
     public void mouseMove(MouseEvent e) {
-        
+
         Point p = e.getPoint();
         int row = rowAtPoint(p);
         int column = columnAtPoint(p);
@@ -432,6 +679,9 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         TableColumn nColumn = Table.this.getColumnModel().getColumn(column);
     }
 
+    /**
+     *
+     */
     public void colorPane() {
 
         if (getParent() != null) {
@@ -443,6 +693,13 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
     }
 
+    /**
+     *
+     * @param valor
+     * @param columna
+     * @param jScrollPane
+     * @return
+     */
     public int buscar(String valor, int columna, JScrollPane jScrollPane) {
 
         for (int i = 0; i < getRowCount(); i++) {
@@ -459,6 +716,12 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
     }
 
+    /**
+     *
+     * @param valor
+     * @param columna
+     * @return
+     */
     public int buscar(String[] valor, int columna) {
 
         for (int i = 0; i < getRowCount(); i++) {
@@ -474,6 +737,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         return -1;
     }
 
+    /**
+     *
+     * @param jScrollPane
+     */
     private void scrollToRow(JScrollPane jScrollPane) {
 
         Integer ultimaFila;
@@ -486,6 +753,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         jScrollPane.getViewport().scrollRectToVisible(r);
     }
 
+    /**
+     *
+     * @param fila
+     */
     public void eliminarFila(Integer fila) {
 
         int valuesItemStatus;
@@ -522,6 +793,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         }
     }
 
+    /**
+     *
+     * @param fila
+     */
     public void eliminarFila_2(Integer fila) {
 
         DefaultTableModel modelo = (DefaultTableModel) getModel();
@@ -529,6 +804,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         setModel(modelo);
     }
 
+    /**
+     *
+     * @param color
+     */
     public void setColor(Color color) {
         /*
          colors = new Color[]{
@@ -560,6 +839,9 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         return rendererComponent;
     }
 
+    /**
+     *
+     */
     public void centrar() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -567,11 +849,12 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         for (int i = 0; i < this.getColumnCount(); i++) {
 
             getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-
         }
-        //setDefaultRenderer(String.class, centerRenderer);
     }
 
+    /**
+     *
+     */
     public void alinear() {
 
         Integer columnas;
@@ -601,24 +884,36 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             } else if (this.formato[i] == Table.numero_double || this.formato[i] == Table.numero_entero) {
                 getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
 
-            } else if (this.formato[i] == Table.fecha) {//|| this.formato[i] == Table.booleano
+            } else if (this.formato[i] == Table.fecha) {
 
                 getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
             }
         }
-        //setDefaultRenderer(String.class, centerRenderer);
     }
 
     /**
      *
      * @param columna
      */
-    public void ocultarcolumna(int columna) {
+    public void ocultarColumna(int columna) {
 
         getColumnModel().getColumn(columna).setMinWidth(0);
         getColumnModel().getColumn(columna).setMaxWidth(0);
 
         primerColumna(columna);
+    }
+
+    /**
+     *
+     * @param columnas
+     */
+    public void ocultarColumnas(int[] columnas) {
+
+        for (int i = 0; i < columnas.length; i++) {
+
+            ocultarColumna(columnas[i]);
+            editables[columnas[i]] = false;
+        }
     }
 
     /**
@@ -676,7 +971,9 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
     public void cambiarTitulos() {
 
         TableColumnModel tcm = this.getColumnModel();
+
         for (int col = 0; col < titulos.length; col++) {
+
             tcm.getColumn(col).setHeaderValue(titulos[col]);
         }
 
@@ -756,7 +1053,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         TableModelAbst modelo = (TableModelAbst) getModel();
         //TableModel modelo =  getModel();
-        int removidas = 0;
+        // int removidas = 0;
 
         Object arr[];
 
@@ -811,12 +1108,6 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         return filas;
 
-        /*
-         if (itemstatus) {
-         //Agregar el item status nuevo sin valor
-         this.setValueAt("1", getSelectedRow(), colItemStatus);
-         }
-         */
     }
 
     /**
@@ -854,7 +1145,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
     private void ordenarFecha() {
 
         Fecha fecha = new Fecha();
-        String Sfecha;
+        //String Sfecha;
 
         for (int i = 0; i < columnaTablaOrdenada.size(); i++) {
 
@@ -905,7 +1196,6 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
      */
     private void ordenarNumero() {
 
-        String campo;
         double numero;
 
         for (int i = 0; i < columnaTablaOrdenada.size(); i++) {
@@ -929,7 +1219,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
      */
     private void ordenarNumeroEntero() {
 
-        String campo;
+        //  String campo;
         int numero;
 
         for (int i = 0; i < columnaTablaOrdenada.size(); i++) {
@@ -939,25 +1229,6 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         }
 
         Collections.sort(columnaTablaOrdenada);
-    }
-
-    /**
-     * Si el numero tiene comas se las quita
-     *
-     *
-     * @param numero
-     * @return
-     */
-    private String obtenerNumero(String numero) {
-
-        StringTokenizer num = new StringTokenizer(numero, ",");
-
-        numero = "";
-
-        while (num.hasMoreTokens()) {
-            numero += num.nextToken();
-        }
-        return numero;
     }
 
     /**
@@ -1029,8 +1300,6 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         setModel(modelo);
     }
 
-    public boolean[] actualizable;
-
     /**
      *
      * @param Aactualizables
@@ -1050,11 +1319,31 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         TableColumn nColumn;
 
+        if (editables == null) {
+
+            editables = new boolean[tamaños.length];
+        }
+
         for (int i = 0; i < tamaños.length; i++) {
 
             nColumn = getColumnModel().getColumn(i);
             nColumn.setPreferredWidth(tamaños[i]);
+
+            if (tamaños[i] == 0) {
+                editables[i] = false;
+            } else {
+                editables[i] = true;
+            }
         }
+    }
+
+    /**
+     *
+     * @param Atamaños
+     */
+    public void setEditables(boolean[] Aeditables) {
+
+        editables = Aeditables;
     }
 
     /**
@@ -1107,8 +1396,8 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         acceptText();
 
         if (!haycambios) {
-            JOptionPane.showConfirmDialog(null, "No hay cambios por guardar", "Mensaje del sistema", JOptionPane.DEFAULT_OPTION);
 
+            JOptionPane.showConfirmDialog(null, "No hay cambios por guardar", "Mensaje del sistema", JOptionPane.DEFAULT_OPTION);
             return;
         }
 
@@ -1122,10 +1411,8 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             if (!tablaBD.grabar()) {
 
                 JOptionPane.showConfirmDialog(null, "Ocurrio un error al grabar\n" + manejadorBD.errorSQL, "Mensaje del sistema", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
-
                 filtrar(null);
                 return;
-
             }
 
             setValueAt("0", fila, colItemStatus);
@@ -1142,7 +1429,6 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             tablaBD.borrar();
             this.eliminarFila_2(fila);
             filtrar(null);
-            //setValueAt("0", fila, colItemStatus);
             fila = buscar(new String[]{"4"}, colItemStatus);
         }
 
@@ -1214,7 +1500,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         tamañoColumna(tamaños);
 
         itemstatus = true;
-        ocultarcolumna(colItemStatus);
+        ocultarColumna(colItemStatus);
     }
 
     /**
@@ -1224,7 +1510,11 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         if (isEditing()) {
 
+            this.getRender = true;
+
             getCellEditor().stopCellEditing();
+
+            this.getRender = false;
         }
     }
 

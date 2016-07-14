@@ -50,9 +50,9 @@ public class TipoPago extends TablaBD {
 
         tabla.agregarItemStatus();
 
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(2);
-        tabla.ocultarcolumna(3);
+        tabla.ocultarColumna(0);
+        tabla.ocultarColumna(2);
+        tabla.ocultarColumna(3);
 
         desconectarBD();
     }
@@ -81,7 +81,7 @@ public class TipoPago extends TablaBD {
         tabla.setTitulos(titulos);
         tabla.cambiarTitulos();
         tabla.setFormato(new int[]{
-            Table.letra, Table.numero_double, Table.letra,
+            Table.letra, Table.letra, Table.letra,
             Table.letra});
         tabla.tamañoColumna(new int[]{
             0, 100, 0, 0

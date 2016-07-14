@@ -37,15 +37,6 @@ public class PagoDetalle extends TablaBD {
         importe = 0.00;
     }
 
-    /*
-     select pd.id_sucursal, pd.id_pago, pd.id_pago_detalle, tp.id_tipo_pago, tp.descripcion,
-     COALESCE(pd.importe, 0.00) as importe
-     from  pago_detalle pd right join tipo_pago tp on
-     pd.id_tipo_pago = tp.id_tipo_pago
-     and pd.id_sucursal = ''
-     and   pd.id_pago		=	''
-     and	  pd.id_pago_detalle  = ''; 
-     */
     /**
      *
      * @param tabla
@@ -70,11 +61,16 @@ public class PagoDetalle extends TablaBD {
         // }
 
         tabla.agregarItemStatus();
-        /*
-         tabla.ocultarcolumna(0);
-         tabla.ocultarcolumna(3);
-         tabla.ocultarcolumna(4);
-         */
+
+        tabla.ocultarColumnas(new int[]{
+            0, 1, 2, 3, 6, 7});
+
+        tabla.setEditables(new boolean[]{
+            false, false, false, false,
+            false, true, false, false});
+
+        tabla.alinear();
+
         desconectarBD();
     }
 
@@ -91,7 +87,7 @@ public class PagoDetalle extends TablaBD {
 
         String titulos[] = {
             "Id Sucursal", "Id Pago", "Id Pago Detalle", "Id Tipo Pago",
-            "Descripcion", "Importe", "Crea", "Modifica",};
+            "Descripción", "Importe", "Crea", "Modifica",};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -105,7 +101,7 @@ public class PagoDetalle extends TablaBD {
         tabla.tamañoColumna(new int[]{
             100, 100, 100, 100,
             100, 100, 100, 100});
-        
+
         tabla.setTablaBD(this);
 
         return tabla;

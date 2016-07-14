@@ -128,10 +128,10 @@ public class ArticuloSucursal extends TablaBD {
         manejadorBD.asignarTable(tabla);
         //}
 
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(1);
-        tabla.ocultarcolumna(4);
-        tabla.ocultarcolumna(5);
+        tabla.ocultarColumna(0);
+        tabla.ocultarColumna(1);
+        tabla.ocultarColumna(4);
+        tabla.ocultarColumna(5);
 
         tabla.setEnabled(false);
 

@@ -49,9 +49,10 @@ public class Impuesto extends TablaBD {
 
         tabla.agregarItemStatus();
 
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(3);
-        tabla.ocultarcolumna(4);
+        tabla.ocultarColumnas(new int[]{0,3,4});
+        tabla.setEditables(new boolean[]{false,true,true,false, false});    
+        tabla.alinear();
+   
 
         desconectarBD();
     }

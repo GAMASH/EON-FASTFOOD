@@ -105,10 +105,10 @@ public class Marca extends TablaBD {
 
         tabla.agregarItemStatus();
 
-        tabla.ocultarcolumna(0);
-        tabla.ocultarcolumna(2);
-        tabla.ocultarcolumna(3);
-        tabla.ocultarcolumna(4);
+        tabla.ocultarColumna(0);
+        tabla.ocultarColumna(2);
+        tabla.ocultarColumna(3);
+        tabla.ocultarColumna(4);
 
         desconectarBD();
     }
