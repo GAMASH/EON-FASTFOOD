@@ -6,6 +6,7 @@
 package abstractt.visual;
 
 import abstractt.TablaBD;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import javax.swing.event.InternalFrameEvent;
 
@@ -20,10 +21,11 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
     /**
      * Creates new form tipos
      */
-    public CatalogoAbstracto() {
+    public CatalogoAbstracto(String titulo) {
 
         initComponents();
         setLocation(30, 30);
+        setTitle(titulo);
     }
 
     public void cargaValores() {
@@ -32,6 +34,11 @@ public class CatalogoAbstracto extends abstractt.visual.InternalFrameAbstracto {
         bGuardar.redimensionarIcono();
         boton1.redimensionarIcono();
         bNuevo.redimensionarIcono();
+    }
+    
+    public void Dimensionar( Dimension d) {
+            
+        this.setSize(d);
     }
 
     /**

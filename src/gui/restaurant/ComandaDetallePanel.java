@@ -10,6 +10,11 @@ import static domain.General.mensaje;
 import static domain.General.sucursal;
 import domain.tabla.ComandaDetalle;
 import domain.tabla.Platillo;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.TransferHandler;
 
 /**
@@ -28,14 +33,14 @@ public class ComandaDetallePanel extends Panel {
 
         initComponents();
         total = 0.0;
-        
+
         table1.setEditable(false);
+        comanda_detalles_panel = new ArrayList<ComandaDetallePanel>();
     }
 
     public void grabar() {
 
         table1.grabar();
-
     }
 
     /**
@@ -74,8 +79,33 @@ public class ComandaDetallePanel extends Panel {
 
         this.tf_subtotal.setDouble(total);
         this.tf_total.setDouble(total);
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public Double getSubtotal(){
         
+        return tf_subtotal.obtenerValor();
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public Double getImpuesto(){
         
+        return tf_impuesto.obtenerValor();        
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public Double getTotal(){
+        
+        return tf_total.obtenerValor();        
     }
 
     public ComandaDetalle quitarPlatillo() {
@@ -134,6 +164,12 @@ public class ComandaDetallePanel extends Panel {
         calcular_totales();
     }
 
+    ArrayList<ComandaDetallePanel> comanda_detalles_panel;
+
+    void setListaPanales(ArrayList<ComandaDetallePanel> comanda_detalles_panel) {
+        this.comanda_detalles_panel = comanda_detalles_panel;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,6 +200,11 @@ public class ComandaDetallePanel extends Panel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                table1PropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(table1);
 
         jPanel1.setOpaque(false);
@@ -179,7 +220,6 @@ public class ComandaDetallePanel extends Panel {
 
         tf_subtotal.setEditable(false);
         tf_subtotal.setBackground(new java.awt.Color(255, 255, 255));
-        tf_subtotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         tf_subtotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_subtotalActionPerformed(evt);
@@ -188,11 +228,9 @@ public class ComandaDetallePanel extends Panel {
 
         tf_impuesto.setEditable(false);
         tf_impuesto.setBackground(new java.awt.Color(255, 255, 255));
-        tf_impuesto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         tf_total.setEditable(false);
         tf_total.setBackground(new java.awt.Color(255, 255, 255));
-        tf_total.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -258,9 +296,78 @@ public class ComandaDetallePanel extends Panel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_subtotalActionPerformed
 
-    
-    
-    
+    private void table1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_table1PropertyChange
+
+        pasa_cambio();
+
+    }//GEN-LAST:event_table1PropertyChange
+
+    private void pasa_cambio() {
+
+        Integer ll_fila;
+        ComandaDetalle comanda_detalle_registro;
+        ComandaDetallePanel comanda_detalle_panel;
+
+        if (comanda_detalle == null) {
+            return;
+        }
+
+        ll_fila = table1.getSelectedRow();
+
+        if (ll_fila < 0) {
+            
+            return;
+        }
+
+        //obtener el registro de ComandaDetalle de la tabla
+        comanda_detalle_registro = new ComandaDetalle();
+        comanda_detalle_registro.setRegistro(table1, ll_fila);
+
+        System.out.println(comanda_detalle_registro.toString());
+
+        //si este detalle es el total
+        if (comanda_detalle.num_comensal == 0) {
+
+            //Total
+            System.out.println("Total: fila " + ll_fila);
+            
+            //obtener el detalle del total
+            comanda_detalle_panel = comanda_detalles_panel.get(comanda_detalle_registro.num_comensal - 1);
+            comanda_detalle_panel.ModficarPlatillo(comanda_detalle_registro);
+
+        } //si este detalle es comensal
+        else {
+
+            //comensal
+            System.out.println("comensal: fila " + ll_fila);
+            System.out.println(table1.getValorString(ll_fila, 7) + " " + table1.getValorInt(ll_fila, 9));
+
+            //obtener el detalle del total
+            comanda_detalle_panel = comanda_detalles_panel.get(comanda_detalles_panel.size() - 1);
+
+            comanda_detalle_panel.ModficarPlatillo(comanda_detalle_registro);
+
+        }
+    }
+
+    public void ModficarPlatillo(ComandaDetalle comanda_detalle) {
+
+        Integer fila;
+        ComandaDetalle comanda_detalle_2 = new ComandaDetalle();
+
+        for (int i = 0; i < table1.getRowCount(); i++) {
+
+            comanda_detalle_2.setRegistro(table1, i);
+
+            if (comanda_detalle_2.equals(comanda_detalle)) {
+
+                table1.setValueAt(comanda_detalle.observaciones, i, 7);
+                table1.setValueAt(comanda_detalle.orden, i, 9);
+            }
+        }       
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

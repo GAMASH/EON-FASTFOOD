@@ -141,7 +141,7 @@ public class TipoPago extends TablaBD {
         manejadorBD.parametrosSP = new ParametrosSP();
         manejadorBD.parametrosSP.agregarParametro(id_tipo_pago, "varId_tipo_pago", "STRING", "IN");
 
-        if (manejadorBD.ejecutarSP("eliminarTipPago") == 0) {
+        if (manejadorBD.ejecutarSP("eliminarTipoPago") == 0) {
 
             error = true;
         } else {

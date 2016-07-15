@@ -7,7 +7,6 @@ package gui.restaurant;
 
 import abstractt.visual.Boton;
 import abstractt.visual.InternalFrameAbstracto;
-import static domain.General.mensaje;
 import domain.tabla.Comanda;
 import domain.tabla.ComandaDetalle;
 import domain.tabla.Pago;
@@ -91,7 +90,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
             platillo_eliminado = panel_detalle.quitarPlatillo();
             //quitar del detalle
             panel_detalle = comanda_detalles_panel.get(platillo_eliminado.num_comensal - 1);
-            platillo_eliminado = panel_detalle.quitarPlatillo();
+            //platillo_eliminado =
+            panel_detalle.quitarPlatillo(platillo_eliminado);
         }
     }
 
@@ -214,8 +214,9 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         comanda_detalle.num_comensal = comensal;
 
         panel_detalle.setComandaDetalle(comanda_detalle);
-
         this.comanda_detalles_panel.add(panel_detalle);
+
+        panel_detalle.setListaPanales(comanda_detalles_panel);
 
         jTabbedPane1.add(panel_detalle, nombre_tab);
     }
@@ -238,8 +239,17 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         panel_detalle.grabar();
 
     }
-    
-    public void pagar(){
+
+    public void pagar() {
+
+        comanda.pago = new Pago();
+        ComandaDetallePanel panel_detalle;
+        panel_detalle = comanda_detalles_panel.get(index_panel_total);
+
+        comanda.pago.subtotal = panel_detalle.getSubtotal();
+        comanda.pago.impuesto = panel_detalle.getImpuesto();
+        comanda.pago.total = panel_detalle.getTotal();
+
         if (pagos_comanda == null) {
 
             pagos_comanda = new Pagos();
@@ -247,19 +257,19 @@ public class ComandaCaptura extends InternalFrameAbstracto {
 
         if (!pagos_comanda.isVisible()) {
 
-            pagos_comanda.setPago(new Pago());
-            
-            
+            pagos_comanda.setPago(comanda.pago);
+
             escritorio.remove(pagos_comanda);
             escritorio.add(pagos_comanda);
             pagos_comanda.centrado(escritorio.getSize());
             pagos_comanda.setModal(true);
             pagos_comanda.setVisible(true);
 
-           
+            comanda.pago = pagos_comanda.getPago();
+
         }
     }
-    
+
     public Pagos pagos_comanda;
 
     /**
@@ -413,7 +423,6 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     private void boton_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_pagarActionPerformed
         pagar();
     }//GEN-LAST:event_boton_pagarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.visual.Boton boton_pagar;

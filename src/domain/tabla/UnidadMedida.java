@@ -68,7 +68,7 @@ public class UnidadMedida extends TablaBD {
 
     private void asignarValores() {
 
-        id_unidad_medida = manejadorBD.getValorString(0, 0 );
+        id_unidad_medida = manejadorBD.getValorString(0, 0);
         descripcion = manejadorBD.getValorString(0, 1);
         nombre_corto = manejadorBD.getValorString(0, 2);
     }
@@ -89,9 +89,9 @@ public class UnidadMedida extends TablaBD {
         }
     }
 
-    public static void cargarUnidadesMedida(Table tabla) {
+    public void cargarTabla(Table tabla) {
 
-        crearTablaUnidadesMedida(tabla);
+        crearTabla(tabla);
         conectarBD();
 
         manejadorBD.consulta(""
@@ -113,7 +113,7 @@ public class UnidadMedida extends TablaBD {
         desconectarBD();
     }
 
-    public static Table crearTablaUnidadesMedida(Table tabla) {
+    private Table crearTabla(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();
@@ -187,7 +187,7 @@ public class UnidadMedida extends TablaBD {
         return error;
     }
 
-     public static ArrayList<String> cargarUnidadesMedida() {
+    public static ArrayList<String> cargarUnidadesMedida() {
 
         ArrayList<String> lista;
 
@@ -211,7 +211,7 @@ public class UnidadMedida extends TablaBD {
 
         return lista;
     }
-    
+
     public static ArrayList<UnidadMedida> unidades_medida() {
 
         ArrayList<UnidadMedida> lista;

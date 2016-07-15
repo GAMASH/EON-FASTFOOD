@@ -34,7 +34,7 @@ public class TipoArticulo extends TablaBD {
     public void cargarPorDescripcion(String sDescripcion) {
 
         conectarBD();
-        
+
         manejadorBD.consulta(
                 "SELECT	 id_tipo_articulo, descripcion, activo\n"
                 + "FROM  tipo_articulo\n"
@@ -44,7 +44,7 @@ public class TipoArticulo extends TablaBD {
 
             asignarValores();
         }
-        
+
         desconectarBD();
     }
 
@@ -52,7 +52,7 @@ public class TipoArticulo extends TablaBD {
 
         conectarBD();
 
-       manejadorBD.consulta(
+        manejadorBD.consulta(
                 "SELECT	 id_tipo_articulo, descripcion, activo\n"
                 + "FROM  tipo_articulo\n"
                 + "WHERE id_tipo_articulo = '" + pk.get(0).toString() + "'");
@@ -64,7 +64,7 @@ public class TipoArticulo extends TablaBD {
 
         desconectarBD();
     }
-    
+
     private void asignarValores() {
 
         id_tipo_articulo = manejadorBD.getValorString(0, 0);
@@ -74,9 +74,9 @@ public class TipoArticulo extends TablaBD {
 
     public void setRegistro(Table table, Integer i) {
 
-        id_tipo_articulo = (String) table.getValueAt( i, 0);
-        descripcion = (String) table.getValueAt( i, 1);
-        activo = (String) table.getValueAt( i, 2);
+        id_tipo_articulo = (String) table.getValueAt(i, 0);
+        descripcion = (String) table.getValueAt(i, 1);
+        activo = (String) table.getValueAt(i, 2);
 
         if (id_tipo_articulo == null) {
 
@@ -88,9 +88,13 @@ public class TipoArticulo extends TablaBD {
         }
     }
 
-    public static void cargarTiposArticulos(Table tabla) {
+    /**
+     *
+     * @param tabla
+     */
+    public void cargarTabla(Table tabla) {
 
-        crearTablaTipoArticulo(tabla);
+        crearTabla(tabla);
 
         conectarBD();
 
@@ -114,7 +118,7 @@ public class TipoArticulo extends TablaBD {
         desconectarBD();
     }
 
-    public static Table crearTablaTipoArticulo(Table tabla) {
+    public Table crearTabla(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();

@@ -88,9 +88,9 @@ public class Marca extends TablaBD {
         }
     }
 
-    public static void cargarMarcas(Table tabla) {
+    public void cargarTabla(Table tabla) {
 
-        crearTablaMarcas(tabla);
+        crearTabla(tabla);
         conectarBD();
 
         manejadorBD.consulta(""
@@ -113,7 +113,7 @@ public class Marca extends TablaBD {
         desconectarBD();
     }
 
-    public static Table crearTablaMarcas(Table tabla) {
+    private Table crearTabla(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();

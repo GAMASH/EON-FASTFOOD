@@ -5,28 +5,27 @@
  */
 package gui;
 
+import abstractt.TablaBD;
+import abstractt.visual.CatalogoAbstracto;
 import abstractt.visual.ComponenteMenu;
 import abstractt.visual.FrameAbstracto;
 import abstractt.visual.InternalFrameAbstracto;
 import static domain.General.cargarConfiguracion;
 import static domain.General.sucursal;
 import gui.inventarios.ArticulosFrame;
-import gui.Catalogos.TipoArticuloCatalogo;
-import gui.Catalogos.MarcaCatalogo;
 import domain.tabla.Impuesto;
+import domain.tabla.Marca;
+import domain.tabla.Mesa;
+import domain.tabla.TipoArticulo;
 import domain.tabla.TipoEmpleado;
 import domain.tabla.TipoPago;
+import domain.tabla.TipoPlatillo;
+import domain.tabla.UnidadMedida;
 import domain.tabla.Usuario;
-
-import gui.Catalogos.ImpuestoCatalogo2;
-import gui.Catalogos.MesaCatalogo;
-import gui.Catalogos.TipoPlatilloCatalogo;
-import gui.Catalogos.TiposPagoCatalogo;
-import gui.Catalogos.UnidadMedidaCatalogo;
-import gui.accesos.TipoEmpleadoCatalogo;
 import gui.accesos.UsuarioCaptura;
 import gui.restaurant.PlatillosFrame;
 import gui.restaurant.ComandasFrame;
+import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,23 +49,24 @@ public class Principal extends javax.swing.JFrame {
     private static final int tipos_empleado_opcion = 10;
     private static final int usuarios_opcion = 11;
     private static final int tipos_pago_opcion = 12;
-    
+
     private Integer ancho_opciones;
     boolean colapsed = false;
 
     /**/
-    private TipoArticuloCatalogo tipoProducto = null;
-    private MarcaCatalogo marca = null;
-    private ImpuestoCatalogo2 impuesto = null;
-    private UnidadMedidaCatalogo unidadMedida = null;
-    private ArticulosFrame articulosFrame = null;
-    private PlatillosFrame platillosFrame = null;
-    private TipoPlatilloCatalogo tipo_platillo = null;
-    private MesaCatalogo mesa = null;
-    private ComandasFrame comanda = null;
-    private TipoEmpleadoCatalogo tipo_empleado = null;
     private FrameAbstracto usuario = null;
-    private TiposPagoCatalogo tipos_pago = null;
+    private ArticulosFrame articulos_frame = null;
+    private PlatillosFrame platillos_frame = null;
+    private ComandasFrame comanda = null;
+
+    private CatalogoAbstracto impuesto = null;
+    private CatalogoAbstracto marca = null;
+    private CatalogoAbstracto mesa = null;
+    private CatalogoAbstracto tipo_empleado = null;
+    private CatalogoAbstracto tipo_pago = null;
+    private CatalogoAbstracto tipo_platillo = null;
+    private CatalogoAbstracto tipo_producto = null;
+    private CatalogoAbstracto unidad_medida = null;
 
     /**
      * Creates new form Principal
@@ -82,8 +82,6 @@ public class Principal extends javax.swing.JFrame {
         ancho_opciones = 200;
 
         menu_bar.setSize(ancho_opciones, getHeight() - 100);
-        // menu_bar.setTipo("P");
-        //menu_bar.setTexto("O P C I O N E S");
 
         statusBar1.progresBarr(0, false, "C A R G A N D O");
 
@@ -125,7 +123,7 @@ public class Principal extends javax.swing.JFrame {
             }
         }
 
-        statusBar1.progressBar = false;
+        statusBar1.setProgressBar(false);
     }
 
     /**
@@ -205,7 +203,7 @@ public class Principal extends javax.swing.JFrame {
                 break;
         }
 
-        statusBar1.progressBar = false;
+        statusBar1.setProgressBar(false);
     }
 
     /**
@@ -440,182 +438,25 @@ public class Principal extends javax.swing.JFrame {
     /**
      *
      */
-    private void tipo_producto() {
-        if (tipoProducto == null) {
-
-            tipoProducto = new gui.Catalogos.TipoArticuloCatalogo();
-        }
-        if (!tipoProducto.isVisible()) {
-
-            tipoProducto = new gui.Catalogos.TipoArticuloCatalogo();
-            //   tipoProducto.setManejadorBD(getManejadorBD());
-            tipoProducto.cargaValores();
-            tipoProducto.centrado(escritorio.getSize());
-            escritorio.remove(tipoProducto);
-            escritorio.add(tipoProducto);
-            tipoProducto.setVisible(true);
-        } else {
-
-            tipoProducto.setVisible(false);
-            tipoProducto.setVisible(true);
-        }
-    }
-
-    /**
-     *
-     */
-    private void marca() {
-
-        if (marca == null) {
-
-            marca = new gui.Catalogos.MarcaCatalogo();
-        }
-        if (!marca.isVisible()) {
-
-            marca = new gui.Catalogos.MarcaCatalogo();
-            // marca.setManejadorBD(getManejadorBD());
-            marca.cargaValores();
-            marca.centrado(escritorio.getSize());
-            escritorio.remove(marca);
-            escritorio.add(marca);
-            marca.setVisible(true);
-        } else {
-
-            marca.setVisible(false);
-            marca.setVisible(true);
-        }
-    }
-
-    /**
-     *
-     */
-    private void tipos_pago() {
-
-        if (tipos_pago == null) {
-
-            tipos_pago = new gui.Catalogos.TiposPagoCatalogo();
-        }
-        if (!tipos_pago.isVisible()) {
-
-            tipos_pago = new gui.Catalogos.TiposPagoCatalogo();
-            tipos_pago.Dimensionar();
-            // marca.setManejadorBD(getManejadorBD());
-            tipos_pago.setTablaBd(new TipoPago());
-            tipos_pago.cargaValores();
-            tipos_pago.centrado(escritorio.getSize());
-
-            escritorio.remove(tipos_pago);
-            escritorio.add(tipos_pago);
-            tipos_pago.setVisible(true);
-
-        } else {
-
-            tipos_pago.setVisible(false);
-            tipos_pago.setVisible(true);
-        }
-    }
-    
-    /**
-     *
-     */
-    private void impuesto() {
-
-        if (impuesto == null) {
-
-            impuesto = new gui.Catalogos.ImpuestoCatalogo2();
-        }
-        if (!impuesto.isVisible()) {
-
-            impuesto = new gui.Catalogos.ImpuestoCatalogo2();
-            impuesto.Dimensionar();
-            // marca.setManejadorBD(getManejadorBD());
-            impuesto.setTablaBd(new Impuesto());
-            impuesto.cargaValores();
-            impuesto.centrado(escritorio.getSize());
-
-            escritorio.remove(impuesto);
-            escritorio.add(impuesto);
-            impuesto.setVisible(true);
-
-        } else {
-
-            impuesto.setVisible(false);
-            impuesto.setVisible(true);
-        }
-    }
-
-    /**
-     *
-     */
-    private void unidad_medida() {
-
-        if (unidadMedida == null) {
-
-            unidadMedida = new gui.Catalogos.UnidadMedidaCatalogo();
-        }
-        if (!unidadMedida.isVisible()) {
-
-            unidadMedida = new gui.Catalogos.UnidadMedidaCatalogo();
-
-            unidadMedida.cargaValores();
-            unidadMedida.centrado(escritorio.getSize());
-            escritorio.remove(unidadMedida);
-            escritorio.add(unidadMedida);
-            unidadMedida.setVisible(true);
-        } else {
-
-            unidadMedida.setVisible(false);
-            unidadMedida.setVisible(true);
-        }
-    }
-
-    /**
-     *
-     */
     private void articulos() {
-        if (articulosFrame == null) {
+        if (articulos_frame == null) {
 
-            articulosFrame = new gui.inventarios.ArticulosFrame();
+            articulos_frame = new gui.inventarios.ArticulosFrame();
         }
-        if (!articulosFrame.isVisible()) {
+        if (!articulos_frame.isVisible()) {
 
-            articulosFrame = new gui.inventarios.ArticulosFrame();
+            articulos_frame = new gui.inventarios.ArticulosFrame();
 
-            articulosFrame.cargaValores();
+            articulos_frame.cargaValores();
             //articulosFrame.centrado(escritorio.getSize());            
-            escritorio.remove(articulosFrame);
-            escritorio.add(articulosFrame);
-            articulosFrame.maximizar(escritorio.getSize());
-            articulosFrame.setVisible(true);
+            escritorio.remove(articulos_frame);
+            escritorio.add(articulos_frame);
+            articulos_frame.maximizar(escritorio.getSize());
+            articulos_frame.setVisible(true);
         } else {
 
-            articulosFrame.setVisible(false);
-            articulosFrame.setVisible(true);
-        }
-    }
-
-    /**
-     *
-     */
-    private void tipo_platillo() {
-
-        if (tipo_platillo == null) {
-
-            tipo_platillo = new gui.Catalogos.TipoPlatilloCatalogo();
-        }
-        if (!tipo_platillo.isVisible()) {
-
-            tipo_platillo = new gui.Catalogos.TipoPlatilloCatalogo();
-            // marca.setManejadorBD(getManejadorBD());
-            tipo_platillo.cargaValores();
-            tipo_platillo.centrado(escritorio.getSize());
-            escritorio.remove(tipo_platillo);
-            escritorio.add(tipo_platillo);
-            tipo_platillo.setVisible(true);
-        } else {
-
-            tipo_platillo.setVisible(false);
-            tipo_platillo.setVisible(true);
+            articulos_frame.setVisible(false);
+            articulos_frame.setVisible(true);
         }
     }
 
@@ -623,75 +464,22 @@ public class Principal extends javax.swing.JFrame {
      *
      */
     private void platillos() {
-        if (platillosFrame == null) {
+        if (platillos_frame == null) {
 
-            platillosFrame = new gui.restaurant.PlatillosFrame();
+            platillos_frame = new gui.restaurant.PlatillosFrame();
         }
-        if (!platillosFrame.isVisible()) {
+        if (!platillos_frame.isVisible()) {
 
-            platillosFrame = new gui.restaurant.PlatillosFrame();
-            platillosFrame.cargaValores();
-            escritorio.remove(platillosFrame);
-            escritorio.add(platillosFrame);
-            platillosFrame.maximizar(escritorio.getSize());
-            platillosFrame.setVisible(true);
+            platillos_frame = new gui.restaurant.PlatillosFrame();
+            platillos_frame.cargaValores();
+            escritorio.remove(platillos_frame);
+            escritorio.add(platillos_frame);
+            platillos_frame.maximizar(escritorio.getSize());
+            platillos_frame.setVisible(true);
         } else {
 
-            platillosFrame.setVisible(false);
-            platillosFrame.setVisible(true);
-        }
-    }
-
-    /**
-     *
-     */
-    private void mesas() {
-        if (mesa == null) {
-
-            mesa = new gui.Catalogos.MesaCatalogo();
-        }
-        if (!mesa.isVisible()) {
-
-            mesa = new gui.Catalogos.MesaCatalogo();
-            // marca.setManejadorBD(getManejadorBD());
-            mesa.cargaValores();
-            mesa.centrado(escritorio.getSize());
-            escritorio.remove(mesa);
-            escritorio.add(mesa);
-            mesa.setVisible(true);
-        } else {
-
-            mesa.setVisible(false);
-            mesa.setVisible(true);
-        }
-    }
-
-    /**
-     *
-     */
-    private void tipo_empleado() {
-
-        if (tipo_empleado == null) {
-
-            tipo_empleado = new TipoEmpleadoCatalogo();
-        }
-        if (!tipo_empleado.isVisible()) {
-
-            tipo_empleado = new TipoEmpleadoCatalogo();
-            tipo_empleado.Dimensionar();
-            // marca.setManejadorBD(getManejadorBD());
-            tipo_empleado.setTablaBd(new TipoEmpleado());
-            tipo_empleado.cargaValores();
-            tipo_empleado.centrado(escritorio.getSize());
-
-            escritorio.remove(tipo_empleado);
-            escritorio.add(tipo_empleado);
-            tipo_empleado.setVisible(true);
-
-        } else {
-
-            tipo_empleado.setVisible(false);
-            tipo_empleado.setVisible(true);
+            platillos_frame.setVisible(false);
+            platillos_frame.setVisible(true);
         }
     }
 
@@ -699,6 +487,7 @@ public class Principal extends javax.swing.JFrame {
      *
      */
     private void comandas() {
+
         if (comanda == null) {
 
             comanda = new gui.restaurant.ComandasFrame();
@@ -747,6 +536,108 @@ public class Principal extends javax.swing.JFrame {
     }
 
     /**
+     * CATALOGOS
+     */
+    /**
+     *
+     * @param catalogo
+     * @param title
+     * @param dimension
+     * @param tabla
+     * @return
+     */
+    private CatalogoAbstracto muestraCatalogo(CatalogoAbstracto catalogo, String title, Dimension dimension, TablaBD tabla) {
+
+        if (catalogo == null) {
+
+            catalogo = new CatalogoAbstracto(title);
+        }
+        if (!catalogo.isVisible()) {
+
+            catalogo = new CatalogoAbstracto(title);
+            catalogo.Dimensionar(dimension);
+            catalogo.setTablaBd(tabla);
+            catalogo.cargaValores();
+            catalogo.centrado(escritorio.getSize());
+
+            escritorio.remove(catalogo);
+            escritorio.add(catalogo);
+            catalogo.setVisible(true);
+
+        } else {
+
+            catalogo.setVisible(false);
+            catalogo.setVisible(true);
+        }
+
+        return catalogo;
+    }
+
+    /**
+     *
+     */
+    private void impuesto() {
+
+        impuesto = muestraCatalogo(impuesto, "Impuestos", new Dimension(250, 500), new Impuesto());
+    }
+
+    /**
+     *
+     */
+    private void marca() {
+
+        marca = muestraCatalogo(marca, "Marcas", new Dimension(250, 500), new Marca());
+    }
+
+    /**
+     *
+     */
+    private void mesas() {
+
+        mesa = muestraCatalogo(mesa, "Mesas", new Dimension(400, 500), new Mesa());
+    }
+
+    /**
+     *
+     */
+    private void tipo_empleado() {
+
+        tipo_empleado = muestraCatalogo(tipo_empleado, "Tipos de Empleado", new Dimension(250, 500), new TipoEmpleado());
+    }
+
+    /**
+     *
+     */
+    private void tipos_pago() {
+
+        tipo_pago = muestraCatalogo(tipo_pago, "Tipos de Pago", new Dimension(250, 500), new TipoPago());
+    }
+
+    /**
+     *
+     */
+    private void tipo_platillo() {
+
+        tipo_platillo = muestraCatalogo(tipo_platillo, "Tipos de Platillo", new Dimension(250, 500), new TipoPlatillo());
+    }
+
+    /**
+     *
+     */
+    private void tipo_producto() {
+
+        tipo_producto = muestraCatalogo(tipo_producto, "Tipos de Articulo", new Dimension(250, 500), new TipoArticulo());
+    }
+
+    /**
+     *
+     */
+    private void unidad_medida() {
+
+        unidad_medida = muestraCatalogo(unidad_medida, "Unidades de Medida", new Dimension(250, 500), new UnidadMedida());
+    }
+
+    /**
      *
      */
     public void collapsed() {
@@ -778,7 +669,6 @@ public class Principal extends javax.swing.JFrame {
         for (int i = 0; i < escritorio.getComponentCount(); i++) {
 
             InternalFrameAbstracto frame = (InternalFrameAbstracto) escritorio.getComponent(i);
-            //  System.out.println("frame " + frame.getClass().getName() + " " + frame);
             frame.reacomodo(escritorio.getSize());
         }
 

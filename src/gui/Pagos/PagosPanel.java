@@ -33,6 +33,11 @@ public class PagosPanel extends Panel {
         
         pago_detalle.cargarTabla(table1, pago);
         
+        tf_subtotal.setDouble(pago.subtotal);
+        tf_impuesto.setDouble(pago.impuesto);
+        tf_total.setDouble(pago.total);
+        
+        
     }
     
 
@@ -52,10 +57,10 @@ public class PagosPanel extends Panel {
         calendar1 = new abstractt.visual.Calendar();
         jPanel2 = new javax.swing.JPanel();
         label4 = new abstractt.visual.Label();
-        textFieldMoneda1 = new abstractt.visual.TextFieldMoneda();
+        tf_subtotal = new abstractt.visual.TextFieldMoneda();
         label5 = new abstractt.visual.Label();
-        textFieldMoneda2 = new abstractt.visual.TextFieldMoneda();
-        textFieldMoneda3 = new abstractt.visual.TextFieldMoneda();
+        tf_impuesto = new abstractt.visual.TextFieldMoneda();
+        tf_total = new abstractt.visual.TextFieldMoneda();
         label6 = new abstractt.visual.Label();
         jPanel3 = new javax.swing.JPanel();
         label7 = new abstractt.visual.Label();
@@ -82,14 +87,19 @@ public class PagosPanel extends Panel {
         label4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label4.setText("Subtotal:");
 
-        textFieldMoneda1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tf_subtotal.setFocusable(false);
+        tf_subtotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_subtotalActionPerformed(evt);
+            }
+        });
 
         label5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label5.setText("Impuesto:");
 
-        textFieldMoneda2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tf_impuesto.setFocusable(false);
 
-        textFieldMoneda3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        tf_total.setFocusable(false);
 
         label6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label6.setText("Total:");
@@ -102,30 +112,31 @@ public class PagosPanel extends Panel {
                 .addContainerGap()
                 .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textFieldMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textFieldMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_impuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textFieldMoneda3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textFieldMoneda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(textFieldMoneda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textFieldMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(label4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tf_total, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_impuesto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_subtotal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -165,12 +176,10 @@ public class PagosPanel extends Panel {
         label7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label7.setText("Efectivo:");
 
-        textFieldMoneda4.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-
         label8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label8.setText("Cambio:");
 
-        textFieldMoneda5.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textFieldMoneda5.setFocusable(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -245,6 +254,10 @@ public class PagosPanel extends Panel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tf_subtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_subtotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_subtotalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.visual.Calendar calendar1;
@@ -261,11 +274,11 @@ public class PagosPanel extends Panel {
     private abstractt.visual.Label label7;
     private abstractt.visual.Label label8;
     private abstractt.visual.Table table1;
-    private abstractt.visual.TextFieldMoneda textFieldMoneda1;
-    private abstractt.visual.TextFieldMoneda textFieldMoneda2;
-    private abstractt.visual.TextFieldMoneda textFieldMoneda3;
     private abstractt.visual.TextFieldMoneda textFieldMoneda4;
     private abstractt.visual.TextFieldMoneda textFieldMoneda5;
+    private abstractt.visual.TextFieldMoneda tf_impuesto;
+    private abstractt.visual.TextFieldMoneda tf_subtotal;
+    private abstractt.visual.TextFieldMoneda tf_total;
     // End of variables declaration//GEN-END:variables
 
 }

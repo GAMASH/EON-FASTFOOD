@@ -20,8 +20,6 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -32,14 +30,12 @@ import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
-import javax.swing.CellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -1508,14 +1504,15 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
      */
     public void acceptText() {
 
-        if (isEditing()) {
-
+       // if (isEditing()) {
+        if (getCellEditor() != null) {
             this.getRender = true;
 
             getCellEditor().stopCellEditing();
 
             this.getRender = false;
         }
+        //}
     }
 
     /**

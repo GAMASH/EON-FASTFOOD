@@ -165,11 +165,5 @@ public class TablaBD {
         System.out.println("TablaBD.getDescripcion funcion no implementada");
         return "";
     }
-    
-    public String toString(){
-        
-        return this.toString();
-    }
-
-  
+         
 }

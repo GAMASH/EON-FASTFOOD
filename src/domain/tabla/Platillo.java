@@ -39,6 +39,22 @@ public class Platillo extends TablaBD {
         precio = 0.00;
         origen = "";
     }
+    
+    public String toString() {
+
+        String sToString;
+
+        sToString = "id_platillo: " + id_platillo + ", "
+                + "tipo_platillo: [" + tipo_platillo.toString() + "], "
+                + "nombre: " + nombre + ","
+                + "descripcion: " + descripcion + ","
+                + "carta: " + carta + ","                
+                + "precio: " + precio + ", "
+                + "orden: " + origen;
+
+        return sToString;
+
+    }
 
     @Override
     public void obtenerPorId(ArrayList pk) {

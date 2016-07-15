@@ -63,9 +63,9 @@ public class Mesa extends TablaBD {
         status = manejadorBD.getValorString(0, 4);
     }
 
-    public static void cargarMesas(Table tabla) {
+    public void cargarTabla(Table tabla) {
 
-        crearTablaMesas(tabla);
+        crearTabla(tabla);
         conectarBD();
 
         manejadorBD.consulta(""
@@ -87,15 +87,12 @@ public class Mesa extends TablaBD {
         
         tabla.agregarComboBox(statusMesaSelector, 4);
         
-        tabla.ocultarColumna(0);
-        tabla.ocultarColumna(1);
-        tabla.ocultarColumna(5);
-        tabla.ocultarColumna(6);
+        tabla.ocultarColumnas(new int[]{0,1,5,6});        
 
         desconectarBD();
     }
 
-    public static Table crearTablaMesas(Table tabla) {
+    public Table crearTabla(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();

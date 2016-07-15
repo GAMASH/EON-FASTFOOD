@@ -18,7 +18,7 @@ public class TiposPagoCatalogo extends CatalogoAbstracto {
      * 
      */
     public TiposPagoCatalogo(){
-        this.setTitle("Tipos de Pago");
+        super("Tipos de Pago");
         
     }
     

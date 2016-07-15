@@ -17,7 +17,7 @@ public class TipoEmpleadoCatalogo extends CatalogoAbstracto {
 
     
     public TipoEmpleadoCatalogo(){
-        this.setTitle("Tipos Empleado");
+        super("Tipos Empleado");
         
     }
     public void Dimensionar() {

@@ -32,6 +32,9 @@ public class ComandaDetalle extends TablaBD {
     public Double precio;
     public Integer orden;
 
+    /**
+     *
+     */
     public ComandaDetalle() {
 
         id_sucursal = "";
@@ -77,6 +80,11 @@ public class ComandaDetalle extends TablaBD {
         return comanda_detalle_lista;
     }
 
+    /**
+     *
+     * @param table
+     * @param i
+     */
     public void setRegistro(Table table, Integer i) {
 
         id_comanda = table.getValorString(i, 1);
@@ -140,9 +148,8 @@ public class ComandaDetalle extends TablaBD {
         tabla.ocultarColumnas(new int[]{0, 1, 2, 3, 5});
 
         tabla.setEditables(new boolean[]{
-            
             false, false, false, false,
-            false, false, false, false,
+            false, false, false, true,
             false, true});
 
         desconectarBD();
@@ -174,7 +181,7 @@ public class ComandaDetalle extends TablaBD {
 
         tabla.tamañoColumna(new int[]{
             100, 100, 100, 100,
-            100, 100, 100, 100,
+            100, 100, 100, 300,
             100, 100
         });
 
@@ -222,6 +229,34 @@ public class ComandaDetalle extends TablaBD {
 
         return error;
     }
+    
+    /**
+     *
+     * @return
+     */
+    public boolean borrar() {
+
+        boolean error = true;
+
+        conectarBD();
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+        manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_comanda, "varId_comanda", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_comanda_detalle, "varId_comanda_detalle", "STRING", "IN");
+        
+        if (manejadorBD.ejecutarSP("eliminarComandaDetalle") == 0) {
+
+            error = true;         
+        } else {
+
+            error = false;
+        }
+
+        desconectarBD();
+
+        return error;
+    }
 
     public boolean equals(Object obj) {
 
@@ -234,15 +269,32 @@ public class ComandaDetalle extends TablaBD {
                     && tmpComandaDetalle.platillo.id_platillo.equals(platillo.id_platillo)
                     && tmpComandaDetalle.num_comensal.equals(num_comensal)
                     && tmpComandaDetalle.convierteStatus().equals(convierteStatus())
-                    && tmpComandaDetalle.observaciones.equals(observaciones)
-                    && tmpComandaDetalle.precio.equals(precio)
-                    && tmpComandaDetalle.orden.equals(orden)) {
+                    //  && tmpComandaDetalle.observaciones.equals(observaciones)
+                    && tmpComandaDetalle.precio.equals(precio)) {
+                //  && tmpComandaDetalle.orden.equals(orden)) {
 
                 return true;
             }
         }
 
         return false;
+    }
+
+    public String toString() {
+
+        String sToString;
+
+        sToString = "id_comanda: " + this.id_comanda + ", "
+                + "id_comanda_detalle: " + id_comanda_detalle + ", "
+                + "Platillo: [" + platillo.toString() + "],"
+                + "num_comensal: " + num_comensal + ","
+                + "status: " + convierteStatus() + ","
+                + "observaciones: " + observaciones + ","
+                + "precio: " + precio + ", "
+                + "orden: " + orden;
+
+        return sToString;
+
     }
 
 }

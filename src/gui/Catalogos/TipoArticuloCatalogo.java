@@ -52,7 +52,7 @@ public class TipoArticuloCatalogo extends abstractt.visual.InternalFrameAbstract
         nuevo = "";
         agregaTipo = "";
 */
-        TipoArticulo.cargarTiposArticulos(table1);
+    //    TipoArticulo.cargarTabla(table1);
     }
 
     /**

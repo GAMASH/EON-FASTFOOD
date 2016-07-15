@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 public class StatusBar extends javax.swing.JPanel {
 
     int borde = 3;
-    public boolean progressBar;
+    private boolean progressBar;
     public static final int etiqueta_izquierda = 0;
     public static final int etiqueta_centro = 1;
     public static final int etiqueta_derecha = 2;
@@ -53,8 +53,8 @@ public class StatusBar extends javax.swing.JPanel {
         } else {
 
             centro.setBounds(100 + (borde * 2), borde, ancho - 200 - (borde * 4), alto - (borde * 2));
-        }                        
-        
+        }
+
         ImageIcon fot = (ImageIcon) icono_progressbar.getIcon();
         Icon icono_2 = new ImageIcon(fot.getImage().getScaledInstance(icono_progressbar.getWidth(), icono_progressbar.getHeight(), Image.SCALE_DEFAULT));
         icono_progressbar.setIcon(icono_2);
@@ -62,7 +62,7 @@ public class StatusBar extends javax.swing.JPanel {
 
     public void progresBarr(int max, boolean controlado, String mensaje) {
 
-        progressBar = true;
+        setProgressBar(true);
         progreesbar.setMaximum(max);
 
         progreesbar.setIndeterminate(false);
@@ -73,13 +73,22 @@ public class StatusBar extends javax.swing.JPanel {
         }
 
         progreesbar.setString(mensaje);
-        progreesbar.setStringPainted(true);        
+        progreesbar.setStringPainted(true);
+        
+         mostrar();
+    }
+    
+    
+    
+    
+    public void paint(){
+         mostrar();
     }
 
     public void mensaje(String mensaje, int etiqueta) {
 
         switch (etiqueta) {
-            case etiqueta_izquierda:                
+            case etiqueta_izquierda:
                 izquierda.setText(mensaje);
                 break;
             case etiqueta_centro:
@@ -139,4 +148,12 @@ public class StatusBar extends javax.swing.JPanel {
     private javax.swing.JLabel izquierda;
     private javax.swing.JProgressBar progreesbar;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @param progressBar the progressBar to set
+     */
+    public void setProgressBar(boolean progressBar) {
+        this.progressBar = progressBar;
+         mostrar();
+    }
 }

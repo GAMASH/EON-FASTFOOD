@@ -28,6 +28,17 @@ public class TipoPlatillo extends TablaBD {
         id_tipo_platillo = "";
         descripcion = "";
     }
+     
+     public String toString() {
+
+        String sToString;
+
+        sToString = "id_tipo_platillo: " + id_tipo_platillo + ", "                
+                + "descripcion: " + descripcion ;
+
+        return sToString;
+
+    }
 
     public void cargarPorDescripcion(String sDescripcion) {
 
@@ -83,9 +94,9 @@ public class TipoPlatillo extends TablaBD {
         
     }
 
-    public static void cargarTiposPlatillo(Table tabla) {
+    public void cargarTabla(Table tabla) {
 
-        crearTablaTiposPlatillo(tabla);
+        crearTabla(tabla);
         conectarBD();
 
         manejadorBD.consulta(""
@@ -107,7 +118,7 @@ public class TipoPlatillo extends TablaBD {
         desconectarBD();
     }
 
-    public static Table crearTablaTiposPlatillo(Table tabla) {
+    private  Table crearTabla(Table tabla) {
 
         if (tabla == null) {
             tabla = new Table();
