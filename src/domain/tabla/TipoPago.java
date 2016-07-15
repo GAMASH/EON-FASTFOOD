@@ -70,7 +70,7 @@ public class TipoPago extends TablaBD {
         }
 
         String titulos[] = {
-            "Id tipo Pago", "Descripcion", "Crea",
+            "Id tipo Pago", "Descripción", "Crea",
             "Modifica",};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(

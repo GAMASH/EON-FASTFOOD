@@ -120,7 +120,7 @@ public class Marca extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Marca", "Descripcion", "Activo", "Crea",
+            "Id Marca", "Descripción", "Activo", "Crea",
             "Modifica",};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(

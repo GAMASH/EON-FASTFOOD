@@ -74,6 +74,8 @@ public class ComandaDetallePanel extends Panel {
 
         this.tf_subtotal.setDouble(total);
         this.tf_total.setDouble(total);
+        
+        
     }
 
     public ComandaDetalle quitarPlatillo() {

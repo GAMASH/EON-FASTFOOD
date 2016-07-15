@@ -121,7 +121,7 @@ public class TipoArticulo extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Tipo Articulo", "Descripcion", "Activo", "Crea",
+            "Id Tipo Articulo", "Descripción", "Activo", "Crea",
             "Modifica",};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(

@@ -69,7 +69,7 @@ public class Impuesto extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Impuesto", "Descripcion", "Porcentaje", "Crea",
+            "Id Impuesto", "Descripción", "Porcentaje", "Crea",
             "Modifica",};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(

@@ -123,7 +123,7 @@ public class ComandaDetalle extends TablaBD {
                 + "        when 'PE' then 'Pendiente'\n"
                 + "        when 'PR' then 'Proceso'\n"
                 + "        when 'SE' then 'Servido'\n"
-                + "       end as status, cd.observaciones, cd.precio,\n"
+                + "       end as status, cd.observaciones, round(cd.precio,2),\n"
                 + "       cd.orden\n"
                 + "from   comanda_detalle cd, platillo p\n"
                 + "where  cd.id_platillo = p.id_platillo\n"

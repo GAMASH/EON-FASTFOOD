@@ -1541,41 +1541,51 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
     @Override
     public void dragGestureRecognized(DragGestureEvent dge) {
-
-        Transferable t = new StringSelection("aString");
-        dragSource.startDrag(dge, DragSource.DefaultCopyDrop, t, this);
-        System.out.println(this.tableHeader.toString());
+        /*
+         Transferable t = new StringSelection("aString");
+         dragSource.startDrag(dge, DragSource.DefaultCopyDrop, t, this);
+         System.out.println(this.tableHeader.toString());
+         */
     }
 
     @Override
     public void dragEnter(DragSourceDragEvent dsde) {
-        System.out.println("enters");
-        System.out.println(this.tableHeader.toString());
+        /*
+         System.out.println("enters");
+         System.out.println(this.tableHeader.toString());
+         */
     }
 
     @Override
     public void dragOver(DragSourceDragEvent dsde) {
-        System.out.println("over");
-        System.out.println(this.tableHeader.toString());
+        /*
+         System.out.println("over");
+         System.out.println(this.tableHeader.toString());
+         */
     }
 
     @Override
     public void dropActionChanged(DragSourceDragEvent dsde) {
-        System.out.println("changes the drag action between copy or move");
-        System.out.println(this.tableHeader.toString());
+        /*
+         System.out.println("changes the drag action between copy or move");
+         System.out.println(this.tableHeader.toString());
+         */
     }
 
     @Override
     public void dragExit(DragSourceEvent dse) {
-        System.out.println("leaves");
-        System.out.println(this.tableHeader.toString());
-
+        /*
+         System.out.println("leaves");
+         System.out.println(this.tableHeader.toString());
+         */
     }
 
     @Override
     public void dragDropEnd(DragSourceDropEvent dsde) {
-        System.out.println("finishes or cancels the drag operation");
-        System.out.println(this.tableHeader.toString());
+        /*
+         System.out.println("finishes or cancels the drag operation");
+         System.out.println(this.tableHeader.toString());
+         */
     }
 
     /**

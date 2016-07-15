@@ -90,7 +90,7 @@ public class Platillo extends TablaBD {
 
         manejadorBD.consulta(""
                 + "SELECT id_platillo, t.descripcion, nombre, p.descripcion, \n"
-                + "       carta, precio, \n"
+                + "       carta, round(precio,2), \n"
                 + "       Case origen\n"
                 + "         WHEN 'Co' THEN 'Cocina'\n"
                 + "         WHEN 'Ba' THEN 'Barra'"
@@ -162,7 +162,7 @@ public class Platillo extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Platillo", "Tipo Platillo", "Nombre", "Descripcion",
+            "Id Platillo", "Tipo Platillo", "Nombre", "Descripción",
             "Carta", "Precio", "Origen", "crea", "modifica"};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(

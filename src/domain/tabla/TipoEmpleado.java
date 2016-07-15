@@ -103,7 +103,7 @@ public class TipoEmpleado extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Tipo Empleado", "Descripcion", "Crea", "Modifica",};
+            "Id Tipo Empleado", "Descripción", "Crea", "Modifica",};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},

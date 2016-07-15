@@ -41,8 +41,9 @@ public class TextFieldMoneda extends TextField {
      * @param valor
      */
     public void setDouble(Double valor) {
-
-        setText("$ " + valor);
+    //"$ " + 
+        setText(valor+"");
+        redondear();
     }
 
     /**
@@ -50,6 +51,11 @@ public class TextFieldMoneda extends TextField {
      * @param evt
      */
     private void FocusLost(java.awt.event.FocusEvent evt) {
+
+        redondear();
+    }
+
+    private void redondear() {
 
         if (!getText().startsWith("$")) {
 

@@ -120,7 +120,7 @@ public class UnidadMedida extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Unidad Medida", "Descripcion", "Nombre Corto", "Crea",
+            "Id Unidad Medida", "Descripción", "Nombre Corto", "Crea",
             "Modifica",};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(

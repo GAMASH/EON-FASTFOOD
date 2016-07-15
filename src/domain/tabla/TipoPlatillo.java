@@ -114,7 +114,7 @@ public class TipoPlatillo extends TablaBD {
         }
 
         String titulos[] = {
-            "Id Tipo Platillo", "Descripcion", "Crea",
+            "Id Tipo Platillo", "Descripción", "Crea",
             "Modifica",};
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(

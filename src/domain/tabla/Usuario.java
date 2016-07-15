@@ -115,8 +115,9 @@ public class Usuario extends TablaBD {
         
         tabla.agregarItemStatus();
 
-        tabla.ocultarColumna(0);
-        tabla.ocultarColumna(1);
+        tabla.ocultarColumnas(new int[]{0,1});
+        tabla.setEditables(new boolean[]{false,false,false,false});
+        
 
         desconectarBD();
     }
