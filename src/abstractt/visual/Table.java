@@ -12,6 +12,8 @@ import abstractt.TablaBD;
 import abstractt.TableModelAbst;
 import static abstractt.ClaseAbstracta.redondear;
 import domain.Fecha;
+import static domain.General.escalaGrises;
+import static domain.General.escala_grises;
 import static domain.General.manejadorBD;
 import static domain.General.obtenerNumero;
 import java.awt.Color;
@@ -149,8 +151,10 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         tableHeader = getTableHeader();
 
         tableHeader.setFont(new Font("Trebuchet", Font.BOLD, 12));
-        //Color de fondo del encabezado
-        tableHeader.setBackground(new Color(0, 0, 128));
+
+        //Color de fondo del encabezado                        
+        tableHeader.setBackground(escalaGrises(new Color(0, 0, 128)));
+
         //Color de fuente del encabezado
         tableHeader.setForeground(new Color(255, 225, 255));
         tableHeader.setOpaque(false);
@@ -161,7 +165,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         setFont(new Font("Trebuchet", 0, 12));
 //        addJTableHeaderListener();
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        setSelectionBackground(new Color(51, 153, 255));
+        setSelectionBackground(escalaGrises(new Color(51, 153, 255)));
 
         addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseMoved(MouseEvent e) {
@@ -190,8 +194,8 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
          });
          */
         pautado = new Color[]{
-            new Color(220, 255, 220), // 
-            new Color(255, 255, 255), // 
+            escalaGrises(new Color(220, 255, 220)), // 
+            escalaGrises(new Color(255, 255, 255)), // 
         };
 
         //pautado = new Color(220, 255, 220);
@@ -1504,7 +1508,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
      */
     public void acceptText() {
 
-       // if (isEditing()) {
+        // if (isEditing()) {
         if (getCellEditor() != null) {
             this.getRender = true;
 

@@ -102,15 +102,19 @@ public class Principal extends javax.swing.JFrame {
             {
                 ComponenteMenu c311 = agregarComponente(c31, "Tipo de producto", "O", tipo_producto_opcion, "");
                 ComponenteMenu c312 = agregarComponente(c31, "Marcas", "O", marcas_opcion, "");
-                ComponenteMenu c313 = agregarComponente(c31, "Impuestos", "O", impuestos_opcion, "");
-                ComponenteMenu c314 = agregarComponente(c31, "Unidades de medida", "O", unidades_medida_opcion, "");
-                ComponenteMenu c315 = agregarComponente(c31, "Tipos de pago", "O", tipos_pago_opcion, "");
+                
+                ComponenteMenu c313 = agregarComponente(c31, "Unidades de medida", "O", unidades_medida_opcion, "");
+                
             }
             ComponenteMenu c32 = agregarComponente(c3, "Restaurante", "M", 0, "");
             {
                 ComponenteMenu c321 = agregarComponente(c32, "Mesas", "O", mesas_opcion, "table.png");
                 ComponenteMenu c322 = agregarComponente(c32, "Tipos de platillos", "O", tipo_platillo_opcion, "user.png");
             }
+            
+            ComponenteMenu c33 = agregarComponente(c3, "Impuestos", "O", impuestos_opcion, "");
+            ComponenteMenu c34 = agregarComponente(c3, "Tipos de pago", "O", tipos_pago_opcion, "");
+            
         }
         ComponenteMenu c4 = agregarComponente(menu_bar, "Accesibilidad", "M", 0, "");
         {
@@ -311,7 +315,7 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        escritorio.setBackground(new java.awt.Color(102, 204, 255));
+        escritorio.setBackground(new java.awt.Color(0, 0, 204));
         getContentPane().add(escritorio);
         escritorio.setBounds(151, 1, 348, 330);
         getContentPane().add(statusBar1);

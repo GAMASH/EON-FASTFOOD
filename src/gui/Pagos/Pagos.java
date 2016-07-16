@@ -27,10 +27,7 @@ public class Pagos extends InternalFrameAbstracto {
 
         pago = aPago;
 
-        this.pagosPanel1.setPago(pago);
-        
-        
-        
+        this.pagosPanel1.setPago(pago);                        
     }
 
     /**

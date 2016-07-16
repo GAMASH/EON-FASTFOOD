@@ -27,6 +27,10 @@
                   </Group>
               </Group>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -45,6 +49,8 @@
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,6 +124,10 @@
           </Properties>
         </Component>
         <Component class="abstractt.visual.Calendar" name="calendar1">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
@@ -221,12 +231,12 @@
                       <Group type="102" attributes="0">
                           <Component id="label7" min="-2" pref="76" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textFieldMoneda4" pref="103" max="32767" attributes="0"/>
+                          <Component id="tf_efectivo" pref="103" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="label8" min="-2" pref="75" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="textFieldMoneda5" max="32767" attributes="0"/>
+                          <Component id="tf_cambio" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -238,12 +248,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textFieldMoneda4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tf_efectivo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="label7" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textFieldMoneda5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tf_cambio" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="label8" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -258,7 +268,7 @@
             <Property name="text" type="java.lang.String" value="Efectivo:"/>
           </Properties>
         </Component>
-        <Component class="abstractt.visual.TextFieldMoneda" name="textFieldMoneda4">
+        <Component class="abstractt.visual.TextFieldMoneda" name="tf_efectivo">
         </Component>
         <Component class="abstractt.visual.Label" name="label8">
           <Properties>
@@ -266,7 +276,7 @@
             <Property name="text" type="java.lang.String" value="Cambio:"/>
           </Properties>
         </Component>
-        <Component class="abstractt.visual.TextFieldMoneda" name="textFieldMoneda5">
+        <Component class="abstractt.visual.TextFieldMoneda" name="tf_cambio">
           <Properties>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
@@ -290,6 +300,53 @@
                 <Column editable="true" title="Title 4" type="java.lang.Object"/>
               </Table>
             </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="table1PropertyChange"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel4">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                  <Component id="label9" min="-2" pref="109" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="tf_total_pagos" pref="103" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="tf_total_pagos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="label9" alignment="3" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="abstractt.visual.Label" name="label9">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Total Pagos:"/>
+          </Properties>
+        </Component>
+        <Component class="abstractt.visual.TextFieldMoneda" name="tf_total_pagos">
+          <Properties>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -26,6 +26,8 @@ public class General {
 
     public static boolean gradient = false;
     public static boolean escala_grises = false;
+    public static boolean gradient_invert = false;
+    
 
     //Label
     public static Font font_label;
@@ -80,6 +82,11 @@ public class General {
         if (propiedades_visuales.getString("escala_grises").equals("true")) {
 
             escala_grises = true;
+        }
+        
+         if (propiedades_visuales.getString("gradient_invert").equals("true")) {
+
+            gradient_invert = true;
         }
 
         font_label = new Font(
@@ -176,6 +183,21 @@ public class General {
             numero += num.nextToken();
         }
         return numero;
+    }
+    
+    public static Color escalaGrises(Color color){
+        
+        int color_med;
+        
+        if (escala_grises) {
+
+            color_med = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
+
+            color = new Color(color_med, color_med, color_med);
+        }
+        
+        return color;
+        
     }
 
 }
