@@ -451,7 +451,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         //System.out.println(getValueAt(fila, columna).toString());
         // return Double.parseDouble(obtenerNumero(getValueAt(fila, columna).toString()));
-        if (getRowCount() > 0) {
+        if (getRowCount() > 0 && this.getColumnCount() > columna ) {
             if (getValueAt(fila, columna) != null) {
 
                 return Double.parseDouble(getValueAt(fila, columna).toString());

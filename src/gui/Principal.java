@@ -87,7 +87,7 @@ public class Principal extends javax.swing.JFrame {
 
         menu_bar.setIcono("");
 
-        ComponenteMenu c1 = agregarComponente(menu_bar, "Resturante", "M", 0, "");
+        ComponenteMenu c1 = agregarComponente(menu_bar, "Restaurante", "M", 0, "");
         {
             ComponenteMenu c11 = agregarComponente(c1, "Comandas", "O", comandas_opcion, "Comanda.png");
         }

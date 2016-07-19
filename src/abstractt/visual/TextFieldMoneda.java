@@ -41,8 +41,8 @@ public class TextFieldMoneda extends TextField {
      * @param valor
      */
     public void setDouble(Double valor) {
-    //"$ " + 
-        setText(valor+"");
+        //"$ " + 
+        setText(valor + "");
         redondear();
     }
 
@@ -76,19 +76,25 @@ public class TextFieldMoneda extends TextField {
     }
 
     /**
-     * Obtiene el valor numerico de un textField con formato $ ##.## retorna
-     * ##.##
+     * Obtiene el valor numerico de un textField con formato $ #,###.## retorna
+     * ####.##
      */
     public double obtenerValor() {
 
-        StringTokenizer st = new StringTokenizer(getText());
-        st.nextToken();
-        String stt = st.nextToken();
-        st = new StringTokenizer(stt, ",");
-        stt = "";
-        while (st.hasMoreTokens()) {
+        String stt;
+        if (getText().contains("$") || getText().contains(",")) {
 
-            stt += st.nextToken();
+            StringTokenizer st = new StringTokenizer(getText());
+            st.nextToken();
+            stt = st.nextToken();
+            st = new StringTokenizer(stt, ",");
+            stt = "";
+            while (st.hasMoreTokens()) {
+
+                stt += st.nextToken();
+            }
+        } else {
+            stt = getText();
         }
 
         return Double.parseDouble(stt);

@@ -19,6 +19,10 @@ public class PagosPanel extends JPanel {
 
     private Pago pago;
     private PagoDetalle pago_detalle;
+    private Double total_efectivo_detalle;
+    private Double total_efectivo;
+    public boolean cargando_tabla = false;
+    private Double cambio;
 
     /**
      * Creates new form PagosPanel
@@ -29,8 +33,10 @@ public class PagosPanel extends JPanel {
         pago_detalle = new PagoDetalle();
     }
 
-    public boolean cargando_tabla = false;
-
+    /**
+     * 
+     * @param aPago 
+     */
     public void setPago(Pago aPago) {
 
         pago = aPago;
@@ -44,7 +50,89 @@ public class PagosPanel extends JPanel {
         tf_total.setDouble(pago.total);
 
         tf_efectivo.setDouble(new Double(0.00));
+        total_efectivo = 0.00;
+        total_efectivo_detalle = 0.00;
+    }
 
+    /**
+     * 
+     */
+    private void valida_recepcion_efectivo() {
+
+        total_efectivo = tf_efectivo.obtenerValor();
+
+        cambio = total_efectivo_detalle - total_efectivo;
+
+        if (cambio < 0.0) {
+
+            tf_efectivo.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            
+            tf_efectivo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        }
+
+        tf_cambio.setDouble(cambio);
+    }
+
+    /**
+     * 
+     */
+    private void total_pagos() {
+
+        Double total_pagos = 0.00;
+        Double pago = 0.00;
+        Double diferencia = 0.00;
+
+        if (!cargando_tabla) {
+
+            for (int i = 0; i < table1.getRowCount(); i++) {
+
+                pago = table1.getValorDouble(i, 5);
+                total_pagos += pago;
+            }
+
+            tf_total_pagos.setDouble(total_pagos);
+
+            //primer fila siempre debe llevar el tipo de pago efectivo
+            total_efectivo_detalle = table1.getValorDouble(0, 5);
+
+            diferencia = tf_total.obtenerValor() - total_pagos;
+        }
+
+        tf_diferencia.setDouble(diferencia);
+
+        valida_total_pagos();
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    private boolean valida_total_pagos() {
+
+        if (tf_total_pagos.obtenerValor() != tf_total.obtenerValor()) {
+
+            tf_total_pagos.setBorder(BorderFactory.createLineBorder(Color.RED));
+            return false;
+        }
+
+        tf_total_pagos.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        return true;
+    }
+
+    /**
+     * 
+     */
+    public void grabar() {
+        
+        pago.fecha = calendar1.getDate();
+        pago.impuesto = tf_impuesto.obtenerValor();
+        pago.subtotal = this.tf_subtotal.obtenerValor();
+        pago.total  = this.tf_total.obtenerValor();
+        pago.efectivo = total_efectivo;
+        pago.cambio     = cambio;
+                
+        System.out.println(pago);
     }
 
     /**
@@ -76,8 +164,10 @@ public class PagosPanel extends JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new abstractt.visual.Table();
         jPanel4 = new javax.swing.JPanel();
-        label9 = new abstractt.visual.Label();
+        label10 = new abstractt.visual.Label();
+        tf_diferencia = new abstractt.visual.TextFieldMoneda();
         tf_total_pagos = new abstractt.visual.TextFieldMoneda();
+        label9 = new abstractt.visual.Label();
 
         jPanel1.setOpaque(false);
 
@@ -188,6 +278,17 @@ public class PagosPanel extends JPanel {
         label7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label7.setText("Efectivo:");
 
+        tf_efectivo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tf_efectivoFocusLost(evt);
+            }
+        });
+        tf_efectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_efectivoActionPerformed(evt);
+            }
+        });
+
         label8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label8.setText("Cambio:");
 
@@ -244,30 +345,44 @@ public class PagosPanel extends JPanel {
 
         jPanel4.setOpaque(false);
 
-        label9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label9.setText("Total Pagos:");
+        label10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label10.setText("Diferencia:");
+
+        tf_diferencia.setFocusable(false);
 
         tf_total_pagos.setFocusable(false);
+
+        label9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        label9.setText("Total Pagos:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tf_total_pagos, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                .addGap(4, 4, 4))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(label10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_diferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(label9, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_total_pagos, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_total_pagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_diferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -298,8 +413,8 @@ public class PagosPanel extends JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -313,37 +428,14 @@ public class PagosPanel extends JPanel {
         total_pagos();
     }//GEN-LAST:event_table1PropertyChange
 
-    private void total_pagos() {
+    private void tf_efectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_efectivoActionPerformed
 
-        Double total_pagos = 0.00;
-        Double pago = 0.00;
+        valida_recepcion_efectivo();
+    }//GEN-LAST:event_tf_efectivoActionPerformed
 
-        if (!cargando_tabla) {
-
-            for (int i = 0; i < table1.getRowCount(); i++) {
-
-                pago = table1.getValorDouble(i, 5);
-                total_pagos += pago;
-            }
-
-            tf_total_pagos.setDouble(total_pagos);
-        }
-
-        valida_total_pagos();
-
-    }
-
-    private boolean valida_total_pagos() {
-
-        if (tf_total_pagos.obtenerValor() != tf_total.obtenerValor()) {
-            tf_total_pagos.setBorder(BorderFactory.createLineBorder(Color.RED));
-            return false;
-        }
-
-        tf_total_pagos.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        return true;
-
-    }
+    private void tf_efectivoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_efectivoFocusLost
+        valida_recepcion_efectivo();
+    }//GEN-LAST:event_tf_efectivoFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -354,6 +446,7 @@ public class PagosPanel extends JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private abstractt.visual.Label label1;
+    private abstractt.visual.Label label10;
     private abstractt.visual.Label label2;
     private abstractt.visual.Label label3;
     private abstractt.visual.Label label4;
@@ -364,6 +457,7 @@ public class PagosPanel extends JPanel {
     private abstractt.visual.Label label9;
     private abstractt.visual.Table table1;
     private abstractt.visual.TextFieldMoneda tf_cambio;
+    private abstractt.visual.TextFieldMoneda tf_diferencia;
     private abstractt.visual.TextFieldMoneda tf_efectivo;
     private abstractt.visual.TextFieldMoneda tf_impuesto;
     private abstractt.visual.TextFieldMoneda tf_subtotal;
