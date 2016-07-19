@@ -7,6 +7,8 @@ package gui.Pagos;
 
 import domain.tabla.Pago;
 import domain.tabla.PagoDetalle;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 /**
@@ -308,9 +310,15 @@ public class PagosPanel extends JPanel {
 
     private void table1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_table1PropertyChange
 
+        total_pagos();
+    }//GEN-LAST:event_table1PropertyChange
+
+    private void total_pagos() {
+
+        Double total_pagos = 0.00;
+        Double pago = 0.00;
+
         if (!cargando_tabla) {
-            Double total_pagos = 0.00;
-            Double pago = 0.00;
 
             for (int i = 0; i < table1.getRowCount(); i++) {
 
@@ -320,7 +328,22 @@ public class PagosPanel extends JPanel {
 
             tf_total_pagos.setDouble(total_pagos);
         }
-    }//GEN-LAST:event_table1PropertyChange
+
+        valida_total_pagos();
+
+    }
+
+    private boolean valida_total_pagos() {
+
+        if (tf_total_pagos.obtenerValor() != tf_total.obtenerValor()) {
+            tf_total_pagos.setBorder(BorderFactory.createLineBorder(Color.RED));
+            return false;
+        }
+
+        tf_total_pagos.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        return true;
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

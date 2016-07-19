@@ -205,12 +205,22 @@ public class CambioPassword extends InternalFrameAbstracto {
         label3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label3.setText("Contraseña anterior");
 
+        tf_pass_ant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_pass_antActionPerformed(evt);
+            }
+        });
         tf_pass_ant.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_pass_antKeyReleased(evt);
             }
         });
 
+        tf_pass_nva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_pass_nvaActionPerformed(evt);
+            }
+        });
         tf_pass_nva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_pass_nvaKeyReleased(evt);
@@ -304,6 +314,14 @@ public class CambioPassword extends InternalFrameAbstracto {
     private void tf_pass_nvaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_pass_nvaKeyReleased
         this.valida_password_nueva();
     }//GEN-LAST:event_tf_pass_nvaKeyReleased
+
+    private void tf_pass_antActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_pass_antActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_pass_antActionPerformed
+
+    private void tf_pass_nvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_pass_nvaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_pass_nvaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private abstractt.visual.Boton boton1;
