@@ -5,6 +5,8 @@
  */
 package gui.Pagos;
 
+import static domain.General.mensaje;
+import static domain.ManejadorBD.errorSQL;
 import domain.tabla.Pago;
 import domain.tabla.PagoDetalle;
 import java.awt.Color;
@@ -34,8 +36,8 @@ public class PagosPanel extends JPanel {
     }
 
     /**
-     * 
-     * @param aPago 
+     *
+     * @param aPago
      */
     public void setPago(Pago aPago) {
 
@@ -55,19 +57,19 @@ public class PagosPanel extends JPanel {
     }
 
     /**
-     * 
+     *
      */
     private void valida_recepcion_efectivo() {
 
         total_efectivo = tf_efectivo.obtenerValor();
 
-        cambio = total_efectivo_detalle - total_efectivo;
+        cambio = total_efectivo - total_efectivo_detalle;
 
         if (cambio < 0.0) {
 
             tf_efectivo.setBorder(BorderFactory.createLineBorder(Color.RED));
         } else {
-            
+
             tf_efectivo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         }
 
@@ -75,7 +77,7 @@ public class PagosPanel extends JPanel {
     }
 
     /**
-     * 
+     *
      */
     private void total_pagos() {
 
@@ -105,8 +107,8 @@ public class PagosPanel extends JPanel {
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     private boolean valida_total_pagos() {
 
@@ -121,17 +123,27 @@ public class PagosPanel extends JPanel {
     }
 
     /**
-     * 
+     *
      */
     public void grabar() {
-        
+
         pago.fecha = calendar1.getDate();
         pago.impuesto = tf_impuesto.obtenerValor();
         pago.subtotal = this.tf_subtotal.obtenerValor();
-        pago.total  = this.tf_total.obtenerValor();
+        pago.total = this.tf_total.obtenerValor();
         pago.efectivo = total_efectivo;
-        pago.cambio     = cambio;
-                
+        pago.cambio = cambio;
+
+        
+        if ( pago.grabar() ){
+            
+            tf_folio_pago.setText(pago.folio_pago.toString());            
+            mensaje("Se grabo el Pago Correctamente");            
+        }else{
+            mensaje("Error al grabar el pago\n"+errorSQL);
+        }
+            
+        
         System.out.println(pago);
     }
 
@@ -146,7 +158,7 @@ public class PagosPanel extends JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         label1 = new abstractt.visual.Label();
-        label2 = new abstractt.visual.Label();
+        tf_folio_pago = new abstractt.visual.Label();
         label3 = new abstractt.visual.Label();
         calendar1 = new abstractt.visual.Calendar();
         jPanel2 = new javax.swing.JPanel();
@@ -174,9 +186,10 @@ public class PagosPanel extends JPanel {
         label1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label1.setText("Folio:");
 
-        label2.setBackground(new java.awt.Color(255, 255, 255));
-        label2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        label2.setOpaque(true);
+        tf_folio_pago.setBackground(new java.awt.Color(255, 255, 255));
+        tf_folio_pago.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tf_folio_pago.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tf_folio_pago.setOpaque(true);
 
         label3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label3.setText("Fecha:");
@@ -250,7 +263,7 @@ public class PagosPanel extends JPanel {
                 .addContainerGap()
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_folio_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(132, 132, 132)
                 .addComponent(label3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -266,7 +279,7 @@ public class PagosPanel extends JPanel {
                     .addComponent(calendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tf_folio_pago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -447,7 +460,6 @@ public class PagosPanel extends JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private abstractt.visual.Label label1;
     private abstractt.visual.Label label10;
-    private abstractt.visual.Label label2;
     private abstractt.visual.Label label3;
     private abstractt.visual.Label label4;
     private abstractt.visual.Label label5;
@@ -459,6 +471,7 @@ public class PagosPanel extends JPanel {
     private abstractt.visual.TextFieldMoneda tf_cambio;
     private abstractt.visual.TextFieldMoneda tf_diferencia;
     private abstractt.visual.TextFieldMoneda tf_efectivo;
+    private abstractt.visual.Label tf_folio_pago;
     private abstractt.visual.TextFieldMoneda tf_impuesto;
     private abstractt.visual.TextFieldMoneda tf_subtotal;
     private abstractt.visual.TextFieldMoneda tf_total;

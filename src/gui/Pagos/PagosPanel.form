@@ -68,7 +68,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="label1" min="-2" pref="59" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="label2" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="tf_folio_pago" min="-2" pref="92" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
                   <Component id="label3" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
                       <Component id="calendar1" min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="label3" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="label2" max="32767" attributes="0"/>
+                          <Component id="tf_folio_pago" max="32767" attributes="0"/>
                           <Component id="label1" pref="23" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -104,7 +104,7 @@
             <Property name="text" type="java.lang.String" value="Folio:"/>
           </Properties>
         </Component>
-        <Component class="abstractt.visual.Label" name="label2">
+        <Component class="abstractt.visual.Label" name="tf_folio_pago">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -114,6 +114,7 @@
                 <EtchetBorder/>
               </Border>
             </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>

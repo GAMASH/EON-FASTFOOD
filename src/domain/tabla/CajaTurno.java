@@ -16,7 +16,7 @@ import java.util.Date;
 public class CajaTurno extends TablaBD{
 
     public String id_sucursal;
-    public String  id_turno_caja;
+    public String  id_caja_turno;
     public Caja caja;
     public Turno turno;
     public Empleado empleado;
