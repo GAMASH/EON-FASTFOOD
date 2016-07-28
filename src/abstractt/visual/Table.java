@@ -1390,7 +1390,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
     /**
      *
      */
-    public void grabar() {
+    public int  grabar() {
 
         int fila;
         acceptText();
@@ -1398,7 +1398,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
         if (!haycambios) {
 
             JOptionPane.showConfirmDialog(null, "No hay cambios por guardar", "Mensaje del sistema", JOptionPane.DEFAULT_OPTION);
-            return;
+            return 0;
         }
 
         filtrar(null);
@@ -1412,7 +1412,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
                 JOptionPane.showConfirmDialog(null, "Ocurrio un error al grabar\n" + manejadorBD.errorSQL, "Mensaje del sistema", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
                 filtrar(null);
-                return;
+                return -1;
             }
 
             setValueAt("0", fila, colItemStatus);
@@ -1436,6 +1436,8 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         //ya se guardo no hay cambios pendientes de guardar
         haycambios = false;
+        
+        return 0;
     }
 
     /**

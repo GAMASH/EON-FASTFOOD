@@ -9,8 +9,10 @@ import abstractt.TablaBD;
 import abstractt.visual.Table;
 import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
+import static domain.General.formatoDateTime_11;
 import static domain.General.manejadorBD;
 import static domain.General.sucursal;
+import domain.ParametrosSP;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -114,7 +116,43 @@ public class PagoDetalle extends TablaBD {
         id_pago = table.getValorString(fila, 1);
         id_pago_detalle = table.getValorString(fila, 2);
         tipo_pago.obtenerPorId(new ArrayList(Arrays.asList(table.getValorString(fila, 3))));
-        importe = table.getValorDouble(fila, 4);
+        importe = table.getValorDouble(fila, 5);
     }
 
+    
+    /**
+     *
+     * @return
+     */
+    public boolean grabar() {
+
+        boolean error = true;
+
+        conectarBD();
+
+        System.out.println(this);
+
+        manejadorBD.parametrosSP = new ParametrosSP();
+        manejadorBD.parametrosSP.agregarParametro(sucursal.id_sucursal, "varId_sucursal", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_pago, "varId_pago", "STRING", "IN");
+        manejadorBD.parametrosSP.agregarParametro(id_pago_detalle, "varId_pago_detalle", "STRING", "INOUT");                    
+        manejadorBD.parametrosSP.agregarParametro(tipo_pago.id_tipo_pago, "varId_tipo_pago", "STRING", "IN");                    
+        manejadorBD.parametrosSP.agregarParametro(importe.toString(), "varImporte", "DOUBLE", "IN");
+
+        if (manejadorBD.ejecutarSP("grabarPagoDetalle") == 0) {
+
+            error = true;
+            id_pago_detalle = manejadorBD.parametrosSP.get(2).getValor();
+            
+        } else {
+
+            error = false;
+        }
+
+        desconectarBD();
+
+        return error;
+    }
+    
+    
 }

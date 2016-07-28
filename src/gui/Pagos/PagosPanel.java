@@ -134,16 +134,27 @@ public class PagosPanel extends JPanel {
         pago.efectivo = total_efectivo;
         pago.cambio = cambio;
 
-        
-        if ( pago.grabar() ){
+        if (pago.grabar()) {
+
+            tf_folio_pago.setText(pago.folio_pago.toString());
             
-            tf_folio_pago.setText(pago.folio_pago.toString());            
-            mensaje("Se grabo el Pago Correctamente");            
-        }else{
-            mensaje("Error al grabar el pago\n"+errorSQL);
+            //agregar el id_pago al detalle que tenga valor en importe
+            for (int i = 0; i < table1.getRowCount(); i++) {
+                
+                if( table1.getValorDouble(i, 5) > 0 ){
+                    
+                    table1.setValueAt(pago.id_pago, i, 1);
+                }                
+            }            
+            
+            if (this.table1.grabar() == 0) {
+
+                mensaje("Se grabo el Pago Correctamente");
+            }
+        } else {
+            mensaje("Error al grabar el pago\n" + errorSQL);
         }
-            
-        
+
         System.out.println(pago);
     }
 

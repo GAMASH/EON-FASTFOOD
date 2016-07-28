@@ -11,6 +11,7 @@ import static domain.ConexionBD.conectarBD;
 import static domain.ConexionBD.desconectarBD;
 import static domain.General.manejadorBD;
 import domain.ParametrosSP;
+import java.util.ArrayList;
 
 /**
  *
@@ -43,10 +44,8 @@ public class TipoPago extends TablaBD {
                 + "SELECT   id_tipo_pago, descripcion, crea, modifica\n"
                 + "FROM     tipo_pago\n"
                 + "ORDER BY descripcion ");
-
-        // if (manejadorBD.getRowCount() > 0) {
+        
         manejadorBD.asignarTable(tabla);
-        // }
 
         tabla.agregarItemStatus();
 
@@ -55,6 +54,29 @@ public class TipoPago extends TablaBD {
         tabla.ocultarColumna(3);
 
         desconectarBD();
+    }
+    
+    public void obtenerPorId(ArrayList pk) {
+
+        conectarBD();
+
+        manejadorBD.consulta(
+                "SELECT	  id_tipo_pago, descripcion, crea, modifica\n"
+                + "FROM  tipo_pago\n"
+                + "WHERE id_tipo_pago = '" + pk.get(0).toString() + "'");
+
+        if (manejadorBD.getRowCount() > 0) {
+
+            asignarValores();
+        }
+
+        desconectarBD();
+    }
+    
+    private void asignarValores() {
+
+        id_tipo_pago = manejadorBD.getValorString(0, 0);
+        descripcion = manejadorBD.getValorString(0, 1);
     }
 
     /**
