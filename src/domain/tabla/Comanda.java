@@ -120,8 +120,9 @@ public class Comanda extends TablaBD {
                 + "                   end, 'Disponible') com_status,\n"
                 + "         c.id_mesero, c.folio\n"
                 + "from mesa m left outer join comanda c on\n"
-                + "         m.id_sucursal = c.id_sucursal\n"
-                + "	 and m.id_mesa     = c.id_mesa\n"
+                + "          m.id_sucursal =  c.id_sucursal\n"
+                + "	 and m.id_mesa     =  c.id_mesa\n"
+                + "      and c.id_pago     is null\n"                
                 + "where m.id_sucursal = '" + sucursal.id_sucursal + "'\n"
                 + "order by numero_mesa; ");
 

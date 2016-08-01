@@ -125,7 +125,7 @@ public class PagosPanel extends JPanel {
     /**
      *
      */
-    public void grabar() {
+    public boolean grabar() {
 
         pago.fecha = calendar1.getDate();
         pago.impuesto = tf_impuesto.obtenerValor();
@@ -137,25 +137,31 @@ public class PagosPanel extends JPanel {
         if (pago.grabar()) {
 
             tf_folio_pago.setText(pago.folio_pago.toString());
-            
+
             //agregar el id_pago al detalle que tenga valor en importe
             for (int i = 0; i < table1.getRowCount(); i++) {
-                
-                if( table1.getValorDouble(i, 5) > 0 ){
-                    
+
+                if (table1.getValorDouble(i, 5) > 0) {
+
                     table1.setValueAt(pago.id_pago, i, 1);
-                }                
-            }            
-            
+                }
+            }
+
             if (this.table1.grabar() == 0) {
 
                 mensaje("Se grabo el Pago Correctamente");
+                return true;
+            } else {
+                return false;
             }
         } else {
             mensaje("Error al grabar el pago\n" + errorSQL);
-        }
 
-        System.out.println(pago);
+        }
+        return true;
+        //setVisible(false);
+
+       // System.out.println(pago);
     }
 
     /**

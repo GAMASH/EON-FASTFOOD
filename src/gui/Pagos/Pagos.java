@@ -61,7 +61,9 @@ public class Pagos extends InternalFrameAbstracto {
      * 
      */
     public void grabar(){
-        this.pagosPanel1.grabar();
+       if(this.pagosPanel1.grabar()){
+           setVisible(false);
+       }
     }
 
     /**

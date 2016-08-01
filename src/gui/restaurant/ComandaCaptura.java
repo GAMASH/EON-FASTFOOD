@@ -234,10 +234,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     public void grabar() {
 
         ComandaDetallePanel panel_detalle;
-
         panel_detalle = comanda_detalles_panel.get(index_panel_total);
         panel_detalle.grabar();
-
     }
 
     public void pagar() {
@@ -245,7 +243,6 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         comanda.pago = new Pago();
         ComandaDetallePanel panel_detalle;
         panel_detalle = comanda_detalles_panel.get(index_panel_total);
-
         comanda.pago.subtotal = panel_detalle.getSubtotal();
         comanda.pago.impuesto = panel_detalle.getImpuesto();
         comanda.pago.total = panel_detalle.getTotal();
@@ -258,15 +255,13 @@ public class ComandaCaptura extends InternalFrameAbstracto {
         if (!pagos_comanda.isVisible()) {
 
             pagos_comanda.setPago(comanda.pago);
-
             escritorio.remove(pagos_comanda);
             escritorio.add(pagos_comanda);
             pagos_comanda.centrado(escritorio.getSize());
             pagos_comanda.setModal(true);
             pagos_comanda.setVisible(true);
-
-            comanda.pago = pagos_comanda.getPago();
-
+            comanda.pago = pagos_comanda.getPago();            
+            comanda.grabar();
         }
     }
 

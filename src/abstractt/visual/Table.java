@@ -1397,7 +1397,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
 
         if (!haycambios) {
 
-            JOptionPane.showConfirmDialog(null, "No hay cambios por guardar", "Mensaje del sistema", JOptionPane.DEFAULT_OPTION);
+           // JOptionPane.showConfirmDialog(null, "No hay cambios por guardar", "Mensaje del sistema", JOptionPane.DEFAULT_OPTION);
             return 0;
         }
 
@@ -1410,7 +1410,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             tablaBD.setRegistro(this, fila);
             if (!tablaBD.grabar()) {
 
-                JOptionPane.showConfirmDialog(null, "Ocurrio un error al grabar\n" + manejadorBD.errorSQL, "Mensaje del sistema", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
+              //  JOptionPane.showConfirmDialog(null, "Ocurrio un error al grabar\n" + manejadorBD.errorSQL, "Mensaje del sistema", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE);
                 filtrar(null);
                 return -1;
             }
@@ -1432,7 +1432,7 @@ public class Table extends javax.swing.JTable implements DragGestureListener, Dr
             fila = buscar(new String[]{"4"}, colItemStatus);
         }
 
-        JOptionPane.showConfirmDialog(null, "Se guardaron los cambios correctamente", "Mensaje del sistema", JOptionPane.DEFAULT_OPTION);
+      //  JOptionPane.showConfirmDialog(null, "Se guardaron los cambios correctamente", "Mensaje del sistema", JOptionPane.DEFAULT_OPTION);
 
         //ya se guardo no hay cambios pendientes de guardar
         haycambios = false;
