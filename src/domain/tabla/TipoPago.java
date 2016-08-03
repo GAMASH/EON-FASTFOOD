@@ -73,6 +73,9 @@ public class TipoPago extends TablaBD {
         desconectarBD();
     }
     
+    /**
+     * 
+     */
     private void asignarValores() {
 
         id_tipo_pago = manejadorBD.getValorString(0, 0);

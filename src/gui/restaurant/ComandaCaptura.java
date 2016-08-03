@@ -260,7 +260,8 @@ public class ComandaCaptura extends InternalFrameAbstracto {
             pagos_comanda.centrado(escritorio.getSize());
             pagos_comanda.setModal(true);
             pagos_comanda.setVisible(true);
-            comanda.pago = pagos_comanda.getPago();            
+            comanda.pago = pagos_comanda.getPago();
+            comanda.status = "PA";
             comanda.grabar();
         }
     }
