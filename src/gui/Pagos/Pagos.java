@@ -19,7 +19,7 @@ import javax.swing.event.InternalFrameEvent;
  */
 public class Pagos extends InternalFrameAbstracto {
 
-    private Pago pago;
+    public Pago pago;
 
     /**
      * Creates new form PagosComanda

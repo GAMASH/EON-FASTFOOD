@@ -9,6 +9,7 @@ import abstractt.visual.Boton;
 import abstractt.visual.InternalFrameAbstracto;
 import domain.tabla.Comanda;
 import domain.tabla.ComandaDetalle;
+import domain.tabla.ComandaPago;
 import domain.tabla.Pago;
 import domain.tabla.Platillo;
 import domain.tabla.TipoPlatillo;
@@ -17,6 +18,7 @@ import gui.Pagos.Pagos;
 import static gui.Principal.escritorio;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -241,12 +243,80 @@ public class ComandaCaptura extends InternalFrameAbstracto {
     public void pagar() {
 
         comanda.pago = new Pago();
+        ComandaPago comandaPago = new ComandaPago();
         ComandaDetallePanel panel_detalle;
-        panel_detalle = comanda_detalles_panel.get(index_panel_total);
+        int respuesta;
+        respuesta = 0;
+
+        respuesta = JOptionPane.showConfirmDialog(null, "¿Desea realizar pagos de cuentas separadas?", "Mensaje del sistema", JOptionPane.YES_NO_CANCEL_OPTION);
+
+        switch (respuesta) {
+            case 0:
+                //si cuentas separadas
+
+                for (int i = 0; i < comanda_detalles_panel.size() - 2; i++) {
+                    generar_pago(i);
+                }
+
+                comanda.status = "PA";
+                comanda.grabar();
+
+            //return;
+            case 1:
+                //una sola cuenta                
+                generar_pago(index_panel_total);
+
+                /*
+                 panel_detalle = comanda_detalles_panel.get(index_panel_total);
+                 comanda.pago.subtotal = panel_detalle.getSubtotal();
+                 comanda.pago.impuesto = panel_detalle.getImpuesto();
+                 comanda.pago.total = panel_detalle.getTotal();
+
+                 if (pagos_comanda == null) {
+
+                 pagos_comanda = new Pagos();
+                 }
+
+                 if (!pagos_comanda.isVisible()) {
+
+                 pagos_comanda.setPago(comanda.pago);
+                 escritorio.remove(pagos_comanda);
+                 escritorio.add(pagos_comanda);
+                 pagos_comanda.centrado(escritorio.getSize());
+                 pagos_comanda.setModal(true);
+                 pagos_comanda.setVisible(true);
+
+                 comandaPago.id_comanda = comanda.id_comanda;
+                 comandaPago.num_comensal = 0;
+                 comandaPago.id_pago = pagos_comanda.getPago().id_pago;
+                 comandaPago.grabar();
+                 //comanda.pago = pagos_comanda.getPago();                                       
+
+                 }
+                 */
+                comanda.status = "PA";
+                comanda.grabar();
+
+            case 2:
+                //cancelar 
+
+        }
+    }
+
+    public void generar_pago(int index) {
+
+        ComandaPago comandaPago = new ComandaPago();
+        ComandaDetallePanel panel_detalle;
+
+        panel_detalle = comanda_detalles_panel.get(index);
         comanda.pago.subtotal = panel_detalle.getSubtotal();
         comanda.pago.impuesto = panel_detalle.getImpuesto();
         comanda.pago.total = panel_detalle.getTotal();
 
+        if (panel_detalle.getTotal() <= 0 ){
+            return;
+        }
+        
         if (pagos_comanda == null) {
 
             pagos_comanda = new Pagos();
@@ -260,9 +330,17 @@ public class ComandaCaptura extends InternalFrameAbstracto {
             pagos_comanda.centrado(escritorio.getSize());
             pagos_comanda.setModal(true);
             pagos_comanda.setVisible(true);
-            comanda.pago = pagos_comanda.getPago();
-            comanda.status = "PA";
-            comanda.grabar();
+
+            
+            if (pagos_comanda.pago == null ) {
+                return;
+            }
+            
+            comandaPago.id_comanda = comanda.id_comanda;
+            comandaPago.num_comensal = 0;
+            comandaPago.id_pago = pagos_comanda.getPago().id_pago;
+            comandaPago.grabar();
+            //comanda.pago = pagos_comanda.getPago();
         }
     }
 
